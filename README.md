@@ -1,1 +1,2 @@
-# ecomerce penew
+# ecomerce 
+Inicio del proyecto
