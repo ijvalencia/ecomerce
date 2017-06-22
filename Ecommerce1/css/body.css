@@ -1,0 +1,79 @@
+/*Remove the navbar's default margin-bottom and rounded borders de cuerpo*/ 
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+
+}
+.row{
+    margin-left: 32px;
+    margin-right: 32px;
+    
+}
+/*imegenes del
+.col-sm-3 {
+    width: 25%;
+    float: left;
+    
+   
+}
+.col-sm-1 {
+    width: 15%;
+    float: left;
+}*/
+.jumbotron{
+    background-color: #eee;
+    color: inherit;
+    margin-bottom: 30px;
+    margin-left: 32px;
+    margin-right: 32px;
+    padding-bottom: 30px;
+    padding-top: 150px;
+}
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.navbar-inverse{
+    background-color: #E8E8E8;
+    border-color: #080808;
+}
+.navbar{
+    border-radius: 4px;
+}
+.navbar{
+    border: 1px solid transparent;
+    margin-bottom: 20px;
+    min-height: 50px;
+    position: relative;
+}
+
+.navbarmenu{
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.navbar-inverses{
+    background-color: #E8E8E8;
+    /*border-color: #E8E8E8;*/
+}
+
+.navbarmenu{
+    border-radius: 1px;
+}
+
+.navbarmenu{
+    border: 1px solid transparent;
+    margin-bottom: 20px;  
+    margin-top: -20px;
+    min-height: 0px;
+    position: relative;
+}
+
+.container-fluid1{
+    background:#fff;
+}
