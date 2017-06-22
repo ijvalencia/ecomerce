@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 21, 2017 at 02:03 PM
+-- Generation Time: Jun 22, 2017 at 10:03 AM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -23,11 +23,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Direccion`
+-- Table structure for table `comentarios`
 --
 
-CREATE TABLE `Direccion` (
-  `id` int(8) NOT NULL,
+CREATE TABLE `comentarios` (
+  `id_comentarios` int(8) NOT NULL,
+  `id_usuario` int(8) NOT NULL,
+  `id_producto` int(5) NOT NULL,
+  `comentario` varchar(200) NOT NULL,
+  `calificacion` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `direccion`
+--
+
+CREATE TABLE `direccion` (
+  `id_direccion` int(8) NOT NULL,
   `id_usuario` int(8) NOT NULL,
   `nombre` varchar(120) NOT NULL,
   `apellidos` varchar(120) NOT NULL,
@@ -48,11 +62,11 @@ CREATE TABLE `Direccion` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Envios`
+-- Table structure for table `envios`
 --
 
-CREATE TABLE `Envios` (
-  `id` int(8) NOT NULL,
+CREATE TABLE `envios` (
+  `id_envios` int(8) NOT NULL,
   `metodo` varchar(80) NOT NULL,
   `descripcion` varchar(260) DEFAULT NULL,
   `empresa` int(80) NOT NULL
@@ -61,11 +75,11 @@ CREATE TABLE `Envios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Favoritos`
+-- Table structure for table `favoritos`
 --
 
-CREATE TABLE `Favoritos` (
-  `id` int(8) NOT NULL,
+CREATE TABLE `favoritos` (
+  `id_favoritos` int(8) NOT NULL,
   `id_usuario` int(8) NOT NULL,
   `id_producto` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -73,11 +87,25 @@ CREATE TABLE `Favoritos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Ordenes`
+-- Table structure for table `gustar`
 --
 
-CREATE TABLE `Ordenes` (
-  `id` int(8) NOT NULL,
+CREATE TABLE `gustar` (
+  `id_gustar` int(8) NOT NULL,
+  `id_usuario` int(8) NOT NULL,
+  `id_producto` int(5) NOT NULL,
+  `comentario` varchar(200) NOT NULL,
+  `megusta` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ordenes`
+--
+
+CREATE TABLE `ordenes` (
+  `id_ordenes` int(8) NOT NULL,
   `id_usuario` int(8) NOT NULL,
   `id_direccion` int(8) NOT NULL,
   `id_envio` int(8) NOT NULL,
@@ -91,11 +119,28 @@ CREATE TABLE `Ordenes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Productos_orden`
+-- Table structure for table `producto`
 --
 
-CREATE TABLE `Productos_orden` (
-  `id` int(8) NOT NULL,
+CREATE TABLE `producto` (
+  `id_producto` int(5) NOT NULL,
+  `nombre` varchar(60) NOT NULL,
+  `imagen` varchar(60) NOT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `categoria` varchar(20) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
+  `fabricante` varchar(20) NOT NULL,
+  `existencias` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productos_orden`
+--
+
+CREATE TABLE `productos_orden` (
+  `id_productos_orden` int(8) NOT NULL,
   `id_orden` int(8) NOT NULL,
   `id_producto` int(8) NOT NULL,
   `cantidad` smallint(2) NOT NULL
@@ -104,11 +149,11 @@ CREATE TABLE `Productos_orden` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Usuario`
+-- Table structure for table `usuario`
 --
 
-CREATE TABLE `Usuario` (
-  `id` int(8) NOT NULL,
+CREATE TABLE `usuario` (
+  `id_usuario` int(8) NOT NULL,
   `nombre` varchar(120) NOT NULL,
   `apellidos` varchar(120) NOT NULL,
   `dia` int(2) NOT NULL,
@@ -122,11 +167,11 @@ CREATE TABLE `Usuario` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Valoraciones`
+-- Table structure for table `valoraciones`
 --
 
-CREATE TABLE `Valoraciones` (
-  `id` int(8) NOT NULL,
+CREATE TABLE `valoraciones` (
+  `id_valoraciones` int(8) NOT NULL,
   `id_usuario` int(8) NOT NULL,
   `id_ordenes` int(8) NOT NULL,
   `envio` double NOT NULL,
@@ -141,54 +186,76 @@ CREATE TABLE `Valoraciones` (
 --
 
 --
--- Indexes for table `Direccion`
+-- Indexes for table `comentarios`
 --
-ALTER TABLE `Direccion`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentarios`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
+-- Indexes for table `direccion`
+--
+ALTER TABLE `direccion`
+  ADD PRIMARY KEY (`id_direccion`),
   ADD KEY `usuario` (`id_usuario`);
 
 --
--- Indexes for table `Envios`
+-- Indexes for table `envios`
 --
-ALTER TABLE `Envios`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `envios`
+  ADD PRIMARY KEY (`id_envios`);
 
 --
--- Indexes for table `Favoritos`
+-- Indexes for table `favoritos`
 --
-ALTER TABLE `Favoritos`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `favoritos`
+  ADD PRIMARY KEY (`id_favoritos`),
   ADD KEY `usuario` (`id_usuario`),
   ADD KEY `producto` (`id_producto`);
 
 --
--- Indexes for table `Ordenes`
+-- Indexes for table `gustar`
 --
-ALTER TABLE `Ordenes`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `gustar`
+  ADD PRIMARY KEY (`id_gustar`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
+-- Indexes for table `ordenes`
+--
+ALTER TABLE `ordenes`
+  ADD PRIMARY KEY (`id_ordenes`),
   ADD KEY `usuario` (`id_usuario`),
   ADD KEY `direccion` (`id_direccion`),
   ADD KEY `envio` (`id_envio`);
 
 --
--- Indexes for table `Productos_orden`
+-- Indexes for table `producto`
 --
-ALTER TABLE `Productos_orden`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`id_producto`);
+
+--
+-- Indexes for table `productos_orden`
+--
+ALTER TABLE `productos_orden`
+  ADD PRIMARY KEY (`id_productos_orden`),
   ADD KEY `orden` (`id_orden`),
   ADD KEY `producto` (`id_producto`);
 
 --
--- Indexes for table `Usuario`
+-- Indexes for table `usuario`
 --
-ALTER TABLE `Usuario`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`);
 
 --
--- Indexes for table `Valoraciones`
+-- Indexes for table `valoraciones`
 --
-ALTER TABLE `Valoraciones`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `valoraciones`
+  ADD PRIMARY KEY (`id_valoraciones`),
   ADD KEY `usuario` (`id_usuario`),
   ADD KEY `orden` (`id_ordenes`);
 
@@ -197,40 +264,63 @@ ALTER TABLE `Valoraciones`
 --
 
 --
--- AUTO_INCREMENT for table `Direccion`
+-- AUTO_INCREMENT for table `comentarios`
 --
-ALTER TABLE `Direccion`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `comentarios`
+  MODIFY `id_comentarios` int(8) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Envios`
+-- AUTO_INCREMENT for table `direccion`
 --
-ALTER TABLE `Envios`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `direccion`
+  MODIFY `id_direccion` int(8) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Favoritos`
+-- AUTO_INCREMENT for table `envios`
 --
-ALTER TABLE `Favoritos`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `envios`
+  MODIFY `id_envios` int(8) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Ordenes`
+-- AUTO_INCREMENT for table `favoritos`
 --
-ALTER TABLE `Ordenes`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `favoritos`
+  MODIFY `id_favoritos` int(8) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Productos_orden`
+-- AUTO_INCREMENT for table `gustar`
 --
-ALTER TABLE `Productos_orden`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `gustar`
+  MODIFY `id_gustar` int(8) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Usuario`
+-- AUTO_INCREMENT for table `ordenes`
 --
-ALTER TABLE `Usuario`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ordenes`
+  MODIFY `id_ordenes` int(8) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Valoraciones`
+-- AUTO_INCREMENT for table `producto`
 --
-ALTER TABLE `Valoraciones`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `producto`
+  MODIFY `id_producto` int(5) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `productos_orden`
+--
+ALTER TABLE `productos_orden`
+  MODIFY `id_productos_orden` int(8) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(8) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `valoraciones`
+--
+ALTER TABLE `valoraciones`
+  MODIFY `id_valoraciones` int(8) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `favoritos`
+--
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
