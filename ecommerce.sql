@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 22, 2017 at 10:03 AM
+-- Generation Time: Jun 23, 2017 at 10:10 AM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -30,7 +30,7 @@ CREATE TABLE `comentarios` (
   `id_comentarios` int(8) NOT NULL,
   `id_usuario` int(8) NOT NULL,
   `id_producto` int(5) NOT NULL,
-  `comentario` varchar(200) NOT NULL,
+  `comentario` text NOT NULL,
   `calificacion` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -69,7 +69,7 @@ CREATE TABLE `envios` (
   `id_envios` int(8) NOT NULL,
   `metodo` varchar(80) NOT NULL,
   `descripcion` varchar(260) DEFAULT NULL,
-  `empresa` int(80) NOT NULL
+  `empresa` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -94,7 +94,7 @@ CREATE TABLE `gustar` (
   `id_gustar` int(8) NOT NULL,
   `id_usuario` int(8) NOT NULL,
   `id_producto` int(5) NOT NULL,
-  `comentario` varchar(200) NOT NULL,
+  `comentario` text,
   `megusta` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -109,9 +109,9 @@ CREATE TABLE `ordenes` (
   `id_usuario` int(8) NOT NULL,
   `id_direccion` int(8) NOT NULL,
   `id_envio` int(8) NOT NULL,
-  `fecha` datetime NOT NULL COMMENT 'YYYY-MM-DD HH:MI:SS',
-  `total` double NOT NULL,
-  `metodo` varchar(20) NOT NULL,
+  `fecha` datetime NOT NULL COMMENT 'YYYY-MM-DD HH:MM:SS',
+  `total` decimal(10,2) NOT NULL,
+  `metodo_pago` varchar(20) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `guia` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -130,7 +130,7 @@ CREATE TABLE `producto` (
   `categoria` varchar(20) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   `fabricante` varchar(20) NOT NULL,
-  `existencias` int(3) NOT NULL
+  `existencias` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -174,10 +174,10 @@ CREATE TABLE `valoraciones` (
   `id_valoraciones` int(8) NOT NULL,
   `id_usuario` int(8) NOT NULL,
   `id_ordenes` int(8) NOT NULL,
-  `envio` double NOT NULL,
-  `concordancia` double NOT NULL,
-  `experiencia` double NOT NULL,
-  `promedio` double NOT NULL,
+  `envio` decimal(3,3) NOT NULL,
+  `concordancia` decimal(3,3) NOT NULL,
+  `experiencia` decimal(3,3) NOT NULL,
+  `promedio` decimal(3,3) NOT NULL,
   `comentario` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -313,14 +313,6 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `valoraciones`
   MODIFY `id_valoraciones` int(8) NOT NULL AUTO_INCREMENT;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `favoritos`
---
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
