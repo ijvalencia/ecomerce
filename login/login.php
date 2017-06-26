@@ -25,16 +25,15 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
     </head>
 
     <body>
-        
         <!-- Top content -->
         <div class="top-content">
         	
             <div class="inner-bg">
                 <div class="container">
+                    
                         <div class="col-sm-5">
                         	
                         	<div class="form-box">
@@ -62,11 +61,10 @@
                                                 </label>
                                             </div>
                                         </div>
-				                        <button type="submit" class="btn">Entrar</button>
+				                        <button type="submit" class="btn" style="background: #ffae4b;">Entrar</button>
 				                    </form>
 			                    </div>
 		                    </div>
-		                
 		                	<div class="social-login">
 	                        	<div class="social-login-buttons">
 		                        	<a class="btn btn-link-1 btn-link-1-facebook" href="#">
@@ -82,7 +80,7 @@
                         
                         <div class="col-sm-1 middle-border"></div>
                         <div class="col-sm-1"></div>
-                        	
+                        
                         <div class="col-sm-5">
                         	
                         	<div class="form-box">
@@ -125,7 +123,7 @@
                                                 </label>
                                             </div>
                                         </div>
-				                        <button type="submit" class="btn">Comenzar a comprar!</button>
+				                        <button type="submit" class="btn" style="background: #ffae4b;">Comenzar a comprar!</button>
 				                    </form>
 			                    </div>
                         	</div>
