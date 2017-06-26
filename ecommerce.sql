@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 23, 2017 at 10:10 AM
+-- Generation Time: Jun 26, 2017 at 01:32 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -143,7 +143,8 @@ CREATE TABLE `productos_orden` (
   `id_productos_orden` int(8) NOT NULL,
   `id_orden` int(8) NOT NULL,
   `id_producto` int(8) NOT NULL,
-  `cantidad` smallint(2) NOT NULL
+  `cantidad` smallint(2) NOT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -292,17 +293,17 @@ ALTER TABLE `gustar`
 -- AUTO_INCREMENT for table `ordenes`
 --
 ALTER TABLE `ordenes`
-  MODIFY `id_ordenes` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ordenes` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `productos_orden`
 --
 ALTER TABLE `productos_orden`
-  MODIFY `id_productos_orden` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_productos_orden` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
