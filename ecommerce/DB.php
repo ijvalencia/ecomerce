@@ -4,7 +4,7 @@ class producto{
     function conexion(){
         $host="localhost";
         $user="root";
-        $pass="";
+        $pass="123";
         $db="ecommerce";
 
             $con= mysql_connect($host, $user, $pass)or die("No se puede conectar al servidor, intenta de nuevo en unos minutos.");
