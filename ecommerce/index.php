@@ -1,342 +1,788 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+<html lang="en" >
+    <meta charset="utf-8">
+    
+<!--  <head>
+        <title>Ecommerce</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/body.css">
+        <link rel="stylesheet" href="css/acomodo.css">
+        <link rel="stylesheet" href="css/carrusel.css">
+        <link rel="stylesheet" href="assets_1/css/style.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.full.js"></script>
 -->
-<?php /*<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
+
+<?php
+include 'head.php';
+?>  
+        <!--<link rel="stylesheet" href="css2/carrusel1.css">-->
+        <!--<link rel="stylesheet" href="select2/select2.min.css">-->
+        <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css">    
+        <link rel="stylesheet" href="select2/select2.min.css">-->
+<!--    <link rel="stylesheet" href="select2/select2-bootstrap.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css">-->
+        <!--<link rel="stylesheet" href="select2/gh-pages.css">-->
         
-        <style type="text/css">
-        * { padding: 0px;
-            margin: 0px;
-            
-        }
+        <!--<script src="select2/anchor.js"></script>
+        <script src="select2/select.js"></script>
+        <script type="text/javascript" src="select2/select2.min.js"></script>
+        -->
         
-        #header{
-            margin:auto;
-            width: 50px;
-            font-family: arial;
-        }
-        
-        ul,ol{
-            list-style: none;
-        }
-        
-        
-        
-        .nav > li{
-            float:left;
-        }
-        
-        .nav li a{
-            background-color: greenyellow;
-            color:black;
-            text-decoration: none;
-            padding: 10px 15px;
-            display: block;
-        }
-        
-        .nav li a:hover{
-            background-color: gray;
-            
-        }
-        
-        
-        
-        .nav li ul{
-            display: none;
-            position:relative;
-            min-width: 140px;
-        }
-        
-        .nav li:hover > ul{
-            display:block;
-                
-        }
-        
-        .nav li ul li{
-            position: relative;
-                
-        }
-        
-        .nav li ul li ul {
-            
-            right: -150px;
-            top: 0px;
-        }
-            </style>
+        <script type="text/javascript" src="Js/carousel.js"></script><!--<script type="text/javascript" src="Js2/carousel1.js"></script>-->
+        <script type="text/javascript" src="Js/carrusel.js"></script><!--<script type="text/javascript" src="Js2/carrusel1.js"></script>-->
     </head>
     <body>
-        <div id="header">
-        <ul class="nav">
-            <li><a href="">Categorias</a>
-                
-                <ul><li><a>Accesorios</a>
-                        <ul><li><a>:v</a>
-                                                    <ul><li><a>:v</a></li></ul></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                    
-                    </li></ul>
-                
-                <ul><li><a href="">Almacenamiento</a>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>                    
-                    
-                    </li></ul>
-                
-                <ul><li><a href="">Audio y Video</a>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                    
-                    </li></ul>
-                
-                <ul><li><a href="">Computadoras</a>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                    
-                    </li></ul>
-                
-                <ul><li><a href="">VideoJuegos</a>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:vretertretretret</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                    
-                    </li></ul>
-                
-                <ul><li><a href="">Pantallas</a>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                        <ul><li><a>:v</a></li></ul>
-                    
-                    </li></ul>
-                
-                <ul><li><a href="">Energia</a>
-                        <ul><li><a>:vghgjfgjf</a></li></ul>
-                        <ul><li><a>:v1</a></li></ul>
-                        <ul><li><a>:v2</a></li></ul>
-                        <ul><li><a>:v3</a></li></ul>
-                    
-                    </li></ul>
-                
-            
-            </li>
-        </ul>
-        </div>
         
-        
-    </body>
-</html>
-*/?>
-<head>
- <style type="text/css">    
-.dropdown-submenu {
-    position: relative;
-}
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <!--<a class="navbar-brand" href="#"><img src="IMG/.jpg"></a>-->
+                </div>
+            </div>
+               
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#"><img src="imgweb/logo.png" width="40px" height="35px"></a></li>
+				<!--	<label for="select2-button-addons-single-input-group" class="control-label"></label>
+					<div class="input-group">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="datosmenu">
+				1			    <img src="imgweb/menu.png" width="30px" height="30px"><!--<span class="caret"></span>
+							</button>
 
-.dropdown-submenu>.dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
-}
-
-.dropdown-submenu:hover>.dropdown-menu {
-    display: block;
-}
-
-.dropdown-submenu>a:after {
-    display: block;
-    content: " ";
-    float: right;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 5px 0 5px 5px;
-    border-left-color: #ccc;
-    margin-top: 5px;
-    margin-right: -10px;
-}
-
-.dropdown-submenu:hover>a:after {
-    border-left-color: #fff;
-}
-
-.dropdown-submenu.pull-left {
-    float: none;
-}
-
-.dropdown-submenu.pull-left>.dropdown-menu {
-    left: -100%;
-    margin-left: 10px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px;
-}
-
-@media (min-width: 768px) {
-    /*added by T Morphy */
-/*from http://www.barrykooij.com/bootstrap-submenu-open-on-mouse-over/ to get hover behaviour on desktop */
-ul.nav li.dropdown:hover ul.dropdown-menu{ display: block; }
-ul.nav li.dropdown:hover ul.dropdown-menu li.dropdown-submenu ul.dropdown-menu {
-    display: none;
-} 
-ul.nav li.dropdown ul.dropdown-menu li.dropdown-submenu:hover ul.dropdown-menu {
-    display: block;
-} 
-  .lead {
-    font-size: 21px;
-  }
-}
-  </style>   
-</head>
-
-<html>
-<nav class="navbar navbar-default navbar-fixed-top sb-slide" role="navigation" style="position:fixed">
-			<!-- Left Control -->
-			<div class="sb-toggle-left navbar-left hidden-lg hidden-md">
-				<div class="navicon-line"></div>
-				<div class="navicon-line"></div>
-				<div class="navicon-line"></div>
-			</div><!-- /.sb-control-left -->
-			<div class="container-fluid">
-
-      
-			<div class="container">
-				<!-- Logo -->
-				<div class="navbar-header hidden-md">
-					<a class="navbar-brand" href="/index.html">stakeholdermap.com</a>
-				</div><!-- /#logo -->
-				
-				<!-- Menu -->
-				<ul class="nav navbar-nav">
-					<li class="dropdown"><a href="#" title="Stakeholder Mapping in 4 steps" class="dropdown-toggle disabled" data-toggle="dropdown">Stakeholder Map <span class="caret"></span></a>
-                    		<ul class="dropdown-menu" role="menu">
-                            <li><a href="/what-is-a-stakeholder.html" title="What is a Stakeholder?">What is a Stakeholder?</a></li>
-                            <li><a href="/what-are-stakeholders-video.html" title="What are stakeholders? video">What are stakeholders? - video</a></li>
-                            <li><a href="/stakeholder-analysis.html" title="Stakeholder Analysis">Stakeholder Analysis</a></li>
-                       <li><a href="/stakeholder-definition.html" title="Stakeholder Definition">Stakeholder Definition</a></li>
-                       <li><a href="/stakeholder-engagement.html" title="Stakeholder Engagement">Stakeholder Engagement</a></li>
-                       <li><a href="/stakeholder-influence.html" title="Stakeholder Influence">Stakeholder Influence</a></li>
-                       <li><a href="/stakeholder-management.html" title="Stakeholder Management">Stakeholder Planning</a></li>
-                       <li class="dropdown-submenu">
-                       			<a href="#" tabindex="-1" class="dropdown-toggle" data-toggle="dropdown">Stakeholder lists</a>
-                                <ul class="dropdown-menu">
-                                          <li><a href="/stakeholder-list.html" title="Stakeholder List">Stakeholder List - generic</a></li>
-                                    <li><a href="/stakeholder-list-big-data.html" title="Big Data stakeholders">Big Data stakeholder list</a></li>
-                                      <li class="slast"><a href="/stakeholders-construction.html" title="Construction Stakeholders">Construction stakeholders</a></li>
-                                  <li><a href="/stakeholders-ecommerce.html" title="stakeholders ecommerce">eCommerce stakeholder list</a> </li>
-                                  <li><a href="/stakeholders-it-project.html" title="stakeholders IT project">IT project stakeholder list</a></li>
-                                  </ul>
-                                </li><!--end submenu-->
-                    <li><a href="/internal-stakeholders.html" title="Internal stakeholders">Internal Stakeholders</a></li>
-               <li><a href="/stakeholder-prezi.html" title="Prezi presentation on stakeholder management">Stakeholder Prezi</a></li>
-               <li><a href="/project-stakeholders.html" title="Project Stakeholders">Project Stakeholders</a></li>
-               	<li><a href="/stakeholder-theory.html" title="stakeholder-theory">Stakeholder Theory</a></li>
-                    	<li><a href="/stakeholder-theory-what-next.html" title="stakeholder theory what's next">What next for Stakeholder Theory?</a></li>
-         
-                   <li><a href="/communication-cultural-assumptions.html" title="Culture in Business Communication">Culture in Business Communication</a></li>
-               <li><a href="/importance-stakeholder-management.html" title="Importance of Stakeholder Management">Importance of Stakeholders</a></li>
-                  <li><a href="/engaging-stakeholders.html" title="Engaging Stakeholders - 5 ideas">5 ways to Engage Stakeholders</a></li>
-                        </ul>
-                        </li>
-					<li class="dropdown"><a class="dropdown-toggle disabled" data-toggle="dropdown" href="#" title="Stakeholder Analysis">Stakeholder Analysis <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                    <li><a href="/stakeholder-analysis.html" title="Stakeholder Analysis">Stakeholder Analysis - how to</a></li>
-                   <li> <a href="/stakeholder-analysis/stakeholder-analysis-basic-method.html" title="Stakeholder Analysis Basic Method">Basic Stakeholder Analysis method</a></li>
-                     <li><a href="/stakeholder-analysis/stakeholder-analysis-example.html" title="Example Stakeholder Analysis">Example Stakeholder Analysis</a></li>
-               <li><a href="/stakeholder-analysis/Stakeholder-Analysis-keyplayers.html" title="Stakeholders Key Players">Key Players</a></li>
-               <li><a href="/stakeholder-analysis.html" title="Power Interest Stakeholder Analysis">Power interest matrix</a></li>
-               <li><a href="/stakeholder-matrix.html" title="an overview of stakeholder matrices">Stakeholder Matrices</a></li>
-                 <li><a href="/stakeholder-mindmap.html" title="Stakeholder Mind Map for a software project">Stakeholder Mind Map</a></li>
-                 <li><a href="/stakeholder-analysis/stakeholder-analysis-displeasure-list.html" title="Keeping stakeholders happy">Happy Stakeholders</a></li>
-                 <li><a href="/stakeholder-power.html" title="stakeholder power">Stakeholder Power</a></li>
-                <li><a href="/stakeholder-analysis/stakeholder-salience.html" title="Stakeholder Salience">Stakeholder Salience</a></li>
-                   <li><a href="/stakeholder-analysis/stakeholder-analysis-software.html" title="stakeholder analysis software">Stakeholder Analysis Software</a></li>
-                         <li><a href="/stakeholder-SWOT.html" title="Stakeholder SWOT">Stakeholder SWOT</a></li>
-                   <li><a href="/stakeholder-analysis/stakeholder-analysis-video.html" title="Stakeholder Analysis video tutorial">Stakeholder Analysis Video</a></li>
+							<ul class="dropdown-menu">
+                                                            
+								<li><a href="lista_producto.php">Categorias</a></li>
+                                                                <li><a href="lista_producto.php"></a>Productos</li>
+								<li><a href=""></a>Celulares</li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>                 
+						<!--<select id="select2-button-addons-single-input-group" class="form-control js-data-example-ajax">
+							<option value="3620194" selected="selected">select2/select2</option>
+						</select> </div>-->
+					
+                        <li><a href="lista_producto.php"><img src="imgweb/menu.png" width="30px" height="30px"></a></li>
+                         <!--<li><a  href="#"><img src="IMG/.jpg"></a></li>-->
                     </ul>
-                    </li>
-					<li><a href="/stakeholder-management-templates.html" title="Stakeholder Templates">Stakeholder Map Templates</a></li>
-                          <li class="dropdown"><!--need to prevent parent from being clickable on ipad. Doesn't matter if it isn't as always click to pages in menu. well not always need to add pages for project management and ms project, risk etc. - dropdown-toggle diabled needs to be in css for the ipad media query-->
-                          <a href="#" title="Project Management Downloads" class="dropdown-toggle disabled" data-toggle="dropdown">Project Templates <span class="caret"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="/project-templates/ms-project-templates.html" title="MS Project Templates">MS Project Templates</a></li>
-                            <li><a href="/project-templates/conference-project-plan.html" title="Conference Project Plan">Conference Project Plan</a></li>
-                            <li><a href="/project-templates/software-project-plan.html" title="Software Project Plan">Software Project Plan</a></li>
-                            <li><a href="/project-templates/project-management-templates.html" title="Project Management Templates">Project Management Templates</a></li>
-                             <li class="divider"></li>
-                              <li><a href="/magic-whiteboard.html" title="Magic Whiteboard - on a roll">Magic Whiteboard</a></li>
-                            <li class="divider"></li>
-                            <li><a href="/interactive-process-model-taster.php" title="Prince 2 process model">Prince 2 interactive</a></li>
-                            <li class="divider"></li>
-                            <li><a href="/plan-project/example-work-breakdown-structures.html" title="Work Breakdown Structure examples">Work Breakdown Structure examples</a></li>
-                          </ul>
-                        </li>
-                                                  <li class="dropdown">
-                          <a href="#" title="Project Management" class="dropdown-toggle disabled" data-toggle="dropdown">Project Management <span class="caret"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                          <li><a href="/project-management/project-management.html" title="Project Management article list">Project Management articles</a></li>
-								 <li><a href="/plan-project/plan-project.html" title="How to Plan a Project">How to Plan a Project</a></li>
-              <li><a href="/project-management/project-methods-vs-tools-techniques.html" title="Project Management Methodologies">Project Methods vs Tools</a></li>
-               <li><a href="/plan-project/plan-project-stage1.html" title="Work Breakdown Stucture">Work Breakdown Stucture</a></li>
-               <li><a href="/plan-project/plan-project-stage2.html" title="Project Network Diagram">Project Network Diagram</a></li>
-               <li><a href="/plan-project/plan-project-stage3.html" title="Estimate task duration">Estimate task duration</a></li>
-               <li><a href="/plan-project/plan-project-stage4.html" title="Resource Plan">Resource Plan</a></li>
-               <li><a href="/project-templates/ms-project-templates.html" title="Project Plans MS project 2007">Project Plans MS project 2007</a></li>
-                    <li><a href="/plan-project/planning-mistake-fixing-start-finish-Dates.html" title="Fixing start and finish dates in MS Project">Fixing Start dates</a></li>
-               <li><a href="/plan-project/plan-reduction-crashing.html" title="Crashing project plans">Crashing project plans</a></li>
-               <li><a href="/project-management/project-monitoring-and-control.html" title="Project monitoring and control">Monitoring and Control</a></li>
-               <li><a href="/risk/nhs-risk-register.html" title="NHS Transition Risk Register - review">NHS Risk Register - review</a></li>
-               <li><a href="/risk/risk-management-construction.html" title="Risk Management in Construction">Construction Risk Management</a></li>
-                <li><a href="/risk/risk-responses.html" title="Risk Risponses">Risk Responses</a></li>
-				<li><a href="/project-management/why-a-project-manager.html" title="why a project manager?">Why a project manager?</a></li>
-                <li><a href="/project-management/why-project-management-fails.html" title="Why Project Management fails">Why Project Management Fails</a></li>
-                          </ul>
-                        </li>
-                                                  <li class="dropdown">
-                          <a href="#" class="dropdown-toggle disabled" data-toggle="dropdown">MS Project <span class="caret"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                         <li><a href="/ms-project/ms-project.html" title="MS project article list">MS Project articles</a></li>
-					<li><a href="/ms-project/analyse-ms-project-plan.html" title="How to Analyse an MS Project Plan">Analyse MS Project Plan</a></li>
-                   <li><a href="/ms-project/Holidays-MSProject-Calendar.html" title="MS Project calendars adding holidays">Project Calendars</a></li>
-                <li><a href="/ms-project/counting-totals-ms-project.html" title="Counting totals in MS Project">Counting totals MS Project</a></li>
-               <li><a href="/ms-project/CriticalPath.html" title="Critical Path Analysis">Critical Path Analysis</a></li>
-               <li><a href="/ms-project/View-Critical-path-msproject.html" title="View critical path MS Project">Viewing Critical Path</a></li>
-               <li><a href="/ms-project/project-constraints.html" title="MS Project Constraints - how to use them">MS Project Constraints - how to</a></li>
-               <li><a href="/ms-project/msproject-constraints-part2.html" title="MS Project Constraints - common mistakes">Project Constraints - mistakes</a></li>
-                <li><a href="/ms-project/filters.html" title="Using MS Project Filters">Using MS Project Filters</a></li>
-                   <li><a href="/ms-project/custom-filters.html" title="MS Project Create Custom Filters">Create Custom Filters</a></li>
-                  <li><a href="/ms-project/ms-project-hyperlinks.html" title="how to create hyperlinks in MS Project">Hyperlinks MS Project</a></li>
-                   <li>  <a href="/ms-project/ms-project-2010-to-PDF.html" title="MS Project 2010 to pdf">MS Project 2010 to pdf</a></li>
-                <li><a href="/ms-project/link-summary-tasks-ms-project.html" title="Why avoid linking summary tasks">Summary tasks</a></li>
-                <li><a href="/project-templates/ms-project-templates.html" title="MS Project Templates">MS Project Templates</a></li>
-                          </ul>
-                        </li>
-                                 <!--   <form class="navbar-form" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+                    
+                    <form class="form-search" id="s" action="/">
+                        <div class="input-append">
+                           <!--input type="hidden"-->
+                           <div class="input-group" style="position: relative; display:block; border-collapse: separate; margin-left: -280px;">
+                               
+                             <script type="text/javascript">
+                              $(".select2-multiple" ).select2({
+                                    theme: "bootstrap",
+                                    placeholder: "Select a State",
+                                    maximumSelectionSize: 6,
+                                    containerCssClass: ':all:'});    
+                             </script>
+
+                                   <div class="form-group">
+                                       <input id="multiple" class="form-control select2-multiple" multiple>
+                                           <!--<optgroup label="Alaskan/Hawaiian Time Zone">
+                                               <option value="AK">Alaska</option>
+                                               <option value="HI" disabled="disabled">Hawaii</option>
+                                           </optgroup>
+                                           <optgroup label="Pacific Time Zone">
+                                               <option value="CA">California</option>
+                                               <option value="NV">Nevada</option>
+                                               <option value="OR">Oregon</option>
+                                               <option value="WA">Washington</option>
+                                           </optgroup>
+                                           <option value="TNOGZ" disabled="disabled">The No Optgroup Zone</option>
+                                           <option value="TPZ">The Panic Zone</option>
+                                           <option value="TTZ">The Twilight Zone</option>
+                                       </select>-->
+                                   </div>
+                                   <span class="input-group-btn">
+                                       <button class="btn btn-default" type="button" data-select2-open="multi-append" id="bntid">
+                                           <span class="glyphicon glyphicon-search"></span>
+                                       </button>
+                                   </span>
+                               </div>
+                           </div>      
+                    </form>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="pocition" href=""><img src="imgweb/camion.png" width="25px" height="25px"><!--<span class="glyphicon glyphicon-log-in"></span>--></a></li>
+                        <li><a class="pocition" href="login.php"><img src="imgweb/login.png" width="25px" height="25px"><!--<span class="glyphicon glyphicon-log-in"></span>--></a></li>
+                        <li><a class="pocition" href="cart.php"><img src="imgweb/carrito.png" width="25px" height="25px"><!--<span class="glyphicon glyphicon-log-in"></span>--></a></li>
+                    </ul>
+                </div>
+            <!--</div>-->
+        </nav>
+        <nav class="navbarmenu navbar-inverse">
+            <div class="container-fluid1">
+               <div class="navbar-header">
+               </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav"> 
+                       
+                    <li><a id="info" href="#">Solo Hoy</a></li>
+                    <li><a id="info" href="#">Promociones</a></li>
+                    <li><a id="info" href="#">Ofertas</a></li>
+                    <li><a id="info" href="#">cancelaciones</a></li>
+                    <li><a id="info" href="#">Descuentos</a></li>
+                    <li><a id="info" href="#">Promociones</a></li>
+                    <li><a id="info" href="#">presios Bajos</a></li>
+                    <li><a id="info" href="#">Ganga</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container-fluid bg-3 text-center">
+            <h3></h3><br>
+            <div class="row">
+                <div class="col-md-8"> 
+                    <img id="superior1" src="IMG/fondo.jpg" class="img-responsive" style="width: 100%"  alt="Image">
+                    <!--.col-md-8-->
+                    </div>
+                
+                    <div class="col-md-4">
+                       <img id="superior2" src="IMG/fondo.jpg" class="img-responsive" style="width: 100%" alt="Image">
+                      <!--.col-md-4-->
+                    </div>    
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-4">
+                     <p></p>
+                      <img src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">
+                    </div>
+                    
+                    <div class="col-md-4">
+                    <p></p>
+                      <img src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image"> 
+                        <!--.col-md-4-->
+                    </div>
+                    
+                    <div class="col-md-4">  
+                        <p></p>
+                         <img src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">
+                        <!--.col-md-4-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"> 
+                        <img id="inferior1" src="IMG/fondo.jpg" class="img-responsive" style="width: 100%"  alt="Image">
+                     <!--.col-md-8-->
+                    </div>
+                
+                    <div class="col-md-6">
+                       <img id="inferior2" src="IMG/fondo.jpg" class="img-responsive" style="width: 100%" alt="Image">
+                      <!--.col-md-4-->
+                    </div>
+                </div>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>-->
-				</ul><!--nav navbar-nav-->
+        <br><br><br><br><br>
+        <div class="container-fluid bg-3 text-center" id="centrados">    
+             <h3></h3><br>
+            <div class="row">
+                <div class="col-md-8">
+                       <p class="titulo">BÚSQUEDA POPULARES</p>             
+                       <a class="populares" >celulares</a>
+                       <a class="populares" >televiciones</a>
+                       <a class="populares" >radios</a>
+                       <a class="populares" >computadoras</a>
+                       <a class="populares" >pilas</a>
+                       <a class="populares" >accesorios</a>
+                       <a class="populares" >refacciones</a>
+                       <a class="populares" >electronicas</a>
+                       <a class="populares" >cables</a>
+                       <a class="populares" >impresoras</a>
+                      <!--<img id="favoritos1" src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">-->                      
+                </div>
+                <!--<div id="vertical-bar">   
+                </div>-->
+                
+                <div class="col-md-4">
+                  <p class="titulo">COMPRAS 100% SEGURAS</p>
+                    <img id="favoritos2" src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">
+                  <!--.col-md-6-->
+                </div>
+            </div>
+        </div>
+        <br>     
+                   
+        <div class="jumbotron">
+            <p class="titulo">PRODUCTOS QUE HAS VISTO RESIENTEMENTE</p>  
+            <div class="container text-center">
+                <div class="row1">
+                    <!--carrusel de 1-->
+               <div id="Carousel" class="carousel slide">
+                                    
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#Carousel" data-slide-to="1"></li>
+                                        <li data-target="#Carousel" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <div class="row">
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="item">
+                                            <div class="row">
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="item">
+                                            <div class="row">
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
+                                    <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
+                                </div>   
+                      
+  <!--fin-->     
+                    <!--<h1>My Portfolio</h1>      
+                      <p>Some text that represents "Me"...</p>
+                    -->
+                    <!-- fincarrusel -->
+                </div>
+            </div>
+        </div>
+       <br>  
+     <br>
+        <!--carrusedel etiquetas los mas recomendados-->
+        <!--<div class="row">
+            <div class="col-sm-3">
+                
+            </div>
+        </div>
+        <!--fin de los etiquetas los mas recomendados-->
+        
+        <!--carrusel para abajo-->
+        <div class="jumbotron">
+            <div class="container text-center">
+                <div class="row">
+                    <!--inicio--> 
+     <div id="Carousel" class="carousel slide">                     
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#Carousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#Carousel" data-slide-to="1"></li>
+                                        <li data-target="#Carousel" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <div class="row">
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="item">
+                                            <div class="row">
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="item">
+                                            <div class="row">
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                                <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
+                                    <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
+                                </div>   
+     <!--fin-->     
+                    <!--
+       <div class="button-next">
+            <a href="javascript:stepcarousel.stepBy('carousel', 1)">
+              <img src="IMG/arrow_right.png" />
+            </a>
+        </div>
+
+        <div class="button-prev">
+            <a href="javascript:stepcarousel.stepBy('carousel', -1)">
+              <img src="IMG/arrow_left.png" />
+            </a>
+        </div>
+
+        <div id="carousel" class="stepcarousel">
+            <div class="belt">
+                <div class="panel">
+                    <img src="IMG/fondo.jpg" width="100px" height="100px"/>
+                    <div class="panel-text">
+                        <p>Este carousel es una demostraci&oacute;n</p>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <img src="IMG/img.jpg" width="100px" height="100px" />
+                    <br>
+                    <div class="panel-text">
+                        <p>de un tutorial de <a href="http://sumolari.com">Sumolari.com</a>.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <img src="IMG/img.jpg" width="100px" height="100px" />
+                    <div class="panel-text">
+                        <p>Puedes ver el tutorial en cuesti&oacute;n</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <img src="IMG/img.jpg" width="100px" height="100px" />
+                    <div class="panel-text">
+                        <p>en <a href="http://sumolari.com/?p=1708">este art&iacute;culo</a> del blog.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <img src="IMG/img.jpg" width="100px" height="100px"/>
+                    <div class="panel-text">
+                        <p>Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <img src="IMG/img.jpg" width="100px" height="100px" />
+                    <div class="panel-text">
+                        <p>Amet sit dolor ipsum lorem.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <img src="IMG/img.jpg" width="100px" height="100px" />
+                    <div class="panel-text">
+                        <p>Bla bla bla bla bla bla bla</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <img src="IMG/img.jpg" width="100px" height="100px" />
+                    <div class="panel-text">
+                        <p>Ble ble ble ble ble ble ble</p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+               </div>
+            </div>
+        </div>
+        <!--fin del carrusel-->
+        <div class="container-fluid bg-3 text-center">    
+            <!--<h3>Some of my Work</h3><br>-->
+            <div class="row">
+                <div class="col-md-1"><img src="IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="" style="color: black">PROTECCIÓN AL COMPRADOR</a></div>
+                <div class="col-md-1"><img src="IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="tipoletra">PAGA AL RECIBIR O EN OXXO</a></div>
+                <div class="col-md-1"><img src="IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA POR TELÉFONO</a></div>
+                <div class="col-md-1"><img src="IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="tipoletra">ENVIOS A TODO MÉXICO</a></div>
+                <div class="col-md-1"><img src="IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA EN LA APP</a></div>
+                <!--<div class="col-sm-3"> 
+                    <p>Some text..</p>
+                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </div>
+                <div class="col-sm-3"> 
+                    <p>Some text..</p>
+                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </div>
+                <div class="col-sm-3">
+                    <p>Some text..</p>
+                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </div>-->
+            </div>
+        </div>
+      <br>
+
+        <div class="container-fluid bg-3 text-center">    
+            <div class="row">
+                <div class="col-sm-4">
+                    
+                    <p class="titulo">BIENVENIDO A "" MÉXICO</p><p class="fuente">
+                    " " México es la tienda online con el catálogo más grande de marcas y productos para todos los gustos y para todas las necesidades. Con tan sólo un clic puedes adquirir en internet el artículo que quieras y recibirlo en la comodidad de tu hogar.
+En " " el cliente es primero, por eso, puedes encontrar varias facilidades de pago. Desde meses sin intereses con tarjetas de crédito hasta pagos al recibir tu paquete. Siempre estamos pensando en proteger tus datos personales, es por eso que para que te sientas cómodo comprando online en Linio te damos la opción de pagar tu pedido en el momento en el que llegue un mensajero a tocar a tu puerta.
+Somos uno de los más grandes e-commerce en América Latina y tenemos presencia en Colombia, Perú, Panamá, Chile y Venezuela. Contamos con una gran experiencia en ventas por internet y puedes tener la certeza de recibir tus paquetes de manera rápida, segura y en perfectas condiciones. Somos los encargados de brindarte la mejor experiencia en compras en línea y de que adquieras exactamente los que estabas buscando.
+Todo el año puedes aprovechar de las distintas ofertas y promociones en cada uno de nuestros departamentos, en éstos encontrarás</p>
+                    <!--<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">-->
+                </div>
+        
+                <div class="col-sm-4"> 
+                    <p> </p>
+                    <p class="fuente">artículos de excelente calidad y gran variedad de marcas. Además, aprovecha de grandiosas temporadas del año como Hot Sale, Buen Fin, Día del niño, Navidad y más para comprar lo que siempre has soñado, pero con promociones y descuentos increíbles.
+Lo que busques lo puedes encontrar aquí. Tenemos lo último en aparatos y accesorios de tecnología, podrás encontrar preventas y lanzamientos de celulares. De la moda no no olvidamos, también podrás comprar online cada pieza de ropa que necesites para que tu outfit quede perfecto para el día que tú quieras.
+Si estás pensando en renovar tu hogar, estás en la tienda online correcta. Encuentra los muebles que necesitas para armar la decoración que más te guste, cada uno de los cuartos de tu hogar podrá tener todo lo que necesitas para que sean acogedores y disfrutes de cada minuto que pases en ellos.
+Ahora, si eres súper deportista, en Linio podrás encontrar desde aparatos para ejercicio, ropa deportiva, tenis especializados y ¡claro! Audífonos bluetooth para disfrutar de tu música favorita sin tener que estar al pendiente de nada más. Siempre es importante cuidar tu cuerpo, haciendo ejercicio, peor también con los productos de salud y belleza que te ayudarán a mantenerte saludable por dentro y por fuera.  </p>
+                </div>
+                <div class="col-sm-4">
+                  <p></p>
+                    <p class="fuente">Contamos con más departamentos que tienen lo más completo en artículos para mascotas, ferretería, automotriz, instrumentos músicales y la mejor selección de libros, música, películas y juguetes.
+                    El modo de pago lo eliges tú, con tarjeta de débito, crédito o en efectivo. Puedes comprar desde cualquier sitio donde te encuentres a través de tu teléfono celular y accediendo con la aplicación móvil. Olvídate de las largas filas y únete al mundo de las satisfactorias y placenteras compras en internet con " ".
+                    No dejes pasar un día más para poder aprovechar los beneficios que te puede dar Linio, comprar online es súper divertido. Si te encanta ir con tu celular a todas partes, eso no es excusa, puedes comprar exacto lo que necesitas con la App de la tienda. ¡No hay pretextos! Compra desde donde estés y paga de la manera que tu quieras. No olvides mantenerte al pendiente de los cupones de descuentos que tenemos cada semana en algunas de las categorías de la tienda. Ahorra cada vez más y compra online los artículos con los que siempre soñaste. </p>
+                    <p class="tamaño">Estás a un clic de comprar lo que siempre has querido con Linio ¡Bienvenido a las compras online seguras!</p>                    
+                </div>
+            </div>
+        </div><br><br>
+        <div class="container-fluid bg-3 text-center">    
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Anuncios</p>
+                  <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </div>
+                <div class="col-sm-4"> 
+                    <p>Anuncios</p>
+                     <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </div>
+                
+                <div class="col-sm-4">
+                  <p>Anuncios</p>
+                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                </div>
+                
+            </div>
+        </div><br><br>
+      <!--  <div class="container-fluid bg-3 text-center">    -->
+          <ul class="pagination">
+                 <li class="disabled">
+                   <span>&laquo;</span>
+                </li>
+                <li class="">
+                    <a href="index.html">A <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">B <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">C <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">D <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">F <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">G <span class="sr-only"></span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">H <span class="sr-only"></span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">I <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">J <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">K <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">L <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">M <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">N <span class="sr-only"></span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">O <span class="sr-only"></span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">P <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">Q <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">R <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">S <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">T <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">U <span class="sr-only"></span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">V <span class="sr-only"></span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">W <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">X <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">Y <span class="sr-only">(página actual)</span></a>
+                </li>
+                <li class="">
+                    <a href="index.html">Z <span class="sr-only">(página actual)</span></a>
+                </li>
+                 
+                <li class="disabled">
+                    <span>&raquo;</span>
+                </li>
+            </ul>   
       
-			</div>
-		</nav>
+      <!-- </div> -->
+    <footer class="container-fluid text-center">
+        <div class="container-fluid bg-3 text-center" id="centrados">    
+             <h3></h3><br><br><br><br><br><br>
+            <div class="row">      
+                    <form class="form-inline" role="form">
+                        !SUSCRÍBETE A NUESTRO NEW¡ 
+                         <div class="form-group">
+                           <input type="email" class="form-control" id="ejemplo_email_2" placeholder="Suscribete con tu email">
+                        </div>
+                        
+                        <input type="button" class="btn btn-default" id="botondesid" value="OFFERTA PARA HOMBRE">
+                        <input type="button" class="btn btn-default" id="botondesid" value="OFFERTA PARA MUJER"><br>
+                        
+                        <div class="checkbox" id="checar">
+                          <input type="checkbox"><label>Accepto los </label><label style="color:red"> Terminos y condiciones</label>
+                        </div>
+                    </form>
+            </div>
+        </div>
+            <hr class="separadores">
+            <div class="container-fluid bg-3 text-center">    
+                <!--<h3>Some of my Work</h3><br>-->
+            <div class="row">
+                <div class="col-md-1" id="iconos"><img src="IMG/.jpg" width="20%" height="20%"><p class="popular">Pago contra entrega</p></div>
+                <div class="col-md-1" id="iconos"><img src="IMG/.jpg" width="20%" height="20%"><p class="popular">Tarjeta Visa</p></div>
+                <div class="col-md-1" id="iconos"><img src="IMG/.jpg" width="20%" height="20%"><p class="popular">Tarjetas Mastercard</p></div>
+                <div class="col-md-1" id="iconos"><img src="IMG/.jpg" width="20%" height="20%"><p class="popular">Tarjetas American Express</p></div>
+                <div class="col-md-1" id="iconos"><img src="IMG/.jpg" width="20%" height="20%"><p class="popular">Pago en OXXO</p></div>
+                <div class="col-md-1" id="iconos"><img src="IMG/.jpg" width="20%" height="20%"><p class="popular">Paypal</p></div>
+                <div class="col-md-1" id="iconos"><img src="IMG/.jpg" width="20%" height="20%"><p class="popular">Tarjetas bancarias</p></div>
+            </div>
+        </div>
+            <hr>
+                <div class="container-fluid bg-3 text-center">    
+                <!--<h3>Some of my Work</h3><br>-->
+              <div class="row">
+                  <div class="col-md-2">
+                       <p class="">ACERCA DE</p>             
+                       <a class="claseizquierda">Vender en...</a><br>
+                       <a class="claseizquierda">¿Quienes somos?</a><br>
+                       <a class="claseizquierda">Trabaja Con nosotros</a><br>
+                       <a class="claseizquierda">Terminos de Uso</a><br>
+                       <a class="claseizquierda">Procteccion de Propiedad Intelectual</a><br>
+                       <a class="claseizquierda">Programas de Lealtad</a><br>
+                       <a class="claseizquierda">Vuelvete un Afiliado</a><br>
+                       <br><a class="claseizquierda">Cupones..</a><br>
+                       <a class="claseizquierda">Legales</a><br>
+                       <a class="claseizquierda">Direcctorio</a><br>
+                       <a class="claseizquierda">Glosario</a><br>
+                       <a class="claseizquierda">Login</a><br>
+                        <!--<img id="favoritos1" src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">-->                      
+                </div>
+                  
+                <div class="col-md-2">
+                       <p class="">SERVICIOS AL CLIENTE</p>             
+                       <a class="claseizquierda" >Preguntas frecuentes</a><br>
+                       <a class="claseizquierda" >Contacto</a><br>
+                       <a class="claseizquierda" >Formato de Pago</a><br>
+                       <a class="claseizquierda" >Politicas de Privacidad</a><br>
+                       <a class="claseizquierda" >Politicas de Envios Devoluciones y Cancelaciones</a><br>
+                       <a class="claseizquierda" >Terminos y Condiciones Generales</a><br>
+                       <a class="claseizquierda" >Terminos y Condiciones de Venta para productos Marketplace</a><br>
+                       <a class="claseizquierda" >Politica de venta de productos</a><br>
+                       <a class="claseizquierda" >internacionales</a><br>
+                      <!--<img id="favoritos1" src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">-->                      
+                </div>
+                  <div class="col-md-2">
+                       <p class="">.... LATINOAMÉRICA</p>
+                       <div class="panelizquierda">
+                           <a class="claseizquierda">Argentina</a><br>
+                           <a class="claseizquierda">Colombia</a><br>
+                           <a class="claseizquierda">Chile</a><br>
+                           <a class="claseizquierda">México</a><br>
+                       </div>
+                       <div class="panelderecha">
+                           <a class="claseizquierda">peru</a><br>
+                           <a class="claseizquierda">Venezuela</a><br>
+                           <a class="claseizquierda">Ecuador</a><br>
+                           <a class="claseizquierda">Panama</a><br>
+                       </div>
+                      <!--<img id="favoritos1" src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">-->                      
+                </div> 
+                 <div class="col-md-2">
+                       <p class="">NOVEDADES</p>             
+                       <a class="claseizquierda">Hot Sale 2017</a><br>
+                       <a class="claseizquierda">Blog ....</a><br>
+                       <a class="claseizquierda">Ofertas a menos de 399</a><br>
+                       <a class="claseizquierda">Consola y videojuegos</a><br>
+                       <a class="claseizquierda">Computacion</a><br>
+                       <a class="claseizquierda">Calendario Dias Festivos</a><br>
+                      <!--<img id="favoritos1" src="IMG/fondo.jpg" class="img-responsive" style="width:100%" alt="Image">-->                      
+                </div>   
+                <div class="col-md-4" >
+                      <p class="titulo"> Siguenos : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                      
+                     <ul class="nav navbar-nav navbar-right">
+                        <li><a class="pocition" href=""><img src="imgweb/face.png" width="25px" height="25px"><!--<span class="glyphicon glyphicon-log-in"></span>--></a></li>
+                        <li><a class="pocition" href=""><img src="imgweb/googlemas.png" width="25px" height="25px"><!--<span class="glyphicon glyphicon-log-in"></span>--></a></li>
+                        <li><a class="pocition" href=""><img src="imgweb/in.png" width="25px" height="25px"><!--<span class="glyphicon glyphicon-log-in"></span>--></a></li>
+                     </ul>
+                      
+                  <!--.col-md-6-->
+                  <div id="vertical-bar">   
+                    <hr>
+                </div>
+                </div>
+            </div>
+        </div>
+       </footer>
+      	<script src="select2/anchor.min.js"></script>
+      <script>
+          
+          	anchors.options.placement = 'left';
+			anchors.add('.container h1, .container h2, .container h3, .container h4, .container h5');
+
+			// Set the "bootstrap" theme as the default theme for all Select2
+			// widgets.
+			//
+			// @see https://github.com/select2/select2/issues/2927
+			$.fn.select2.defaults.set( "theme", "bootstrap" );
+
+			var placeholder = "Select a State";
+
+			$( ".select2-single, .select2-multiple" ).select2( {
+				placeholder: placeholder,
+				width: null,
+				containerCssClass: ':all:'
+			} );
+
+			$( ".select2-allow-clear" ).select2( {
+				allowClear: true,
+				placeholder: placeholder,
+				width: null,
+				containerCssClass: ':all:'
+			} );
+
+			// @see https://select2.github.io/examples.html#data-ajax
+			function formatRepo( repo ) {
+				if (repo.loading) return repo.text;
+
+				var markup = "<div class='select2-result-repository clearfix'>" +
+					"<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
+					"<div class='select2-result-repository__meta'>" +
+						"<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+
+				if ( repo.description ) {
+					markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+				}
+
+				markup += "<div class='select2-result-repository__statistics'>" +
+							"<div class='select2-result-repository__forks'><span class='glyphicon glyphicon-flash'></span> " + repo.forks_count + " Forks</div>" +
+							"<div class='select2-result-repository__stargazers'><span class='glyphicon glyphicon-star'></span> " + repo.stargazers_count + " Stars</div>" +
+							"<div class='select2-result-repository__watchers'><span class='glyphicon glyphicon-eye-open'></span> " + repo.watchers_count + " Watchers</div>" +
+						"</div>" +
+					"</div></div>";
+
+				return markup;
+			}
+
+			function formatRepoSelection( repo ) {
+				return repo.full_name || repo.text;
+			}
+
+			$( ".js-data-example-ajax" ).select2({
+				width : null,
+				containerCssClass: ':all:',
+				ajax: {
+					url: "https://api.github.com/search/repositories",
+					dataType: 'json',
+					delay: 250,
+					data: function (params) {
+						return {
+							q: params.term, // search term
+							page: params.page
+						};
+					},
+					processResults: function (data, params) {
+						// parse the results into the format expected by Select2
+						// since we are using custom formatting functions we do not need to
+						// alter the remote JSON data, except to indicate that infinite
+						// scrolling can be used
+						params.page = params.page || 1;
+
+						return {
+							results: data.items,
+							pagination: {
+								more: (params.page * 30) < data.total_count
+							}
+						};
+					},
+					cache: true
+				},
+				escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+				minimumInputLength: 1,
+				templateResult: formatRepo,
+				templateSelection: formatRepoSelection
+			});
+
+			$( "button[data-select2-open]" ).click( function() {
+				$( "#" + $( this ).data( "select2-open" ) ).select2( "open" );
+			});
+
+			$( ":checkbox" ).on( "click", function() {
+				$( this ).parent().nextAll( "select" ).prop( "disabled", !this.checked );
+			});
+
+			// copy Bootstrap validation states to Select2 dropdown
+			//
+			// add .has-waring, .has-error, .has-succes to the Select2 dropdown
+			// (was #select2-drop in Select2 v3.x, in Select2 v4 can be selected via
+			// body > .select2-container) if _any_ of the opened Select2's parents
+			// has one of these forementioned classes (YUCK! ;-))
+			$( ".select2-single, .select2-multiple, .select2-allow-clear, .js-data-example-ajax" ).on( "select2:open", function() {
+				if ( $( this ).parents( "[class*='has-']" ).length ) {
+					var classNames = $( this ).parents( "[class*='has-']" )[ 0 ].className.split( /\s+/ );
+
+					for ( var i = 0; i < classNames.length; ++i ) {
+						if ( classNames[ i ].match( "has-" ) ) {
+							$( "body > .select2-container" ).addClass( classNames[ i ] );
+						}
+					}
+				}
+			});
+    </script>
+    </body>
 </html>
