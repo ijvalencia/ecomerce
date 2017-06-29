@@ -38,7 +38,14 @@ class BD {
         }
     }
     
-    /*	Inicio de los procedimietnos de agregar	*/
+	// Agregar encriptacion, buscar manual passwords php
+	public function validarContra($usuario, $contra) {
+		$sql = "SELECT contra FROM usuario WHERE id_usuario=".$usuario;
+        $pass = $this->conexion->query($sql);
+        echo strcmp($pass['contra'], $contra);	// 0 si son iguales
+	}
+	
+    /* Agregar datos */
     
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
         $tipo = 0;  // 0 para usuarios 1 para admin
@@ -93,7 +100,8 @@ class BD {
  		$this->conexion->exec($sql);
     }
     
-    public function agregarLike($usuario, $producto, $megusta) {
+	// Comentario puede ser NULL
+    public function agregarLike($usuario, $producto, $megusta, $comentario) {
         $sql = "INSERT INTO gustar (id_nombre, id_producto, comentario, megusta) 
         VALUES ('".$usuario."','".$producto."',"
             .!is_null($comentario) ? "'".$comentario."'" : "NULL"
@@ -133,38 +141,16 @@ class BD {
     
 	// Comentario puede ser NULL
     public function agregarValoracion($usuario, $ordenes, $envio, $concordancia, $experiencia, $promedio, $comentario) {
-        $sql = "INSERT INTO valoracion (id_usuario, id_ordenes, envio, concordancia, experiencia, promedio, comentario) 
+        $sql = "INSERT INTO valoraciones (id_usuario, id_orden, envio, concordancia, experiencia, promedio, comentario) 
 		VALUES ('".$usuario."','".$ordenes."','".$envio."','".$concordancia."','".$experiencia."','".$promedio."',".
 			(!is_null($comentario) ? "'".$comentario."'" : "NULL") .")";
  		$this->conexion->exec($sql);
     } 
-    
-	// Solo necesita un parametro, los demas a NULL
-    public function getDatosProducto($id, $nombre, $categoria) {
-        if (!is_null($id)) {
-            $sql = "SELECT * FROM producto WHERE id_producto = ".$id;
-        } else if (!is_null($nombre)) {
-            $sql = "SELECT * FROM producto WHERE nombre = '".$nombre."'";	
-        } else if (!is_null($categoria)) {
-            $sql = "SELECT * FROM producto WHERE categoria = '".$categoria."'";
-        } else {
-			echo "NOPE";
-        }
-		
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['id_producto']."||";
-			echo $row['nombre']."||";
-			echo $row['imagen']."||";
-			echo $row['precio']."||";
-			echo $row['categoria']."||";
-			echo $row['descripcion']."||";
-			echo $row['fabricante']."||";
-			echo $row['existencias']."||"; 
-		}
-    }
 	
-	// Solo necesita un parametro
-	public function getDatosUsuario($id, $correo) {
+	/* Obtner datos */
+	
+	// Solo necesita un parametro, el otro NULL
+	public function getUsuario($id, $correo) {
 		if (!is_null($id)) {
             $sql = "SELECT * FROM usuario WHERE id_usuario = ".$id;
         } else if (!is_null($correo)) {
@@ -186,7 +172,7 @@ class BD {
 		}
 	}
 	
-	public function getDatosDireccion($usuario) {
+	public function getDireccion($usuario) {
         $sql = "SELECT * FROM direccion WHERE id_usuario = ".$id;
         foreach ($this->conexion->query($sql) as $row) {
            	echo $row['id_direccion']."||";
@@ -207,7 +193,151 @@ class BD {
 		}
 	}
 	
-	//public function getDatos
+	// Solo necesita un parametro, los demas a NULL
+    public function getProducto($id, $nombre, $categoria) {
+        if (!is_null($id)) {
+            $sql = "SELECT * FROM producto WHERE id_producto = ".$id;
+        } else if (!is_null($nombre)) {
+            $sql = "SELECT * FROM producto WHERE nombre = '".$nombre."'";	
+        } else if (!is_null($categoria)) {
+            $sql = "SELECT * FROM producto WHERE categoria = '".$categoria."'";
+        } else {
+			echo "NOPE";
+        }
+        foreach ($this->conexion->query($sql) as $row) {
+            echo $row['id_producto']."||";
+			echo $row['nombre']."||";
+			echo $row['imagen']."||";
+			echo $row['precio']."||";
+			echo $row['categoria']."||";
+			echo $row['descripcion']."||";
+			echo $row['fabricante']."||";
+			echo $row['existencias']."||"; 
+		}
+    }
+	
+	public function getComentario($usuario, $producto) {
+		$sql = "SELECT comentario, calificacion FROM comentario WHERE id_usuario=".$usuario." AND id_producto=".$producto;
+		foreach ($this->conexion->query($sql) as $row) {
+            echo $row['comentario']."||";
+			echo $row['calificacion']."||";
+		}
+	}
+	
+	// regresa todos los tipos de envios
+	public function getEnvios() {
+		$sql = "SELECT * FROM envios";
+		foreach ($this->conexion->query($sql) as $row) {
+            echo $row['id_envios']."||";
+			echo $row['metodo']."||";
+			echo $row['descripcion']."||";
+			echo $row['empresa']."||";
+		}
+	}
+	
+	public function getDatosEnvio($envio) {
+		$sql = "SELECT metodo, empresa FROM envios WHERE id_envios=".$envio;
+		foreach ($this->conexion->query($sql) as $row) {
+			echo $row['metodo']."||";
+			echo $row['empresa']."||";
+		}
+	}
+	
+	public function getFavoritos($usuario) {
+		$sql = "SELECT id_producto FROM favoritos WHERE id_usuario=".$usuario;
+		foreach ($this->conexion->query($sql) as $row) {
+			echo $row['id_producto']."||";
+		}
+	}
+	
+	// Muestra la cantidad y luego todos los comentarios
+	public function getLikesProducto($producto) {
+		$aux = true;
+		$sql = "SELECT COUNT(megusta) AS cantidad, comentario FROM gustar WHERE id_producto=".$producto;
+		foreach ($this->conexion->query($sql) as $row) {
+			if ($aux) {
+				echo $row['cantidad']."||";
+				$aux = false;
+			}
+            echo $row['comentario']."||";
+		}
+	}
+	
+	public function getLikesUsuario($usuario, $producto) {
+		$sql = "SELECT megusta FROM gustar WHERE id_usuario=".$usuario." AND id_producto=".$producto;
+		$valor = $this->conexion->query($sql);
+		echo $valor['megusta'];
+	}
+	
+	public function getOrdenes($usuario) {
+		$sql = "SELECT id_ordenes, id_direccion, id_envio, fecha, total, metodo_pago, estado, guia FROM ordenes WHERE id_usuario=".$usuario;
+		foreach ($this->conexion->query($sql) as $row) {
+			echo $row['id_ordenes']."||";
+			echo $row['id_direccion']."||";
+			echo $row['id_envio']."||";
+			echo $row['fecha']."||";
+			echo $row['total']."||";
+			echo $row['metodo_pago']."||";
+			echo $row['estado']."||";
+			echo $row['guia']."||";
+		}
+	}
+	
+	public function getProductosOrden($orden) {
+		$sql = "SELECT id_producto, cantidad, subtotal FROM productos_orden WHERE id_orden=".$orden;
+		foreach ($this->conexion->query($sql) as $row) {
+            echo $row['id_producto']."||";
+			echo $row['cantidad']."||";
+			echo $row['subtotal']."||";
+		}
+	}
+	
+	public function getValoraciones($usuario, $orden) {
+		$sql = "SELECT envio, concordancia, experiencia, promedio, comentario 
+		FROM valoraciones WHERE id_usuario=".$usuario." AND id_orden=".$orden;
+		foreach ($this->conexion->query($sql) as $row) {
+            echo $row['envio']."||";
+			echo $row['concordancia']."||";
+			echo $row['experiencia']."||";
+			echo $row['promedio']."||";
+			echo $row['comentario']."||";
+		}
+	}
+	
+	/* Actualizar datos */
+	
+	// Usuario obligatorio
+	public function actualizarDatosUsuario($usuario, $nombre, $apellidos, $contra) {
+		$sql = "UPDATE usuario SET nombre='".$nombre."', apellidos='".$apellidos."',
+			contra='".$contra."' WHERE id_usuario=".$usuario;
+		$this->conexion->exec($sql);
+	}
+	
+	public function cancelarOrden($orden) {
+		$sql = "UPDATE ordenes SET estado = 0 WHERE id_ordenes=".$orden;
+		$this->conexion->exec($sql);
+	}
+	
+	/* Eliminar datos */
+	public function borrarDireccion($direccion) {
+		$sql = "DELETE FROM direccion WHERE id_direccion=".$direccion;
+ 		$this->conexion->exec($sql);
+	}
+	
+	public function borrarFavoritos($usuario, $producto) {
+		$sql = "DELETE FROM favoritos WHERE id_usuario=".$usuario." AND id_producto=".$producto;
+ 		$this->conexion->exec($sql);
+	}
+	
+	public function borrarLike($usuario, $producto) {
+		$sql = "DELETE FROM gustar WHERE id_usuario=".$usuario." AND id_producto=".$producto;
+ 		$this->conexion->exec($sql);
+	}
+	
+	public function borrarComentario($usuario, $producto) {
+		$sql = "DELETE FROM comentarios WHERE id_usuario=".$usuario." AND id_producto=".$producto;
+ 		$this->conexion->exec($sql);
+	}
 	
 }
 ?>
