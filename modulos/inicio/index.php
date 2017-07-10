@@ -586,9 +586,8 @@
         </div>
     </footer>  
     
-    <script src="../../Js/Libreria_js/jquery-1.7.2.min.js"></script>     
-    <script src="../../Js/Libreria_js/Cambio_de_ventanas.js"></script>
-    <script src="../../Js/Libreria_js/Principal.js"></script>
+
+    <script src="Principal.js"></script>
 	<!-- Pasar a archivo externo, si no es necesario, eliminar -->
 </body>
 </html>

@@ -21,8 +21,8 @@
     
     <!--Mas CSS-->
     <link rel="stylesheet" href="../../css/style.css">  
-    <link rel="stylesheet" href="../../css/Menu_vertical.css">  
-    <link href="../../Js/Menu/linea.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/navbar.css" >
+    <!--<link rel="stylesheet" href="../../css/Menu_vertical.css">  -->
     
     <!-- envio de datos al post-->
 	<!-- <script src="Js/Libreria_js/jquery-1.7.2.min.js"></script> -->
