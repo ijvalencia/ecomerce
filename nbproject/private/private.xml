@@ -3,18 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/ingresar.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/inicio/Cerrar_Sesion.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/connectBD.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/index.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/Js/Libreria_js/Login.js</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/inicio/index.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/bin/navbar.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/carrito/cart.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/Js/Libreria_js/Login.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/usuario/index.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/index.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/Js/jqueryValidate/validaciones.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/Js/Libreria_js/Principal.js</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/index.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/carrito/index.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/bin/head.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/usuario/navbar.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/css/Menu_vertical.css</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/css/style.css</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/productos/detalles.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/bin/connectBD.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/bin/ingresar.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/bin/categorias.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/productos/producto.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/detalles_producto/index.php</file>
         </group>
     </open-files>
 </project-private>

@@ -25,16 +25,11 @@
 		display: inline-block; width: 8rem;
 	}
 	
-	
-	
 	table#cart tfoot td{display:block; }
-	table#cart tfoot td .btn{display:block;}
-	
+	table#cart tfoot td .btn{display:block;}	
 }
 
-
 body {
-	background: url(../img/bg.jpg) left top repeat;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-weight: 300;
@@ -66,7 +61,8 @@ h3 {
 }
 img{ 
     max-width: 100%;
-    margin: 5px;
+    //margin: 5px;
+    margin: 9px;
 }
 ::-moz-selection { background: #ffae4b; color: #fff; text-shadow: none; }
 ::selection { background: #ffae4b; color: #fff; text-shadow: none; }
@@ -322,9 +318,8 @@ height: 47px;
     width: 90%;
     margin-left: 10%;  
 }
-
 .jumbotron{
-    background-color: #f2f2f2;
+    background-color: #fff;
     color: inherit;
     margin-bottom: 30px;
     margin-left: 59px;/*32px*/
@@ -530,7 +525,7 @@ form .row{
     display: block;
     float: left;
     height: 155px;
-    margin-top: -59px;
+    margin-top: 8px;
     overflow: hidden;
 }
 #inferior1,#inferior2{
@@ -563,8 +558,7 @@ form .row{
     cursor: pointer;
     color: gray;
     margin-left: 3px;    
-    font-size: 14px;
-    
+    font-size: 14px; 
 }
 .col-md-1 {
     margin-left: -21px;
@@ -587,18 +581,19 @@ form .row{
 #checar{
     margin-left: -293px;
 }
+
 #iconos{
     float: left;
     margin-right: -86px;
     padding-inline-end: 97px;
 }
-hr {   
-    
+
+hr {       
     border: 1px inset #eee;
     height: 1px;
     width: 92%;
-    
 }
+
 .panelderecha{
    float: right; 
    width: 45%;
@@ -616,6 +611,7 @@ hr {
     float: left;
     color: grey;
 }
+
 .claseizquierda:hover{
     color: black;
     
@@ -721,4 +717,191 @@ hr {
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:1 ;}
+}
+
+/* Zoom */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption { 
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+/* Loader pagina */
+.loader{
+    position:fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('../IMG/loader.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .9;
+   
+}
+/*la pagina principal*/
+.contList2,.contList3{
+    float: left;
+    margin-left: 20px;
+}
+/*position orden orden.php*/
+#btncontacto{
+   margin-left:84%;
+}
+
+.detallesPro{
+  margin-left: -34%;
+}
+
+#position{
+   margin-top: -140px;
+   margin-left: -44px;    
+}
+
+.Precios{
+    margin-left:-57%;
+}
+
+/*detalles descripcion  Detalles_orden.php*/
+.precioisquierda{
+ float: right;        
+ margin-left: -109%;
+ margin-top: -147px;
+}
+
+.descrpicion{
+   margin-left: 20%;
+}
+
+.panelessde{
+   width: 47%;
+   float: left;
+   background: #f2f2f2;
+}
+
+.panelessiz{
+  width: 594px;
+  background: #f2f2f2;
+  margin-right: -538px;
+}
+
+.imgderecha{
+  float: left;
+  margin-left:2%;
+  margin-top: -38px;
+  text-align: center;  
+}
+
+/*menu principal*/
+#imagen1,#imagen2{
+    float: right;
+}
+
+/*incresar usuario*/
+#btnguardar{
+  width: 20%;
+  float: left;
+}
+
+#nombress,#apellidos{
+  float: left;  
+  margin-left: -3%;
+}
+
+#fechass{
+    float: left;
+    margin-left: 3%;
+}
+
+#sexo{
+    float: left;
+    margin-left: 1%;    
+}
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    float: left;
+    margin-left: 3%;
+}
+.tamaño{
+  width: 108%;
 }

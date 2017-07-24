@@ -1,143 +1,71 @@
-/*
-0 Computo 
-1 Electrónica 
-2 Almacenamiento 
-3 Audio/Video
-4 Software/Juegos 
-5 Redes/Telefonia 
-6 Impresoras/Escaner 
-7 Accesorios/Personal 
-8 Hogar/Muebles 
-9 Seguridad 
-10 Garantias */
+var categorias;
+var subcategorias = [];
+var imagenes = [];
 
-function cargarLista(index) {
-	$('#lista_subcat').empty();
+$(document).ready(function() {
+});
+
+$.getJSON("../../bin/ingresar.php?categoria=getCategorias", function(respuesta) {
+	categorias = respuesta;
+	$('#supercategorias').empty();
+	$('#categorias_busqueda').empty();
+	$('#categorias_busqueda').append('<li><a onclick="busquedaCat(666)">Todo</a></li>');
+	var lista = '<li onmouseover="cargarLista(#id_cat)"><a href="link_categoria">nombre_categoria</a></li>';
+	$.each(categorias, function(i, datos) {
+		var aux = lista;
+		aux = aux.replace("#id_cat", datos["id_super"]);
+		aux = aux.replace("nombre_categoria", datos["nombre"]);
+		
+		// AQUI CAMBIAS EL LINK DE LA CATEGORIA
+		aux = aux.replace("link_categoria", "../../modulos/productos/detalles.php?extra=1&categoria="+datos["id_super"]);
+		
+		$('#supercategorias').append(aux);
+		$('#categorias_busqueda').append('<li><a onclick="busquedaCat('+i+')">'+datos["nombre"]+"</a></li>");		
+	});
+	/* Cargar las cubcategorias*/
+	for (var i = 0; i < categorias.length; i++) {
+		$.getJSON("../../bin/ingresar.php?categoria=getSubcategorias&subcategoria="+categorias[i]["nombre"], function(subrespuesta) {
+			subcategorias.push(subrespuesta);
+			cargarLista(categorias[0]["id_super"]);
+		});
+	}
+});
+
+function cargarLista(numero) {
+	numero = parseInt(numero);
+	$('#lista_subcat').empty(); 
 	$('#lista_subcat2').empty();
-
-	var categoria;
-	console.log(index);
-	switch (index) {
-		case 0:
-			categoria = [
-				"MOUSE",
-				"BOCINAS",
-				"ALMACENAMIENTO",
-				"MEMORIAS",
-				"GAMES",
-				"CONMUTADORES",
-				"GABINETES",
-				"IMPRESORAS",
-				"MONITORES",
-				"MULTIFUNCIONALES",
-				"PIEZAS",
-				"PORTATILES",
-				"PROCESADORES",
-				"REPRODUCTORES",
-				"SCANNER",
-				"SOFTWARE",
-				"TABLETAS",
-				"TARJETA CONTROLADORA",
-				"TARJETA MADRE",
-				"TECLADO Y MOUSE",
-				"TECLADOS",
-				"VIDEO",
-				"VIDEOCONFERENCIA",
-				"VIDEOPROYECTOR"];
-			break;
-		case 1:
-			categoria = ["CABLES","CABLEADO ESTRUCTURADO","ENERGIA","HERRAMIENTAS"];
-			break;
-		case 2:
-			categoria = ["ALMACENAMIENTO","DISCOS DUROS","MEMORIAS","SERVIDORES","TARJETA CONTROLADORA","TARJETA MADRE"];
-			break;
-		case 3:
-			categoria = ["ACCESORIOS",
-						 "AUDIFONOS Y MICRO",
-						 "BACK PACK (MOCHILA)",
-						 "CONSUMIBLES",
-						 "FUNDAS",
-						 "HERRAMIENTAS",
-						 "MALETINES",
-						 "MEMORIAS",
-						 "PIZARRON",
-						 "PRODUCTOS DE LIMPIEZA",
-						 "RELOJES"];
-			break;
-		case 4:
-			categoria = ["VIDEOJUEGOS","JUGUETES","SOFTWARE"];
-			break;
-		case 5:
-			categoria = ["FAX",
-						 "CABLEADO ESTRUCTURADO",
-						 "ALARMAS",
-						 "DIGITALIZADOR",
-						 "CONMUTADORES",
-						 "CABLES",
-						 "CAMARAS",
-						 "CONTROL DE ACCESO Y ASISTENCIA",
-						 "CONTROLES",
-						 "DISCOS DUROS",
-						 "MULTIFUNCIONALES",
-						 "OPTICOS",
-						 "PRESENTADOR",
-						 "PUNTO DE VENTA",
-						 "RACK",
-						 "REDES",
-						 "SERVICIOS METROCARRIER",
-						 "TELEFONIA",
-						 "VIDEOGRABADORES"];
-			break;
-		case 6:
-			categoria = ["FAX","SCANNER","TELEVISOR","IMPRESORAS","PLOTTER"];
-			break;
-		case 7:
-			categoria = [
-			"ACCESORIOS",
-			"AUDIFONOS Y MICRO",
-			"BACK PACK (MOCHILA)",
-			"CONSUMIBLES",
-			"FUNDAS",
-			"HERRAMIENTAS",
-			"MALETINES",
-			"MEMORIAS",
-			"PIZARRON",
-			"PRODUCTOS DE LIMPIEZA",
-			"RELOJES",
-			"VENTILADORES"];
-			break;
-		case 8:
-			categoria = ["AIRE ACONDICIONADO",
-						 "CAMARAS",
-						 "IMPRESORAS",
-						 "LINEA BLANCA",
-						 "MAQUINAS DE COSER",
-						 "MUEBLES PARA OFICINA",
-						 "TELEFONIA",
-						 "TELEVISOR",
-						 "VENTILADORES"];
-			break;
-		case 9:
-			categoria = ["MALETINES","ENERGIA","ALARMAS","CABLEADO ESTRUCTURADO","CABLES","CAMARAS"];
-			break;
-		case 10:	// Garantias, revisar
-			categoria = ["POLIZA DE GARANTIAS COMPUTO GHIA 2 A&Ntilde;OS",
-						 "POLIZA DE GARANTIAS COMPUTO GHIA 1 A&Ntilde;O",
-						 "POLIZA DE SERVICIO",
-						 "POLIZAS DE GARANTIA",
-						 "POLIZA DE SERVICIO"];
-			break;
-	}
 	
-	var inicio = "<li><a href=";
-	var link = '"#">';
-	var fin = "</a></li>"
-	for(var i = 0; i < categoria.length; i++) {
-		if (i >= 12) {
-			for (var j = i; j < categoria.length; j++) 
-				$('#lista_subcat2').append(inicio + link + categoria[j] + fin);
-			break;
+	var inicio = '<li><a href="#">';
+	var fin = "</a></li>";
+	var id_append = '#lista_subcat';
+	for (var i = 0; i < categorias.length; i++)
+		if (categorias[i]["id_super"] == numero)
+			numero = categorias[i]["nombre"];
+//	console.log("categoria: " + numero);
+	$.each(subcategorias, function(i, subcat) {
+		if (subcat[0]["id_supercategoria"] == numero) {
+			$.each(subcat, function(j, subs) {
+//				console.log(subs);
+				var link = inicio;
+				if(j >= (subcat.length / 2))
+					id_append = '#lista_subcat2';
+				link = link.replace("#", "../../modulos/productos/detalles.php?extra=1&subcategoria="+subs["id_categoria"]);
+				$(id_append).append(link + subs["id_categoria"] + fin);
+			});
+			return;
 		}
-		$('#lista_subcat').append(inicio + link + categoria[i] + fin);
-	}
+	});
+	$('#img_navbar').attr("src", "../../IMG/categorias/icono_"+numero.replace("/", "-")+".png");
 }
+
+function busquedaCat(index) {
+	$('#categoria_elegida').empty();
+	if (index == 666) 
+		$('#categoria_elegida').append("Todo");
+	else 
+		$('#categoria_elegida').append(categorias[index]["nombre"]);
+	$('#entrada_categoria').attr("value", $('#categoria_elegida').text());
+	console.log($('#categoria_elegida').val);
+}
+

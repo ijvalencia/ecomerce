@@ -1,84 +1,112 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<?php include '../../bin/head.php' ?>
-	</head>
-	<body>
-		<?php include '../../bin/navbar.php' ?>
-		<div class="container">
-			<div class="account-container row">
-				
-				<ol class="breadcrumb">
-					<li><a href="http://localhost/Ecommerce/modulos/inicio/index.php">Inicio</a></li>
-					<li>Mi cuenta</li>
-				</ol>
-				<h1>Mis datos personales</h1>
-				<!-- Menu -->
-				<div class="col-md-3">
-					<h4>Mi cuenta</h4>
-					<ul>
-						<li><a href="/account/profile-edit">Mis datos</a></li>
-						<li><a href="/account/address-book">Mis direcciones</a></li>
-						<li><a href="/account/reviews">Mis reseñas</a></li>
-						<li><a href="/account/order/list">Mis pedidos</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-1 middle-border"></div>
-				<div class="col-md-8">
-					<div>
-						<!-- Form actualizacion -->
-						<form id="form-actualizar">
-							<div class="col-md-6"><label class="form-label required">Nombre</label>
-								<input id="actualizacion_nombre" required="required" class="form-control" type="text"></div>
-							<div class="col-md-6"><label class="form-label required">Apellidos</label>
-								<input id="actualizacion_apellido" required="required" class="form-control" type="text"></div>
-							<div class="col-md-6">
-								<label class="form-label">Fecha de nacimiento</label>
-								<div> <!--Fecha nacimiento -->
-									<div class="col-md-4">
-										<select id="actualizacion_dia" class="form-control"></select>
-									</div>
-									<div class="col-md-4">
-										<select id="actualizacion_mes" class="form-control"></select>
-									</div>
-									<div class="col-md-4">
-										<select id="actualizacion_anio" class="form-control"></select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<label class="form-label">Sexo</label>
-								<div class="row">
-									<input id="check-sexo" value="f" type="radio">
-									<label class="required">Femenino</label>
-									<input id="check-sexo" value="m"  type="radio">
-									<label class="required">Masculino</label>
-								</div>
-							</div>
-							<div class="row"></div>
-							<div>
-								<div class="col-md-6"><label class="form-label required">Email</label>
-									<input id="actualizar_correo" readonly="readonly" class="form-control" value="aqui_va_tu_correo@correo.com" type="email">
-								</div>
-								<div class="col-md-6">
-									<a class="btn">Cambiar e-mail</a>
-								</div>
-							</div>
-							<div class="row"></div>
-							<div class="row">
-								<div class="col-md-6">
-									<label class="form-label">Contraseña actual</label>
-									<input disabled="disabled" required="required" placeholder="**********" class="form-control" type="password">
-								</div>
-								<div class="col-md-6">
-									<a class="btn">Cambia tu contraseña</a>
-								</div>
-							</div>
-							<button type="submit" class="btn">Guardar Cambios</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
+    <head>
+        <?php include '../../bin/head.php' ?>
+    </head>
+    <body>
+        <?php include '../../bin/navbar.php' ?>
+        <div class="loader"></div>
+        <div class="container">
+            <div class="account-container row">
+                <br>
+                <div class="col-sm-1 middle-border"></div>
+                <div class="col-md-8">
+                   
+                        <!-- Form actualizacion -->
+                        <form id="form-actualizar"> 
+                            <div class="col-md-12">
+                                <label for="ejemplo_email_3" class="col-lg-2">Nombre:</label>
+                                <div class="col-xs-5">
+                                    <input class="form-control" type="text" placeholder="Ejemplo: Juan " id="txtnombre" name="txtnombres">
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="col-md-12">
+                                <label for="ejemplo_email_3" class="col-lg-2 control-label">Apellidos:</label>
+                                <div class="col-xs-5">
+                                    <!--<label class="form-label required" id="apellidos">Apellidos</label>-->
+                                    <input class="form-control" placeholder="Ejemplo: Perez" type="text" id="txtapellido" name="txtapellidos">
+                                </div>
+                            </div>
+                            <br> <br>
+                            <div class="col-md-12">     
+                               <div class="row">   
+                                 <label class="form-label" id="fechass" >Fecha de<br>nacimiento:</label>
+                                      <div class="col-xs-5">
+                                       <div class="form-group">
+                                           <select class="selectpicker form-control tamaño" id="fechadia" name="cmbfechas">
+                                            <option value="">Selecionar..</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>        
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>        
+                                           </select>
+                                    </div>
+                                    
+                                       <div class="form-group">
+                                           <select class="selectpicker form-control tamaño" id="fechames" name="cbxmes">
+                                            <option value="">Selecionar..</option>
+                                            <option value="1">Enero</option>
+                                            <option value="2">Febrero</option>
+                                            <option value="3">Marzo</option>        
+                                            <option value="4">Abril</option>
+                                            <option value="5">Mayo</option>
+                                            <option value="6">Junio</option>        
+                                          </select>
+                                        </div>
+                                     
+                                        <div class="form-group">
+                                            <select  class="selectpicker form-control tamaño" id="fechaanio" name="cmbxanio">
+                                            <option value="">Selecionar..</option>
+                                            <option value="1">1989</option>
+                                            <option value="2">1990</option>
+                                            <option value="3">1991</option>        
+                                            <option value="4">1992</option>
+                                            <option value="5">1993</option>
+                                            <option value="6">1994</option>  
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                            
+                         <div class="col-md-12">
+                            <div class="row">
+                                   <label  class="col-lg-2 control-label" id="sexo">Sexo:</label>
+                                   <label class="required">Femenino <input id="check-sexo" name="sexo" value="Feminino"  type="radio" checked=""></label>&nbsp;&nbsp;        
+                                   <label class="required">Masculino<input id="check-sexo" name="sexo" value="Masculino" type="radio">&nbsp;&nbsp;</label>  
+                            </div>
+                        </div>
+                            
+                        <div class="col-md-12">
+                            <div class="row">
+                                     <label  class="col-lg-2 control-label" id="sexo">Email:</label>
+                                    <div class="col-xs-5">
+                                        <input  class="form-control" placeholder="ejemplo@correo.com" type="email" id="txtemail" name="txtemail">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="col-md-12">
+                                 <div class="row">
+                                     <label  class="col-lg-2 control-label" id="sexo">Contraseña:</label>
+                                    <div class="col-xs-5">
+                                        <input class="form-control" placeholder="Cambiar Contraseña" type="password" id="txtpassw">
+                                    </div>
+                              </div>    
+                            <button type="button" class="btn" id="btnguardar">Guardar</button>
+                            <br><br>
+                        </div>
+                     </form>
+                </div>
+            </div>
+        </div>
+        <script src="../../Js/Libreria_js/Principal.js"></script>
+        <script src="../../Js/jqueryValidate/dist/jquery.validate.min.js"></script>
+        <script src="navbar.js"></script>
+        <script src="../../Js/jqueryValidate/validaciones.js"></script>
+        <script src="../../Js/jqueryValidate/mensajesv&v.js"></script>
+       <!--<script src="../../Js/Libreria_js/Principal.js"></script>-->
+    </body>
 </html>

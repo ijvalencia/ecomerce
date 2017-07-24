@@ -3,12 +3,17 @@ var tipo_cambio;
 var sesion;
 
 $(document).ready(function() {
-	/*Obtener sesion */
+	/*Obtener sesion y otros datos */
 	$.getJSON("../../bin/ingresar.php?categoria=sesion", function(datos) {
 		sesion = datos;
 	});
+	$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
+		tipo_cambio = datos['tipo_cambio'];
+	});
+	
 	/* Muestra los articulos */
 	mostrarArticulos();
+	
 	/* Carga los envios */
 	$.getJSON("../../bin/ingresar.php?categoria=envios", function(dato) {
 		/*Inserta los datos si es Modal
@@ -27,18 +32,15 @@ $(document).ready(function() {
 });
 
 function mostrarArticulos() {
-	var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4"><img src="link_imagen" class="img-responsive"/></div><div class="col-sm-8"><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price"><span class="precios">precio_producto</span></td><td data-th="Quantity"><input class="numero_cantidad" type="number" value="1" min="1" max="99" style="width:60px" onchange="actualizarTotal()"></td><td class="actions" data-th=""><a onclick="borrarArticulo(#n)"><i class="fa fa-trash-o"></i></a></td></tr>';
-	$.getJSON("carrito.php", function(dato) {
+	var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4"><img src="link_imagen" class="img-responsive"/></div><div class="col-sm-8"><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price"><span class="precios">precio_producto</span></td><td data-th="Quantity"><input class="numero_cantidad" type="number" value="1" min="1" max="99" style="width:60px" onchange="actualizarTotal()" onkeydown="return false"></td><td class="actions" data-th=""><a onclick="borrarArticulo(#n)"><i class="fa fa-trash-o"></i></a></td></tr>';
+	$.getJSON("../../bin/ingresar.php?categoria=getCarrito", function(dato) {
 		$.each(dato, function(j, valor) {
-			$.each(valor, function(i, valor) {
-				var salida = tabla_producto;
-				salida = salida.replace(/#n/g, i);
-				salida = salida.replace("link_imagen", valor['imagen']);
-				salida = salida.replace("nombre_producto", valor['descripcion']);
-				tipo_cambio = valor['tipocambio'];
-				salida = salida.replace("precio_producto", (valor['precio']*tipo_cambio).toFixed(2) + " ");
-				$('tbody').append(salida);
-			});
+			var salida = tabla_producto;
+			salida = salida.replace(/#n/g, j);
+			salida = salida.replace("link_imagen", valor['imagen']);
+			salida = salida.replace("nombre_producto", valor['descripcion']);
+			salida = salida.replace("precio_producto", valor['moneda'] === "Pesos" ? valor["precio"] + " " : (valor["precio"]*tipo_cambio).toFixed(2) + " ");
+			$('tbody').append(salida);
 		});
 		var sub = 0;
 		var precios = $(".precios").text().split(" ");
@@ -48,6 +50,7 @@ function mostrarArticulos() {
 		sub = sub.toFixed(2);
 		$('#txt_subtotal').append(sub);
 		$('#txt_total').append(sub);
+		$('.loader').fadeOut("slow");
 	});
 }
 
@@ -78,7 +81,6 @@ $('#btn_confirmar_compra').click(function() {
 			alert("Tu compra es mayor a $20,000 para\nconfirmarla comunicate a 01-800-CVA");
 			// Mandar correo con el numero de orden y telefono de confirmacion
 		} else {
-			
 			// Ir a metodos de pago 
 		}
 		// Enviar a la pag de ordenes
