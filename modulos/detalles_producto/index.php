@@ -11,7 +11,7 @@
 			echo '<span class="hidden" id="categoria" value="'.$categoria.'"></span>';
 		?>
 		<?php include '../../bin/navbar.php'?>
-		
+            
 		<div class="container">
 			<ol class="breadcrumb">
 				<li><a href="http://localhost/Ecommerce/modulos/inicio/index.php">Inicio</a></li>
@@ -36,7 +36,7 @@
 					<div class="product-price-container option-container">
 						<span id="descripcion_producto"></span>
 						<br>
-						<a>$<span id="precio_producto"></span></a>
+						<h4><a>$<span id="precio_producto"></span></a></h4>
 						<br>
 						Disponibles: <a id="cant_disponibles"></a>
 						<br><br>
@@ -48,6 +48,7 @@
 			</div>
 		</div>
 		<!-- Descripcion y detalles -->
+		<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-lg-8">
 				<h2>Detalle del Producto</h2>
@@ -70,5 +71,8 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="scripts.js"></script>
+		<br/>
+		</div>
+		<?php include '../../bin/footer.php'?>
 	</body>
 </html>

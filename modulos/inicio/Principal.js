@@ -2,8 +2,7 @@ var tabla_productos = "<div class='col-md-2' id='mostrar'><img id='superior2' sr
 var carrusel = "<div class='col-md-3'><a href='#' class='thumbnail' id='sombreado'><img src='imagecarrusel' alt='Image'><p><hr><small>descripcion</small>precio</p></a></div>";
 var image,images;
 
-$(document).ready(function() {  
-	$('.loader').fadeOut("slow");
+$(document).ready(function() {    
    $.getJSON("../../bin/ingresar.php?categoria=informa", function(respuesta) {
          console.log(respuesta);
          $.each(respuesta, function(i, valor){

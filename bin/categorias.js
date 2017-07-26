@@ -1,6 +1,7 @@
 var categorias;
 var subcategorias = [];
 var imagenes = [];
+var extra = "marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined";
 
 $(document).ready(function() {
 });
@@ -50,7 +51,7 @@ function cargarLista(numero) {
 				var link = inicio;
 				if(j >= (subcat.length / 2))
 					id_append = '#lista_subcat2';
-				link = link.replace("#", "../../modulos/productos/detalles.php?extra=1&subcategoria="+subs["id_categoria"]);
+				link = link.replace("#", "../../modulos/productos/detalles.php?extra=1&"+extra+"&subcategoria="+subs["id_categoria"]);
 				$(id_append).append(link + subs["id_categoria"] + fin);
 			});
 			return;
@@ -66,6 +67,5 @@ function busquedaCat(index) {
 	else 
 		$('#categoria_elegida').append(categorias[index]["nombre"]);
 	$('#entrada_categoria').attr("value", $('#categoria_elegida').text());
-	console.log($('#categoria_elegida').val);
+//	console.log($('#categoria_elegida').text());
 }
-

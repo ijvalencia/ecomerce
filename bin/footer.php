@@ -1,4 +1,4 @@
-<!--<div class="row">-->
+<div class="container">
     <div class="jumbotron" id="colorblanco">
         <div class="col-md-12">
             <p class="titulo" >LO MAS VENDIDO</p>  
@@ -97,6 +97,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <footer style="background: #f2f2f2">
     <!--<div class="container">-->
@@ -108,3 +109,5 @@
         </div>
    <!-- </div>-->
 </footer>
+
+    

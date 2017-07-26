@@ -16,16 +16,7 @@
                 <div class="imgg">
                 </div>
             </div>
-            <br><br><br>
-            <!-- <div class="row">
-                  <div class="imgg2">         
-                  
-                  </div>
-              </div>
-          <div class="row">
-              <div class="imgg3">                     
-              </div>
-          </div>-->       
+            <br><br><br>       
         </div>
         <br><br><br>
         <div class="container-fluid bg-3 text-center" id="centrados">    

@@ -31,7 +31,9 @@ function cargarProducto(codigo) {
 	$.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo="+codigo, function(datos) {
 		articulo = datos["item"];
 		var disp = parseInt(articulo["disponible"]);
+		disp = disp <= 0 ? 0 : disp;
 		var dispCD = parseInt(articulo["disponibleCD"]);
+		dispCD = dispCD <= 0 ? 0 : dispCD;
 		var total_disp = disp + dispCD;
 		if (total_disp <= 0) {
 			$('#btn_comprar').hide();
@@ -43,7 +45,15 @@ function cargarProducto(codigo) {
 		$('#descripcion_producto').append(articulo["descripcion"]);
 		$('#precio_producto').append((articulo["moneda"] === "Pesos" ? articulo["precio"] : (articulo["precio"]*articulo['tipocambio']).toFixed(2)));
 		$('#cant_disponibles').append(total_disp);
-		$('#descripcion_producto2').append(articulo["descripcion"]);
+		var ftecnica;
+		ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"].replace("/13", "<br>") : "NO EXISTE INFORMACION ADICIONAL";
+		$('#descripcion_producto2').append(ftecnica);
+		$('#descripcion_producto2').append("<br>");
+		/*var fcomercial = articulo["ficha_comercial"];
+		if (!jQuery.isEmptyObject(fcomercial)) {
+			fcomercial = fcomercial.replace("/13", "<br>");
+			$('#descripcion_producto2').append(fcomercial);
+		}*/
 		$('#codigo_fabricante').append(articulo["codigo_fabricante"]);
 		$('#tiempo_garantia').append(articulo["garantia"].replace("NI", "Ñ"));
 		for (var i = 0; i < categorias_sin_cantidad.length; i++) {
@@ -63,10 +73,14 @@ $('#btn_comprar').click(function() {
 		data: {"articulo": articulo},
 		success: function(resp) {
 			console.log(resp);
-			if (resp != "0")
+			if (resp !== "0"){
 				alert("Agregado al carrito");
-			else
+                                window.location.href = "../../modulos/carrito/index.php";
+                                window.close();   
+                                }
+			else{
 				alert("No se pudo agregar");
+                            }
 		}
 	});
 });

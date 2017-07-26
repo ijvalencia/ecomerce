@@ -5,13 +5,12 @@
     </head>
     <body>
         <?php include '../../bin/navbar.php' ?>
-        <div class="loader"></div>
+     <!--  <div class="loader"></div>-->
         <div class="container">
             <div class="account-container row">
                 <br>
                 <div class="col-sm-1 middle-border"></div>
-                <div class="col-md-8">
-                   
+                <div class="col-md-8">     
                         <!-- Form actualizacion -->
                         <form id="form-actualizar"> 
                             <div class="col-md-12">
@@ -89,22 +88,21 @@
                                 </div>
                         </div>
                         <div class="col-md-12">
-                                 <div class="row">
+                              <div class="row">
                                      <label  class="col-lg-2 control-label" id="sexo">Contraseña:</label>
                                     <div class="col-xs-5">
                                         <input class="form-control" placeholder="Cambiar Contraseña" type="password" id="txtpassw">
                                     </div>
                               </div>    
-                            <button type="button" class="btn" id="btnguardar">Guardar</button>
+                                <button type="button" class="btn" id="btnguardar">Guardar</button>
                             <br><br>
                         </div>
                      </form>
                 </div>
             </div>
         </div>
-        <script src="../../Js/Libreria_js/Principal.js"></script>
-        <script src="../../Js/jqueryValidate/dist/jquery.validate.min.js"></script>
-        <script src="navbar.js"></script>
+     <script src="usuarios.js"></script>
+       <!--<script src="../../Js/jqueryValidate/dist/jquery.validate.min.js"></script>
         <script src="../../Js/jqueryValidate/validaciones.js"></script>
         <script src="../../Js/jqueryValidate/mensajesv&v.js"></script>
        <!--<script src="../../Js/Libreria_js/Principal.js"></script>-->

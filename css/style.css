@@ -61,7 +61,7 @@ h3 {
 }
 img{ 
     max-width: 100%;
-    //margin: 5px;
+    /*margin: 5px;*/
     margin: 9px;
 }
 ::-moz-selection { background: #ffae4b; color: #fff; text-shadow: none; }
@@ -322,8 +322,8 @@ height: 47px;
     background-color: #fff;
     color: inherit;
     margin-bottom: 30px;
-    margin-left: 59px;/*32px*/
-    margin-right: 59px;/*32px*/
+    margin-left:  0px;/* 59 32px*/
+    margin-right: 0px;/* 59 32px*/
     padding-bottom: 30px;
     /*padding-top: 150px;*/
     padding-top: 10px;
@@ -428,7 +428,10 @@ height: 47px;
 
 /********************************************************************************************************************************************************************************/
 /*Archivo acomodo.css*/
-
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap [class*="col-"] {
+    padding: 0;
+}
+/*los datos del img en carrusel*/
 div.show-top-margin{
     margin-top:2em;
 }
@@ -826,7 +829,8 @@ hr {
 }
 
 .detallesPro{
-  margin-left: -34%;
+   margin-left: -11%;
+   
 }
 
 #position{
@@ -835,14 +839,24 @@ hr {
 }
 
 .Precios{
-    margin-left:-57%;
+    margin-left: -25%;
+    margin-top: 52px;
+}
+
+.detallesorden{
+  margin-left: 56%;   
+}
+
+.Preciosdetalle{
+ margin-top: -58px;
+ margin-left: -53px;   
 }
 
 /*detalles descripcion  Detalles_orden.php*/
 .precioisquierda{
- float: right;        
- margin-left: -109%;
- margin-top: -147px;
+ //float: right;        
+ margin-left: -28%;
+ margin-top: -76px;
 }
 
 .descrpicion{
@@ -864,8 +878,8 @@ hr {
 .imgderecha{
   float: left;
   margin-left:2%;
-  margin-top: -38px;
-  text-align: center;  
+  margin-top:-60px;
+  text-align:center;  
 }
 
 /*menu principal*/
@@ -898,10 +912,15 @@ label {
     display: inline-block;
     max-width: 100%;
     margin-bottom: 5px;
-    font-weight: 700;
-    float: left;
-    margin-left: 3%;
+    font-weight:700;
+    float:left;
+    margin-left:3%;
 }
 .tamaño{
   width: 108%;
+}
+/* menu de imagenes */
+#img_navbar{
+  margin-left: 215%;
+  margin-top: -252%;  
 }

@@ -18,38 +18,35 @@
             <div class="panel-body row">
                 <div class="container-fluid bg-3 text-center">
                     <div class="panelessde">
-                        <p class="detallesPro">Producto :</p>
-                        <p class="Precios">Cargo de envio :</p>
-                        <hr>
-                        <p class="Precios">Monto total :</p> 
-                        <p class="precioisquierda">$200 MXN</p>
-                        <br>
-                        <p class="precioisquierda">$200 MXN</p>
-                   
+                         <p class="detallesPro">Orden de comprar mas detallado </p><br>
+                         <p class="Precios" ></p>
+                        
+                         <p class="precioisquierda" id="precios"></p>
+                         <p class="Precios" id="precioMonto"></p> 
+                         <p class="precioisquierda" id="preciosenvio"></p> <br><br>
                     </div>
                     
                       <div class="row">
                         <div class="col-sm-1">
                             <div class="panelessiz">
                                 <p style="text-align: left; margin-left: 2%;">Paquete</p><br>
-                                <img src="https://placehold.it/150x80?text=IMAGE" width="20%" class="imgderecha">
-                               
-                               <br>
-                               <p class="">Encamino</p>
-                               <p class="">LLegara Miercoles 4:30</p>     
-                             
+                                   <div id="descripcion" class="detallesorden"></div>
+                                     <div id="precio" class="Preciosdetalle"></div>
+                                       <img src="imagen" width="20%" id="imagen" class="imgderecha">
+                                    <br>
+                                 <br>
+                              <br>
                           </div>
                         </div>    
                       </div>
-                    <br>
+                    <br> 
                     <div class="row">
-                        <div class="panelessde">
-                          <p class="detallesPro">Metodo de Pago</p>
-                          <p class="Precios">Mastercatd</p>
-                          <div class="col-sm-4">
-                              <img src="https://placehold.it/150x80?text=IMAGE" style="width: 230%" class="imgderecha">
-                          </div>    
-                        </div>
+                       <div class="panelessde">
+                           <div id="pagos">
+                                <p class="detallesPro">Metodo de Pago</p>
+                                <img src="../../IMG/tarjeta.png" style="width: 30px" class="imgderecha img-circle">
+                          </div>
+                       </div>
                     </div>
                     <br>
                     <div class="row">
@@ -62,9 +59,10 @@
                     </div>
                   </div>
                 </div>
-          <hr>
-        </div>
-      <br>         
-     <br>
+              <hr>
+           </div>
+          <br>         
+        <br>
+        <script src="detalle_orden.js"></script>
   </body>
 </html>

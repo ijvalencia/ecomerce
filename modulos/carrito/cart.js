@@ -1,6 +1,7 @@
 var img_error = "http://placehold.it/100x100";
+var parametros
 var tipo_cambio;
-var sesion;
+var sesion="";
 
 $(document).ready(function() {
 	/*Obtener sesion y otros datos */
@@ -8,7 +9,8 @@ $(document).ready(function() {
 		sesion = datos;
 	});
 	$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
-		tipo_cambio = datos['tipo_cambio'];
+		parametros = datos;
+		tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
 	});
 	
 	/* Muestra los articulos */
@@ -29,6 +31,26 @@ $(document).ready(function() {
 			$('#selector_envio').append(salida);
 		});
 	});
+        
+        
+    $('#btn_confirmar_compra').on("click",function() { 
+        //alert("hola"+sesion);
+           if(sesion === ""){
+                alert("Registrate para poder seguir con tu compra");
+                window.location.href = "../../modulos/login/index.php";
+                window.close();
+		alert("Registrate para poder seguir con tu compra");
+		// Enviar a la pagina de registro
+	} else {
+		if (parseFloat($('#txt_total').text()) > parametros["compra_maxima"]){
+			alert("Para confirmar tu compra comunicate a " + parametros["no_cva"]);
+			// Mandar correo con el numero de orden y telefono de confirmacion
+		} else {
+			// Ir a metodos de pago 
+		}
+		// Enviar a la pag de ordenes
+      }
+   });     
 });
 
 function mostrarArticulos() {
@@ -72,17 +94,3 @@ function actualizarTotal() {
 	$('#txt_total').append(sub);
 }
 
-$('#btn_confirmar_compra').click(function() {
-	if (sesion['nombre'] == "invitado") {
-		alert("Registrate para poder seguir con tu compra");
-		// Enviar a la pagina de registro
-	} else {
-		if (parseFloat($('#txt_total').text()) > 20000){
-			alert("Tu compra es mayor a $20,000 para\nconfirmarla comunicate a 01-800-CVA");
-			// Mandar correo con el numero de orden y telefono de confirmacion
-		} else {
-			// Ir a metodos de pago 
-		}
-		// Enviar a la pag de ordenes
-	}
-});

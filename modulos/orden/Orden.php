@@ -10,21 +10,21 @@
     </head>
     
     <body style="background: #f2f2f2;">
-        <br>
+        <br> <!--class="panel-title"-->
         <div class="panel panel-default row">
-            <div class="panel-heading"> <!--class="panel-title"-->
+            <div class="panel-heading"> 
                 <h5 >ORDENES DE COMPRAS</h5>
             </div>
             <div class="panel-body row">
                 <div class="container-fluid bg-3 text-center">   
-                         <button class="btn btn-default" id="btncontacto">Contactos</button>
-                         <p class="detallesPro">Detalles del la descripcion del producto Comprado</p>
-                         <p class="Precios">$ 300 MXN</p>
-                         <a href="detalles_orden.php" id="btncontacto">Ver Detalles</a>
-                        
+                        <button class="btn btn-default" id="btncontacto">01-800-333CBA</button>
+                        <!--<div id="nombre" class="detallesPro"></div>-->
+                        <div id="descripcion" class="detallesPro"></div>
+                        <div id="precio" class="Precios"></div>
+                        <a href="detalles_orden.php" id="btncontacto">Ver Detalles</a>
                 <div class="row">
                     <div class="col-sm-2" id="position">
-                      <img src="../../imgweb/210011Q-500x500.jpg">
+                     <img src="imagen" id="imagen">
                     </div>
                 </div>
               </div>
@@ -34,28 +34,15 @@
         <br>
         <br>
         
+        <!--class="panel-title"-->
+        <!--
     <div class="panel panel-default row">
-            <div class="panel-heading"> <!--class="panel-title"-->
+            <div class="panel-heading"> 
                 <h5>ORDENES DE COMPRAS</h5>
             </div>
-                      
-        </div>         
-        <!--<div class="container-fluid bg-3 text-center">    
-            <div class="row">
-                <div class="col-sm-4">
-                    <p>Anuncios</p>
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                </div>
-                <div class="col-sm-4"> 
-                    <p>Anuncios</p>
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                </div>
-                <div class="col-sm-4">
-                    <p>Anuncios</p>
-                    <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                </div>
-            </div>
-        </div>-->
+        </div> 
+        -->
+        
         <br>
        </body>
        <script src="orden.js"></script>
