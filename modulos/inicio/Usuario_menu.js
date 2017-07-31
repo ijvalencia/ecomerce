@@ -42,7 +42,7 @@ $(document).ready(function(){
 				image = image.replace("descripcion",valorrs['descripcion']);
 				image = image.replace("marca",valorrs['marca']);
 				image = image.replace("precio", "$", valorrs['precio']);      
-				
+
 				for(var k in image){
 					//alert(k+"cantidad"+image.length);
 					if (image.length === 281){ 

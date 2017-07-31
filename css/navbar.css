@@ -358,11 +358,6 @@ padding-bottom: 51px;
   font-size: 10px;
   padding: 4px 7px;
 }
-.line-navbar-two .lnt-dropdown-mega-menu > .lnt-category {
-  width: 250px;
-  border-right: 1px solid #eeeeee;
-  float: left;
-}
 @media (min-width: 768px) and (max-width: 992px) {
   .line-navbar-two .lnt-dropdown-mega-menu > .lnt-category {
     width: 190px;
@@ -370,16 +365,6 @@ padding-bottom: 51px;
 }
 .line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li {
   position: relative;
-}
-.line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a {
-  color: #949494;
-  padding: 10px 20px;
-  border-bottom: 1px solid #eeeeee;
-  display: block;
-  white-space: nowrap;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a:hover,
 .line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a:focus {
@@ -408,11 +393,6 @@ padding-bottom: 51px;
   border-top: 9px solid transparent;
   border-bottom: 9px solid transparent;
 }
-.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap {
-  margin-left: 250px;
-  position: relative;
-  background-color: #ffffff;
-}
 @media (min-width: 768px) and (max-width: 992px) {
   .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap {
     margin-left: 190px;
@@ -423,12 +403,6 @@ padding-bottom: 51px;
 }
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap > div.active {
   display: block;
-}
-.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap.container-fluid {
-  padding: 0;
-}
-.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap [class*=col-] {
-  padding: 0;
 }
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory {
   padding-bottom: 10px;
@@ -442,9 +416,6 @@ padding-bottom: 51px;
 }
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory ul li {
   padding: 6px 20px;
-}
-.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory ul li a {
-  color:  #949494;
 }
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .carousel-indicators li {
   width: 15px;
@@ -768,3 +739,65 @@ padding-bottom: 51px;
   opacity: 0.1;
   filter: alpha(opacity=10);
 }
+
+/* SATANAS */
+.icon_navbar {
+	width: 40px;
+	position: static;
+	padding-left: 0px;
+}
+.line-navbar-two .lnt-dropdown-mega-menu > .lnt-category {
+  width: 270px;
+  border-right: 1px solid #eeeeee;
+  float: left;
+}
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap {
+  margin-left: 270px;
+  position: relative;
+  background-color: #ffffff;
+}
+.line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a {
+	color: #444;
+	padding: 5px 0px;
+	border-bottom: 2px solid #eee;
+	display: block;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: 400;
+}
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory ul li a {
+  	color: #444;
+	font-weight: 250;
+}
+.line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a:hover,
+.line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a:focus {
+/*  background-color: #ffae4b;*/
+  background: #ff8400;
+  background-image: -webkit-linear-gradient(right, red, #ffae4b);
+  background-image: -moz-linear-gradient(right, red, #ffae4b);
+  background-image: -ms-linear-gradient(right, red, #ffae4b);
+  background-image: -o-linear-gradient(right, red, #ffae4b);
+  background-image: linear-gradient(to left, red, #ffae4b);
+  color: #ffffff;
+}
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory ul li a:hover {
+  color: #ff8400;
+}
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap.container-fluid {
+  padding: 0 0;
+}
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap [class*=col-] {
+  padding: 0;
+  padding-right: 40px;
+}
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategory-img {
+	position: absolute;
+  	display: block;
+  	margin: 0px 0px 0px 530px;
+  	width: auto;
+  	height: calc;
+  	min-height: 70%;
+}
+/***********/

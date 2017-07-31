@@ -1,4 +1,3 @@
-var img_error = "http://placehold.it/100x100";
 var tabla_producto;
 //var x=getUrlParameter('subcategoria');
 var x=0;
@@ -44,6 +43,7 @@ $(document).ready(function() {
 	var supercategoria = $('#supercategoria').attr("value");
 	var busqueda = $('#busqueda').attr("value");
 	if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda)) {
+		$('.breadcrumb').append("<li><a></a>Busqueda</li>");
 		busqueda = busqueda.split(" ");
 		var productos_busqueda = [];
 		$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
@@ -61,7 +61,9 @@ $(document).ready(function() {
 						});
 					});
 //					console.log(productos_busqueda);
-					var html_imagen = '<div class="col-sm-3"><a href="../detalles_producto/index.php?categoria=&producto=#id_producto" class="thumbnail"><img src="#imagen" class="img-responsive" style="width:100%" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>#descripcion</small></p><h4>$#costo</h4></a></div>';
+					var html_imagen = '<div class="col-sm-3 .container_img_producto"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail"><img src="#imagen" class="img-responsive" style="width:100%" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>#descripcion</small></p><h4>$#costo</h4></a></div>';
+					html_imagen = html_imagen.replace("#cat", $('#subcategoria').attr("value"));
+//					console.log(html_imagen);
 					var tabla_producto='<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
 					var id_tabla;
 					var t = 0;
@@ -84,6 +86,7 @@ $(document).ready(function() {
 			});
 		});
 	}
+	$('.breadcrumb').append("<li>"+$('#subcategoria').attr("value")+"</li>");
 	/***********/
 });
 
@@ -111,7 +114,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 			var imprimemela="";
 			for(var y=0; y < dato.item.length; y++)
 			{
-				tabla_producto = '<div class="col-sm-3"><a href="../detalles_producto/index.php?categoria=&producto=compa" class="thumbnail"><img src="imagen" class="img-responsive" style="width:100%" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>Texto</small></p></a></div>';
+				tabla_producto = '<div class="col-sm-3 container_img_producto"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail"><img src="imagen" class="img-responsive" style="width:100%" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>Texto</small></p></a></div>';
 				if (x==0)
 					tabla_producto='<div class="container-fluid bg-3 text-center">' + tabla_producto;
 				if (x==3) 

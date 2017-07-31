@@ -59,24 +59,7 @@ class BD {
     }
 
     //	Procedimiento Login
-    public function login($correo, $contra) {
-        $sql = "SELECT id_usuario, nombre, apellidos FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
-        $datos = $this->conexion->query($sql);
-        if ($datos != false) {  // Si la consulta funciona imprime los datos
-            foreach ($datos as $row) {
-                echo $row['id_usuario'] . "||";
-                echo $row['nombre'] . "||";
-                echo $_SESSION['nombre'] = $row['nombre'];
-                echo $_SESSION['apellidos'] = $row['apellidos'];
-                //echo $_SESSION['Bienvenido'] = "Bienvenido :";
-                echo $_SESSION['id'] = $row['id_usuario'];
-            }
-        } else {
-            echo "0";
-        }
-    }
-
-   // Agregar encriptacion, buscar manual passwords php
+    // Agregar encriptacion, buscar manual passwords php
     public function validarContra($usuario, $contra) {
         $sql = "SELECT contra FROM usuario WHERE id_usuario=" . $usuario;
         $pass = $this->conexion->query($sql);
@@ -319,7 +302,7 @@ class BD {
     }
 
     /* Actualizar datos */
-	
+
     public function cambiarEstadoOrden($orden, $estado) {
         $sql = "UPDATE ordenes SET estado = " . estado . " WHERE id_ordenes=" . $orden;
         // 1 se realizo consulta con exito, 0 no se realizo
@@ -348,17 +331,19 @@ class BD {
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
 
-	/******************* NO USAR PELIGRUS!!! *******************/
-	function verTodosProductos() {
-		$filename = $url_cva . "&marca=%&grupo=%&clave=%&codigo=%";
-		set_time_limit(5000);
-		$articulos = simplexml_load_file($filename);
-		echo json_encode($articulo);
-	}
-	/******************** FIN DEL PELIGRUS *********************/  
-	
-	
-	/* SATANAS */
+    /*     * ***************** NO USAR PELIGRUS!!! ****************** */
+
+    function verTodosProductos() {
+        $filename = $url_cva . "&marca=%&grupo=%&clave=%&codigo=%";
+        set_time_limit(5000);
+        $articulos = simplexml_load_file($filename);
+        echo json_encode($articulo);
+    }
+
+    /*     * ****************** FIN DEL PELIGRUS ******************** */
+
+
+   	/* SATANAS */
    	public function getCategorias() {
 		$sql = "SELECT * FROM super_categorias";
 		$datos = [];
@@ -408,7 +393,7 @@ class BD {
 		$sql = [];
 		if ($categoria === "Todo")
 			foreach ($palabras as $busqueda) {
-				array_push($sql, "SELECT * FROM producto WHERE INSTR(descripcion, ' ".$busqueda." ') ORDER BY departamento");
+				array_push($sql, "SELECT * FROM producto WHERE INSTR(descripcion, ' ".$busqueda." ') OR INSTR(grupo, '".$busqueda."') GROUP BY codigo_fabricante ORDER BY departamento");
 			}
 		else
 			foreach ($palabras as $busqueda) {
@@ -424,62 +409,204 @@ class BD {
 		}
 		echo json_encode($arr);
 	}
-	/***********/
 	
-
+	public function productosInicio() {
+		$sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";	
+		$datos = [];
+		foreach ($this->conexion->query($sql) as $row) {
+			array_push($datos, $row);
+		}
+		echo json_encode($datos);
+                
+                }
+	/***********/
     /* parte del chuy  */
-    public function mostrarordenes($id_usuariosesion){
-    $sql="select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";  
-    $arr=[];
-        foreach ($this-> conexion->query($sql) as $rowordenar){
-           array_push($arr, $rowordenar);
+    public function getcarruselfooter(){
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
+        $arrnewfooter = [];
+        foreach ($this->conexion->query($sql) as $rownewfooter) {
+            array_push($arrnewfooter, $rownewfooter);
+        }
+        echo json_encode($arrnewfooter);
+    }
+    
+    public function getcarruselfooter2(){
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
+        $arrnewfooter = [];
+        foreach ($this->conexion->query($sql) as $rownewfooter) {
+            array_push($arrnewfooter, $rownewfooter);
+        }
+        echo json_encode($arrnewfooter);
+    }
+    
+    public function getcarruselfooter3(){
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
+        $arrnewfooter = [];
+        foreach ($this->conexion->query($sql) as $rownewfooter) {
+            array_push($arrnewfooter, $rownewfooter);
+        }
+        echo json_encode($arrnewfooter);
+    }
+    
+    public function getcarruselfooter4(){
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
+        $arrnewfooter = [];
+        foreach ($this->conexion->query($sql) as $rownewfooter) {
+            array_push($arrnewfooter, $rownewfooter);
+        }
+        echo json_encode($arrnewfooter);
+    }
+    
+    public function getcarruselfooter5(){
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
+        $arrnewfooter = [];
+        foreach ($this->conexion->query($sql) as $rownewfooter) {
+            array_push($arrnewfooter, $rownewfooter);
+        }
+        echo json_encode($arrnewfooter);
+    }
+    
+    public function getcarruselfooter6(){
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
+        $arrnewfooter = [];
+        foreach ($this->conexion->query($sql) as $rownewfooter) {
+            array_push($arrnewfooter, $rownewfooter);
+        }
+        echo json_encode($arrnewfooter);
+    }
+    
+    public function login($correo, $contra) {
+        $sql = "SELECT id_usuario, nombre, apellidos FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
+        $datos = $this->conexion->query($sql);
+        if ($datos != false) {  // Si la consulta funciona imprime los datos
+            foreach ($datos as $row) {
+                echo $row['id_usuario'] . "||";
+                echo $row['nombre'] . "||";
+                echo $_SESSION['nombre'] = $row['nombre'];
+                echo $_SESSION['apellidos'] = $row['apellidos'];
+                //echo $_SESSION['Bienvenido'] = "Bienvenido :";
+                echo $_SESSION['id'] = $row['id_usuario'];
+            }
+        } else {
+            echo "0";
+        }
+    }
+
+    public function mostrarordenes($id_usuariosesion) {
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesion . "'";
+        $arr = [];
+        foreach ($this->conexion->query($sql) as $rowordenar) {
+            array_push($arr, $rowordenar);
         }
         echo json_encode($arr);
     }
-    
-    public function mostrarordenesdetalles($id_usuariosesiondetalle){
-   
-    $sql="select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado, ordenes.metodo_pago,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesiondetalle."'";  
-    $arrdetalle=[];
-        foreach ($this->conexion->query($sql) as $rowordenardetalle){
-           array_push($arrdetalle, $rowordenardetalle);
-           
+
+    public function mostrarordenesdetalles($id_usuariosesiondetalle) {
+
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado, ordenes.metodo_pago,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesiondetalle . "'";
+        $arrdetalle = [];
+        foreach ($this->conexion->query($sql) as $rowordenardetalle) {
+            array_push($arrdetalle, $rowordenardetalle);
         }
         echo json_encode($arrdetalle);
     }
-    
+
     public function actualizarDatosUsuario($id, $nombre, $apellidos, $dia, $mes, $anio, $correos, $contra) {
         $sql = "UPDATE usuario SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "',dia='" . $dia . "', mes='" . $mes . "',anio='" . $anio . "' ,correo='" . $correos . "',contra='" . $contra . "' WHERE id_usuario='" . $id . "'";
         echo $sql;
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
-
-    public function getProductosPrincipal(){
-        $sql = "SELECT imagen, precio, descripcion FROM producto limit 23";  
+/*
+    public function getProductosPrincipal() {
+        $sql = "SELECT imagen, precio, descripcion FROM producto limit 23";
         $arr = [];
         foreach ($this->conexion->query($sql) as $row) {
             array_push($arr, $row);
         }
         echo json_encode($arr);
     }
-    public function getcarruselProcuctosnuevo(){ //metodo para computadoras
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' and marca='lenovo' order by precio desc limit 30";   
-        $arrnew=[];    
+*/
+    public function getcarruselProcuctosnuevo() { //metodo para computadoras
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' and marca='lenovo' order by rand(), precio limit 4";
+        $arrnew = [];
         foreach ($this->conexion->query($sql) as $rownew) {
             array_push($arrnew, $rownew);
         }
         echo json_encode($arrnew);
     }
-    
-    public function getcaruselTv(){
-        $sql="SELECT descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='A' and grupo='TELEVISOR'  order by precio desc limit 300";           
-        $arrtv=[];        
-        foreach($this->conexion->query($sql) as $rowtv){
-            array_push($arrtv, $rowtv);    
+
+    public function getcarrusel2Productosnuevos() {
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' and marca='lenovo' order by rand(), precio limit 4 , 4";
+        $arrnew1 = [];
+        foreach ($this->conexion->query($sql) as $rownew1) {
+            array_push($arrnew1, $rownew1);
         }
-        echo json_decode(arrtv);
+        echo json_encode($arrnew1);
+    }
+
+    public function getcarrusel3Productivosnuevos() {
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' and marca='lenovo' order by rand(), precio desc limit 4";
+        $arrnew2 = [];
+        foreach ($this->conexion->query($sql) as $rownew2) {
+            array_push($arrnew2, $rownew2);
+        }
+        echo json_encode($arrnew2);
+    }
+
+    public function getcaruselTv1() {
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='A' and grupo='TELEVISOR'  order by rand(), precio desc limit 4";
+        $arrtv = [];
+        foreach ($this->conexion->query($sql) as $rowtv) {
+            array_push($arrtv, $rowtv);
+        }
+        echo json_encode($arrtv);
+    }
+
+    public function getcaruselTv2() {
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='S P C D' and grupo='TELEVISOR'  order by rand(), precio desc limit 4";
+        $arrtv2 = [];
+        foreach ($this->conexion->query($sql) as $rowtv2) {
+            array_push($arrtv2, $rowtv2);
+        }
+        echo json_encode($arrtv2);
+    }
+
+    public function getcaruselTv3() {
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='POR SALIR' and grupo='TELEVISOR'  order by rand(), precio desc limit 4";
+        $arrtv3 = [];
+        foreach ($this->conexion->query($sql) as $rowtv3){
+            array_push($arrtv3, $rowtv3);
+        }
+        echo json_encode($arrtv3);
+    }
+
+    public function getcarruselPC1(){
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='C' and grupo='PORTATILES' order by rand(), precio desc limit 4";/**/
+        $arrPCl = [];
+     foreach($this->conexion->query($sql) as $rowPC){
+             array_push($arrPCl, $rowPC);         
+     }
+     echo json_encode($arrPCl);
+    }
+   
+    public function getcarruselPC2() {
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='C' and grupo='PORTATILES'  order by rand(), precio desc limit 4,4";
+        $arrPC2 = [];
+        foreach ($this->conexion->query($sql) as $rowPC2) {
+            array_push($arrPC2, $rowPC2);
+        }
+        echo json_encode($arrPC2);
     }
     
+    public function getcarruselPC3() {
+        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='A' and grupo='PORTATILES'  order by rand(), precio desc limit 4";
+        $arrPC3 = [];
+        foreach ($this->conexion->query($sql) as $rowPC3) {
+            array_push($arrPC3, $rowPC3);
+        }
+        echo json_encode($arrPC3);
+    }
+
     public function getUsuario($id, $correo) {
         if (!is_null($id)) {
             $sql = "SELECT * FROM usuario WHERE id_usuario = " . $id;
@@ -534,137 +661,114 @@ class BD {
         echo json_encode($articulo);
     }
 
-        public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax)
-        {
-            $min=($lugar-1)*20;
-            $max=$min+20;
-            if($Pmax<1500)
-                $Pmax=250000;
-        
-            if (!($marca == "undefined" || $envio == "undefined" )) 
-                {
-                if ($marca=="totaliti")
-                {
-                    if ($envio == "Local") {
-                        $sql = 'SELECT * FROM producto WHERE grupo = "'.$subcat.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND GDL >0 limit '.$min.",".$max;
-                    }else
-                    if ($envio == "Foraneo") {
-                        $sql = 'SELECT * FROM producto WHERE grupo = "'.$subcat.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND CDMX >0 limit '.$min.",".$max;
-                    }else
-                    if ($envio == "Indiferente") {
-                        $sql = 'SELECT * FROM producto WHERE grupo = "'.$subcat.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' limit '.$min.",".$max;
-                    }
-                }
-                else
-                {
-                    if ($envio == "Local") {
-                        $sql = 'SELECT * FROM producto WHERE grupo = "'.$subcat.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND GDL >0 AND marca = "'.$marca.'" limit '.$min.",".$max;
-                    }else
-                    if ($envio == "Foraneo") {
-                        $sql = 'SELECT * FROM producto WHERE grupo = "'.$subcat.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND CDMX >0 AND marca = "'.$marca.'" limit '.$min.",".$max;
-                    }else
-                    if ($envio == "Indiferente") {
-                        $sql = 'SELECT * FROM producto WHERE grupo = "'.$subcat.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND marca = "'.$marca.'" limit '.$min.",".$max;
-                    }
-                } 
-                }
-                else {
-                    $sql = "select * from producto where grupo='" . $subcat . "' limit " . $min . "," . $max;
-                    }
-        $buscado=$this->conexion->query($sql);
+    public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax) {
+        $min = ($lugar - 1) * 20;
+        $max = $min + 20;
+        if ($Pmax < 1500)
+            $Pmax = 250000;
 
-            error_reporting(0);
-            for($x=0; $x<20;$x++)
-            {
-                $fila = mysqli_fetch_array($buscado); 
-                if(isset($fila['descripcion']))
-                {
-                    $articulos->item[$x]->descripcion=$fila['descripcion'];
-                    $articulos->item[$x]->imagen=$fila['imagen'];
-                    $articulos->item[$x]->codigo_fabricante=$fila['codigo_fabricante'];
-                    /*echo "<br>".$articulos->[$x]->descripcion;
-                    echo "<br>".$articulos->item[$x]->imagen;
-                    echo "<br>".$articulos->item[$x]->codigo_fabricante."<br>";*/
-                    
+        if (!($marca == "undefined" || $envio == "undefined" )) {
+            if ($marca == "totaliti") {
+                if ($envio == "Local") {
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 limit ' . $min . "," . $max;
+                } else
+                if ($envio == "Foraneo") {
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 limit ' . $min . "," . $max;
+                } else
+                if ($envio == "Indiferente") {
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' limit ' . $min . "," . $max;
+                }
+            } else {
+                if ($envio == "Local") {
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '" limit ' . $min . "," . $max;
+                } else
+                if ($envio == "Foraneo") {
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '" limit ' . $min . "," . $max;
+                } else
+                if ($envio == "Indiferente") {
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '" limit ' . $min . "," . $max;
                 }
             }
-            echo json_encode($articulos);
+        } else {
+            $sql = "select * from producto where grupo='" . $subcat . "' limit " . $min . "," . $max;
         }
-    
-    public function verCantidad($grupo, $cantidad, $marca, $envio, $Pmin, $Pmax)
-        {
+        $buscado = $this->conexion->query($sql);
 
-            if (!($marca == "undefined" || $envio == "undefined")) 
-                {
-                if ($marca=="totaliti")
-                {
-                    if ($envio == "Local") {
-                        $sql = 'SELECT count(*) FROM producto WHERE grupo = "'.$grupo.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND GDL >0';
-                    }else
-                    if ($envio == "Foraneo") {
-                        $sql = 'SELECT count(*) FROM producto WHERE grupo = "'.$grupo.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND CDMX >0';
-                    }else
-                    if ($envio == "Indiferente") {
-                        $sql = 'SELECT count(*) FROM producto WHERE grupo = "'.$grupo.'" AND precio >'.$Pmin.' AND precio <'.$Pmax;
-                    }
-                }
-                else
-                {
-                    if ($envio == "Local") {
-                        $sql = 'SELECT count(*) FROM producto WHERE grupo = "'.$grupo.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND GDL >0 AND marca = "'.$marca.'"';
-                    }else
-                    if ($envio == "Foraneo") {
-                        $sql = 'SELECT count(*) FROM producto WHERE grupo = "'.$grupo.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND CDMX >0 AND marca = "'.$marca.'"';
-                    }else
-                    if ($envio == "Indiferente") {
-                        $sql = 'SELECT count(*) FROM producto WHERE grupo = "'.$grupo.'" AND precio >'.$Pmin.' AND precio <'.$Pmax.' AND marca = "'.$marca.'"';
-                    }
-                } 
-                }
-                else {
-                    $sql = "select count(*) from producto where grupo='" . $grupo."'";
-                    }
-            $cantidad_productos=$this->conexion->query($sql);
-            if ($cantidad!=1)
-            {
-                echo "<center><a href='detalles.php?extra=".($cantidad-1).'&marca='.$marca.'&priceMIN='.$Pmin.'&priceMAX='.$Pmax.'&envio='.$envio."&subcategoria=".$grupo."'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
+        error_reporting(0);
+        for ($x = 0; $x < 20; $x++) {
+            $fila = mysqli_fetch_array($buscado);
+            if (isset($fila['descripcion'])) {
+                $articulos->item[$x]->descripcion = $fila['descripcion'];
+                $articulos->item[$x]->imagen = $fila['imagen'];
+                $articulos->item[$x]->codigo_fabricante = $fila['codigo_fabricante'];
+                /* echo "<br>".$articulos->[$x]->descripcion;
+                  echo "<br>".$articulos->item[$x]->imagen;
+                  echo "<br>".$articulos->item[$x]->codigo_fabricante."<br>"; */
             }
-            $cantidad_grupo= mysqli_fetch_array($cantidad_productos);
-            $cantidad_grupo['count(*)']/=20;
-            $cantidad_grupo=ceil($cantidad_grupo['count(*)']);
-            for($x=1;$x<=$cantidad_grupo;$x++)
-            {                
-            if ($cantidad == $x) 
-                {
-                echo '<u>';           
+        }
+        echo json_encode($articulos);
+    }
+
+    public function verCantidad($grupo, $cantidad, $marca, $envio, $Pmin, $Pmax) {
+
+        if (!($marca == "undefined" || $envio == "undefined")) {
+            if ($marca == "totaliti") {
+                if ($envio == "Local") {
+                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0';
+                } else
+                if ($envio == "Foraneo") {
+                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0';
+                } else
+                if ($envio == "Indiferente") {
+                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax;
                 }
-            echo " <a href='detalles.php?extra=".$x.'&marca='.$marca.'&priceMIN='.$Pmin.'&priceMAX='.$Pmax.'&envio='.$envio."&subcategoria=".$grupo."'>".$x;
-            
-            if($cantidad == $x) {
+            } else {
+                if ($envio == "Local") {
+                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '"';
+                } else
+                if ($envio == "Foraneo") {
+                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '"';
+                } else
+                if ($envio == "Indiferente") {
+                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '"';
+                }
+            }
+        } else {
+            $sql = "select count(*) from producto where grupo='" . $grupo . "'";
+        }
+        $cantidad_productos = $this->conexion->query($sql);
+        if ($cantidad != 1) {
+            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
+        }
+        $cantidad_grupo = mysqli_fetch_array($cantidad_productos);
+        $cantidad_grupo['count(*)']/=20;
+        $cantidad_grupo = ceil($cantidad_grupo['count(*)']);
+        for ($x = 1; $x <= $cantidad_grupo; $x++) {
+            if ($cantidad == $x) {
+                echo '<u>';
+            }
+            echo " <a href='detalles.php?extra=" . $x . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&subcategoria=" . $grupo . "'>" . $x;
+
+            if ($cantidad == $x) {
                 echo "</u>";
             }
             echo "</a>  ";
-            }
-            if($cantidad<$cantidad_grupo)
-            {                
-                echo "<a href='detalles.php?extra=".($cantidad+1).'&marca='.$marca.'&priceMIN='.$Pmin.'&priceMAX='.$Pmax.'&envio='.$envio."&subcategoria=".$grupo."'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";            
-                
-            }
-        
-            //echo "<br>".$grupo."<br>". $cantidad."<br>". $marca."<br>". $envio."<br>". $Pmin."<br>". $Pmax;
-            }
-        
-    public function verMarcas($grupo)
-    {
-        $sql='SELECT DISTINCT(marca) FROM producto WHERE grupo = "'.$grupo.'"';
-        $cantidad_marcas=$this->conexion->query($sql);
-        $x=0;
-        while($fila = mysqli_fetch_array($cantidad_marcas))
-        {
-            echo $fila['marca'].";";
+        }
+        if ($cantidad < $cantidad_grupo) {
+            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
+        }
+
+        //echo "<br>".$grupo."<br>". $cantidad."<br>". $marca."<br>". $envio."<br>". $Pmin."<br>". $Pmax;
+    }
+
+    public function verMarcas($grupo) {
+        $sql = 'SELECT DISTINCT(marca) FROM producto WHERE grupo = "' . $grupo . '"';
+        $cantidad_marcas = $this->conexion->query($sql);
+        $x = 0;
+        while ($fila = mysqli_fetch_array($cantidad_marcas)) {
+            echo $fila['marca'] . ";";
             $x++;
         }
-        
     }
 
 }

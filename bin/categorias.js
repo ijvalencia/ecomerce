@@ -11,14 +11,18 @@ $.getJSON("../../bin/ingresar.php?categoria=getCategorias", function(respuesta) 
 	$('#supercategorias').empty();
 	$('#categorias_busqueda').empty();
 	$('#categorias_busqueda').append('<li><a onclick="busquedaCat(666)">Todo</a></li>');
-	var lista = '<li onmouseover="cargarLista(#id_cat)"><a href="link_categoria">nombre_categoria</a></li>';
+	var lista = '<li onmouseover="cargarLista(#id_cat)"><a href="link_categoria"><img class="icon_navbar" src="#link_img">nombre_categoria</a></li>';
+	var link_img = "../../IMG/categorias/icono_";
 	$.each(categorias, function(i, datos) {
 		var aux = lista;
 		aux = aux.replace("#id_cat", datos["id_super"]);
 		aux = aux.replace("nombre_categoria", datos["nombre"]);
+		var img = link_img;
+		img =  link_img + datos["nombre"].replace("/", "-") + ".png";
+		aux = aux.replace("#link_img", img);
 		
 		// AQUI CAMBIAS EL LINK DE LA CATEGORIA
-		aux = aux.replace("link_categoria", "../../modulos/productos/detalles.php?extra=1&categoria="+datos["id_super"]);
+		aux = aux.replace("link_categoria", "../../modulos/categorias/index.php?categoria="+datos["nombre"]);
 		
 		$('#supercategorias').append(aux);
 		$('#categorias_busqueda').append('<li><a onclick="busquedaCat('+i+')">'+datos["nombre"]+"</a></li>");		
@@ -57,7 +61,6 @@ function cargarLista(numero) {
 			return;
 		}
 	});
-	$('#img_navbar').attr("src", "../../IMG/categorias/icono_"+numero.replace("/", "-")+".png");
 }
 
 function busquedaCat(index) {
@@ -69,3 +72,18 @@ function busquedaCat(index) {
 	$('#entrada_categoria').attr("value", $('#categoria_elegida').text());
 //	console.log($('#categoria_elegida').text());
 }
+
+/* terminar de probar */
+$('#btn_enviar').click(function(e) {
+	e.preventDefault();
+	var busqueda = $('#entrada_busqueda').val().toUpperCase();
+	$.each(subcategorias, function(i, subcat) {
+		$.each(subcat, function(j, subs) {
+			if (busqueda.indexOf(subs["id_categoria"]) != -1) {
+				alert("SI");
+				window.location.replace("../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria="+subs["id_categoria"]);
+			}
+		});
+	});
+});
+

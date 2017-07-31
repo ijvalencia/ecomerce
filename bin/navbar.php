@@ -42,7 +42,7 @@
 </nav>
 <!-- Line secondary navbar -->
 <nav class="navbar navbar-static-top line-navbar-two">
-    <div class="container">
+    <div class="container-fluid">
         <div class="collapse navbar-collapse" id="line-navbar-collapse-2">
             <ul class="nav navbar-nav lnt-nav-mega">
                 <li class="dropdown">
@@ -59,18 +59,20 @@
                             <!-- Subcategorias -->
                             <div class="lnt-subcategroy-carousel-wrap container-fluid">
                                 <div id="subcategory-home" class="active">
-                                    <div class="lnt-subcategory col-sm-8 col-md-8" id="div_lista_subcat">
+									<div class="lnt-subcategory-img col-md-5 col-sm-5">
+										<a href="../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=PORTATILES">
+											<img id="img_navbar" src="../../IMG/navbar/banner01.jpg">
+										</a>
+									</div>	
+                                    <div class="lnt-subcategory col-sm-7 col-md-7" id="div_lista_subcat">
                                         <ul class="list-unstyled col-sm-6" id="lista_subcat">
                                         </ul>
                                         <ul class="list-unstyled col-sm-6" id="lista_subcat2">
                                         </ul>
-                                    </div>
+                                    </div>		
                                 </div>
                             </div>
                             <!-- Carousel -->
-                            <div class="col-md-4">
-                                <img id="img_navbar" height="30%">     
-                            </div>			
                         </div>
                     </div> 
                 </li> 
@@ -93,7 +95,7 @@
 							</ul>
 						</div>
 						<!--Entrada de busqueda -->
-						<input name="busqueda" type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Buscar" minlength="3" maxlength="20">
+						<input name="busqueda" id="entrada_busqueda" type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Buscar" minlength="3" maxlength="20">
 					</div>
 				</div>
 				<!-- boton de busqueda-->

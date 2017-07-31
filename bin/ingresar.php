@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 include 'connectBD.php';
@@ -26,8 +27,8 @@ switch ($Menu) {
         $conexion->login($correo, $contra);
         break;
 
-   
-    /* Parte hecha por Adrian */
+
+    /* SATANAS */
     case "envios":
         $conexion->getEnvios();
         break;
@@ -45,12 +46,12 @@ switch ($Menu) {
         $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
         echo json_encode($usuario);
         break;
-    
+
     case "getCarrito":
         $carrito = $_SESSION['carrito'];
         echo json_encode($carrito);
         break;
-    
+		
     case "setCarrito":
         if (isset($_POST['articulo'])) {
             $nuevo = $_POST['articulo'];
@@ -76,10 +77,11 @@ switch ($Menu) {
         } else
             echo "0";
         break;
+		
     case "getArticulo":
         if (isset($_GET['codigo'])) {
             $codigo = $_GET['codigo'];
-            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$codigo."&tc=1&dc=1&dt=1";
+            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $codigo . "&tc=1&dc=1&dt=1";
             $articulo = simplexml_load_file($filename);
             echo json_encode($articulo);
         }
@@ -91,52 +93,120 @@ switch ($Menu) {
         $articulo = simplexml_load_file($filename);
         echo json_encode($articulo);
         break;
+		
     case "cerrar":
         session_destroy();
         header('Location: ../index.php');
         break;
+		
     case "getCategorias":
         $conexion->getCategorias();
         break;
+		
     case "getSubcategorias":
         $conexion->getSubcategorias($_GET["subcategoria"]);
         break;
+		
     case "parametros":
         $conexion->setTipoCambio();
         $conexion->getParametros();
         break;
-	case "buscar":
-		$conexion->busqueda($_POST["categoria"], $_POST["palabras"]);
+		
+    case "buscar":
+        $conexion->busqueda($_POST["categoria"], $_POST["palabras"]);
+        break;
+		
+    case "productosInicio":
+        $conexion->productosInicio();
+        break;
+		
+	case "borrarCarrito":
+		$carrito = $_SESSION['carrito'];
+		array_splice($carrito, $_POST['articulo']);
+		$_SESSION['carrito'] = $carrito;
 		break;
-    /************************************/
+	/***********/	
+		
     //parte del chuy
     case "usuariordendetalles":
-        $id_usuariosdetalles=$_POST["usuario"];
+        $id_usuariosdetalles = $_POST["usuario"];
         $conexion->mostrarordenesdetalles($id_usuariosdetalles);
-    break;
-    
+        break;
+
     case "usuarioorden":
-    $id_usuario = $_POST["usuario"];
-    $conexion->mostrarordenes($id_usuario);
-    break;
+        $id_usuario = $_POST["usuario"];
+        $conexion->mostrarordenes($id_usuario);
+        break;
 
     case "orden":
-       $conexion->getOrdenes();
-    break;
+        $conexion->getOrdenes();
+        break;
 
     case "informa":
-       $conexion->getProductosPrincipal();
-    break;
-    
+        $conexion->getProductosPrincipal();
+        break;
+
     case "carrusel":
-       $conexion->getcarruselProcuctosnuevo();
-    break;
+        $conexion->getcarruselProcuctosnuevo();
+        break;
 
+    case "carrusel2":
+        $conexion->getcarrusel2Productosnuevos();
+        break;
+
+    case "carrusel3":
+        $conexion->getcarrusel3Productivosnuevos();
+        break;
+
+    case "carruselTv1":
+        $conexion->getcaruselTv1();
+        break;
+
+    case "carruselTv2":
+        $conexion->getcaruselTv2();
+        break;
+
+    case "carruselTv3":
+        $conexion->getcaruselTv3();
+        break;
+
+    case "carruselPC1":
+        $conexion->getcarruselPC1();
+        break;
+
+
+    case "carruselPC2":
+        $conexion->getcarruselPC2();
+        break;
+
+    case "carruselPC3":
+        $conexion->getcarruselPC3();
+        break;
+
+    case "carruselfooter":
+        $conexion->getcarruselfooter();
+        break;
+
+    case "carruselfooter2":
+        $conexion->getcarruselfooter2();
+        break;
+
+    case "carruselfooter3":
+        $conexion->getcarruselfooter3();
+        break;
+
+    case "carruselfooter4":
+        $conexion->getcarruselfooter4();
+        break;
+
+    case "carruselfooter5":
+        $conexion->getcarruselfooter5();
+        break;
+
+    case "carruselfooter6":
+        $conexion->getcarruselfooter6();
+        break;
     
-    case "carruselTv":
-       $conexion->getcaruselTv();
-    break;
-
     case "UpdateUsuario":
         $id = $_POST["id_usuario"];
         $nombre = $_POST["nombre"];
@@ -155,6 +225,7 @@ switch ($Menu) {
         echo $id;
         $conexion->getUsuario($id, $correo = null);
         break;
+    
     case "email":
         $correo = $_POST['correo'];
         $contra = $_POST['contra'];
@@ -170,61 +241,65 @@ switch ($Menu) {
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
-    /************************** */
+    /*     * ************************ */
     /* Anton */
     case "aux":
         $variable = $_GET['categoria'];
         $posicion = $_GET['extra'];
         //extra=1&marca=undefined&envio=undefined&min=undefined&max=undefined&categoria=OPTICOS;
-        $marca = $_GET['marca'] or die ("undefined");
-        $envio = $_GET['envio'] or die ("undefined");
-        $min = $_GET['min']+1 or die ("undefined");
-        $max = $_GET['max']+1 or die ("undefined");
+        $marca = $_GET['marca'] or die("undefined");
+        $envio = $_GET['envio'] or die("undefined");
+        $min = $_GET['min'] + 1 or die("undefined");
+        $max = $_GET['max'] + 1 or die("undefined");
         $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max);
         break;
-    
+
     case "listadocantidad":
         $variable = $_GET['grupo'];
-        
+
         $posicion = $_GET['cantidad'] or die(1);
-            if($posicion=="") {
-                $posicion=1;
-            }
-            
-        $marca = $_GET['marca'] or die ("undefined");
-            if($marca==""){
-                $marca="undefined";
-            }
+        if ($posicion == "") {
+            $posicion = 1;
+        }
+
+        $marca = $_GET['marca'] or die("undefined");
+        if ($marca == "") {
+            $marca = "undefined";
+        }
 
         $envio = $_GET['envio'] or die("undefined");
-            if($envio=="") {
-                $envio="undefined";
-            }
-            
+        if ($envio == "") {
+            $envio = "undefined";
+        }
+
         /* @var $_GET pe */
-        $min = (isset($_GET['min']) ? $_GET['min'] : 0)+1 or die("undefined");
-            if($min == ""){
-               $min="undefined";   
-            }
-            
-        $max = $_GET['maxn'] or die ("undefined");
-            if($max == ""){    
-               $max="undefined";
-            }
-            
-        if($min>1){
-        $min--;}
-        if($max<1500){
-        $max=250000;}
-        if($max=="undefined"){
-        $max=250000;}
-        if($min=="undefined"){
-        $min=1;}
+        $min = (isset($_GET['min']) ? $_GET['min'] : 0) + 1 or die("undefined");
+        if ($min == "") {
+            $min = "undefined";
+        }
+
+        $max = $_GET['maxn'] or die("undefined");
+        if ($max == "") {
+            $max = "undefined";
+        }
+
+        if ($min > 1) {
+            $min--;
+        }
+        if ($max < 1500) {
+            $max = 250000;
+        }
+        if ($max == "undefined") {
+            $max = 250000;
+        }
+        if ($min == "undefined") {
+            $min = 1;
+        }
         //echo $posicion."<br>".$marca."<br>".$envio."<br>".$min."<br>".$max."<br>";
 
         $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max);
         break;
-        
+
     case "marcas":
         $grupo = $_GET['grupo'];
         $conexion->verMarcas($grupo);

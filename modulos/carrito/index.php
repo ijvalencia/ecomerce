@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ol class="breadcrumb">
-                            <li><a href="http://localhost/Ecommerce/modulos/inicio/index.php">Inicio</a></li>
+                            <li><a href="../../modulos/inicio/index.php">Inicio</a></li>
                             <li>Carrito</li>
                         </ol>
                         <!-- Agregar bara de navegacion -->      

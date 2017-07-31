@@ -8,14 +8,15 @@
 			echo '<span class="hidden" id="supercategoria" value="'.$_GET['supercategoria'].'"></span>';
 		if (isset($_GET['busqueda']))
 			echo '<span class="hidden" id="busqueda" value="'.$_GET['busqueda'].'"></span>';
+		echo '<span class="hidden" id="subcategoria" value="'.$_GET['subcategoria'].'"></span>';
         ?> 
     </head>
     <body>
 		<?php include '../../bin/navbar.php'; ?>
         <div class="container-fluid">
             <ol class="breadcrumb">
+				<!-- SATANAS -->
                 <li><a href="../../modulos/inicio/index.php">Inicio</a></li>
-                <li>Productos</li>
             </ol>
             <div class="col-sm-2 sidenav">
 

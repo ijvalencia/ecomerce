@@ -12,17 +12,20 @@ $(document).ready(function() {
 	/* Zoom imagen del producto */
 	$('#img_producto').click(function() {
 		$('#modalZoom').show();
+		$('#form_busqueda').hide();
 		$('#img_modal').attr('src', $('#img_producto').attr('src'));
 	});
 	
 	$('.close').click(function() { 
 		$('#modalZoom').hide();
+		$('#form_busqueda').show();
 	});
 	
 	$(document).keypress(function(e) {
 		var code = e.keyCode || e.which;
 		if(code == 27) { //Enter keycode
 			$('#modalZoom').hide();
+			$('#form_busqueda').show();
 		}
 	});
 });
@@ -39,9 +42,13 @@ function cargarProducto(codigo) {
 			$('#btn_comprar').hide();
 			$('#numero_comprar').hide();
 		}
+		$('#nombre_categoria').append(articulo["grupo"]);
+		$('#nombre_categoria').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria="+articulo["grupo"]);
 		$('#nombre_marca').append(articulo["marca"]);
+		$('#nombre_marca').attr("href", "../../modulos/productos/detalles.php?extra=1&supercategoria=Todo&busqueda=" + articulo["marca"]);
 		$('#nombre_producto').append(articulo["clave"]);
 		$('#img_producto').attr("src", articulo["imagen"]);
+		$('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
 		$('#descripcion_producto').append(articulo["descripcion"]);
 		$('#precio_producto').append((articulo["moneda"] === "Pesos" ? articulo["precio"] : (articulo["precio"]*articulo['tipocambio']).toFixed(2)));
 		$('#cant_disponibles').append(total_disp);
@@ -75,12 +82,12 @@ $('#btn_comprar').click(function() {
 			console.log(resp);
 			if (resp !== "0"){
 				alert("Agregado al carrito");
-                                window.location.href = "../../modulos/carrito/index.php";
-                                window.close();   
-                                }
+				window.location.href = "../../modulos/carrito/index.php";
+				window.close();   
+			}
 			else{
 				alert("No se pudo agregar");
-                            }
+			}
 		}
 	});
 });

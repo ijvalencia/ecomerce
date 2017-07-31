@@ -17,7 +17,7 @@
             </div>
             <div class="panel-body row">
                 <div class="container-fluid bg-3 text-center">   
-                        <button class="btn btn-default" id="btncontacto">01-800-333CBA</button>
+                        <button class="btn btn-default" id="btncontacto">01-800-CVA</button>
                         <!--<div id="nombre" class="detallesPro"></div>-->
                         <div id="descripcion" class="detallesPro"></div>
                         <div id="precio" class="Precios"></div>

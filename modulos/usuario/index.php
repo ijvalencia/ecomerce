@@ -41,6 +41,30 @@
                                             <option value="04">04</option>
                                             <option value="05">05</option>
                                             <option value="06">06</option>        
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>        
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>        
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>        
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>        
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>        
+                                            <option value="29">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
                                            </select>
                                     </div>
                                     
@@ -53,18 +77,39 @@
                                             <option value="4">Abril</option>
                                             <option value="5">Mayo</option>
                                             <option value="6">Junio</option>        
+                                            <option value="7">Julio</option>
+                                            <option value="8">Agosto</option>
+                                            <option value="9">Septiembre</option>        
+                                            <option value="10">Octubre</option>
+                                            <option value="11">Noviembre</option>
+                                            <option value="12">Diciembre</option>        
+                                            
                                           </select>
                                         </div>
                                      
                                         <div class="form-group">
                                             <select  class="selectpicker form-control tamaño" id="fechaanio" name="cmbxanio">
                                             <option value="">Selecionar..</option>
-                                            <option value="1">1989</option>
-                                            <option value="2">1990</option>
-                                            <option value="3">1991</option>        
-                                            <option value="4">1992</option>
-                                            <option value="5">1993</option>
-                                            <option value="6">1994</option>  
+                                            <option value="1">1800</option>
+                                            <option value="2">1801</option>
+                                            <option value="3">1802</option>        
+                                            <option value="4">1803</option>
+                                            <option value="5">1804</option>
+                                            <option value="6">1805</option>  
+                                            <option value="1">1806</option>
+                                            <option value="2">1807</option>
+                                            <option value="3">1808</option>        
+                                            <option value="4">1809</option>
+                                            <option value="5">1810</option>
+                                            <option value="6">1811</option>  
+                                        
+                                            <option value="1"></option>
+                                            <option value="2"></option>
+                                            <option value="3"></option>        
+                                            <option value="4"></option>
+                                            <option value="5"></option>
+                                            <option value="6"></option>  
+                                        
                                         </select>
                                     </div>
                                 </div>

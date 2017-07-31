@@ -5,24 +5,24 @@
 	</head>
 	<body>
 		<?php 
-			$codigo = $_GET['producto'];
-			$categoria = $_GET['categoria'];
-			echo '<span class="hidden" id="producto" value="'.$codigo.'"></span>';
-			echo '<span class="hidden" id="categoria" value="'.$categoria.'"></span>';
+			echo '<span class="hidden" id="producto" value="'.$_GET['producto'].'"></span>';
+			echo '<span class="hidden" id="categoria" value="'.$_GET['categoria'].'"></span>';
 		?>
 		<?php include '../../bin/navbar.php'?>
             
 		<div class="container">
 			<ol class="breadcrumb">
-				<li><a href="http://localhost/Ecommerce/modulos/inicio/index.php">Inicio</a></li>
-				<li><a href="link-productos"></a>Productos</li>
-				<li><a href="link-marcas"></a><span id="nombre_marca"></span></li>
+				<li><a href="../../modulos/inicio/index.php">Inicio</a></li>
+				<li><a href="link_categoria" id="nombre_categoria"></a></li>
+				<li><a href="link_marcas" id="nombre_marca"></a></li>
 				<li><span id="nombre_producto"></span></li>
 			</ol>
 		</div>
 		<!-- Imagen -->
 		<div class="col-md-6">
+		 <div class="modalZoom">
 			<img id="img_producto">
+			</div>
 			<!-- The Modal -->
 			<div id="modalZoom" class="modal">
 				<span class="close">&times;</span>
@@ -52,7 +52,9 @@
 		<div class="row">
 			<div class="col-md-6 col-lg-8">
 				<h2>Detalle del Producto</h2>
+				  <div class="cortarleer">
 				<span id="descripcion_producto2"></span>
+				</div>
 			</div>
 			<div class="col-md-6 col-lg-4">
 				<h2>Características</h2>
