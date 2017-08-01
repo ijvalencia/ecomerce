@@ -1007,7 +1007,8 @@ label {
     overflow: hidden;
 }
 .thumbnail img {
-    max-height: 240px;
+    width: auto;
+    max-height: 215px;
     margin: 0px 0px 0px 0px;
 }
 .thumbnail small {
@@ -1015,4 +1016,7 @@ label {
 }
 .thumbnail h4 {
 	color: darkorange;
+}
+.container_img_producto {
+    height: 350px;
 }

@@ -11,30 +11,30 @@ $(document).ready(function() {
 	var productos_busqueda = [];
 	$.getJSON("../../bin/ingresar.php?categoria=productosInicio", function(respuesta){
 		$.each(respuesta, function(i, objeto) {
-			productos_busqueda.push(objeto);
-		});
-		var html_imagen = '<div class="col-sm-3" id="mostrar"><a href="../detalles_producto/index.php?categoria=&producto=#id_producto" class="thumbnail"><img src="#imagen" class="img-responsive" width="130" height="130" onerror="this.src=\'../../IMG/error.jpg\'"><p class="cortar"><small>#descripcion</small>#precio</p><div id="mensaje"><h6 id="grupos">des</h6></div></a></div>';
-		var tabla_producto='<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
-		var id_tabla;
-		var t = 0;
-		$.each(productos_busqueda, function(i, producto) {
-			var imagen = html_imagen;
-			var tabla = tabla_producto;
-                        
-			if(i % 4 === 0 || t === 0) {
-				id_tabla = "#tabla_" + t;
-				$('ttbody').append(tabla.replace("#id_tabla", t));
-				t++;
-			}
-			imagen = imagen.replace("#id_producto", producto["codigo_fabricante"]);
-			imagen = imagen.replace("#imagen", producto["imagen"]);
-			imagen = imagen.replace("#descripcion",producto["descripcion"].substring(0,30)+"<br>");
-                        imagen = imagen.replace("des",producto["grupo"]);
-                        imagen = imagen.replace("#precio","$"+producto["precio"]+"<br>");
-		        $(id_tabla).append(imagen);
-		});
-		$('.loader').fadeOut("slow");
-	});    
+            productos_busqueda.push(objeto);
+        });
+        var html_imagen = '<div class="col-sm-3" id="mostrar"><a href="../detalles_producto/index.php?categoria=&producto=#id_producto" class="thumbnail inicio"><img src="#imagen" class="img-responsive" width="130" height="130" onerror="this.src=\'../../IMG/error.jpg\'"><p class="cortar"><small>#descripcion</small>#precio</p><div id="mensaje"><h6 id="grupos">des</h6></div></a></div>';
+        var tabla_producto='<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
+        var id_tabla;
+        var t = 0;
+        $.each(productos_busqueda, function(i, producto) {
+            var imagen = html_imagen;
+            var tabla = tabla_producto;
+            
+            if(i % 4 === 0 || t === 0) {
+                id_tabla = "#tabla_" + t;
+                $('ttbody').append(tabla.replace("#id_tabla", t));
+                t++;
+            }
+            imagen = imagen.replace("#id_producto", producto["codigo_fabricante"]);
+            imagen = imagen.replace("#imagen", producto["imagen"]);
+            imagen = imagen.replace("#descripcion",producto["descripcion"].substring(0,30)+"<br>");
+            imagen = imagen.replace("des",producto["grupo"]);
+            imagen = imagen.replace("#precio","$"+producto["precio"]);
+            $(id_tabla).append(imagen);
+        });
+        $('.loader').fadeOut("slow");
+    });    
     cargarCarousel('#galeria_destacados', "Todo");
     cargarCarousel('#galeria_audio', "AUDIFONOS Y MICRO");
     cargarCarousel('#galeria_computadoras', "portatiles");

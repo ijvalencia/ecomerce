@@ -9,7 +9,7 @@ var imagefooter,imagefooter2,imagefooter3,imagefooter4,imagefooter5,imagefooter6
 
 $(document).ready(function(){
     $.getJSON("../../bin/ingresar.php?categoria=carruselfooter", function(respuestacarruselfooter){
-         console.log(respuestacarruselfooter);
+//         console.log(respuestacarruselfooter);
     
          $.each(respuestacarruselfooter, function(i, valorfooter){
          imagefooter = carruselfooter; 
@@ -19,13 +19,13 @@ $(document).ready(function(){
           $('.imegs').attr("imagecarruselfooter",valorfooter['imagen']);
 	  $('.imegs').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
          
-         console.log(imagefooter);
+//         console.log(imagefooter);
          $(".caruselfooter1").append(imagefooter);
       });
    });
    
     $.getJSON("../../bin/ingresar.php?categoria=carruselfooter2", function(respuestacarruselfooter2){
-         console.log(respuestacarruselfooter2);
+//         console.log(respuestacarruselfooter2);
          $.each(respuestacarruselfooter2, function(i, valorfooter2){
          imagefooter2 = carruselfooter2; 
          imagefooter2 = imagefooter2.replace("imagecarruselfooter2",valorfooter2['imagen']);
@@ -34,13 +34,13 @@ $(document).ready(function(){
          $('.imegs').attr("imagecarruselfooter2",valorfooter2['imagen']);
 	 $('.imegs').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
 	
-         //console.log(imagefooter2);
+//         console.log(imagefooter2);
          $(".caruselfooter2").append(imagefooter2);
       });
    });
    
     $.getJSON("../../bin/ingresar.php?categoria=carruselfooter3", function(respuestacarruselfooter3){
-         console.log(respuestacarruselfooter3);
+//         console.log(respuestacarruselfooter3);
          $.each(respuestacarruselfooter3, function(i, valorfooter3){
          imagefooter3 = carruselfooter3; 
          imagefooter3 = imagefooter3.replace("imagecarruselfooter3",valorfooter3['imagen']);
@@ -48,7 +48,7 @@ $(document).ready(function(){
          imagefooter3 = imagefooter3.replace("preciofooter3","$"+valorfooter3['precio']);
          $('.imegs').attr("imagecarruselfooter3",valorfooter3['imagen']);
 	 $('.imegs').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
-        // console.log(imagefooter3);
+//         console.log(imagefooter3);
          $(".caruselfooter3").append(imagefooter3);
       });
    });
@@ -56,7 +56,7 @@ $(document).ready(function(){
 
 /*los mejotres productos mas descatados */
     $.getJSON("../../bin/ingresar.php?categoria=carruselfooter4", function(respuestacarruselfooter4){
-         console.log(respuestacarruselfooter4);
+//         console.log(respuestacarruselfooter4);
          $.each(respuestacarruselfooter4, function(i, valorfooter4){
          imagefooter4 = carruselfooter4; 
          imagefooter4 = imagefooter4.replace("imagecarruselfooter4",valorfooter4['imagen']);
@@ -64,19 +64,19 @@ $(document).ready(function(){
          imagefooter4 = imagefooter4.replace("preciofooter4","$"+valorfooter4['precio']);
          $('.imegs').attr("imagecarruselfooter4",valorfooter4['imagen']);
 	 $('.imegs').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
-         console.log(imagefooter4);
+//         console.log(imagefooter4);
          $(".caruselfooter4").append(imagefooter4);
       });
    });
 
     $.getJSON("../../bin/ingresar.php?categoria=carruselfooter5", function(respuestacarruselfooter5){
-         console.log(respuestacarruselfooter5);
+//         console.log(respuestacarruselfooter5);
          $.each(respuestacarruselfooter5, function(i, valorfooter5){
          imagefooter5 = carruselfooter5; 
          imagefooter5 = imagefooter5.replace("imagecarruselfooter5",valorfooter5['imagen']);
 	 imagefooter5 = imagefooter5.replace("descripcionfooter5",valorfooter5['descripcion']);
          imagefooter5 = imagefooter5.replace("preciofooter5","$"+valorfooter5['precio']);
-         console.log(imagefooter5);
+//         console.log(imagefooter5);
          $('.imegs').attr("imagecarruselfooter5",valorfooter5['imagen']);
 	 $('.imegs').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
          $(".caruselfooter5").append(imagefooter5);
@@ -84,13 +84,13 @@ $(document).ready(function(){
    });
    
    $.getJSON("../../bin/ingresar.php?categoria=carruselfooter6", function(respuestacarruselfooter6){
-         console.log(respuestacarruselfooter6);
+//         console.log(respuestacarruselfooter6);
          $.each(respuestacarruselfooter6, function(i, valorfooter6){
          imagefooter6 = carruselfooter6; 
          imagefooter6 = imagefooter6.replace("imagecarruselfooter6",valorfooter6['imagen']);
 	 imagefooter6 = imagefooter6.replace("descripcionfooter6",valorfooter6['descripcion']);
          imagefooter6 = imagefooter6.replace("preciofooter6","$"+valorfooter6['precio']);
-         console.log(imagefooter6);
+//         console.log(imagefooter6);
          $('.imegs').attr("imagecarruselfooter6",valorfooter6['imagen']);
 	 $('.imegs').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
          $(".caruselfooter6").append(imagefooter6);
