@@ -344,6 +344,7 @@ class BD {
 
 
    	/* SATANAS */
+   	
    	public function getCategorias() {
 		$sql = "SELECT * FROM super_categorias";
 		$datos = [];
@@ -416,9 +417,20 @@ class BD {
 		foreach ($this->conexion->query($sql) as $row) {
 			array_push($datos, $row);
 		}
-		echo json_encode($datos);
-                
-                }
+		echo json_encode($datos);            
+	}
+	
+	public function getCarousel($busqueda) {
+		if ($busqueda == "Todo")
+			$sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";	
+		else
+			$sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR' AND grupo = '".$busqueda."') AS resultados ORDER BY RAND() LIMIT 12";	
+		$datos = [];
+		foreach ($this->conexion->query($sql) as $row) {
+			array_push($datos, $row);
+		}
+		echo json_encode($datos);  
+	}
 	/***********/
     /* parte del chuy  */
     public function getcarruselfooter(){
@@ -476,22 +488,23 @@ class BD {
     }
     
     public function login($correo, $contra) {
-        $sql = "SELECT id_usuario, nombre, apellidos FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
+        
+        $sql = "SELECT id_usuario, nombre, apellidos, correo, contra FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
         $datos = $this->conexion->query($sql);
-        if ($datos != false) {  // Si la consulta funciona imprime los datos
-            foreach ($datos as $row) {
-                echo $row['id_usuario'] . "||";
-                echo $row['nombre'] . "||";
-                echo $_SESSION['nombre'] = $row['nombre'];
-                echo $_SESSION['apellidos'] = $row['apellidos'];
-                //echo $_SESSION['Bienvenido'] = "Bienvenido :";
-                echo $_SESSION['id'] = $row['id_usuario'];
+          if ($datos != false) {//Si la consulta funciona imprime los datos
+            foreach ($datos as $row){    
+              if ($correo === $row['correo'] || $contra === $row['contra']){
+                  echo $row['id_usuario']."||";
+                  echo $row['nombre']."||";
+                  echo $_SESSION['nombre'] = $row['nombre'];
+                  echo $_SESSION['apellidos'] = $row['apellidos'];
+                  //echo $_SESSION['Bienvenido'] = "Bienvenido :";
+                  echo $_SESSION['id'] = $row['id_usuario'];
+                }
             }
-        } else {
-            echo "0";
-        }
+        } 
     }
-
+    
     public function mostrarordenes($id_usuariosesion) {
         $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesion . "'";
         $arr = [];
@@ -515,96 +528,6 @@ class BD {
         $sql = "UPDATE usuario SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "',dia='" . $dia . "', mes='" . $mes . "',anio='" . $anio . "' ,correo='" . $correos . "',contra='" . $contra . "' WHERE id_usuario='" . $id . "'";
         echo $sql;
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-/*
-    public function getProductosPrincipal() {
-        $sql = "SELECT imagen, precio, descripcion FROM producto limit 23";
-        $arr = [];
-        foreach ($this->conexion->query($sql) as $row) {
-            array_push($arr, $row);
-        }
-        echo json_encode($arr);
-    }
-*/
-    public function getcarruselProcuctosnuevo() { //metodo para computadoras
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' and marca='lenovo' order by rand(), precio limit 4";
-        $arrnew = [];
-        foreach ($this->conexion->query($sql) as $rownew) {
-            array_push($arrnew, $rownew);
-        }
-        echo json_encode($arrnew);
-    }
-
-    public function getcarrusel2Productosnuevos() {
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' and marca='lenovo' order by rand(), precio limit 4 , 4";
-        $arrnew1 = [];
-        foreach ($this->conexion->query($sql) as $rownew1) {
-            array_push($arrnew1, $rownew1);
-        }
-        echo json_encode($arrnew1);
-    }
-
-    public function getcarrusel3Productivosnuevos() {
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' and marca='lenovo' order by rand(), precio desc limit 4";
-        $arrnew2 = [];
-        foreach ($this->conexion->query($sql) as $rownew2) {
-            array_push($arrnew2, $rownew2);
-        }
-        echo json_encode($arrnew2);
-    }
-
-    public function getcaruselTv1() {
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='A' and grupo='TELEVISOR'  order by rand(), precio desc limit 4";
-        $arrtv = [];
-        foreach ($this->conexion->query($sql) as $rowtv) {
-            array_push($arrtv, $rowtv);
-        }
-        echo json_encode($arrtv);
-    }
-
-    public function getcaruselTv2() {
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='S P C D' and grupo='TELEVISOR'  order by rand(), precio desc limit 4";
-        $arrtv2 = [];
-        foreach ($this->conexion->query($sql) as $rowtv2) {
-            array_push($arrtv2, $rowtv2);
-        }
-        echo json_encode($arrtv2);
-    }
-
-    public function getcaruselTv3() {
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='POR SALIR' and grupo='TELEVISOR'  order by rand(), precio desc limit 4";
-        $arrtv3 = [];
-        foreach ($this->conexion->query($sql) as $rowtv3){
-            array_push($arrtv3, $rowtv3);
-        }
-        echo json_encode($arrtv3);
-    }
-
-    public function getcarruselPC1(){
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='C' and grupo='PORTATILES' order by rand(), precio desc limit 4";/**/
-        $arrPCl = [];
-     foreach($this->conexion->query($sql) as $rowPC){
-             array_push($arrPCl, $rowPC);         
-     }
-     echo json_encode($arrPCl);
-    }
-   
-    public function getcarruselPC2() {
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='C' and grupo='PORTATILES'  order by rand(), precio desc limit 4,4";
-        $arrPC2 = [];
-        foreach ($this->conexion->query($sql) as $rowPC2) {
-            array_push($arrPC2, $rowPC2);
-        }
-        echo json_encode($arrPC2);
-    }
-    
-    public function getcarruselPC3() {
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca, grupo FROM producto WHERE departamento='A' and grupo='PORTATILES'  order by rand(), precio desc limit 4";
-        $arrPC3 = [];
-        foreach ($this->conexion->query($sql) as $rowPC3) {
-            array_push($arrPC3, $rowPC3);
-        }
-        echo json_encode($arrPC3);
     }
 
     public function getUsuario($id, $correo) {

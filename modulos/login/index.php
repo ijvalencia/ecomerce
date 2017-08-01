@@ -1,4 +1,5 @@
 <html lang="en">
+    
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,6 +7,7 @@
         <title>Login</title>
         <?php include '../../bin/head.php';?>   
         <body>
+           <script>var num;</script>
         <?php include'../../bin/navbar.php';?>        
     <div class="line-navbar-left">
       <p class="lnl-nav-title">Categories</p>
@@ -45,7 +47,7 @@
                                             </div>
                                         </div>
 				                        <button type="button" class="btn" id="botonsesion">Iniciar Sesiòn</button>
-				                    </form>
+                                                    </form>
 			                    </div>
 		                    </div>
                             <!-- Form login con facebook/google -->
@@ -116,6 +118,7 @@
         </div>
         <!-- Footer -->
         <script src="../../modulos/login/Login.js"></script> 
+   
         <!--<script> $("#commentForm").validate();</script>-->
     </body>
 </html>

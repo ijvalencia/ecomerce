@@ -28,7 +28,7 @@ switch ($Menu) {
         break;
 
 
-    /* SATANAS */
+    /* Parte hecha por Adrian */
     case "envios":
         $conexion->getEnvios();
         break;
@@ -51,7 +51,7 @@ switch ($Menu) {
         $carrito = $_SESSION['carrito'];
         echo json_encode($carrito);
         break;
-		
+
     case "setCarrito":
         if (isset($_POST['articulo'])) {
             $nuevo = $_POST['articulo'];
@@ -77,7 +77,6 @@ switch ($Menu) {
         } else
             echo "0";
         break;
-		
     case "getArticulo":
         if (isset($_GET['codigo'])) {
             $codigo = $_GET['codigo'];
@@ -93,40 +92,37 @@ switch ($Menu) {
         $articulo = simplexml_load_file($filename);
         echo json_encode($articulo);
         break;
-		
     case "cerrar":
         session_destroy();
         header('Location: ../index.php');
         break;
-		
     case "getCategorias":
         $conexion->getCategorias();
         break;
-		
     case "getSubcategorias":
         $conexion->getSubcategorias($_GET["subcategoria"]);
         break;
-		
     case "parametros":
         $conexion->setTipoCambio();
         $conexion->getParametros();
         break;
-		
     case "buscar":
         $conexion->busqueda($_POST["categoria"], $_POST["palabras"]);
         break;
-		
     case "productosInicio":
         $conexion->productosInicio();
         break;
-		
-	case "borrarCarrito":
+    
+    	case "borrarCarrito":
 		$carrito = $_SESSION['carrito'];
 		array_splice($carrito, $_POST['articulo']);
 		$_SESSION['carrito'] = $carrito;
 		break;
-	/***********/	
 		
+	case "getCarousel":
+		$conexion->getCarousel($_GET['clave']);
+		break;
+    /*     * ********************************* */
     //parte del chuy
     case "usuariordendetalles":
         $id_usuariosdetalles = $_POST["usuario"];

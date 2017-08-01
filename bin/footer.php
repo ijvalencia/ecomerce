@@ -100,7 +100,7 @@
     </div>
 </div>
 
-<footer style="background: #f2f2f2; width: 118%; margin-left: -9%;">
+<footer style="background: #f2f2f2; width: 109%; margin-left: -9%;">
     <!--<div class="container">-->
         <div class="row">			
             <div class="col-sm-8 col-sm-offset-2">

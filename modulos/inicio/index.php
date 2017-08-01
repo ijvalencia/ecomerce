@@ -8,10 +8,11 @@
         include '../../bin/navbar.php';
         ?>
     </head>
-    <body >
+    <body>
+       
         <!--<div class="loader"></div>-->
        <br>
-		<!-- Imagenes de inicio -->
+	<!-- Imagenes de inicio -->
         <div class="container">
             <div class="row">
 			<ttbody>			
@@ -21,134 +22,47 @@
             </div>           
         </div>
         <br>
-        <!--<div class="container">
-        <div class="container-fluid bg-3 text-center" id="centrados">    
-            <h3></h3><br>
-        <div class="row">
-                <div class="col-md-8">
-                    <p class="titulo">BÚSQUEDA POPULARES</p>             
-                    <a class="populares" href="../../productos.php">celulares</a>
-                    <a class="populares" href="../../productos.php">televisiòn</a>
-                    <a class="populares" href="../../productos.php">radios</a>
-                    <a class="populares" href="../../productos.php">computadoras</a>
-                    <a class="populares" href="../../productos.php">pilas</a>
-                    <a class="populares" href="../../productos.php">accesorios</a>
-                    <a class="populares" href="../../productos.php">refacciones</a>
-                    <a class="populares" href="../../productos.php">electronicas</a>
-                    <a class="populares" href="../../productos.php">cables</a>
-                    <a class="populares" href="../../productos.php">impresoras</a>
-                </div>
-                <div class="col-md-4">
-                    <p class="titulo">COMPRAS 100% SEGURAS</p>
-                    <img id="favoritos2" src="../../IMG/escudo.jpg" class="img-responsive" style="width:20px; height:20px; "alt="Image">
-                    <ul>
-                        <li class="contList1">° Paga seguro online o al recibir tu producto</li>
-                        <li class="contList2">° Envíos a todo México</li><br>
-                        <li class="contList3">° Devoluciones fáciles y sin costo</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-     </div>-->
-        
-     <div class="container">
-        <div class="jumbotron">
-            <p class="titulo">PRODUCTOS QUE HAS VISTO RECIENTEMENTE</p>  
-            <div class="container text-center">
-				<div id="carrusel_satan" class="carousel slide">
-					<a data-slide="prev" href="#carrusel_satan" class="left carousel-control">‹</a>
-					<a data-slide="next" href="#carrusel_satan" class="right carousel-control">›</a>
-				</div>  
-            </div>
-         </div>
-      </div>
-        
-     <div class="container">
-        <div class="jumbotron">
-            <p class="titulo">LO MEJOR EN TELEVISIONES</p>  
-            <div class="container text-center">
-                <div class="row1">
-                    <div id="Carousel4" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="row">
-                                   <div class="imgcarrusel4">        
-                                   
-                                   </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    <div class="imgcarrusel5">        
-                                   </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="row">
-                                    
-                                    <div class="imgcarrusel6">        
-                                   
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a data-slide="prev" href="#Carousel4" class="left carousel-control">‹</a>
-                        <a data-slide="next" href="#Carousel4" class="right carousel-control">›</a>
-                    </div>  
-                </div>
-            </div>
-        </div>
-      </div>
-    <div class="container">    
-        <div class="jumbotron">
-            <p class="titulo">LO MEJOR EN COMPUTADORAS</p>  
-            <div class="container text-center">
-                <div class="row1">
-                    <div id="Carousel5" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="row">
-                                    <div class="imgcarrusel7">        
-                                        
-                                    </div>
-                                  <!--  <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>-->
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="row">
-                                    <div class="imgcarrusel8">        
-                                        
-                                    </div>
-                                    <!--<div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>-->
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <div class="row">
-                                    <div class="imgcarrusel9">
-                                        
-                                    </div> 
-                              <!--  <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>
-                                    <div class="col-md-3"><a href="#" class="thumbnail" id="sombreado"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"><p><small>Este contenido de texto se verá más pequeño y puede ser utilizado por ejemplo para "la letra pequeña" de la página</small></p></a></div>-->
-                                </div>
-                            </div>
-                        </div>
-                        <a data-slide="prev" href="#Carousel5" class="left carousel-control">‹</a>
-                        <a data-slide="next" href="#Carousel5" class="right carousel-control">›</a>
-                    </div>  
-                </div>
-            </div>
-        </div>
-      </div>  
+    <div class="container">
+			<div class="jumbotron">
+				<p class="titulo">PRODUCTOS DESTACADOS</p>  
+				<div class="container text-center">
+					<div class="carousel slide" id="carousel_destacados">
+						<div class="carousel-inner" id="galeria_destacados">
+						</div>
+						<a data-slide="prev" href="#carousel_destacados" class="left carousel-control">‹</a>
+						<a data-slide="next" href="#carousel_destacados" class="right carousel-control">›</a>
+					</div>  
+				</div>
+			</div>
+		</div>
+        <!-- Carousel televisores -->
+		<div class="container">
+			<div class="jumbotron">
+				<p class="titulo">LO MEJOR EN AUDIFONOS</p>  
+				<div class="container text-center">
+					<div class="carousel slide" id="carousel_audio">
+						<div class="carousel-inner" id="galeria_audio">
+						</div>
+						<a data-slide="prev" href="#carousel_audio" class="left carousel-control">‹</a>
+						<a data-slide="next" href="#carousel_audio" class="right carousel-control">›</a>
+					</div>  
+				</div>
+			</div>
+		</div>
+		<!-- Carousel computadoras-->
+		<div class="container">
+			<div class="jumbotron">
+				<p class="titulo">LO MEJOR EN COMPUTADORAS</p>  
+				<div class="container text-center">
+					<div class="carousel slide" id="carousel_computadoras">
+						<div class="carousel-inner" id="galeria_computadoras">
+						</div>
+						<a data-slide="prev" href="#carousel_computadoras" class="left carousel-control">‹</a>
+						<a data-slide="next" href="#carousel_computadoras" class="right carousel-control">›</a>
+					</div>  
+				</div>
+			</div>
+		</div>
         <br>
         <div class="container">
         <div class="container-fluid bg-3 text-center">    

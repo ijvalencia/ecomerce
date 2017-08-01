@@ -1,18 +1,12 @@
+/* global sesion */
 var correo = /[-A-Za-z0-9._]+[@][A-Za-z]+[.]{1}[A-Za-z]+/;
 var Cadena = /[A-Za-z]+/;
 var bandera = false;
 var bandera2 = false;
- 
- 
-$(document).ready(function () {
- var ref = document.referrer;   
- var desision = ref.indexOf("../../modulos/carrito/index.ph")? "SI" : "NO";
-    alert(desision);
-    $("#btn-enviar").attr("disabled", true);
-    //funcion del para iniciar seciones
-    $("#botonsesion").on('click', function () {
 
-        
+$(document).ready(function () {
+    $("#btn-enviar").attr("disabled", true);
+      $("#botonsesion").on('click', function () {
         var txtusuario = $("input:text[id='form-mail']").val();
         var txtcontra = $("input:password[id='form-pass']").val();
         
@@ -22,8 +16,8 @@ $(document).ready(function () {
         } else {
             $('#form-mail').css({"border": "2px solid Gainsboro"});
             $('#form-pass').css({"border": "2px solid Gainsboro"});
-            
-            if (bandera === false) {
+
+            if (bandera === false){
                 if (correo.test(txtusuario)) {
                     $('#form-mail').css({"border": "2px solid Gainsboro"});
                 } else {
@@ -38,6 +32,7 @@ $(document).ready(function () {
                     bandera = false;
                 }
             }
+            
             if ((correo.test(txtusuario)) && (txtcontra !== null)) {
                 bandera = true;
                 if (bandera === true) {
@@ -47,19 +42,12 @@ $(document).ready(function () {
                             "correo": txtusuario,
                             "contra": txtcontra},
                         success: function (sessionmsj) {
-                            var loginobtenido = sessionmsj.split('||');
-                            // $("#").html(loginobtenido[0]);
-                            // $("#login").(loginobtenido[1]);
-                            // $("#").html(loginobtenido[2]);    
-                        if(desision==="SI"){   
-                           window.location.href = "../../modulos/carrito/index.php";
-                            window.close();   
-                        }
-                        else if(desision==="NO"){
-                            window.location.href = "../../modulos/inicio/index.php";
-                            window.close();   
-                        }
-                        }
+                            if (sessionmsj === "") {
+                                alert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");                   
+                            } else { 
+                                    history.back(); 
+                            }
+                         }
                     });
                 }
             }
@@ -127,21 +115,21 @@ $(document).ready(function () {
                     $('#form-confirmacion').css({"border": "2px solid red"});
                     bandera2 = false;
                 }
-                
-                if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra!==null && (txtconfir!==null))) {
-                      bandera2 = true;
-                      if (bandera2 === true){
-                          $.ajax({type: "POST",
+
+                if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== null && (txtconfir !== null))) {
+                    bandera2 = true;
+                    if (bandera2 === true) {
+                        $.ajax({type: "POST",
                             url: "../../bin/ingresar.php?categoria=registro",
                             data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir},
                             success: function (mns) {
-                             if(mns===1){
-                                alert("LOS DATO REGISTRADO CON EXITO");
-                            }else if(mns===0){
-                                alert("ERROR");
+                                if (mns === 1) {
+                                    alert("LOS DATO REGISTRADO CON EXITO");
+                                } else if (mns === 0) {
+                                    alert("ERROR");
+                                }
                             }
-                         }
-                       });
+                        });
                     }
                 }
             }

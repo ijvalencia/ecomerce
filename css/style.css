@@ -127,18 +127,13 @@ img{
 }
 .btn-link-2:hover, .btn-link-2:focus, 
 .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #fff; }
-
-
 /***** Top content *****/
-
 .inner-bg {
     padding: 60px 0 80px 0;
 }
-
 .top-content .description {
     margin: 20px 0 10px 0;
 }
-
 .top-content .description a:hover, 
 .top-content .description a:focus { border-bottom: 1px dotted #ffae4b; }
 
@@ -951,16 +946,14 @@ label {
 .tamaño{
     width: 108%;
 }
+/* menu de imagenes */
 
 /* menu de imagenes */
 #img_producto {
-	max-width:250px;
-	max-height:250px;
-	min-width: 200px;
-	min-height: 200px;
-	width: auto;
-	height: auto;
-	margin-left: 250px;
+  max-width:500px;
+  max-height:500px;
+  width: auto;
+  height: auto;
 }
 
 /*recortar el texto*/
@@ -1006,13 +999,20 @@ label {
 #cuatro{
     margin-top: -40px;
 }
-
 /* SATANAS */
-.container_img_producto .thumbnail {
+.thumbnail {
 	text-align: center;
     color:black;
     height: 320px;
+    overflow: hidden;
 }
-.container_img_producto .thumbnail img {
-    display: block;
+.thumbnail img {
+    max-height: 240px;
+    margin: 0px 0px 0px 0px;
+}
+.thumbnail small {
+	font-weight: 300;
+}
+.thumbnail h4 {
+	color: darkorange;
 }

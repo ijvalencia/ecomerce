@@ -12,22 +12,22 @@
             
 		<div class="container">
 			<ol class="breadcrumb">
-				<li><a href="../../modulos/inicio/index.php">Inicio</a></li>
+				<li><a href="http://localhost/Ecommerce/modulos/inicio/index.php">Inicio</a></li>
 				<li><a href="link_categoria" id="nombre_categoria"></a></li>
 				<li><a href="link_marcas" id="nombre_marca"></a></li>
 				<li><span id="nombre_producto"></span></li>
 			</ol>
 		</div>
 		<!-- Imagen -->
-		<div class="col-md-6">
-		 <div class="modalZoom">
-			<img id="img_producto">
-			</div>
+		<div class="col-md-6">    
+                   <div class="modalZoom">
+		       <img id="img_producto">
+	           </div>
 			<!-- The Modal -->
-			<div id="modalZoom" class="modal">
-				<span class="close">&times;</span>
-				<img class="modal-content" id="img_modal">
-			</div>
+	         <div id="modalZoom" class="modal">
+			<span class="close">&times;</span>
+			<img class="modal-content" id="img_modal">
+		 </div>
 		</div>
 		<!-- Datos y compra -->
 		<div class="col-md-6">
@@ -57,8 +57,8 @@
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-4">
-				<h2>Características</h2>
-				<table class="table">
+			    <h2>Características</h2>
+			     <table class="table">
 					<tbody>
 						<tr>
 							<td>Codigo del fabricante</td>
@@ -72,7 +72,7 @@
 				</table>
 			</div>
 		</div>
-		<script type="text/javascript" src="scripts.js"></script>
+        <script src="scripts.js"></script>
 		<br/>
 		</div>
 		<?php include '../../bin/footer.php'?>
