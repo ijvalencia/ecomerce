@@ -13,7 +13,7 @@ $(document).ready(function() {
 		$.each(respuesta, function(i, objeto) {
             productos_busqueda.push(objeto);
         });
-        var html_imagen = '<div class="col-sm-3" id="mostrar"><a href="../detalles_producto/index.php?categoria=&producto=#id_producto" class="thumbnail inicio"><img src="#imagen" class="img-responsive" width="130" height="130" onerror="this.src=\'../../IMG/error.jpg\'"><p class="cortar"><small>#descripcion</small>#precio</p><div id="mensaje"><h6 id="grupos">des</h6></div></a></div>';
+        var html_imagen = '<div class="col-sm-3" id="mostrar"><a href="../detalles_producto/index.php?categoria=&producto=#id_producto" class="thumbnail inicio"><img src="#imagen" class="img-responsive" width="130" height="130" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>#descripcion</small>#precio</p><div id="mensaje"><h6 id="grupos">des</h6></div></a></div>';
         var tabla_producto='<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
         var id_tabla;
         var t = 0;

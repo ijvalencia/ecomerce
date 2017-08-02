@@ -137,71 +137,6 @@ switch ($Menu) {
     case "orden":
         $conexion->getOrdenes();
         break;
-
-    case "informa":
-        $conexion->getProductosPrincipal();
-        break;
-
-    case "carrusel":
-        $conexion->getcarruselProcuctosnuevo();
-        break;
-
-    case "carrusel2":
-        $conexion->getcarrusel2Productosnuevos();
-        break;
-
-    case "carrusel3":
-        $conexion->getcarrusel3Productivosnuevos();
-        break;
-
-    case "carruselTv1":
-        $conexion->getcaruselTv1();
-        break;
-
-    case "carruselTv2":
-        $conexion->getcaruselTv2();
-        break;
-
-    case "carruselTv3":
-        $conexion->getcaruselTv3();
-        break;
-
-    case "carruselPC1":
-        $conexion->getcarruselPC1();
-        break;
-
-
-    case "carruselPC2":
-        $conexion->getcarruselPC2();
-        break;
-
-    case "carruselPC3":
-        $conexion->getcarruselPC3();
-        break;
-
-    case "carruselfooter":
-        $conexion->getcarruselfooter();
-        break;
-
-    case "carruselfooter2":
-        $conexion->getcarruselfooter2();
-        break;
-
-    case "carruselfooter3":
-        $conexion->getcarruselfooter3();
-        break;
-
-    case "carruselfooter4":
-        $conexion->getcarruselfooter4();
-        break;
-
-    case "carruselfooter5":
-        $conexion->getcarruselfooter5();
-        break;
-
-    case "carruselfooter6":
-        $conexion->getcarruselfooter6();
-        break;
     
     case "UpdateUsuario":
         $id = $_POST["id_usuario"];
@@ -237,7 +172,7 @@ switch ($Menu) {
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
-    /*     * ************************ */
+    /***************************/
     /* Anton */
     case "aux":
         $variable = $_GET['categoria'];

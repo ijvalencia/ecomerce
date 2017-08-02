@@ -61,9 +61,9 @@ $(document).ready(function() {
 						});
 					});
 //					console.log(productos_busqueda);
-					/*var html_imagen = '<div class="col-sm-3 .container_img_producto"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail"><img src="#imagen" class="img-responsive" style="width:100%" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>#descripcion</small></p><h4>$#costo</h4></a></div>';*/
+					/*var html_imagen = '<div class="col-sm-3 .container_img_producto"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail"><img src="#imagen" class="img-responsive" style="width:100%; height: 50%;" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>#descripcion</small></p><h4>$#costo</h4></a></div>';*/
                     
-                    var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img  src="#imagen" class="img-responsive" style="width:100%" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small><h4>$#costo</h4></p></a></div>';
+                    var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img  src="#imagen" class="img-responsive" style="width:100%; height: 50%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small><h4>$#costo</h4></p></a></div>';
 					html_imagen = html_imagen.replace("#cat", $('#subcategoria').attr("value"));
 //					console.log(html_imagen);
 					var tabla_producto='<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
@@ -79,7 +79,7 @@ $(document).ready(function() {
 						}
 						imagen = imagen.replace("#id_producto", producto["codigo_fabricante"]);
 						imagen = imagen.replace("#imagen", producto["imagen"]);
-						imagen = imagen.replace("#descripcion", producto["descripcion"].substring(0,30) + "...<br>");
+						imagen = imagen.replace("#descripcion", producto["descripcion"].substring(0,35) + "...<br>");
 						imagen = imagen.replace("#costo", producto["moneda"] == "Pesos" ? producto["precio"] : (producto["precio"]*tipo_cambio).toFixed(2));
 						$(id_tabla).append(imagen);
 					});
@@ -118,7 +118,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 			{
 				/*tabla_producto = '<div class="col-sm-3 container_img_producto"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail"><img src="imagen" class="img-responsive" style="width:100%" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>Texto</small></p></a></div>';*/
                 
-                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail  container_img_producto" id=sombreado><img src="imagen" class="img-responsive" style="width:100%" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto</small><h4>$#precio</h4></p></a></div>';
+                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail  container_img_producto" id="sombreado"><img src="imagen" class="img-responsive" style="width:100%; height: 50%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto</small>costo</p><h4>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
 				if (x==0)
 					tabla_producto='<div class="container-fluid bg-3 text-center">' + tabla_producto;
 				if (x==3) 
@@ -131,8 +131,8 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 				var salida = tabla_producto;
 				salida = salida.replace("imagen", dato.item[y].imagen);
 				salida = salida.replace("compa", dato.item[y].codigo_fabricante);
-				salida = salida.replace("Texto", dato.item[y].descripcion.substring(0,30) + "...");
-//				salida = salida.replace("#precio",dato.item[y].precio);
+				salida = salida.replace("Texto", dato.item[y].descripcion.substring(0,35) + "...<br>");
+//				salida = salida.replace("costo",dato.item[y].precio);
 				imprimemela += salida;
 				if(x==0 || y==dato.item.length-1)
 				{
