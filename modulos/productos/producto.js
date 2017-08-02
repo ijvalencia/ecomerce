@@ -61,9 +61,7 @@ $(document).ready(function() {
 						});
 					});
 //					console.log(productos_busqueda);
-					/*var html_imagen = '<div class="col-sm-3 .container_img_producto"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail"><img src="#imagen" class="img-responsive" style="width:100%; height: 50%;" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>#descripcion</small></p><h4>$#costo</h4></a></div>';*/
-                    
-                    var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img  src="#imagen" class="img-responsive" style="width:100%; height: 50%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small><h4>$#costo</h4></p></a></div>';
+                    var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img  src="#imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small><h4>$#costo</h4></p></a></div>';
 					html_imagen = html_imagen.replace("#cat", $('#subcategoria').attr("value"));
 //					console.log(html_imagen);
 					var tabla_producto='<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
@@ -116,9 +114,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 			var imprimemela="";
 			for(var y=0; y < dato.item.length; y++)
 			{
-				/*tabla_producto = '<div class="col-sm-3 container_img_producto"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail"><img src="imagen" class="img-responsive" style="width:100%" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><small>Texto</small></p></a></div>';*/
-                
-                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail  container_img_producto" id="sombreado"><img src="imagen" class="img-responsive" style="width:100%; height: 50%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto</small>costo</p><h4>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
+                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail  container_img_producto" id="sombreado"><img src="imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto</small>costo</p><h4>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
 				if (x==0)
 					tabla_producto='<div class="container-fluid bg-3 text-center">' + tabla_producto;
 				if (x==3) 
