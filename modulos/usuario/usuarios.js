@@ -26,7 +26,7 @@ $(document).ready(function (){
            $("#txtapellido").val(datosusuario[2]);
            $("#txtemail").val(datosusuario[6]);
            $("#txtpassw").val(datosusuario[7]);
-           //$('.loader').fadeOut("slow");
+           $('.loader').fadeOut("slow");
       }
     });
  });

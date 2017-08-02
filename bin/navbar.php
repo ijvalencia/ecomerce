@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<!--<div class="loader"></div>-->
+<div class="loader"></div>
 <!-- Navbar dinamica-->
 <nav class="navbar navbar-static-top line-navbar-one" for="hide" id="content">
     <div class="container">

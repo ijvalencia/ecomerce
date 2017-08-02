@@ -19,18 +19,16 @@ class BD {
         $username = "desarrollo";
         $password = "Pa55w0rd!crm";
 
-        /* try{
-          $this->conexion = new PDO("mysql:host=10.1.0.49;dbname=ecommerce", $username, $password);
-          //$this->conexion = new PDO("mysql:host=localhost;dbname=ecommerce", $username, $password);
-          $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          } catch(PDOException $e){
-          echo "ERROR: " . $e->getMessage();
-          } */
-
         $this->conexion = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
         if (mysqli_connect_errno($this->conexion)) {
             echo "Error al conectar con MySQL: " . mysqli_connect_error();
         }
+        
+        /* Conectar a BD Local */
+        /*$this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
+        if (mysqli_connect_errno($this->conexion)) {
+            echo "Error al conectar con MySQL: " . mysqli_connect_error();
+        }*/
     }
 
     // Procedimiento para cerrar conexion
@@ -550,70 +548,63 @@ class BD {
             echo $row['tipo'] . "||";
         }
     }
+    
+    /* Anton */
 
-    /* Funciones XML Anton */
-
-    public function verCodigoProducto($producto) {
-        $articulo = simplexml_load_file($url_cva . $str_codigo . $producto);
-        set_time_limit(5000);
-
-        echo json_encode($articulo);
-    }
-
-    public function verGrupoProdcuto($subcategoria) {
-        $filename = $url_cva . $str_marca . $str_grupo . $subcategoria . $str_clave . $str_codigo;
-        set_time_limit(5000);
-        $articulos = simplexml_load_file($filename);
-
-        echo json_encode($articulo);
-    }
-
-    public function verMarcaProducto($marca) {
-        $filename = ($url_cva . $str_marca . $marca . $str_grupo . $str_clave . $str_codigo);
-        set_time_limit(5000);
-        $articulos = simplexml_load_file($filename);
-
-        echo json_encode($articulo);
-    }
-
-    public function verTodasMarcas() {
-        $filename = "http://www.grupocva.com/catalogo_clientes_xml/marcas.xml";
-        $articulos = simpleXML_load_file($filename);
-        set_time_limit(5000);
-
-        echo json_encode($articulo);
-    }
-
-    public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax) {
+    public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax, $orden) {
         $min = ($lugar - 1) * 20;
         $max = $min + 20;
-        if ($Pmax < 1500)
-            $Pmax = 250000;
+
+        switch ($orden) {
+            case "normal":
+                $ordenamiento="";
+                break;
+            
+            case "mayor":
+                $ordenamiento="order by precio desc";
+                break;
+            
+            case "menor":
+                $ordenamiento="order by precio asc";
+                break;
+            
+            case "alfa":
+                $ordenamiento="order by descripcion asc";
+                break;
+            
+            case "invalfa":
+                $ordenamiento="order by descripcion desc";
+                break;
+            
+            
+            
+            
+        }
 
         if (!($marca == "undefined" || $envio == "undefined" )) {
             if ($marca == "totaliti") {
                 if ($envio == "Local") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE descripcion like "" grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 '.$ordenamiento.' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Foraneo") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 '.$ordenamiento.' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Indiferente") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' '.$ordenamiento.' limit ' . $min . "," . $max;
                 }
             } else {
                 if ($envio == "Local") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '" limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '" '.$ordenamiento.' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Foraneo") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '" limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '" '.$ordenamiento.' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Indiferente") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '" limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '" '.$ordenamiento.' limit ' . $min . "," . $max;
                 }
             }
         } else {
-            $sql = "select * from producto where grupo='" . $subcat . "' limit " . $min . "," . $max;
+            $sql = "select * from producto where grupo='" . $subcat . "' ".$ordenamiento." limit " . $min . "," . $max;
         }
         $buscado = $this->conexion->query($sql);
 
@@ -624,6 +615,7 @@ class BD {
                 $articulos->item[$x]->descripcion = $fila['descripcion'];
                 $articulos->item[$x]->imagen = $fila['imagen'];
                 $articulos->item[$x]->codigo_fabricante = $fila['codigo_fabricante'];
+                $articulos->item[$x]->precio = $fila['precio'];
                 /* echo "<br>".$articulos->[$x]->descripcion;
                   echo "<br>".$articulos->item[$x]->imagen;
                   echo "<br>".$articulos->item[$x]->codigo_fabricante."<br>"; */
@@ -632,7 +624,7 @@ class BD {
         echo json_encode($articulos);
     }
 
-    public function verCantidad($grupo, $cantidad, $marca, $envio, $Pmin, $Pmax) {
+    public function verCantidad($grupo, $cantidad, $marca, $envio, $Pmin, $Pmax, $orden) {
 
         if (!($marca == "undefined" || $envio == "undefined")) {
             if ($marca == "totaliti") {
@@ -661,16 +653,16 @@ class BD {
         }
         $cantidad_productos = $this->conexion->query($sql);
         if ($cantidad != 1) {
-            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
+            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio ."&orden=".$orden. "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
         }
         $cantidad_grupo = mysqli_fetch_array($cantidad_productos);
-        $cantidad_grupo['count(*)']/=20;
+        $cantidad_grupo['count(*)'] /= 20;
         $cantidad_grupo = ceil($cantidad_grupo['count(*)']);
         for ($x = 1; $x <= $cantidad_grupo; $x++) {
             if ($cantidad == $x) {
                 echo '<u>';
             }
-            echo " <a href='detalles.php?extra=" . $x . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&subcategoria=" . $grupo . "'>" . $x;
+            echo " <a href='detalles.php?extra=" . $x . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=".$orden."&subcategoria=" . $grupo . "'>" . $x;
 
             if ($cantidad == $x) {
                 echo "</u>";
@@ -678,7 +670,7 @@ class BD {
             echo "</a>  ";
         }
         if ($cantidad < $cantidad_grupo) {
-            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
+            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=".$orden."&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
         }
 
         //echo "<br>".$grupo."<br>". $cantidad."<br>". $marca."<br>". $envio."<br>". $Pmin."<br>". $Pmax;

@@ -182,7 +182,15 @@ switch ($Menu) {
         $envio = $_GET['envio'] or die("undefined");
         $min = $_GET['min'] + 1 or die("undefined");
         $max = $_GET['max'] + 1 or die("undefined");
-        $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max);
+        if (isset($_GET['orden']))
+            if ($_GET['orden'] == "undefined")
+                $orden = "normal";
+            else
+                $orden = $_GET['orden'];
+        else
+            $orden = "normal";
+        //echo $variable, $posicion, $marca, $envio, $min, $max, $orden."<br>";
+        $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max, $orden);
         break;
 
     case "listadocantidad":
@@ -204,20 +212,28 @@ switch ($Menu) {
         }
 
         /* @var $_GET pe */
-        $min = (isset($_GET['min']) ? $_GET['min'] : 0) + 1 or die("undefined");
+        $min = (isset($_GET['minn']) ? $_GET['minn'] : 0) + 1 or die("undefined");
         if ($min == "") {
             $min = "undefined";
         }
 
-        $max = $_GET['maxn'] or die("undefined");
+        $max = (isset($_GET['maxn']) ? $_GET['maxn'] : 0) + 1 or die("undefined");
         if ($max == "") {
             $max = "undefined";
         }
+        
+        if (isset($_GET['orden']))
+            if ($_GET['orden'] == "undefined")
+                $orden = "normal";
+            else
+                $orden = $_GET['orden'];
+        else
+            $orden = "normal";
 
         if ($min > 1) {
             $min--;
         }
-        if ($max < 1500) {
+        if ($max < 1) {
             $max = 250000;
         }
         if ($max == "undefined") {
@@ -228,7 +244,7 @@ switch ($Menu) {
         }
         //echo $posicion."<br>".$marca."<br>".$envio."<br>".$min."<br>".$max."<br>";
 
-        $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max);
+        $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max, $orden);
         break;
 
     case "marcas":

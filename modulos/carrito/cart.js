@@ -30,6 +30,7 @@ $(document).ready(function() {
 			$('.modal-body').append(salida);*/
 			$('#selector_envio').append(salida);
 		});
+        $('.loader').fadeOut("slow");
 	});
 	
 	
