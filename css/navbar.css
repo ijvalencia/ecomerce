@@ -792,12 +792,11 @@ padding-bottom: 51px;
   padding: 0;
   padding-right: 40px;
 }
-.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategory-img {
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategory-img :empty {
 	position: absolute;
   	display: block;
-  	margin: 0px 0px 0px 530px;
+  	margin: 10px 0px 0px -10px;
   	width: auto;
-  	height: calc;
-  	min-height: 70%;
+  	height: auto;
 }
 /***********/

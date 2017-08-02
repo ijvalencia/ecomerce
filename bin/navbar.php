@@ -59,17 +59,17 @@
                             <!-- Subcategorias -->
                             <div class="lnt-subcategroy-carousel-wrap container-fluid">
                                 <div id="subcategory-home" class="active">
-	                 		<div class="lnt-subcategory-img col-md-5 col-sm-5">
-						<a href="../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=PORTATILES">
-			         		<img id="img_navbar" src="../../IMG/navbar/banner01.jpg">
-						</a>
-					</div>	
                                     <div class="lnt-subcategory col-sm-7 col-md-7" id="div_lista_subcat">
                                         <ul class="list-unstyled col-sm-6" id="lista_subcat">
                                         </ul>
                                         <ul class="list-unstyled col-sm-6" id="lista_subcat2">
                                         </ul>
-                                    </div>		
+                                    </div>
+                                    <div class="lnt-subcategory-img col-md-5 col-sm-5">
+                                        <a href="../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=PORTATILES">
+                                            <img id="img_navbar" src="../../IMG/navbar/banner01.jpg">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Carousel -->
