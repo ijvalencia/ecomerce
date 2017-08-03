@@ -13,10 +13,10 @@
     <!-- CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../../bin/JAlert/jquery.alerts.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="../../css/style.css">  
     <link rel="stylesheet" href="../../css/navbar.css" >
-    <link rel="stylesheet" href="../../css/Menu_vertical.css">  
+    <link rel="stylesheet" href="../../css/Menu_vertical.css">
+    <link href="../../bin/JAlert/jquery.alerts.css" rel="stylesheet" type="text/css"/>
     <!-- envio de datos al post-->
 
  <!-- Borrar si no swe necesitan

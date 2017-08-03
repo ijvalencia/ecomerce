@@ -40,8 +40,8 @@ $(document).ready(function() {
 			$.validator.methods.basicoCaptcha = function(value, element, param) {return value == param;};
 			
 			$("#manual").click(function() {
-				  alert("&iquest;Formulario v&aacute;lido?: " + $("#entityDataForm").validate().form());
-				  alert("Existen " + $("#entityDataForm").validate().numberOfInvalids() + " errores.");  
+				  jAlert("&iquest;Formulario v&aacute;lido?: " + $("#entityDataForm").validate().form());
+				  jAlert("Existen " + $("#entityDataForm").validate().numberOfInvalids() + " errores.");  
 			});
 			
 			$("#addRule").click(function() {

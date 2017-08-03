@@ -10,7 +10,7 @@ $(document).ready(function(){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
-        //alert(number);
+        //jAlert(number);
          
     		$.ajax({
                 type: "POST",
@@ -18,7 +18,7 @@ $(document).ready(function(){
 			data:{"usuario":number},
                         success: function(sessionmsj){
                             
-                           // alert(sessionmsj);
+                           // jAlert(sessionmsj);
                             sessionmsj = JSON.parse(sessionmsj);
                             console.log(sessionmsj[0]["nombre"]);
                             console.log(sessionmsj[0]["apellidos"]);

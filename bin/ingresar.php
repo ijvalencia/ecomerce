@@ -11,7 +11,7 @@ if (isset($_GET['extra'])) {
 }
 
 switch ($Menu) {
-// registro de para login
+    /* SATANAS */
     case "registro":
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
@@ -20,15 +20,12 @@ switch ($Menu) {
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
-//inicio de sesionen
     case "email":
         $correo = $_POST['correo'];
         $contra = $_POST['contra'];
         $conexion->login($correo, $contra);
         break;
 
-
-    /* Parte hecha por Adrian */
     case "envios":
         $conexion->getEnvios();
         break;
@@ -48,6 +45,7 @@ switch ($Menu) {
         break;
 
     case "getCarrito":
+//        unset($_SESSION['carrito']);
         $carrito = $_SESSION['carrito'];
         echo json_encode($carrito);
         break;
@@ -77,6 +75,7 @@ switch ($Menu) {
         } else
             echo "0";
         break;
+        
     case "getArticulo":
         if (isset($_GET['codigo'])) {
             $codigo = $_GET['codigo'];
@@ -85,6 +84,7 @@ switch ($Menu) {
             echo json_encode($articulo);
         }
         break;
+        
     case "articulos":
         //$filename= ("http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%&grupo=%&clave=%&codigo=%".$producto."&tc=1&promos=1&porcentaje=0");
         //$filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%25&grupo=%25&clave=%25&codigo=WD5000AZLX&tc=1&promos=1&porcentaje=0";
@@ -92,38 +92,48 @@ switch ($Menu) {
         $articulo = simplexml_load_file($filename);
         echo json_encode($articulo);
         break;
+        
     case "cerrar":
         session_destroy();
         header('Location: ../index.php');
         break;
+        
     case "getCategorias":
         $conexion->getCategorias();
         break;
+        
     case "getSubcategorias":
         $conexion->getSubcategorias($_GET["subcategoria"]);
         break;
+        
     case "parametros":
         $conexion->setTipoCambio();
         $conexion->getParametros();
         break;
+        
     case "buscar":
         $conexion->busqueda($_POST["categoria"], $_POST["palabras"]);
         break;
+        
     case "productosInicio":
         $conexion->productosInicio();
         break;
     
-    	case "borrarCarrito":
-		$carrito = $_SESSION['carrito'];
-		array_splice($carrito, $_POST['articulo']);
-		$_SESSION['carrito'] = $carrito;
+    case "borrarCarrito":
+		$carrito = [];
+		foreach ($_SESSION['carrito'] as $producto) {
+            if (strcmp($_GET['item'], str_replace("<br />", "", $producto['codigo_fabricante'])) != 0) 
+                array_push($carrito, $producto);
+        }
+        $_SESSION['carrito'] = $carrito;
 		break;
 		
 	case "getCarousel":
 		$conexion->getCarousel($_GET['clave']);
 		break;
-    /*     * ********************************* */
-    //parte del chuy
+    /***********/
+        
+    /* Chuy */
     case "usuariordendetalles":
         $id_usuariosdetalles = $_POST["usuario"];
         $conexion->mostrarordenesdetalles($id_usuariosdetalles);

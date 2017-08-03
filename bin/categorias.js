@@ -80,7 +80,7 @@ $('#btn_enviar').click(function(e) {
 	$.each(subcategorias, function(i, subcat) {
 		$.each(subcat, function(j, subs) {
 			if (busqueda.indexOf(subs["id_categoria"]) != -1) {
-				alert("SI");
+				jAlert("SI");
 				window.location.replace("../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria="+subs["id_categoria"]);
 			}
 		});

@@ -20,8 +20,8 @@ $(document).ready(function() {
 	{
 		for(var ver in get)
 		{
-			//alert(ver);
-			//alert(get[ver]);
+			//jAlert(ver);
+			//jAlert(get[ver]);
 			if(ver=="extra")
 				var lugar=get[ver];
 			if(ver=="marca")
@@ -39,7 +39,7 @@ $(document).ready(function() {
 		}
 	}
 	else
-		alert("Pagina no encontrada.");
+		jAlert("Pagina no encontrada.");
 	
 	/* SATANAS */
 	var supercategoria = $('#supercategoria').attr("value");
@@ -110,10 +110,10 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 		data:{},       
 		success: function(articulo) {
 			//console.log(articulo);
-                        //alert("../../bin/ingresar.php?extra="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&min="+miSalario+"&max="+McPato+"&orden="+fascismo+"&categoria="+crayola);
+                        //jAlert("../../bin/ingresar.php?extra="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&min="+miSalario+"&max="+McPato+"&orden="+fascismo+"&categoria="+crayola);
 			var dato=JSON.parse(articulo);
 			//console.log(dato);
-			//alert(dato.item.length);
+			//jAlert(dato.item.length);
 			var imprimemela="";
 			for(var y=0; y < dato.item.length; y++)
 			{
@@ -145,3 +145,4 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 	});
 
 }
+

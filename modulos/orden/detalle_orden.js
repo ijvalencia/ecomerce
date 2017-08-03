@@ -9,14 +9,14 @@ $(document).ready(function (){
         apellido = field[1];
         number = field[2];
         
-        //alert(number);
+        //jAlert(number);
     		$.ajax({
                 type: "POST",
 			url: "../../bin/ingresar.php?categoria=usuarioorden",              
 			data:{"usuario":number},
                         success: function(sessionmsj){
                             
-                           // alert(sessionmsj
+                           // jAlert(sessionmsj
                             sessionmsj = JSON.parse(sessionmsj);
                             console.log(sessionmsj[0]["nombre"]);
                             console.log(sessionmsj[0]["apellidos"]);
@@ -37,7 +37,7 @@ $(document).ready(function (){
 		 url: "../../bin/ingresar.php?categoria=usuariordendetalles",              
 	         data:{"usuario":number},
                  success: function(sessionmsj){                
-                    // alert("2"+sessionmsj);
+                    // jAlert("2"+sessionmsj);
                  sessionmsj = JSON.parse(sessionmsj);
                  $("#pagos").html("Tarjeta de Dèbito : "+sessionmsj[0]["metodo_pago"]);
                  }

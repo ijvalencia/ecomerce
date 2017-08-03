@@ -81,12 +81,12 @@ $('#btn_comprar').click(function() {
 		success: function(resp) {
 			console.log(resp);
 			if (resp !== "0"){
-				alert("Agregado al carrito");
+				jAlert("Agregado al carrito");
 				window.location.href = "../../modulos/carrito/index.php";
-				window.close();   
+//				window.close();   
 			}
 			else{
-				alert("No se pudo agregar");
+				jAlert("No se pudo agregar");
 			}
 		}
 	});

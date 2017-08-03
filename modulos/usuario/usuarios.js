@@ -7,7 +7,7 @@ $(document).ready(function (){
      //$("#btn-enviar").attr("disabled",true); 
     $.getJSON("../../bin/ingresar.php?categoria=sesion", function(datos) {     
 	sesion = datos;
-        //alert(sesion);
+        //jAlert(sesion);
         var stringB = new String(sesion);
         //var fieldd = stringB.split(",",2);
         var field = stringB.split(",");
@@ -59,7 +59,7 @@ $("#btnguardar").on('click', function (){
                     $('#txtnombre').css({"border": "2px solid Gainsboro"});
                 } else {
                     $('#txtnombre').css({"border": "2px solid red"});
-                    //alert("no");
+                    //jAlert("no");
                     bandera = false;
                 }
                 if (cadena.test(txtapellido)) {
@@ -94,7 +94,7 @@ $("#btnguardar").on('click', function (){
             },       
         success: function(sessionmsj){   
             // var loginobtenido = sessionmsj.split('||');
-              //alert(sessionmsj);
+              //jAlert(sessionmsj);
              // $("#").html(loginobtenido[0]);
              // $("#login").(loginobtenido[1]);
              // $("#").html(loginobtenido[2]);    
