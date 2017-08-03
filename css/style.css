@@ -1028,3 +1028,7 @@ label {
 .inicio img {
     height: 65%;
 }
+.dropdown-menu: hover,
+.dropdown-menu: focus {
+    
+}
