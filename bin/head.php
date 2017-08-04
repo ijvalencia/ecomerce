@@ -18,9 +18,3 @@
     <link rel="stylesheet" href="../../css/Menu_vertical.css">
     <link href="../../bin/JAlert/jquery.alerts.css" rel="stylesheet" type="text/css"/>
     <!-- envio de datos al post-->
-
- <!-- Borrar si no swe necesitan
-    <script src="../../Js/Menu/jquery.highlight.js"></script>
-    <script src="../../Js/Menu/jquery.touchSwipe.min.js"></script>
-    <script src="../../Js/Menu/jquery.randomColor.js"></script>
-    <script src="../../Js/Menu/line.js"></script> -->
