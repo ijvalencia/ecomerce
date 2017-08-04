@@ -58,9 +58,14 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_precio">Rango de precio:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_precio"><center>
-                                            <li><input value="0"  name="min" type="number" min="0" max="250000"/> <!--placeholder="Minimo"--></li>
-                                            <li><input value="250000" name="max" type="number" min="0" max="250000" /></li></center>
+                                        <ul class="menu hidden" role="menu" id="sub_precio">
+                                            <center>
+                                                <li>
+                                                    <input value="0" name="min" type="number" min="0" max="250000">
+                                                    <span class="separator"></span>
+                                                    <input value="250000" name="max" type="number" min="0" max="250000">
+                                                </li>
+                                            </center>
                                         </ul>   
                                     </li>
                                     <li class="dropdown">

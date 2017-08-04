@@ -31,11 +31,11 @@ $(document).ready(function() {
 });
 
 function cargarProducto(codigo) {
-    if (codigo != "") {
+    if (codigo.length > 3) {
         $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo="+codigo, function(datos) {
-            console.log(datos['item'];
-            if (jQuery.isEmptyObject(datos)) {
-                /* cargar pag error */
+            if (datos['item'][1] != undefined) {
+                window.location.replace("../../modulos/error/index.php");
+                $('.loader').fadeOut("slow");
                 return;
             }
             articulo = datos["item"];
@@ -79,7 +79,7 @@ function cargarProducto(codigo) {
         });
     } else {
         $('.loader').fadeOut("slow");
-        /* cargar pag error */
+        window.location.replace("../../modulos/error/index.php");
     }
 }
 
