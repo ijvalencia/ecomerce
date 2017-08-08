@@ -1,21 +1,24 @@
-$(document).ready(function() {
-    $('.dropdown-toggle').click(function() {
-//  console.log($(this).attr("id"));
-        switch($(this).attr("id")) {
-            case "btn_marca":
-                mostrar('#sub_marca');
-                break;
-            case "btn_disponible":
-                mostrar('#sub_disponible');
-                break;
-            case "btn_precio":
-                mostrar('#sub_precio');
-                break;
-            case "btn_orden":
-                mostrar('#sub_orden');
-                break;
+
+//$('.navbar-nav').append("<li>una tonteria</li>");
+$('.dropdown-toggle').click(function() {
+    console.log($(this).attr("id"));
+    switch($(this).attr("id")) {
+        case "btn_marca":
+            mostrar('#sub_marca');
+            break;
+        case "btn_disponible":
+            mostrar('#sub_disponible');
+            break;
+        case "btn_precio":
+            mostrar('#sub_precio');
+            break;
+        case "btn_orden":
+            mostrar('#sub_orden');
+            break;
+        case "btn_memoria":
+            mostrar('#sub_memoria');
+            break;
         }
-    });
 });
 
 function mostrar(id_contenedor) {

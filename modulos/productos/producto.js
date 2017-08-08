@@ -6,40 +6,46 @@ var productos_busqueda = [];
 
 $(document).ready(function() {
 	var loc = document.location.href;
-	if(loc.indexOf('?') > 0)
-	{
-		var getString = loc.split('?')[1];
-		var GET = getString.split('&');
-		var get = {};
-		for(var i = 0, l = GET.length; i < l; i++) {
-			var tmp = GET[i].split('=');
-			get[tmp[0]] = unescape(decodeURI(tmp[1]));
-		}
-	}
-	/* Separa los parametros del get para mostrar los articulos */
-	if(get)
-	{
-		for(var ver in get)
-		{
-			//jAlert(ver);
-			//jAlert(get[ver]);
-			if(ver=="extra")
-				var lugar=get[ver];
-			if(ver=="marca")
-				var marca=get[ver];
-			if(ver=="envio")
-				var envio=get[ver];
-			if(ver=="priceMIN")
-				var min=get[ver];
-			if(ver=="priceMAX")
-				var max=get[ver];
-                        if(ver=="orden")
-                                var orden=get[ver];
-			if (ver=="subcategoria")             
-				mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden);
-		}
-	}
-	else
+    if (loc.indexOf('?') > 0)
+    {
+        var getString = loc.split('?')[1];
+        var GET = getString.split('&');
+        var get = {};
+        for (var i = 0, l = GET.length; i < l; i++) {
+            var tmp = GET[i].split('=');
+            get[tmp[0]] = unescape(decodeURI(tmp[1]));
+        }
+    }
+    /* Separa los parametros del get para mostrar los articulos */
+    if (get)
+    {
+        for (var ver in get)
+        {
+            //alert(ver);
+            //alert(get[ver]);
+            if (ver == "busqueda_MG")
+                var memoriag = get[ver];
+            if (ver == "busqueda_MT")
+                var memoriat = get[ver];
+            if (ver == "extra")
+                var lugar = get[ver];
+            if (ver == "marca")
+                var marca = get[ver];
+            if (ver == "envio")
+                var envio = get[ver];
+            if (ver == "priceMIN")
+                var min = get[ver];
+            if (ver == "priceMAX")
+                var max = get[ver];
+            if (ver == "orden")
+                var orden = get[ver];
+            if (ver == "subcategoria")
+                if (memoriag || memoriat)
+                    mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden, "&capacidadg=" + memoriag + "&capacidadt=" + memoriat);
+                else
+                    mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden, "");
+        }
+    } else
 		jAlert("Pagina no encontrada.");
 	
 	/* SATANAS */
@@ -171,56 +177,146 @@ function cargarBusqueda(arr_productos) {
 }
 
 //grupo/categoria, paginacion/extra, marca, envio/(local/foraneo/indef), precio minimo, precio maximo
-function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, McPato, fascismo) {
-	$.get("../../bin/ingresar.php?categoria=marcas&grupo="+crayola, function(respuesta) {
-		respuesta=respuesta.split(";");
-		for(var x=0; x<respuesta.length-1;x++)
-			$('#marquitas').append("<option value='"+respuesta[x]+"'>"+respuesta[x]+"</option> ");
-	});
-	$.get("../../bin/ingresar.php?categoria=listadocantidad&cantidad="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&minn="+miSalario+"&maxn="+McPato+"&orden="+fascismo+"&grupo="+crayola, 
-	function(cantidad) {
-		$('#catidad').append(cantidad);
-		$('#AquiGrupo').append(crayola);
-	});
-	$.ajax({
-		type: "POST",
-		url: "../../bin/ingresar.php?extra="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&min="+miSalario+"&max="+McPato+"&orden="+fascismo+"&categoria="+crayola,
-		data:{},       
-		success: function(articulo) {
-			//console.log(articulo);
-                        //jAlert("../../bin/ingresar.php?extra="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&min="+miSalario+"&max="+McPato+"&orden="+fascismo+"&categoria="+crayola);
-			var dato=JSON.parse(articulo);
-			//console.log(dato);
-			//jAlert(dato.item.length);
-			var imprimemela="";
-			for(var y=0; y < dato.item.length; y++)
-			{
-                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria='+crayola+'&producto=compa" class="thumbnail  container_img_producto" id=sombreado><img  src="imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto...</small></p><h4>precio<br>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
-				if (x==0)
-					tabla_producto='<div class="container-fluid bg-3 text-center">' + tabla_producto;
-				if (x==3) 
-				{
-					tabla_producto+='</div>';
-					x=0;
-				} else
-					x++;   
-				
-				var salida = tabla_producto;
-				salida = salida.replace("imagen", dato.item[y].imagen);
-				salida = salida.replace("compa", dato.item[y].codigo_fabricante);
-				salida = salida.replace("Texto", dato.item[y].descripcion.substring(26,0));
-                                salida = salida.replace("precio", "$"+dato.item[y].precio);
-				//salida = salida.replace("precio_producto", "$" + valor['precio']);
-				imprimemela += salida;
-				if(x==0 || y==dato.item.length-1)
-				{
-					$('ttbody').append(imprimemela);
-					imprimemela="";
-				}
-			};
-			$('.loader').fadeOut("slow");
-		}
-	});
+function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, McPato, fascismo, vino) {
+    $('#AquiGrupo').append(crayola);
+    //filtro de marcas
+    $.get("../../bin/ingresar.php?categoria=marcas&grupo=" + crayola, function (respuesta) {
+        respuesta = respuesta.split(";");
+        for (var x = 0; x < respuesta.length - 1; x++)
+            $('#marquitas').append("<option value='" + respuesta[x] + "'>" + respuesta[x] + "</option> ");
+    });
+    //filtro de memoria
+    //alert("../../bin/ingresar.php?categoria=memoria&grupo=" + crayola);
+    $.get("../../bin/ingresar.php?categoria=memoria&grupo=" + crayola, function (respuesta)
+    {
+        respuesta = respuesta.split("/");
+        var TB = respuesta[0].split("$");
+        var GB = respuesta[1].split("$");
+        console.log(TB, GB);
+        //alert("../../bin/ingresar.php?categoria=cantidad_memoria&TB=" + TB[x] + "&grupo=" + crayola);
+
+
+        var texto2 = "";
+        var contenido = "";
+        if (!(GB[0] == "")) {
+            //for (var x = 0; x < TB.length - 1; x++)
+            var x = 0;
+            var salir = false;
+
+            while (!salir) {
+                if (GB[x] !== "")
+                    $.ajax({
+                        url: "../../bin/ingresar.php?categoria=cantidad_memoria&GB=" + GB[x] + "&grupo=" + crayola,
+                        async: false,
+                        success: function (respuesta)
+                        {
+                            contenido += '<li><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '"> ' + GB[x] + ' GB  <u>(' + respuesta + ')</u>' + '</li>';
+                            x++;
+                            if (x === GB.length - 1) {
+                                salir = true;
+                            }
+                        }});
+                for (var aux = 0; aux <= 100; aux++)
+                    aux = aux;
+            }
+
+        }
+        var contenido1 = "";
+
+        if (!(TB[0] == "")) {
+            //for (var x = 0; x < TB.length - 1; x++)
+
+            var x = 0;
+            var salir = false;
+            while (!salir) {
+                $.ajax({
+                    url:"../../bin/ingresar.php?categoria=cantidad_memoria&TB=" + TB[x] + "&grupo=" + crayola,
+                    async: false,
+                    success: function (respuesta)
+                {
+                    contenido1 += '<li><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '"> ' + TB[x] + ' TB  <u>(' + respuesta + ')</u>' + '</li>';
+
+
+                    x++;
+                    if (x === TB.length - 1) {
+                        texto2 += contenido1 + contenido;
+                        var texto1 = '\n\
+                <a class="dropdown-toggle" id="btn_memoria">Capacidad de memoria:</a>\n\
+                <ul class="menu hidden" role="menu" id="sub_memoria"><center>';
+                        var texto3 = '</center></ul> ';
+                        var imprimir = texto1 + texto2 + texto3;
+
+                        $('#memorama').append(imprimir);
+                        salir = true;
+                    }
+                }});
+
+            }
+            $.ajax({
+                url: "../../modulos/productos/sidebar.js",
+                dataType: "script",
+                success: function () {
+                }
+            });
+        } else
+            $.ajax({
+                url: "../../modulos/productos/sidebar.js",
+                dataType: "script",
+                success: function () {
+                }
+            });
+    });
+
+
+
+    //paginacion
+    if (vino == "")
+        $.get("../../bin/ingresar.php?categoria=listadocantidad&cantidad=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&minn=" + miSalario + "&maxn=" + McPato + "&orden=" + fascismo + "&grupo=" + crayola,
+                function (cantidad) {
+                    $('#catidad').append(cantidad);
+                });
+    //productos
+    alert("../../bin/ingresar.php?extra=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&min=" + miSalario + "&max=" + McPato + "&orden=" + fascismo + "&categoria=" + crayola + vino);
+    $.ajax({
+        type: "POST",
+        url: "../../bin/ingresar.php?extra=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&min=" + miSalario + "&max=" + McPato + "&orden=" + fascismo + "&categoria=" + crayola + vino,
+        data: {},
+        success: function (articulo) {
+            //console.log(articulo);
+            //alert("../../bin/ingresar.php?extra="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&min="+miSalario+"&max="+McPato+"&orden="+fascismo+"&categoria="+crayola+vino);
+            var dato = JSON.parse(articulo);
+            //console.log(dato);
+            //alert(dato.item.length);
+            var imprimemela = "";
+            for (var y = 0; y < dato.item.length; y++)
+            {
+                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=' + crayola + '&producto=compa" class="thumbnail  container_img_producto" id=sombreado><img  src="imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto...</small></p><h4>precio<br>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
+                if (x == 0)
+                    tabla_producto = '<div class="container-fluid bg-3 text-center">' + tabla_producto;
+                if (x == 3)
+                {
+                    tabla_producto += '</div>';
+                    x = 0;
+                } else
+                    x++;
+                var salida = tabla_producto;
+                salida = salida.replace("imagen", dato.item[y].imagen);
+                salida = salida.replace("compa", dato.item[y].codigo_fabricante);
+                salida = salida.replace("Texto", dato.item[y].descripcion.substring(26, 0));
+                salida = salida.replace("precio", "$" + dato.item[y].precio + "<br>");
+                //salida = salida.replace("precio_producto", "$" + valor['precio']);
+                imprimemela += salida;
+                if (x == 0 || y == dato.item.length - 1)
+                {
+                    $('ttbody').append(imprimemela);
+                    imprimemela = "";
+                }
+            }
+            ;
+
+            $('.loader').fadeOut("slow");
+
+        }
+    });
 
 }
-

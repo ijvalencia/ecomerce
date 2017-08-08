@@ -78,6 +78,9 @@
                                             <li><input type="radio" name="orden" value="invalfa"> Z->A  </li></center>
                                         </ul>   
                                     </li>
+                                    <li id="memorama" class="dropdown">
+
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -106,6 +109,6 @@
             </div>
         </footer>
         <script type="text/javascript" src="producto.js"></script>
-        <script type="text/javascript" src="sidebar.js"></script>
+<!--        <script type="text/javascript" src="sidebar.js"></script>-->
     </body>
 </html>

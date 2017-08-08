@@ -558,54 +558,50 @@ class BD {
 
         switch ($orden) {
             case "normal":
-                $ordenamiento="";
+                $ordenamiento = "";
                 break;
-            
+
             case "mayor":
-                $ordenamiento="order by precio desc";
+                $ordenamiento = "order by precio desc";
                 break;
-            
+
             case "menor":
-                $ordenamiento="order by precio asc";
+                $ordenamiento = "order by precio asc";
                 break;
-            
+
             case "alfa":
-                $ordenamiento="order by descripcion asc";
+                $ordenamiento = "order by descripcion asc";
                 break;
-            
+
             case "invalfa":
-                $ordenamiento="order by descripcion desc";
+                $ordenamiento = "order by descripcion desc";
                 break;
-            
-            
-            
-            
         }
 
         if (!($marca == "undefined" || $envio == "undefined" )) {
             if ($marca == "totaliti") {
                 if ($envio == "Local") {
-                    $sql = 'SELECT * FROM producto WHERE descripcion like "" grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 '.$ordenamiento.' limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE descripcion like "" grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 ' . $ordenamiento . ' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Foraneo") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 '.$ordenamiento.' limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 ' . $ordenamiento . ' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Indiferente") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' '.$ordenamiento.' limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' ' . $ordenamiento . ' limit ' . $min . "," . $max;
                 }
             } else {
                 if ($envio == "Local") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '" '.$ordenamiento.' limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '" ' . $ordenamiento . ' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Foraneo") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '" '.$ordenamiento.' limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '" ' . $ordenamiento . ' limit ' . $min . "," . $max;
                 } else
                 if ($envio == "Indiferente") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '" '.$ordenamiento.' limit ' . $min . "," . $max;
+                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '" ' . $ordenamiento . ' limit ' . $min . "," . $max;
                 }
             }
         } else {
-            $sql = "select * from producto where grupo='" . $subcat . "' ".$ordenamiento." limit " . $min . "," . $max;
+            $sql = "select * from producto where grupo='" . $subcat . "' " . $ordenamiento . " limit " . $min . "," . $max;
         }
         $buscado = $this->conexion->query($sql);
 
@@ -654,7 +650,7 @@ class BD {
         }
         $cantidad_productos = $this->conexion->query($sql);
         if ($cantidad != 1) {
-            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio ."&orden=".$orden. "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
+            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
         }
         $cantidad_grupo = mysqli_fetch_array($cantidad_productos);
         $cantidad_grupo['count(*)'] /= 20;
@@ -663,7 +659,7 @@ class BD {
             if ($cantidad == $x) {
                 echo '<u>';
             }
-            echo " <a href='detalles.php?extra=" . $x . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=".$orden."&subcategoria=" . $grupo . "'>" . $x;
+            echo " <a href='detalles.php?extra=" . $x . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'>" . $x;
 
             if ($cantidad == $x) {
                 echo "</u>";
@@ -671,7 +667,7 @@ class BD {
             echo "</a>  ";
         }
         if ($cantidad < $cantidad_grupo) {
-            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=".$orden."&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
+            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
         }
 
         //echo "<br>".$grupo."<br>". $cantidad."<br>". $marca."<br>". $envio."<br>". $Pmin."<br>". $Pmax;
@@ -685,6 +681,103 @@ class BD {
             echo $fila['marca'] . ";";
             $x++;
         }
+    }
+
+    public function verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden) {
+
+        $sql_extra = "";
+        if ($marca !== "totaliti")
+            $sql_extra += " and marca='" . $marca . "' ";
+        switch ($envio) {
+            case "Foraneo":
+                $sql_extra += " and CDMX>0 ";
+                break;
+
+            case "Local":
+                $sql_extra += " and GDL>0 ";
+                break;
+        }
+
+        switch ($orden) {
+            case "normal":
+                $ordenamiento = "";
+                break;
+
+            case "mayor":
+                $ordenamiento = "order by precio desc";
+                break;
+
+            case "menor":
+                $ordenamiento = "order by precio asc";
+                break;
+
+            case "alfa":
+                $ordenamiento = "order by descripcion asc";
+                break;
+
+            case "invalfa":
+                $ordenamiento = "order by descripcion desc";
+                break;
+        }
+        $sql_extra = $sql_extra . " " . $ordenamiento;
+        error_reporting(0);
+        $capacidades = explode("$", $capacidad[0]);
+        $x = 0;
+        foreach ($capacidades as $busqueda) {
+            $sql = "select * from producto where grupo='" . $categoria . "' and GB=" . $busqueda . $sql_extra;
+            $resultado = $this->conexion->query($sql);
+            while ($recorrido = mysqli_fetch_array($resultado)) {
+                $articulos->item[$x]->descripcion = $recorrido['descripcion'];
+                $articulos->item[$x]->precio = $recorrido['precio'];
+                $articulos->item[$x]->imagen = $recorrido['imagen'];
+                $articulos->item[$x]->codigo_fabricante = $recorrido['codigo_fabricante'];
+                $x++;
+            }
+        }
+            $y=0;
+        $capacidades = explode("$", $capacidad[1]);
+        foreach ($capacidades as $busqueda) {
+
+            $sql = "select * from producto where grupo='" . $categoria . "' and TB=" . $busqueda . $sql_extra;
+            $resultado = $this->conexion->query($sql);
+            while ($recorrido = mysqli_fetch_array($resultado)) {
+                //echo $item->descripcion."<br>";
+                $item[$y]->descripcion = $recorrido['descripcion'];
+                $item[$y]->precio = $recorrido['precio'];
+                $item[$y]->imagen = $recorrido['imagen'];
+                $item[$y]->codigo_fabricante = $recorrido['codigo_fabricante'];
+                if (!(in_array($item, $articulos->item[$y]))) {
+                $articulos->item[$x] = $item[$y];
+                $y++;
+                $x++;
+                }
+            }
+        }
+        //$articulos= array_unique($articulos->item);
+        echo json_encode($articulos);
+    }
+
+    public function verMemorias($categoria, $grupo) {
+        $sql = "select distinct(TB) from producto where not tb='' and grupo='" . $grupo . "'";
+        $resultado = $this->conexion->query($sql);
+        while ($corrida = mysqli_fetch_array($resultado)) {
+            echo $corrida['TB'] . "$";
+        }
+        echo "/";
+        $sql = "select distinct(GB) from producto where not gb='' and grupo='" . $grupo . "'";
+        $resultado = $this->conexion->query($sql);
+        while ($corrida = mysqli_fetch_array($resultado)) {
+            echo $corrida['GB'] . "$";
+        }
+    }
+
+    public function verNumeroMemoria($tipo, $busqueda, $grupo) {
+        error_reporting(0);
+
+        $sql = "select count(" . $tipo . ") from producto where " . $tipo . "=" . $busqueda . " and grupo='" . $grupo . "'";
+        $resultado = $this->conexion->query($sql);
+        $corrida = mysqli_fetch_array($resultado);
+        echo $corrida[0];
     }
 
 }

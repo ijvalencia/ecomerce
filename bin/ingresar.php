@@ -9,6 +9,9 @@ $Menu = $_GET['categoria'];
 if (isset($_GET['extra'])) {
     $Menu = "aux";
 }
+if ((isset($_GET['capacidadg'])) || (isset($_GET['capacidadt']))) {
+    $Menu = "GB_TB";
+}
 
 switch ($Menu) {
 // registro de para login
@@ -28,7 +31,7 @@ switch ($Menu) {
         break;
 
 
-    /* Parte hecha por Adrian */
+    /* SATANAS */
     case "envios":
         $conexion->getEnvios();
         break;
@@ -128,7 +131,7 @@ switch ($Menu) {
     case "getCarousel":
         $conexion->getCarousel($_GET['clave']);
         break;
-    /*     * ********************************* */
+    /***********/
     //parte del chuy
     case "ordenes":
           $agregardatos = $_POST["nombres"];
@@ -193,7 +196,7 @@ switch ($Menu) {
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
-    /*     * ************************ */
+    /**********/
     /* Anton */
     case "aux":
         $variable = $_GET['categoria'];
@@ -264,13 +267,51 @@ switch ($Menu) {
             $min = 1;
         }
         //echo $posicion."<br>".$marca."<br>".$envio."<br>".$min."<br>".$max."<br>";
-
         $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max, $orden);
         break;
 
     case "marcas":
         $grupo = $_GET['grupo'];
         $conexion->verMarcas($grupo);
+        break;
+
+    case "GB_TB":
+        $capacidad[0] = $_GET['capacidadg'];
+        $capacidad[1] = $_GET['capacidadt'];
+        $categoria = $_GET['categoria'];
+        $posicion = $_GET['extra'];
+        $marca = $_GET['marca'];
+        $envio = $_GET['envio'];
+        $min = $_GET['min'] + 1;
+        $max = $_GET['max'] + 1;
+        if (isset($_GET['orden']))
+            if ($_GET['orden'] == "undefined")
+                $orden = "normal";
+            else
+                $orden = $_GET['orden'];
+        else
+            $orden = "normal";
+
+        $conexion->verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden);
+        break;
+
+    case "memoria":
+        $categoria = $_GET['categoria'];
+        $grupo = $_GET['grupo'];
+        $conexion->verMemorias($categoria, $grupo);
+        break;
+
+    case "cantidad_memoria":
+        if(isset($_GET['TB']))
+        {
+            $TB=$_GET['TB'];
+            $conexion->verNumeroMemoria("TB", $TB, $_GET['grupo']);
+        }
+        if(isset($_GET['GB']))
+        {
+            $GB=$_GET['GB'];
+            $conexion->verNumeroMemoria("GB", $GB, $_GET['grupo']);
+        }
         break;
 }
 $conexion->cerrar();
