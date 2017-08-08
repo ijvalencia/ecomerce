@@ -68,6 +68,7 @@ img{
 ::selection { background: #ffae4b; color: #fff; text-shadow: none; }
 
 .btn {
+    display: block;
     background: #ffae4b;
     background-image: -webkit-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: -moz-linear-gradient(top, #ffae4b, #ffae4b);
@@ -75,6 +76,12 @@ img{
     background-image: -o-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: linear-gradient(to bottom, #ffae4b, #ffae4b);
     color: #ffffff;
+   -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   -moz-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   -o-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   -ms-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   /* -webkit-mask-image:-webkit-linear-gradient(top, rgba(3, 0, 0,.4), rgba(3, 0, 0,.4));*/
 }
 
 .btn:hover {
@@ -85,6 +92,41 @@ img{
     background-image: -o-linear-gradient(top, #ff9317, #ffae4b);
     background-image: linear-gradient(to bottom, #ff9317, #ffae4b);
     color: #ffffff;
+  /*  background-image: url('../imgweb/loginred.png');*/
+}
+
+.ocultarr{
+    display: block;
+    background: #ffae4b;
+    background-image: -webkit-linear-gradient(top, #ffae4b, #ffae4b);
+    background-image: -moz-linear-gradient(top, #ffae4b, #ffae4b);
+    background-image: -ms-linear-gradient(top, #ffae4b, #ffae4b);
+    background-image: -o-linear-gradient(top, #ffae4b, #ffae4b);
+    background-image: linear-gradient(to bottom, #ffae4b, #ffae4b);
+    color: #ffffff;
+   -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   -moz-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   -o-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   -ms-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+   /* -webkit-mask-image:-webkit-linear-gradient(top, rgba(3, 0, 0,.4), rgba(3, 0, 0,.4));*/
+}
+
+.ocultarr:hover{
+    display: none;
+    -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -moz-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -o-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -ms-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    background: #ff8400;
+    background-image: -webkit-linear-gradient(top, #ff9317, #ffae4b);
+    background-image: -moz-linear-gradient(top, #ff9317, #ffae4b);
+    background-image: -ms-linear-gradient(top, #ff9317, #ffae4b);
+    background-image: -o-linear-gradient(top, #ff9317, #ffae4b);
+    background-image: linear-gradient(to bottom, #ff9317, #ffae4b);
+    color: #ffffff;
+  /*  background-image: url('../imgweb/loginred.png');*/
 }
 
 .btn-link-1 {
@@ -957,7 +999,7 @@ label {
 }
 
 /*recortar el texto*/
-.cortar{
+/*.cortar{
     width:200px;
     height:20px;
     padding:20px;
@@ -972,55 +1014,118 @@ label {
     overflow:visible;
     cursor: pointer;
     height: 30%;
-}
+}*/
 /*foter*/
+
 #foter{
     background: #f2f2f2;    
 }
+/* chuy */
+.element,
+.outer-container {
+  width: 700px;
+  height: 150px;
+}
 
-/*segir lellendo mas */
-.cortarleer{
-    width:628px;
-    height:20px;
-    
-    text-overflow:ellipsis;
-    white-space:nowrap; 
-    overflow:hidden; 
+.outer-container {
+  /*border: 5px solid purple;*/
+  position: relative;
+  overflow: hidden;
 }
-.cortarleer:hover {
-    width: auto;
-    white-space: initial;
-    overflow:visible;
-    cursor: pointer;
-    height: 30%;
-    display: block;
+
+.inner-container {
+  position: absolute;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-right: 150px;
 }
+
+.inner-container::-webkit-scrollbar {
+  display: none;
+}
+
 /*play Store*/
 #cuatro{
     margin-top: -157px;
 }
 /*mac Store*/
-#cinco{
-    margin-top: -157px;
+#sinco{
+    margin-top: -166px;
 }
-/* SATANAS */
+
+/*fin chuy*/
+/*SATANAS*/
 .thumbnail {
-	text-align: center;
+    text-align: center;
     color:black;
     height: 320px;
     overflow: hidden;
 }
 .thumbnail img {
     width: 100%;
+    height: 50%;
     max-height: 230px;
     margin: 0px 0px 0px 0px;
 }
+
 .thumbnail small {
-	font-weight: 300;
+    font-weight: 300;
 }
+
 .thumbnail h4 {
-	color: darkorange;
+    color: darkorange;
 }
 .container_img_producto {
     height: 350px;
+}
+.inicio img {
+    height: 65%;
+}
+/* ERRROR 404 */
+#error404{display:block; width:100%; margin:100px 0; line-height:1.6em; text-align:center;}
+#error404 .hgroup{text-transform:uppercase;}
+#error404 .hgroup h1{margin-bottom:25px; font-size:80px;}
+#error404 .hgroup h1 span{display:inline-block; margin-left:5px; padding:2px;}
+#error404 .hgroup h1 span strong{display:inline-block; padding:0 20px 20px;}
+#error404 .hgroup h2{font-size:60px;}
+#error404 .hgroup h2 span{display:block; font-size:30px;}
+#error404 p{margin:25px 0 0 0; padding:0; font-size:16px;}
+#error404 p:first-child{margin-top:0;}
+
+.btn-subcategoria {
+    padding: 0px 10px;
+    display:inline-block;
+    font-size:14px;
+    vertical-align:middle;
+    -ms-touch-action:manipulation;
+    touch-action:manipulation;
+    cursor:pointer;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    background-image:none;
+    border:1px solid transparent;
+    border-radius:4px
+}
+
+#imageness3:hover{
+   display: block;
+   background: url('../imgweb/carritored.png');
+   background-repeat: no-repeat;
+   background-position: 10px;
+  }
+#imageness2:hover{
+   display: block;
+   background: url('../imgweb/loginred.png');
+   background-repeat: no-repeat;
+   background-position: 10px;
+}
+
+#imageness1:hover{
+   display: block;
+   background: url('../imgweb/enviored.png');
+   background-repeat: no-repeat;
+   background-position: 10px;
 }

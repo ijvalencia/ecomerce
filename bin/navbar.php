@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<!--<div class="loader"></div>-->
+<div class="loader"></div>
 <!-- Navbar dinamica-->
 <nav class="navbar navbar-static-top line-navbar-one" for="hide" id="content">
     <div class="container">
@@ -15,8 +15,7 @@
             <button class="lno-btn-toggle">
                 <span class="fa fa-bars"></span>
             </button>
-            <a class="navbar-brand" href="#">
-            </a>
+            <a class="navbar-brand" href="#"></a>
         </div>
         <div class="collapse navbar-collapse" id="line-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -78,51 +77,57 @@
                 </li> 
             </ul>
             <form id="form_busqueda" class="navbar-form navbar-left lnt-search-form" role="search" action="../../modulos/productos/detalles.php">
-				<input name="extra" value="1" class="hidden">
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-btn lnt-search-category">
-							<!-- Selector de categoria busqueda -->
-							<a class="btn btn-default dropdown-toggle selected-category-btn" data-toggle="dropdown" aria-expanded="false">
-								<span class="selected-category-text" id="categoria_elegida">Todo</span>
-								<span class="caret"></span>
-							</a>
-							<input name="supercategoria" id="entrada_categoria" class="hidden" value="Todo">
-							<!-- categorias barra busqueda-->
-							<ul class="dropdown-menu" role="menu" id="categorias_busqueda">
-								<li><a>Todo</a></li>
-								<!-- Aqui se insertan las categorias de busqueda-->
-							</ul>
-						</div>
-						<!--Entrada de busqueda -->
-						<input name="busqueda" id="entrada_busqueda" type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Buscar" minlength="3" maxlength="20">
-					</div>
-				</div>
-				<!-- boton de busqueda-->
-				<button type="submit" class="btn btn-search" id="btn_enviar"><span class="fa fa-search"></span></button>
-			</form>
+                <input name="extra" value="1" class="hidden">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-btn lnt-search-category">
+                            <!-- Selector de categoria busqueda -->
+                            <a class="btn btn-default dropdown-toggle selected-category-btn" data-toggle="dropdown" aria-expanded="false">
+                                <span class="selected-category-text" id="categoria_elegida">Todo</span>
+                                <span class="caret"></span>
+                            </a>
+                            <input name="supercategoria" id="entrada_categoria" class="hidden" value="Todo">
+                            <!-- categorias barra busqueda-->
+                            <ul class="dropdown-menu" role="menu" id="categorias_busqueda">
+                                <li><a>Todo</a></li>
+                                <!-- Aqui se insertan las categorias de busqueda-->
+                            </ul>
+                        </div>
+                        <!--Entrada de busqueda -->
+                        <input name="busqueda" id="entrada_busqueda" type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Buscar" minlength="1" maxlength="20">
+                    </div>
+                </div>
+                <!-- boton de busqueda-->
+                <button type="submit" class="btn btn-search" id="btn_enviar"><span class="fa fa-search"></span></button>
+            </form>
             <ul class="nav navbar-nav navbar-right lnt-shopping-cart">
                 <li class="dropdown">
                     <span id="nombre_usuario_nav"></span>
                     <div class="btn-group" role="group" aria-label="...">
-                        <a class="btn btn-default lnt-cart" href="../inicio/index.php">
-                            <img src="../../imgweb/envio.png">
+                        <a class="btn btn-default lnt-cart" href="../inicio/index.php" id="imageness1">
+                            <div class="ocultarr">
+                                <img src="../../imgweb/envio.png" width="26px" height="26px">
+                            </div>
                         </a>
                         <div class="btn-group" role="group">
-                            <a class="btn btn-default lnt-cart"  dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false"> 
-                                <img src="../../imgweb/login.png" width="20px" height="20px">
+                            <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" id="imageness2">
+                                <div class="ocultarr">
+                                    <img src="../../imgweb/login.png" width="28px" height="28px" style="-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,.4), rgba(0, 0, 0,.4))">
+                                </div>
                             </a>
                             <ul class="dropdown-menu" role="menu" id="menuloginid">
-                                <li><a href="../login/index.php"><img src="../../imgweb/login.png" width="20px" height="20px" >Iniciar sesion</a></li>
+                                <li><a href="../login/index.php"><img src="../../imgweb/login.png" width="25px" height="25px" >Iniciar sesion</a></li>
                                 <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><img src="../../imgweb/lapis.png" width="20px" height="20px" >Mis Perfil</a></li>
-                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/envio.png" width="20px" height="20px" >Mis Pedidos</a></li>
-                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="20px" height="20px" >Mis Ofertas</a></li>				
-                                <li class="ocultar"><a id="info" href="../orden/Orden.php"><img src="../../imgweb/cupon.png" width="20px" height="20px" >Mis Ordenes</a></li>
-                                <li><a href="../../bin/ingresar.php?categoria=cerrar"><img src="../../imgweb/login.png" width="20px" height="20px">Cerrar sesion</a></li>
+                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/envio.png" width="25px" height="25px" >Mis Pedidos</a></li>
+                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ofertas</a></li>
+                                <li class="ocultar"><a id="info" href="../orden/Orden.php"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ordenes</a></li>
+                                <li><a href="../../bin/ingresar.php?categoria=cerrar"><img src="../../imgweb/login.png" width="25px" height="25px">Cerrar sesion</a></li>
                             </ul>
                         </div>
-                        <a class="btn btn-default lnt-cart" href="../carrito/index.php">
-                            <img src="../../imgweb/carrito.png">
+                        <a class="btn btn-default lnt-cart" href="../carrito/index.php" id="imageness3">
+                            <div class="ocultarr">
+                                <img src="../../imgweb/carrito.png" width="28px" height="28px">
+                            </div>
                         </a>
                     </div>
                 </li>
@@ -133,5 +138,5 @@
 <!-- Barra inferior -->
 <script src="../../modulos/inicio/Usuario_menu.js"></script>
 <script src="../../modulos/usuario/usuarios.js"></script>
-
+<script src="navbar.js"></script>
 <!--<script src="../../modulos/detalles_producto/scripts.js"></script>-->

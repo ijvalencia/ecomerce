@@ -17,7 +17,7 @@ $(document).ready(function () {
             $('#form-mail').css({"border": "2px solid Gainsboro"});
             $('#form-pass').css({"border": "2px solid Gainsboro"});
 
-            if (bandera === false){
+            if(bandera === false){
                 if (correo.test(txtusuario)) {
                     $('#form-mail').css({"border": "2px solid Gainsboro"});
                 } else {
@@ -43,7 +43,7 @@ $(document).ready(function () {
                             "contra": txtcontra},
                         success: function (sessionmsj) {
                             if (sessionmsj === "") {
-                                alert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");                   
+                                jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");
                             } else { 
                                     history.back(); 
                             }
@@ -124,9 +124,9 @@ $(document).ready(function () {
                             data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir},
                             success: function (mns) {
                                 if (mns === 1) {
-                                    alert("LOS DATO REGISTRADO CON EXITO");
+                                    jAlert("LOS DATO REGISTRADO CON EXITO");
                                 } else if (mns === 0) {
-                                    alert("ERROR");
+                                    jAlert("ERROR");
                                 }
                             }
                         });
@@ -135,4 +135,5 @@ $(document).ready(function () {
             }
         }
     });
+    $('.loader').fadeOut("slow");
 });

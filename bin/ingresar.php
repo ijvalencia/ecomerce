@@ -79,12 +79,18 @@ switch ($Menu) {
         break;
     case "getArticulo":
         if (isset($_GET['codigo'])) {
-            $codigo = $_GET['codigo'];
-            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $codigo . "&tc=1&dc=1&dt=1";
-            $articulo = simplexml_load_file($filename);
-            echo json_encode($articulo);
+            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
+            $context = stream_context_create(array('http' => array('timeout' => 3)));
+            $data = file_get_contents($filename, false, $context);
+            if(!$data){
+                echo "{}";
+            } else {
+                $articulo = simplexml_load_string($data);
+                echo json_encode($articulo);
+            }
         }
         break;
+
     case "articulos":
         //$filename= ("http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%&grupo=%&clave=%&codigo=%".$producto."&tc=1&promos=1&porcentaje=0");
         //$filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%25&grupo=%25&clave=%25&codigo=WD5000AZLX&tc=1&promos=1&porcentaje=0";
@@ -112,18 +118,33 @@ switch ($Menu) {
     case "productosInicio":
         $conexion->productosInicio();
         break;
-    
-    	case "borrarCarrito":
-		$carrito = $_SESSION['carrito'];
-		array_splice($carrito, $_POST['articulo']);
-		$_SESSION['carrito'] = $carrito;
-		break;
-		
-	case "getCarousel":
-		$conexion->getCarousel($_GET['clave']);
-		break;
+
+    case "borrarCarrito":
+        $carrito = $_SESSION['carrito'];
+        array_splice($carrito, $_POST['articulo']);
+        $_SESSION['carrito'] = $carrito;
+        break;
+
+    case "getCarousel":
+        $conexion->getCarousel($_GET['clave']);
+        break;
     /*     * ********************************* */
     //parte del chuy
+    case "ordenes":
+          $agregardatos = $_POST["nombres"];
+
+        echo $clave[0];
+            /*$n1 = array($agregardatos);
+            foreach($recolec as $clave=>$agregardatos){
+                print_r($clave);
+                echo $recolec;
+                print_r($agregardatos);
+              //echo json_decode($agregardatos);
+             //print_r($agregardatos);
+          }
+           print_r($agregardatos);*/
+         break;
+
     case "usuariordendetalles":
         $id_usuariosdetalles = $_POST["usuario"];
         $conexion->mostrarordenesdetalles($id_usuariosdetalles);
@@ -137,7 +158,7 @@ switch ($Menu) {
     case "orden":
         $conexion->getOrdenes();
         break;
-    
+
     case "UpdateUsuario":
         $id = $_POST["id_usuario"];
         $nombre = $_POST["nombre"];
@@ -156,7 +177,7 @@ switch ($Menu) {
         echo $id;
         $conexion->getUsuario($id, $correo = null);
         break;
-    
+
     case "email":
         $correo = $_POST['correo'];
         $contra = $_POST['contra'];
@@ -172,7 +193,7 @@ switch ($Menu) {
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
-    /***************************/
+    /*     * ************************ */
     /* Anton */
     case "aux":
         $variable = $_GET['categoria'];
@@ -182,7 +203,15 @@ switch ($Menu) {
         $envio = $_GET['envio'] or die("undefined");
         $min = $_GET['min'] + 1 or die("undefined");
         $max = $_GET['max'] + 1 or die("undefined");
-        $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max);
+        if (isset($_GET['orden']))
+            if ($_GET['orden'] == "undefined")
+                $orden = "normal";
+            else
+                $orden = $_GET['orden'];
+        else
+            $orden = "normal";
+        //echo $variable, $posicion, $marca, $envio, $min, $max, $orden."<br>";
+        $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max, $orden);
         break;
 
     case "listadocantidad":
@@ -204,20 +233,28 @@ switch ($Menu) {
         }
 
         /* @var $_GET pe */
-        $min = (isset($_GET['min']) ? $_GET['min'] : 0) + 1 or die("undefined");
+        $min = (isset($_GET['minn']) ? $_GET['minn'] : 0) + 1 or die("undefined");
         if ($min == "") {
             $min = "undefined";
         }
 
-        $max = $_GET['maxn'] or die("undefined");
+        $max = (isset($_GET['maxn']) ? $_GET['maxn'] : 0) + 1 or die("undefined");
         if ($max == "") {
             $max = "undefined";
         }
 
+        if (isset($_GET['orden']))
+            if ($_GET['orden'] == "undefined")
+                $orden = "normal";
+            else
+                $orden = $_GET['orden'];
+        else
+            $orden = "normal";
+
         if ($min > 1) {
             $min--;
         }
-        if ($max < 1500) {
+        if ($max < 1) {
             $max = 250000;
         }
         if ($max == "undefined") {
@@ -228,7 +265,7 @@ switch ($Menu) {
         }
         //echo $posicion."<br>".$marca."<br>".$envio."<br>".$min."<br>".$max."<br>";
 
-        $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max);
+        $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max, $orden);
         break;
 
     case "marcas":

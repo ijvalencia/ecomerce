@@ -5,7 +5,6 @@ var extra = "marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined";
 
 $(document).ready(function() {
 });
-
 $.getJSON("../../bin/ingresar.php?categoria=getCategorias", function(respuesta) {
 	categorias = respuesta;
 	$('#supercategorias').empty();
@@ -41,8 +40,8 @@ function cargarLista(numero) {
 	$('#lista_subcat').empty(); 
 	$('#lista_subcat2').empty();
 	
-	var inicio = '<li><a href="#">';
-	var fin = "</a></li>";
+        var inicio = '<li><a class="btn-subcategoria" href="#">';
+        var fin = "</a></li>";
 	var id_append = '#lista_subcat';
 	for (var i = 0; i < categorias.length; i++)
 		if (categorias[i]["id_super"] == numero)

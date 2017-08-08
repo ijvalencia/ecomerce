@@ -1,0 +1,6 @@
+{               
+     "excluded-directories" : ["excluded-dir", "/tests-.*files/", "JAlert", "jqueryValidate", "Menu"],  
+     "excluded-files" : ["require.js", "jquery*.js", "/lib-1.[12].js/"],  
+     "max-file-count": "100",   
+     "max-file-size": "524288"  
+}

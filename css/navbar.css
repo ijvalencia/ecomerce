@@ -774,13 +774,12 @@ padding-bottom: 51px;
 .line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a:hover,
 .line-navbar-two .lnt-dropdown-mega-menu > .lnt-category > li > a:focus {
 /*  background-color: #ffae4b;*/
-  background: #ff8400;
-  background-image: -webkit-linear-gradient(right, red, #ffae4b);
-  background-image: -moz-linear-gradient(right, red, #ffae4b);
-  background-image: -ms-linear-gradient(right, red, #ffae4b);
-  background-image: -o-linear-gradient(right, red, #ffae4b);
-  background-image: linear-gradient(to left, red, #ffae4b);
-  color: #ffffff;
+  background: white;
+  background-image: -webkit-linear-gradient(right, white, darkorange);
+  background-image: -moz-linear-gradient(right, white, darkorange);
+  background-image: -ms-linear-gradient(right, white, darkorange);
+  background-image: -o-linear-gradient(right, white, darkorange);
+  background-image: linear-gradient(to left, white, darkorange);
 }
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory ul li a:hover {
   color: #ff8400;
@@ -798,5 +797,27 @@ padding-bottom: 51px;
   	margin: 10px 0px 0px -10px;
   	width: auto;
   	height: auto;
+}
+.nav .dropdown ul {
+  margin-top: 5px;
+ margin-bottom: 10px;
+  width: 200px;
+}
+.nav .dropdown .menu li {
+  width: 200px;
+}
+.nav .dropdown .menu li input,
+.nav .dropdown .menu li select {
+  width: 150px;
+  margin-left: -80px;
+}
+nav .dropdown .menu li input[type = "number"] {
+    width: 80px;
+}
+nav .dropdown .menu li input[type = "radio"] {
+  width: auto;
+}
+.separator {
+    padding: 40px;
 }
 /***********/

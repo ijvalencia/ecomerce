@@ -9,71 +9,71 @@
         ?>
     </head>
     <body>
-       
+
         <!--<div class="loader"></div>-->
-       <br>
-	<!-- Imagenes de inicio -->
+        <br>
+        <!-- Imagenes de inicio -->
         <div class="container">
             <div class="row">
-			<ttbody>			
-			</ttbody>
+                <ttbody>
+                </ttbody>
                 <!--<div class="imgg">
                 </div>-->
             </div>           
         </div>
         <br>
-    <div class="container">
-			<div class="jumbotron">
-				<p class="titulo">PRODUCTOS DESTACADOS</p>  
-				<div class="container text-center">
-					<div class="carousel slide" id="carousel_destacados">
-						<div class="carousel-inner" id="galeria_destacados">
-						</div>
-						<a data-slide="prev" href="#carousel_destacados" class="left carousel-control">‹</a>
-						<a data-slide="next" href="#carousel_destacados" class="right carousel-control">›</a>
-					</div>  
-				</div>
-			</div>
-		</div>
+        <div class="container">
+            <div class="jumbotron">
+                <p class="titulo">PRODUCTOS DESTACADOS</p>
+                <div class="container text-center">
+                    <div class="carousel slide" id="carousel_destacados">
+                        <div class="carousel-inner" id="galeria_destacados">
+                        </div>
+                        <a data-slide="prev" href="#carousel_destacados" class="left carousel-control">‹</a>
+                        <a data-slide="next" href="#carousel_destacados" class="right carousel-control">›</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Carousel televisores -->
-		<div class="container">
-			<div class="jumbotron">
-				<p class="titulo">LO MEJOR EN AUDIFONOS</p>  
-				<div class="container text-center">
-					<div class="carousel slide" id="carousel_audio">
-						<div class="carousel-inner" id="galeria_audio">
-						</div>
-						<a data-slide="prev" href="#carousel_audio" class="left carousel-control">‹</a>
-						<a data-slide="next" href="#carousel_audio" class="right carousel-control">›</a>
-					</div>  
-				</div>
-			</div>
-		</div>
-		<!-- Carousel computadoras-->
-		<div class="container">
-			<div class="jumbotron">
-				<p class="titulo">LO MEJOR EN COMPUTADORAS</p>  
-				<div class="container text-center">
-					<div class="carousel slide" id="carousel_computadoras">
-						<div class="carousel-inner" id="galeria_computadoras">
-						</div>
-						<a data-slide="prev" href="#carousel_computadoras" class="left carousel-control">‹</a>
-						<a data-slide="next" href="#carousel_computadoras" class="right carousel-control">›</a>
-					</div>  
-				</div>
-			</div>
-		</div>
+        <div class="container">
+            <div class="jumbotron">
+                <p class="titulo">LO MEJOR EN AUDIFONOS</p>
+                <div class="container text-center">
+                    <div class="carousel slide" id="carousel_audio">
+                        <div class="carousel-inner" id="galeria_audio">
+                        </div>
+                        <a data-slide="prev" href="#carousel_audio" class="left carousel-control">‹</a>
+                        <a data-slide="next" href="#carousel_audio" class="right carousel-control">›</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel computadoras-->
+        <div class="container">
+            <div class="jumbotron">
+                <p class="titulo">LO MEJOR EN COMPUTADORAS</p>
+                <div class="container text-center">
+                    <div class="carousel slide" id="carousel_computadoras">
+                        <div class="carousel-inner" id="galeria_computadoras">
+                        </div>
+                        <a data-slide="prev" href="#carousel_computadoras" class="left carousel-control">‹</a>
+                        <a data-slide="next" href="#carousel_computadoras" class="right carousel-control">›</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <br>
         <div class="container">
-        <div class="container-fluid bg-3 text-center">    
-            <div class="row">
-                <div class="col-md-1"><img src="../../IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="" style="color: black">PROTECCIÓN AL COMPRADOR</a></div>
-                <div class="col-md-1"><img src="../../IMG/pagos/oxxo.png" width="10%" height="10%" ><a href="" class="tipoletra">PAGA AL RECIBIR O EN OXXO</a></div>
-                <div class="col-md-1"><img src="../../IMG/pagos/atencion-cliente.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA POR TELÉFONO</a></div>
-                <!--<div class="col-md-1"><img src="../../IMG/envio.png" width="10%" height="10%" ><a href="" class="tipoletra">ENVIOS A TODO MÉXICO</a></div>-->
-                <div class="col-md-1"><img src="../../IMG/pagos/telefono.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA EN LA APP</a></div>
+            <div class="container-fluid bg-3 text-center">
+                <div class="row">
+                    <div class="col-md-1"><img src="../../IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="" style="color: black">PROTECCIÓN AL COMPRADOR</a></div>
+                    <div class="col-md-1"><img src="../../IMG/pagos/oxxo.png" width="10%" height="10%" ><a href="" class="tipoletra">PAGA AL RECIBIR O EN OXXO</a></div>
+                    <div class="col-md-1"><img src="../../IMG/pagos/atencion-cliente.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA POR TELÉFONO</a></div>
+                    <!--<div class="col-md-1"><img src="../../IMG/envio.png" width="10%" height="10%" ><a href="" class="tipoletra">ENVIOS A TODO MÉXICO</a></div>-->
+                    <div class="col-md-1"><img src="../../IMG/pagos/telefono.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA EN LA APP</a></div>
+                </div>
             </div>
-         </div>
         </div>
         <br>
         <div class="container">
@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <p class="titulo">BIENVENIDO A TEKNIOS MÉXICO</p><p class="fuente">
-                        TEKNIOS, Es la evolución de la conocida empresa SITE, empresa orgullosamente Mexicana con 18 años en el mercado, hemos tenido un crecimiento continuo, atendiendo las necesidades de las empresas locales y foráneas, contamos actualmente con clientes en toda la república Mexicana con una distribución más ágil esto gracias a los acuerdos que tenemos con los mayoristas.       </div>
+                            TEKNIOS, Es la evolución de la conocida empresa SITE, empresa orgullosamente Mexicana con 18 años en el mercado, hemos tenido un crecimiento continuo, atendiendo las necesidades de las empresas locales y foráneas, contamos actualmente con clientes en toda la república Mexicana con una distribución más ágil esto gracias a los acuerdos que tenemos con los mayoristas.       </div>
                     <div class="col-sm-4"> 
                         <p> </p>
                         <p class="fuente"> 
@@ -189,15 +189,15 @@
 <a class="claseizquierda">Computacion</a><br>
 <a class="claseizquierda">Calendario Dias Festivos</a><br>
 </div>-->
-                            
+
                             <div class="col-md-4">
                                 <p class="titulo"> Siguenos:</p>
                                 <a href="https://es-la.facebook.com/"><img id="uno" src="../../IMG/pagos/facebook.png" class="img-circle"></a>
                                 <a href="https://plus.google.com/about?hl=es"><img id="dos" src="../../IMG/pagos/google+.png"  class="img-circle"></a>
                                 <a href="https://www.linkedin.com/"><img src="../../IMG/pagos/in.png" class="img-circle" id="tres"></a>
-                                <a href=""><img src="../../IMG/pagos/google-play.png" class="" id="cuatro"></a>
-                                <a href=""><img src="../../IMG/pagos/app_Store.png" class="" id="sinco"></a>
-                                
+                                <a href=""><img src="../../IMG/pagos/google-play.png" id="cuatro"></a>
+                                <a href=""><img src="../../IMG/pagos/app_Store.png" id="sinco"></a>
+
                             </div>
                             <!--</div>-->
                         </div>
