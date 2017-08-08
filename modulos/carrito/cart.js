@@ -109,14 +109,14 @@ $(document).ready(function () {
                         alert(mns);
                         mns = JSON.parse(mns);
                             console.log(mns[0]["codigo_fabricante"],mns[0]["descripcion"]);
-
-                          // alert(mns[0]["codigo_fabricante"]);
+                            
+                          // alert(mns[0]["codigo_fabricante"]); 
                         $.ajax({
                             type: "POST",
                             url: "../../bin/ingresar.php?categoria=ordenes",
                             //  dataType:'json',
                             //data: {"nombres": datoss},
-
+                            
                             success: function (mns) {
                                 if (mns === 1) {
                                     jAlert("LOS DATO REGISTRADO CON EXITO");

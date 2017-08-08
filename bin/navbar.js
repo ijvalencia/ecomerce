@@ -1,7 +1,7 @@
 var bandera=false;
 
 $(document).ready(function (){
-
+    
     var txtbuscar = $("input:text[id='entrada_busqueda']").val();
    //Comprobamos la longitud de caracteres
 	if (txtbuscar.length>1){
@@ -9,7 +9,7 @@ $(document).ready(function (){
 	}
 	else {
 		alert('Minimo 2 caracteres');
-		return false;
+		return false;	
 	}
     if(txtbuscar===""){
         jAlert("INGRESE TEXTO");
@@ -19,5 +19,5 @@ $(document).ready(function (){
             $('#form-mail').css({"border": "2px solid Gainsboro"});
             $('#form-pass').css({"border": "2px solid Gainsboro"});
     }
-
+    
 });

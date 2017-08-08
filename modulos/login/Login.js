@@ -16,7 +16,7 @@ $(document).ready(function () {
         } else {
             $('#form-mail').css({"border": "2px solid Gainsboro"});
             $('#form-pass').css({"border": "2px solid Gainsboro"});
-
+            
             if(bandera === false){
                 if (correo.test(txtusuario)) {
                     $('#form-mail').css({"border": "2px solid Gainsboro"});
@@ -43,7 +43,7 @@ $(document).ready(function () {
                             "contra": txtcontra},
                         success: function (sessionmsj) {
                             if (sessionmsj === "") {
-                                jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");
+                                jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");                   
                             } else { 
                                     history.back(); 
                             }

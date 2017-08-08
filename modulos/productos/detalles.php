@@ -24,7 +24,7 @@
             </div>
             <div class="col-sm-2 sidenav">
                 <nav class="navbar navbar-default sidebar" role="navigation">
-                    <form id="formulario" action="filtramela.php?subcategoria=<?php echo $_GET['subcategoria']; ?>&busqueda=<?php echo $_GET['busqueda'] ?>&supercategoria=<?php echo $_GET['supercategoria'] ?>" method="post">
+                    <form id="formulario" action="filtramela.php?subcategoria=<?php echo $_GET['subcategoria']; ?>&busqueda=<?php echo $_GET['busqueda'] ?>&supercategoria=<?php echo $_GET['supercategoria'] ?>" method="post"> 
                         <div class="row"></div>
                         <div class="container-fluid">
                             Filtros de <a id="AquiGrupo" name="grupo"></a>
@@ -36,7 +36,7 @@
                                             <center>
                                                 <li>
                                                     <select id="marquitas" type="text" name="marcas">
-                                                        <option value="totaliti">Todas las marcas</option>
+                                                        <option value="totaliti">Todas las marcas</option> 
                                                     </select>
                                                 </li>
                                             </center>
@@ -48,13 +48,13 @@
                                             <center>
                                                 <li>
                                                     <select id="filtro_disponibilidad" type="text" name="envio">
-                                                        <option value="Indiferente">Indiferente</option>
-                                                        <option value="Local">Local</option>
+                                                        <option value="Indiferente">Indiferente</option> 
+                                                        <option value="Local">Local</option> 
                                                         <option value="Foraneo">Foraneo</option>
                                                     </select>
                                                 </li>
                                             </center>
-                                        </ul>
+                                        </ul>   
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_precio">Rango de precio:</a>
@@ -66,7 +66,7 @@
                                                     <input id="filtro_miExpectativa" value="250000" name="max" type="number" min="0" max="250000">
                                                 </li>
                                             </center>
-                                        </ul>
+                                        </ul>   
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_orden">Ordenar por:</a>
@@ -76,7 +76,7 @@
                                             <li><input type="radio" name="orden" value="menor"> Precio(menor a mayor)  </li>
                                             <li><input type="radio" name="orden" value="alfa"> A->Z  </li>
                                             <li><input type="radio" name="orden" value="invalfa"> Z->A  </li></center>
-                                        </ul>
+                                        </ul>   
                                     </li>
                                 </ul>
                             </div>
@@ -96,13 +96,13 @@
         <a id="catidad"></a>
         <a id="AquiGrupo"></a>
         <footer style="background: #f2f2f2">
-            <div class="row">
+            <div class="row">			
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="footer-border"></div>
                     <p>© 2017 México.   Todos los derechos reservados.
                         <br/>Precios son expresados en moneda nacional (MXN).
                         <br/>Los precios mostrados son unicamente referencias y pueden cambiar sin previo aviso.</p>
-                </div>
+                </div>			
             </div>
         </footer>
         <script type="text/javascript" src="producto.js"></script>

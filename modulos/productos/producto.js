@@ -48,7 +48,7 @@ $(document).ready(function() {
 	if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda)) {
         $('#AquiGrupo').append("busqueda");
 		$('.breadcrumb').append("<li><a></a>Busqueda</li>");
-
+        
 		busqueda = busqueda.trim().split(" ");
         var marcas = [];
 		$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
@@ -70,19 +70,19 @@ $(document).ready(function() {
                         marcas.push(producto.marca);
                     });
                     marcas.sort();
-                    for (var i = 0; i < marcas.length - 1; i++)
+                    for (var i = 0; i < marcas.length - 1; i++) 
                         if (marcas[i] == marcas[i+1]) {
                             marcas.splice(i+1, 1);
                             i--;
                         }
                     for (var i = 0; i < marcas.length; i++) {
                         $('#marquitas').append('<option value="'+marcas[i]+'">'+marcas[i]+"</option>");
-                    }
+                    } 
 					$('.loader').fadeOut("slow");
 				}
 			});
 		});
-
+        
         /* Agrega filtro a busqueda */
         $('#btn_filtramela').click(function(event) {
             event.preventDefault();
@@ -98,14 +98,14 @@ $(document).ready(function() {
             if ($('#filtro_disponibilidad').val() != "Indiferente") {
                 switch ($('#filtro_disponibilidad').val()) {
                     case "Local":
-                        for (var i = 0; i < productos_filtro.length; i++)
+                        for (var i = 0; i < productos_filtro.length; i++) 
                             if (productos_filtro[i].GDL == "0") {
                                 productos_filtro.splice(i, 1);
                                 i--;
                             }
                         break;
                     case "Foraneo":
-                        for (var i = 0; i < productos_filtro.length; i++)
+                        for (var i = 0; i < productos_filtro.length; i++) 
                             if (productos_filtro[i].CDMX == "0") {
                                 productos_filtro.splice(i, 1);
                                 i--;
@@ -116,7 +116,7 @@ $(document).ready(function() {
             if ($('#filtro_miSalario').val() != "0" || $('#filtro_miExpectativa').val() != "250000") {
                 var min = parseFloat($('#filtro_miSalario').val());
                 var max = parseFloat($('#filtro_miExpectativa').val());
-                for (var i = 0; i < productos_filtro.length; i++)
+                for (var i = 0; i < productos_filtro.length; i++) 
                     if (parseFloat(productos_filtro[i].precio) < min || parseFloat(productos_filtro[i].precio) > max) {
                         productos_filtro.splice(i, 1);
                         i--;
@@ -177,7 +177,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 		for(var x=0; x<respuesta.length-1;x++)
 			$('#marquitas').append("<option value='"+respuesta[x]+"'>"+respuesta[x]+"</option> ");
 	});
-	$.get("../../bin/ingresar.php?categoria=listadocantidad&cantidad="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&minn="+miSalario+"&maxn="+McPato+"&orden="+fascismo+"&grupo="+crayola,
+	$.get("../../bin/ingresar.php?categoria=listadocantidad&cantidad="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&minn="+miSalario+"&maxn="+McPato+"&orden="+fascismo+"&grupo="+crayola, 
 	function(cantidad) {
 		$('#catidad').append(cantidad);
 		$('#AquiGrupo').append(crayola);

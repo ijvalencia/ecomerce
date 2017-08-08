@@ -15,7 +15,7 @@
         <!-- Imagenes de inicio -->
         <div class="container">
             <div class="row">
-                <ttbody>
+                <ttbody>			
                 </ttbody>
                 <!--<div class="imgg">
                 </div>-->
@@ -24,48 +24,48 @@
         <br>
         <div class="container">
             <div class="jumbotron">
-                <p class="titulo">PRODUCTOS DESTACADOS</p>
+                <p class="titulo">PRODUCTOS DESTACADOS</p>  
                 <div class="container text-center">
                     <div class="carousel slide" id="carousel_destacados">
                         <div class="carousel-inner" id="galeria_destacados">
                         </div>
                         <a data-slide="prev" href="#carousel_destacados" class="left carousel-control">‹</a>
                         <a data-slide="next" href="#carousel_destacados" class="right carousel-control">›</a>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
         <!-- Carousel televisores -->
         <div class="container">
             <div class="jumbotron">
-                <p class="titulo">LO MEJOR EN AUDIFONOS</p>
+                <p class="titulo">LO MEJOR EN AUDIFONOS</p>  
                 <div class="container text-center">
                     <div class="carousel slide" id="carousel_audio">
                         <div class="carousel-inner" id="galeria_audio">
                         </div>
                         <a data-slide="prev" href="#carousel_audio" class="left carousel-control">‹</a>
                         <a data-slide="next" href="#carousel_audio" class="right carousel-control">›</a>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
         <!-- Carousel computadoras-->
         <div class="container">
             <div class="jumbotron">
-                <p class="titulo">LO MEJOR EN COMPUTADORAS</p>
+                <p class="titulo">LO MEJOR EN COMPUTADORAS</p>  
                 <div class="container text-center">
                     <div class="carousel slide" id="carousel_computadoras">
                         <div class="carousel-inner" id="galeria_computadoras">
                         </div>
                         <a data-slide="prev" href="#carousel_computadoras" class="left carousel-control">‹</a>
                         <a data-slide="next" href="#carousel_computadoras" class="right carousel-control">›</a>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
         <br>
         <div class="container">
-            <div class="container-fluid bg-3 text-center">
+            <div class="container-fluid bg-3 text-center">    
                 <div class="row">
                     <div class="col-md-1"><img src="../../IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="" style="color: black">PROTECCIÓN AL COMPRADOR</a></div>
                     <div class="col-md-1"><img src="../../IMG/pagos/oxxo.png" width="10%" height="10%" ><a href="" class="tipoletra">PAGA AL RECIBIR O EN OXXO</a></div>

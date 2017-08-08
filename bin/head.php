@@ -4,7 +4,7 @@
     <meta name="keywords" content="PALABRAS CLAVE DEL SITIO">
 <!-- Usar en una sola linea, no separar -->
     <script type="text/javascript" src="../../bin/JAlert/jquery-1.4.2.min.js"></script><script type="text/javascript" src="../../bin/JAlert/jquery.alerts.js"></script><script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!---------------------------------------->
+    <!---------------------------------------->    
 <!--Scripts -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="../../bin/footer.js"></script>
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../css/navbar.css" >
     <link rel="stylesheet" href="../../css/Menu_vertical.css">  
     <link href="../../bin/JAlert/jquery.alerts.css" rel="stylesheet" type="text/css"/>
-
+    
     <!-- envio de datos al post-->
  <!-- Borrar si no swe necesitan
     <script src="../../Js/Menu/jquery.highlight.js"></script>

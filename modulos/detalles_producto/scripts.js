@@ -93,7 +93,7 @@ $('#btn_comprar').click(function() {
 			if (resp !== "0"){
 				jAlert("Agregado al carrito");
 				window.location.href = "../../modulos/carrito/index.php";
-//				window.close();
+//				window.close();   
 			}
 			else{
 				jAlert("No se pudo agregar");

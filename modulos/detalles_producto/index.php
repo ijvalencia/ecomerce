@@ -17,9 +17,9 @@
 				<li><a href="link_marcas" id="nombre_marca"></a></li>
 				<li><span id="nombre_producto"></span></li>
 			</ol>
-
+		  
             <!-- Imagen -->
-            <div class="col-md-8">
+            <div class="col-md-8">    
                 <div class="modalZoom">
                     <img id="img_producto">
                 </div>

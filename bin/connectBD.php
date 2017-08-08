@@ -23,7 +23,7 @@ class BD {
         if (mysqli_connect_errno($this->conexion)) {
             echo "Error al conectar con MySQL: " . mysqli_connect_error();
         }
-
+        
         /* Conectar a BD Local */
         /*$this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
         if (mysqli_connect_errno($this->conexion)) {
@@ -139,7 +139,7 @@ class BD {
         STR_TO_DATE('" . $fecha . "', '%d/%m/%Y %H:%i:%s'),'" .
                 $total . "','" . $metodo_pago . "'," . $estado . ")";
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-
+        
         $sql = "SELECT id_ordenes FROM ordens
         WHERE id_usuario = '" . $usuario . "' AND fecha = STR_TO_DATE('" . $fecha . "', '%d/%m/%Y %H:%i:%s') AND estado = " . $estado;
         foreach ($this->conexion->query($sql) as $id) {
@@ -549,7 +549,7 @@ class BD {
             echo $row['tipo'] . "||";
         }
     }
-
+    
     /* Anton */
 
     public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax, $orden) {
@@ -560,26 +560,26 @@ class BD {
             case "normal":
                 $ordenamiento="";
                 break;
-
+            
             case "mayor":
                 $ordenamiento="order by precio desc";
                 break;
-
+            
             case "menor":
                 $ordenamiento="order by precio asc";
                 break;
-
+            
             case "alfa":
                 $ordenamiento="order by descripcion asc";
                 break;
-
+            
             case "invalfa":
                 $ordenamiento="order by descripcion desc";
                 break;
-
-
-
-
+            
+            
+            
+            
         }
 
         if (!($marca == "undefined" || $envio == "undefined" )) {

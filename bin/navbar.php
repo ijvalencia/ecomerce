@@ -110,7 +110,7 @@
                             </div>
                         </a>
                         <div class="btn-group" role="group">
-                            <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" id="imageness2">
+                            <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" id="imageness2"> 
                                 <div class="ocultarr">
                                     <img src="../../imgweb/login.png" width="28px" height="28px" style="-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,.4), rgba(0, 0, 0,.4))">
                                 </div>
@@ -119,7 +119,7 @@
                                 <li><a href="../login/index.php"><img src="../../imgweb/login.png" width="25px" height="25px" >Iniciar sesion</a></li>
                                 <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><img src="../../imgweb/lapis.png" width="20px" height="20px" >Mis Perfil</a></li>
                                 <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/envio.png" width="25px" height="25px" >Mis Pedidos</a></li>
-                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ofertas</a></li>
+                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ofertas</a></li>				
                                 <li class="ocultar"><a id="info" href="../orden/Orden.php"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ordenes</a></li>
                                 <li><a href="../../bin/ingresar.php?categoria=cerrar"><img src="../../imgweb/login.png" width="25px" height="25px">Cerrar sesion</a></li>
                             </ul>

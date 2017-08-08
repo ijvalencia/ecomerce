@@ -90,7 +90,7 @@ switch ($Menu) {
             }
         }
         break;
-
+    
     case "articulos":
         //$filename= ("http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%&grupo=%&clave=%&codigo=%".$producto."&tc=1&promos=1&porcentaje=0");
         //$filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%25&grupo=%25&clave=%25&codigo=WD5000AZLX&tc=1&promos=1&porcentaje=0";
@@ -132,7 +132,7 @@ switch ($Menu) {
     //parte del chuy
     case "ordenes":
           $agregardatos = $_POST["nombres"];
-
+        
         echo $clave[0];
             /*$n1 = array($agregardatos);
             foreach($recolec as $clave=>$agregardatos){
