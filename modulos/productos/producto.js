@@ -46,7 +46,7 @@ $(document).ready(function() {
                     mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden, "");
         }
     } else
-		jAlert("Pagina no encontrada.");
+        $('.loader').fadeOut("slow");
 	
 	/* SATANAS */
 	var supercategoria = $('#supercategoria').attr("value");
@@ -188,21 +188,18 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
     //filtro de memoria
     //alert("../../bin/ingresar.php?categoria=memoria&grupo=" + crayola);
     $.get("../../bin/ingresar.php?categoria=memoria&grupo=" + crayola, function (respuesta)
-    {
+          {
         respuesta = respuesta.split("/");
         var TB = respuesta[0].split("$");
         var GB = respuesta[1].split("$");
         console.log(TB, GB);
         //alert("../../bin/ingresar.php?categoria=cantidad_memoria&TB=" + TB[x] + "&grupo=" + crayola);
-
-
         var texto2 = "";
         var contenido = "";
         if (!(GB[0] == "")) {
             //for (var x = 0; x < TB.length - 1; x++)
             var x = 0;
             var salir = false;
-
             while (!salir) {
                 if (GB[x] !== "")
                     $.ajax({
@@ -210,7 +207,8 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                         async: false,
                         success: function (respuesta)
                         {
-                            contenido += '<li><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '"> ' + GB[x] + ' GB  <u>(' + respuesta + ')</u>' + '</li>';
+                            var texto = GB[x] + " GB <u>(" + respuesta + ")</u>             ";
+                            contenido += '<li><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '">' + texto + '</li>';
                             x++;
                             if (x === GB.length - 1) {
                                 salir = true;
@@ -219,38 +217,29 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 for (var aux = 0; aux <= 100; aux++)
                     aux = aux;
             }
-
         }
         var contenido1 = "";
-
         if (!(TB[0] == "")) {
             //for (var x = 0; x < TB.length - 1; x++)
-
             var x = 0;
             var salir = false;
             while (!salir) {
                 $.ajax({
                     url:"../../bin/ingresar.php?categoria=cantidad_memoria&TB=" + TB[x] + "&grupo=" + crayola,
                     async: false,
-                    success: function (respuesta)
-                {
-                    contenido1 += '<li><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '"> ' + TB[x] + ' TB  <u>(' + respuesta + ')</u>' + '</li>';
-
-
-                    x++;
-                    if (x === TB.length - 1) {
-                        texto2 += contenido1 + contenido;
-                        var texto1 = '\n\
-                <a class="dropdown-toggle" id="btn_memoria">Capacidad de memoria:</a>\n\
-                <ul class="menu hidden" role="menu" id="sub_memoria"><center>';
-                        var texto3 = '</center></ul> ';
-                        var imprimir = texto1 + texto2 + texto3;
-
-                        $('#memorama').append(imprimir);
-                        salir = true;
-                    }
-                }});
-
+                    success: function (respuesta) {
+                        var texto = TB[x] + " TB <u>(" + respuesta + ")</u>             ";
+                        contenido1 += '<li><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '">' + texto + '</li>';
+                        x++;
+                        if (x === TB.length - 1) {
+                            texto2 += contenido1 + contenido;
+                            var texto1 = '<a class="dropdown-toggle" id="btn_memoria">Capacidad de memoria:</a><ul class="menu hidden container" role="menu" id="sub_memoria"><center>';
+                            var texto3 = '</center></ul> ';
+                            var imprimir = texto1 + texto2 + texto3;
+                            $('#memorama').append(imprimir);
+                            salir = true;
+                        }
+                    }});
             }
             $.ajax({
                 url: "../../modulos/productos/sidebar.js",
@@ -266,17 +255,14 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 }
             });
     });
-
-
-
     //paginacion
     if (vino == "")
         $.get("../../bin/ingresar.php?categoria=listadocantidad&cantidad=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&minn=" + miSalario + "&maxn=" + McPato + "&orden=" + fascismo + "&grupo=" + crayola,
-                function (cantidad) {
-                    $('#catidad').append(cantidad);
-                });
+              function (cantidad) {
+            $('#catidad').append(cantidad);
+        });
     //productos
-    alert("../../bin/ingresar.php?extra=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&min=" + miSalario + "&max=" + McPato + "&orden=" + fascismo + "&categoria=" + crayola + vino);
+    //    alert("../../bin/ingresar.php?extra=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&min=" + miSalario + "&max=" + McPato + "&orden=" + fascismo + "&categoria=" + crayola + vino);
     $.ajax({
         type: "POST",
         url: "../../bin/ingresar.php?extra=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&min=" + miSalario + "&max=" + McPato + "&orden=" + fascismo + "&categoria=" + crayola + vino,
@@ -284,10 +270,19 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
         success: function (articulo) {
             //console.log(articulo);
             //alert("../../bin/ingresar.php?extra="+plastilina+"&marca="+marcador+"&envio="+avionpapel+"&min="+miSalario+"&max="+McPato+"&orden="+fascismo+"&categoria="+crayola+vino);
-            var dato = JSON.parse(articulo);
+            try {
+                var dato = JSON.parse(articulo);
+            } catch (err) {
+                $('.loader').fadeOut("slow");
+                return;
+            }
             //console.log(dato);
             //alert(dato.item.length);
             var imprimemela = "";
+            if (dato == null) {
+                $('.loader').fadeOut("slow");
+                return;
+            }
             for (var y = 0; y < dato.item.length; y++)
             {
                 tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=' + crayola + '&producto=compa" class="thumbnail  container_img_producto" id=sombreado><img  src="imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto...</small></p><h4>precio<br>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
@@ -312,11 +307,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                     imprimemela = "";
                 }
             }
-            ;
-
             $('.loader').fadeOut("slow");
-
         }
     });
-
 }
