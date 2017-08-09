@@ -102,17 +102,20 @@
             <div class="container-fluid bg-3 text-center">    
                 <div class="row">
                     <div class="col-sm-4">
-                        <p>Anuncios</p>
-                        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                        <!-- Cambiar nombres y poner ink a categoria -->
+                        <a href=""><h4>Smartphones</h4>
+                            <img src="../../IMG/celular.gif" class="img-responsive" style="width:100%" alt="Image">
+                        </a>
                     </div>
                     <div class="col-sm-4"> 
-                        <p>Anuncios</p>
-                        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                        <a href=""><h4>Laptops</h4>
+                            <img src="../../IMG/laptop.gif" class="img-responsive" style="width:100%" alt="Image">
+                        </a>
                     </div>
                     <div class="col-sm-4">
-                        <p>Anuncios</p>
-
-                        <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                        <a href=""><h4>Videojuegos</h4>
+                            <img src="../../IMG/control.gif" class="img-responsive" style="width:100%" alt="Image">
+                        </a>
                     </div>
                 </div>
             </div>
