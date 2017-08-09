@@ -301,7 +301,9 @@ padding-bottom: 51px;
   margin-left: -98PX;
 }
 .line-navbar-two .nav > li > .dropdown-menu {
-  margin-top: 16px;
+  margin-top: 10px;
+    /* Posicion menu desplegable */
+    margin-left: -50px;
 }
 @media (min-width: 768px) {
   .line-navbar-two .nav.navbar-right .dropdown-menu:before {
@@ -748,7 +750,7 @@ padding-bottom: 51px;
 }
 .line-navbar-two .lnt-dropdown-mega-menu > .lnt-category {
   width: 270px;
-  border-right: 1px solid #eeeeee;
+  border-right: 0px solid #eeeeee;
   float: left;
 }
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap {
@@ -798,6 +800,13 @@ padding-bottom: 51px;
   	width: auto;
   	height: auto;
 }
+.line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategory-img2 :empty {
+    position: absolute;
+  	display: block;
+  	margin: 250px 0px 0px -10px;
+  	width: auto;
+  	height: auto;
+}
 .nav .dropdown ul {
   margin-top: 5px;
  margin-bottom: 10px; 
@@ -818,9 +827,14 @@ nav .dropdown .menu li input[type = "radio"] {
   width: auto;
 }
 nav .dropdown .menu li input[type = "checkbox"] {
-    width: auto;
+    position: absolute;
     display: block;
-    margin: 5px 100px -23px 0px;
+    width: 30px;
+    height: auto;
+    margin: 10px 0px 0px 30px;
+}
+nav .dropdown .menu li input span {
+    margin: 0px 0px 0px 0px;
 }
 .separator {
     padding: 40px;

@@ -65,8 +65,13 @@
                                         </ul>
                                     </div>
                                     <div class="lnt-subcategory-img col-md-5 col-sm-5">
+                                        <a id="link_banner" href="">
+                                            <img id="img_navbar" src="">
+                                        </a>
+                                    </div>
+                                    <div class="lnt-subcategory-img2 col-md-5 col-sm-5">
                                         <a href="../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=PORTATILES">
-                                            <img id="img_navbar" src="../../IMG/navbar/banner01.jpg">
+                                            <img id="img_navbar_2" src="">
                                         </a>
                                     </div>
                                 </div>

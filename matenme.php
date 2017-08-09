@@ -116,6 +116,22 @@ foreach($con->query($sql_borradas) as $b) {
 }
 /***********/
 
+/* JODER A MOLINA */
+/*$subjects = ["Molina","Molonga","Molinator","Molinillo","Molomaster","Molinazo","Molimoli",""];
+$Body = "You have a message from: ";
+$Body .= $name;
+$Body .= "\n";
+$Body .= "\n";
+$Body .= $message;
+
+$sent = mail($emailTo, $subject, $Body);
+
+if ($sent){
+  echo 'sent';
+}*/
+
+/******************/
+
 echo "<br>acabooooo :D";
 
 mysqli_close($con);
