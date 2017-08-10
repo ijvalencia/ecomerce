@@ -54,7 +54,7 @@ $(document).ready(function() {
 	if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda)) {
         $('#AquiGrupo').append("busqueda");
 		$('.breadcrumb').append("<li><a></a>Busqueda</li>");
-        
+        $('#memorama').hide();
 		busqueda = busqueda.trim().split(" ");
         var marcas = [];
 		$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
@@ -147,6 +147,12 @@ $(document).ready(function() {
             }
             cargarBusqueda(productos_filtro);
         });
+        $.ajax({
+            url: "../../modulos/productos/sidebar.js",
+            dataType: "script",
+            success: function () {
+            }
+        });
 	}
 //	$('.breadcrumb').append("<li>"+$('#subcategoria').attr("value")+"</li>");
 	/***********/
@@ -208,7 +214,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                         success: function (respuesta)
                         {
                             var texto = GB[x] + " GB <u>(" + respuesta + ")</u>             ";
-                            contenido += '<li><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '">' + texto + '</li>';
+                            contenido += '<li><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '"><span>' + texto + '</span></li>';
                             x++;
                             if (x === GB.length - 1) {
                                 salir = true;
@@ -229,12 +235,12 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                     async: false,
                     success: function (respuesta) {
                         var texto = TB[x] + " TB <u>(" + respuesta + ")</u>             ";
-                        contenido1 += '<li><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '">' + texto + '</li>';
+                        contenido1 += '<li><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '"><span>' + texto + '</span></li>';
                         x++;
                         if (x === TB.length - 1) {
                             texto2 += contenido1 + contenido;
-                            var texto1 = '<a class="dropdown-toggle" id="btn_memoria">Capacidad de memoria:</a><ul class="menu hidden container" role="menu" id="sub_memoria"><center>';
-                            var texto3 = '</center></ul> ';
+                            var texto1 = '<a class="dropdown-toggle" id="btn_memoria">Capacidad de memoria:</a><ul class="menu hidden" role="menu" id="sub_memoria">';
+                            var texto3 = '</ul> ';
                             var imprimir = texto1 + texto2 + texto3;
                             $('#memorama').append(imprimir);
                             salir = true;

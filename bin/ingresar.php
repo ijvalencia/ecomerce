@@ -85,7 +85,7 @@ switch ($Menu) {
             $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
-            if(!$data){
+            if (!$data) {
                 echo "{}";
             } else {
                 $articulo = simplexml_load_string($data);
@@ -93,7 +93,7 @@ switch ($Menu) {
             }
         }
         break;
-    
+
     case "articulos":
         //$filename= ("http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%&grupo=%&clave=%&codigo=%".$producto."&tc=1&promos=1&porcentaje=0");
         //$filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%25&grupo=%25&clave=%25&codigo=WD5000AZLX&tc=1&promos=1&porcentaje=0";
@@ -131,22 +131,30 @@ switch ($Menu) {
     case "getCarousel":
         $conexion->getCarousel($_GET['clave']);
         break;
-    /***********/
+    /*     * ******** */
     //parte del chuy
-    case "ordenes":
-          $agregardatos = $_POST["nombres"];
+      case "direccioness":   
+         $idusuario = $_POST['idusuarios'];
+         $conexion->getdireccionesusuario($idusuario);
+      break;
+     /*
+      case "productosordenes":  
+        $id_orden = $_POST['id_orden'];   
+        $conexion->agregarProductosOrden($id_orden, $codigoF, $cantidad);  
+       break;*/
+   
+      case "agregarordenes":
+        $usuario = $_POST['idusuario'];
+        $direccion = $_POST['direccion'];
+        $envio = $_POST['idenvio'];
+        $total = $_POST['subtotal'];
+        $metodo_pago = $_POST['metodo_pago'];
+        $codigoF  = $_POST['codigoF'];
+        $cantidad = $_POST['cantidad'];
+        //echo json_encode('50');
+        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago,1,$codigoF,$cantidad);
         
-        echo $clave[0];
-            /*$n1 = array($agregardatos);
-            foreach($recolec as $clave=>$agregardatos){
-                print_r($clave);
-                echo $recolec;
-                print_r($agregardatos);
-              //echo json_decode($agregardatos);
-             //print_r($agregardatos);
-          }
-           print_r($agregardatos);*/
-         break;
+        break;
 
     case "usuariordendetalles":
         $id_usuariosdetalles = $_POST["usuario"];
@@ -196,7 +204,7 @@ switch ($Menu) {
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
-    /**********/
+    /*     * ******* */
     /* Anton */
     case "aux":
         $variable = $_GET['categoria'];
@@ -302,14 +310,12 @@ switch ($Menu) {
         break;
 
     case "cantidad_memoria":
-        if(isset($_GET['TB']))
-        {
-            $TB=$_GET['TB'];
+        if (isset($_GET['TB'])) {
+            $TB = $_GET['TB'];
             $conexion->verNumeroMemoria("TB", $TB, $_GET['grupo']);
         }
-        if(isset($_GET['GB']))
-        {
-            $GB=$_GET['GB'];
+        if (isset($_GET['GB'])) {
+            $GB = $_GET['GB'];
             $conexion->verNumeroMemoria("GB", $GB, $_GET['grupo']);
         }
         break;

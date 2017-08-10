@@ -4,7 +4,21 @@ var imagenes = [];
 var extra = "marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined";
 
 $(document).ready(function() {
+    $('.lnt-cart').mouseenter(function() {
+        var link_img = $(this).find('img').attr("src");
+        link_img = link_img.indexOf("carrito.") ? link_img.replace("carrito.", "carritored.") : link_img ;
+        link_img = link_img.indexOf("login.") ? link_img.replace("login.", "loginred.") : link_img ;
+        link_img = link_img.indexOf("envio.") ? link_img.replace("envio.", "enviored.") : link_img ;
+        $(this).find('img').attr("src", link_img);
+    }).mouseleave(function() {
+        var link_img = $(this).find('img').attr("src");
+        link_img = link_img.indexOf("carritored.") ? link_img.replace("carritored.", "carrito.") : link_img ;
+        link_img = link_img.indexOf("loginred.") ? link_img.replace("loginred.", "login.") : link_img ;
+        link_img = link_img.indexOf("enviored.") ? link_img.replace("enviored.", "envio.") : link_img ;
+        $(this).find('img').attr("src", link_img);
+    });
 });
+
 $.getJSON("../../bin/ingresar.php?categoria=getCategorias", function(respuesta) {
 	categorias = respuesta;
 	$('#supercategorias').empty();
@@ -40,19 +54,25 @@ function cargarLista(numero) {
 	$('#lista_subcat').empty(); 
 	$('#lista_subcat2').empty();
 	
-        var inicio = '<li><a class="btn-subcategoria" href="#">';
-        var fin = "</a></li>";
+    var inicio = '<li><a class="btn-subcategoria" href="#">';
+    var fin = "</a></li>";
 	var id_append = '#lista_subcat';
 	for (var i = 0; i < categorias.length; i++)
 		if (categorias[i]["id_super"] == numero)
 			numero = categorias[i]["nombre"];
 //	console.log("categoria: " + numero);
+    $('#img_navbar').attr("src", "../../IMG/navbar/banner_" + numero.replace("/", "_") + ".jpg");
+    if (numero == "Equipo de computo")
+        $('#img_navbar_2').attr("src", "../../IMG/laptop.gif");
+     else
+        $('#img_navbar_2').attr("src", "../../IMG/navbar/banner_laptops.jpg");
 	$.each(subcategorias, function(i, subcat) {
 		if (subcat[0]["id_supercategoria"] == numero) {
+            $('#link_banner').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=" + subcat[0]["id_categoria"]);
 			$.each(subcat, function(j, subs) {
 //				console.log(subs);
 				var link = inicio;
-				if(j >= (subcat.length / 2))
+				if(j > (subcat.length / 2))
 					id_append = '#lista_subcat2';
 				link = link.replace("#", "../../modulos/productos/detalles.php?extra=1&"+extra+"&subcategoria="+subs["id_categoria"]);
 				$(id_append).append(link + subs["id_categoria"] + fin);

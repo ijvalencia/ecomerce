@@ -19,5 +19,5 @@ $(document).ready(function (){
             $('#form-mail').css({"border": "2px solid Gainsboro"});
             $('#form-pass').css({"border": "2px solid Gainsboro"});
     }
-    
 });
+

@@ -1,2 +1,5 @@
-/nbproject/
+/nbproject/*
 /matenme.php
+/*.swp
+/*.swo
+/*.swn
