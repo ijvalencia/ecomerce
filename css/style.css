@@ -1021,28 +1021,37 @@ label {
     background: #f2f2f2;    
 }
 /* chuy */
-.element,
-.outer-container {
-  width: 700px;
-  height: 150px;
+.inner-container{
+    margin:20px;
+    height:150px;
+    width:92%;
+    overflow:auto;
+    padding:10px;  
 }
 
-.outer-container {
-  /*border: 5px solid purple;*/
-  position: relative;
-  overflow: hidden;
+.inner-container::-webkit-scrollbar-track-piece
+{
+    background:transparent;
 }
-
-.inner-container {
-  position: absolute;
-  left: 0;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding-right: 150px;
-}
-
 .inner-container::-webkit-scrollbar {
-  display: none;
+	width: 0;
+	background: rgba(255,255,255,1);
+	}
+
+.inner-container::-webkit-scrollbar-button {
+	height: 0;
+	width: 0;
+        
+	}
+
+.inner-container::-webkit-scrollbar-thumb {
+	background:transparent;
+        background-color: rgba(255,255,255,1);
+	}
+        
+.inner-container::-webkit-scrollbar-track {
+	background:transparent;
+	box-shadow: none;
 }
 
 /*play Store*/
@@ -1082,7 +1091,7 @@ label {
 .inicio img {
     height: 65%;
 }
-/* ERRROR 404 */
+/* ERROR 404 */
 #error404{display:block; width:100%; margin:100px 0; line-height:1.6em; text-align:center;}
 #error404 .hgroup{text-transform:uppercase;}
 #error404 .hgroup h1{margin-bottom:25px; font-size:80px;}
@@ -1109,23 +1118,10 @@ label {
     border:1px solid transparent;
     border-radius:4px
 }
-
-#imageness3:hover{
-   display: block; 
-   background: url('../imgweb/carritored.png');
-   background-repeat: no-repeat;
-   background-position: 10px;
-  }
-#imageness2:hover{
-   display: block; 
-   background: url('../imgweb/loginred.png');
-   background-repeat: no-repeat;
-   background-position: 10px;
+.background_icon_navbar {
+    width: 55px;
+    height: 50px;
 }
-
-#imageness1:hover{
-   display: block; 
-   background: url('../imgweb/enviored.png');
-   background-repeat: no-repeat;
-   background-position: 10px;
+.lnt-cart :hover {
+    background-color: white;
 }

@@ -11,25 +11,27 @@ $(document).ready(function(){
         apellido = field[1];
         number = field[2];
         //alert(number);
-         
     		$.ajax({
                 type: "POST",
 			url: "../../bin/ingresar.php?categoria=usuarioorden",              
+                        datajson: "json",
 			data:{"usuario":number},
                         success: function(sessionmsj){
-                            
-                           // alert(sessionmsj);
+                            alert(sessionmsj);
+                            console.log(sessionmsj);
+                            for (var i=0 ; i<10 ;i++){
                             sessionmsj = JSON.parse(sessionmsj);
-                            console.log(sessionmsj[0]["nombre"]);
-                            console.log(sessionmsj[0]["apellidos"]);
-                            $("#nombre").html(sessionmsj[0]["nombre"]+" "+sessionmsj[0]["apellidos"]);
-                            $("#cantidad").html(sessionmsj[0]["cantidad"]);
-                            $("#descripcion").html("Descrpicion del producto es:"+sessionmsj[0]["descripcion"]);
-                            $("#precio").html("$ "+sessionmsj[0]["precio"]+" ºº");
+                            console.log(sessionmsj[i]["nombre"]);
+                            console.log(sessionmsj[i]["apellidos"]);
+                            $("#nombre").html(sessionmsj[i]["nombre"]+"-"+sessionmsj[i]["apellidos"]);
+                            $("#cantidad").html(sessionmsj[i]["cantidad"]);
+                            $("#descripcion").html("Descrpicion del producto es:"+sessionmsj[i]["descripcion"]);
+                            $("#precio").html("$ "+sessionmsj[i]["precio"]+" ºº");
                             //$("#imagen").html(sessionmsj[0]["imagen"]);
-                            $("#imagen").attr("src",sessionmsj[0]['imagen']);
+                           $("#imagen").attr("src",sessionmsj[i]['imagen']);
+                       }
                     }
-	     });            
+	      });            
 	 });
         /*
    $.getJSON("../../bin/ingresar.php?categoria=orden", function(respuesta) {

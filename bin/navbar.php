@@ -16,10 +16,6 @@
                 <span class="fa fa-bars"></span>
             </button>
             <a class="navbar-brand" href="#"></a>
-        </div>
-        <div class="collapse navbar-collapse" id="line-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#"></a></li>
                 <li><a href="#"></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>
@@ -109,15 +105,15 @@
                 <li class="dropdown">
                     <span id="nombre_usuario_nav"></span>
                     <div class="btn-group" role="group" aria-label="...">
-                        <a class="btn btn-default lnt-cart" href="../inicio/index.php" id="imageness1">
-                            <div class="ocultarr">
-                                <img src="../../imgweb/envio.png" width="26px" height="26px">
+                        <a class="btn btn-default lnt-cart" href="../inicio/index.php">
+                            <div class="background_icon_navbar">
+                                <img id="navbar_icon_envio" src="../../imgweb/envio.png" width="28px" height="28px">
                             </div>
                         </a>
                         <div class="btn-group" role="group">
-                            <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" id="imageness2"> 
-                                <div class="ocultarr">
-                                    <img src="../../imgweb/login.png" width="28px" height="28px" style="-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,.4), rgba(0, 0, 0,.4))">
+                            <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" > 
+                                <div class="background_icon_navbar">
+                                    <img id="navbar_icon_login" src="../../imgweb/login.png" width="28px" height="28px" style="-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,.4), rgba(0, 0, 0,.4))">
                                 </div>
                             </a>
                             <ul class="dropdown-menu" role="menu" id="menuloginid">
@@ -129,8 +125,8 @@
                                 <li><a href="../../bin/ingresar.php?categoria=cerrar"><img src="../../imgweb/login.png" width="25px" height="25px">Cerrar sesion</a></li>
                             </ul>
                         </div>
-                        <a class="btn btn-default lnt-cart" href="../carrito/index.php" id="imageness3">
-                            <div class="ocultarr">
+                        <a id="navbar_icon_carrito" class="btn btn-default lnt-cart" href="../carrito/index.php">
+                            <div class="background_icon_navbar">
                                 <img src="../../imgweb/carrito.png" width="28px" height="28px">
                             </div>
                         </a>

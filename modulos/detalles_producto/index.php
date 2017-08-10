@@ -53,12 +53,8 @@
 		<div class="row">
 			<div class="col-md-6 col-lg-8">
 				<h2>Detalle del Producto</h2>
-                                  <div class="element">
-                                     <div class="outer-container">
-                                        <div class="inner-container">
+                                  <div class="inner-container">
                                            <span id="descripcion_producto2"></span>
-                                        </div>
-                                      </div>
                                   </div>
 			</div>
 			<div class="col-md-6 col-lg-4">

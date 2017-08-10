@@ -127,32 +127,6 @@ class BD {
                 . ",'" . $megusta . "')";
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
-
-    // Imprime el numero de orden
-
-    // Estado = 1 activa, 0 inactiva, -1 o 2 cancelada
-    public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado) {
-        date_default_timezone_set('America/Mexico_City');
-        $fecha = date('d/m/Y H:i:s', time());
-        $sql = "INSERT INTO ordenes(id_usuario, id_direccion, id_envio, fecha, total, metodo_pago, estado)
-        VALUES ('" . $usuario . "','" . $direccion . "','" . $envio . "',
-        STR_TO_DATE('" . $fecha . "', '%d/%m/%Y %H:%i:%s'),'" .
-                $total . "','" . $metodo_pago . "'," . $estado . ")";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-        
-        $sql = "SELECT id_ordenes FROM ordens
-        WHERE id_usuario = '" . $usuario . "' AND fecha = STR_TO_DATE('" . $fecha . "', '%d/%m/%Y %H:%i:%s') AND estado = " . $estado;
-        foreach ($this->conexion->query($sql) as $id) {
-            echo $id['id_ordenes'];
-        }
-    }
-
-    public function agregarProductosOrden($orden, $producto, $cantidad) {
-        $sql = "INSERT INTO productos_orden (id_orden, producto, cantidad)
-        VALUES ('" . $orden . "','" . $producto . "','" . $cantidad . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
     // Agrega numero de guia
     public function agregarGuiaOrden($orden, $guia) {
         $sql = "UPDATE ordenes SET guia='" . $guia . "' WHERE id_ordenes='" . $orden . "'";
@@ -431,7 +405,42 @@ class BD {
 		echo json_encode($datos);  
 	}
 	/***********/
-    /* parte del chuy  */
+    /* parte del chuy */
+    public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado, $codigoF, $cantidad) {
+        date_default_timezone_set('America/Mexico_City');
+        $fecha = date('d/m/Y H:i:s', time());
+        $sql = "INSERT INTO ordenes(id_usuario, id_direccion, id_envio, fecha, total, metodo_pago, estado)
+             VALUES ('" . $usuario . "','" . $direccion . "','" . $envio . "',
+             STR_TO_DATE('" . $fecha . "', '%d/%m/%Y %H:%i:%s'),'" .
+             $total . "','" . $metodo_pago . "'," . $estado . ")";
+        echo $this->conexion->query($sql) ? "1" : "0"; 
+      
+        $sql = "select id_ordenes from ordenes where id_usuario='".$usuario."' and estado='".$estado."' and fecha= STR_TO_DATE('".$fecha."','%d/%m/%Y %H:%i:%s')";
+         foreach ($this->conexion->query($sql) as $row) {
+            $row['id_ordenes'];
+            $sql = "INSERT INTO productos_orden (id_orden, id_producto, cantidad) VALUES('".$row['id_ordenes']."','".$codigoF."','".$cantidad."')";
+            echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
+            
+           }
+              //$id_ordeness=[];
+     /* foreach($this->conexion->query($sql) as $rowidordenar){
+           array_push($id_ordeness , $rowidordenar);
+        }
+        echo json_encode($id_ordeness);  
+       */ 
+        
+    }
+    public function getdireccionesusuario($idusuario){
+          $sql = "select id_usuario, id_direccion from direccion  where id_usuario='".$idusuario."'";	
+          $usuarioDireciones = [];
+	  foreach($this->conexion->query($sql) as $rowusuario) {
+		 
+              array_push($usuarioDireciones, $rowusuario);   
+	    }
+	echo json_encode($usuarioDireciones);  
+        }
+        
+
     public function getcarruselfooter(){
         $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
         $arrnewfooter = [];
@@ -441,7 +450,7 @@ class BD {
         echo json_encode($arrnewfooter);
     }
     
-    public function getcarruselfooter2(){
+  /*  public function getcarruselfooter2(){
         $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
         $arrnewfooter = [];
         foreach ($this->conexion->query($sql) as $rownewfooter) {
@@ -485,7 +494,7 @@ class BD {
         }
         echo json_encode($arrnewfooter);
     }
-    
+    */
     public function login($correo, $contra) {
         
         $sql = "SELECT id_usuario, nombre, apellidos, correo, contra FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
@@ -505,16 +514,15 @@ class BD {
     }
     
     public function mostrarordenes($id_usuariosesion) {
-        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesion . "'";
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
         }
         echo json_encode($arr);
     }
-
+    
     public function mostrarordenesdetalles($id_usuariosesiondetalle) {
-
         $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado, ordenes.metodo_pago,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesiondetalle . "'";
         $arrdetalle = [];
         foreach ($this->conexion->query($sql) as $rowordenardetalle) {
