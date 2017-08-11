@@ -3,9 +3,18 @@ var tabla_producto;
 var x=0;
 var tipo_cambio;
 var productos_busqueda = [];
+var iva; 
+
+/* Obtiene los datos de la tabla de parametros*/
+$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
+    tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
+    iva = parseFloat(datos["iva"]);
+    iva = (iva/100)+1;
+    //console.log(iva);
+});
 
 $(document).ready(function() {
-	var loc = document.location.href;
+    var loc = document.location.href;
     if (loc.indexOf('?') > 0)
     {
         var getString = loc.split('?')[1];
@@ -53,42 +62,38 @@ $(document).ready(function() {
 	var busqueda = $('#busqueda').attr("value");
 	if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda)) {
         $('#AquiGrupo').append("busqueda");
-		$('.breadcrumb').append("<li><a></a>Busqueda</li>");
+	$('.breadcrumb').append("<li><a></a>Busqueda</li>");
         $('#memorama').hide();
-		busqueda = busqueda.trim().split(" ");
+	busqueda = busqueda.trim().split(" ");
         var marcas = [];
-		$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
-			var parametros = datos;
-			tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
-			$.ajax({
-				type: "POST",
-				url: "../../bin/ingresar.php?categoria=buscar",
-				data: {"categoria":supercategoria, "palabras":busqueda},
-				success: function(respuesta) {
-					respuesta = JSON.parse(respuesta);
-					$.each(respuesta, function(i, objeto) {
-						$.each(objeto, function(j, producto) {
-						productos_busqueda.push(producto);
-						});
-					});
-                    cargarBusqueda(productos_busqueda);
-                    $.each(productos_busqueda, function(i, producto) {
-                        marcas.push(producto.marca);
-                    });
-                    marcas.sort();
-                    for (var i = 0; i < marcas.length - 1; i++) 
-                        if (marcas[i] == marcas[i+1]) {
-                            marcas.splice(i+1, 1);
-                            i--;
-                        }
-                    for (var i = 0; i < marcas.length; i++) {
-                        $('#marquitas').append('<option value="'+marcas[i]+'">'+marcas[i]+"</option>");
-                    } 
-					$('.loader').fadeOut("slow");
-				}
-			});
-		});
-        
+        $.ajax({
+	    type: "POST",
+	    url: "../../bin/ingresar.php?categoria=buscar",
+	    data: {"categoria":supercategoria, "palabras":busqueda},
+	    success: function(respuesta) {
+	        respuesta = JSON.parse(respuesta);
+	        $.each(respuesta, function(i, objeto) {
+	    	$.each(objeto, function(j, producto) {
+	    	    productos_busqueda.push(producto);
+	    	});
+	        });
+                cargarBusqueda(productos_busqueda);
+                $.each(productos_busqueda, function(i, producto) {
+                    marcas.push(producto.marca);
+                });
+                marcas.sort();
+                for (var i = 0; i < marcas.length - 1; i++) 
+                    if (marcas[i] == marcas[i+1]) {
+                    marcas.splice(i+1, 1);
+                    i--;
+                }
+                for (var i = 0; i < marcas.length; i++) {
+                    $('#marquitas').append('<option value="'+marcas[i]+'">'+marcas[i]+"</option>");
+                } 
+    	        $('.loader').fadeOut("slow");
+	    }
+	});
+
         /* Agrega filtro a busqueda */
         $('#btn_filtramela').click(function(event) {
             event.preventDefault();
@@ -177,7 +182,7 @@ function cargarBusqueda(arr_productos) {
         imagen = imagen.replace("#id_producto", producto["codigo_fabricante"]);
         imagen = imagen.replace("#imagen", producto["imagen"]);
         imagen = imagen.replace("#descripcion", producto["descripcion"].substring(0,30) + "...<br>");
-        imagen = imagen.replace("#costo", producto["moneda"] == "Pesos" ? producto["precio"] : (producto["precio"]*tipo_cambio).toFixed(2));
+        imagen = imagen.replace("#costo", producto["moneda"] == "Pesos" ? (producto["precio"]*iva).toFixed(2) : (producto["precio"]*tipo_cambio*iva).toFixed(2));
         $(id_tabla).append(imagen);
     });
 }
@@ -247,19 +252,13 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                         }
                     }});
             }
-            $.ajax({
-                url: "../../modulos/productos/sidebar.js",
-                dataType: "script",
-                success: function () {
-                }
-            });
-        } else
-            $.ajax({
-                url: "../../modulos/productos/sidebar.js",
-                dataType: "script",
-                success: function () {
-                }
-            });
+        } 
+        $.ajax({
+            url: "../../modulos/productos/sidebar.js",
+            dataType: "script",
+            success: function () {
+            }
+        });
     });
     //paginacion
     if (vino == "")
@@ -304,7 +303,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 salida = salida.replace("imagen", dato.item[y].imagen);
                 salida = salida.replace("compa", dato.item[y].codigo_fabricante);
                 salida = salida.replace("Texto", dato.item[y].descripcion.substring(26, 0));
-                salida = salida.replace("precio", "$" + dato.item[y].precio + "<br>");
+                salida = salida.replace("precio", "$" + (parseFloat(dato.item[y].precio)*iva).toFixed(2) + "<br>");
                 //salida = salida.replace("precio_producto", "$" + valor['precio']);
                 imprimemela += salida;
                 if (x == 0 || y == dato.item.length - 1)

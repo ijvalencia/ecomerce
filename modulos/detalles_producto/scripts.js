@@ -5,10 +5,21 @@ var categorias_sin_cantidad = [
 
 var articulo;
 
-$(document).ready(function() {
-	/* Mostrar producto */
-	cargarProducto($('#producto').attr("value"));
+var iva;
+var parametros;
+var tipo_cambio;
+
+$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
+    parametros = datos;
+    iva = parseFloat(datos.iva);
+    iva = (iva/100)+1;
+    tipo_cambio = datos.tipo_cambio + datos.agregado;
+    $('#numero_comprar').append(datos.no_cva);
+});
 	
+$(document).ready(function() {
+    	/* Mostrar producto */
+	cargarProducto($('#producto').attr("value"));
 	/* Zoom imagen del producto */
 	$('#img_producto').click(function() {
 		$('#modalZoom').show();
@@ -56,11 +67,11 @@ function cargarProducto(codigo) {
             $('#img_producto').attr("src", articulo["imagen"]);
             $('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
             $('#descripcion_producto').append(articulo["descripcion"]);
-            $('#precio_producto').append((articulo["moneda"] === "Pesos" ? articulo["precio"] : (articulo["precio"]*articulo['tipocambio']).toFixed(2)));
+            $('#precio_producto').append((articulo["moneda"] === "Pesos" ? (articulo["precio"]*iva).toFixed(2) : (articulo["precio"]*articulo['tipocambio']*iva).toFixed(2)));
             $('#cant_disponibles').append(total_disp);
             var ftecnica;
-            ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"].replace("/13", "<br>") : "NO EXISTE INFORMACION ADICIONAL";
-            $('#descripcion_producto2').append(ftecnica);
+            ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"] : "NO EXISTE INFORMACION ADICIONAL";
+            $('#descripcion_producto2').append(articulo.ficha_tecnica);
             $('#descripcion_producto2').append("<br>");
             /*var fcomercial = articulo["ficha_comercial"];
             if (!jQuery.isEmptyObject(fcomercial)) {
@@ -85,19 +96,18 @@ function cargarProducto(codigo) {
 
 $('#btn_comprar').click(function() {
 	$.ajax({
-		type: "POST",
-		url: "../../bin/ingresar.php?categoria=setCarrito",
-		data: {"articulo": articulo},
-		success: function(resp) {
-			console.log(resp);
-			if (resp !== "0"){
-				jAlert("Agregado al carrito");
-				window.location.href = "../../modulos/carrito/index.php";
-//				window.close();   
-			}
-			else{
-				jAlert("No se pudo agregar");
-			}
+	type: "POST",
+	url: "../../bin/ingresar.php?categoria=setCarrito",
+	data: {"articulo": articulo},
+	success: function(resp) {
+		console.log(resp);
+		if (resp !== "0"){
+			jAlert("Agregado al carrito");
+			window.location.href = "../../modulos/carrito/index.php";
+//			window.close();   
+		} else {
+			jAlert("No se pudo agregar");
 		}
+	    }
 	});
 });

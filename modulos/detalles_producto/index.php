@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
 		<?php include '../../bin/head.php'?>
 	</head>
 	<body>
@@ -44,7 +45,7 @@
                         <a id="btn_comprar" class="btn btn-lg">Comprar Ahora</a>
                     </div>
                     <br>
-                    <a id="numero_comprar" href="link_contacto">Compra telefónica: 01-800 CVA</a>
+                    <a id="numero_comprar" href="link_contacto">Compra telefónica: </a>
                 </div>
             </div>
         </div>

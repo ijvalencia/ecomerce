@@ -70,7 +70,7 @@
                                             <h3>$<a id="txt_total"></a></h3>
                                         </li>
                                     </ul>
-                                    <button type="button" class="btn btn-default" id="btn_confirmar_compra">
+                                    <button type="button" class="btn btn-default" id="btn_confirmar_compra" style="margin-left:40px">
                                         Confirmar compra
                                     </button>
                                     <div class="row"></div>
