@@ -1,13 +1,15 @@
 var tipo_cambio;
+var parametros;
+var iva;
+
+$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
+    parametros = datos;
+    tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
+    iva = (datos.iva/100)+1;	
+});
 
 $(document).ready(function() {    
     /* SATANAS */
-
-    $.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
-		var parametros = datos;
-		tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
-	});
-
 	var productos_busqueda = [];
 	$.getJSON("../../bin/ingresar.php?categoria=productosInicio", function(respuesta){
 		$.each(respuesta, function(i, objeto) {
@@ -30,7 +32,7 @@ $(document).ready(function() {
             imagen = imagen.replace("#imagen", producto["imagen"]);
             imagen = imagen.replace("#descripcion",producto["descripcion"].substring(0,30)+"<br>");
             imagen = imagen.replace("des",producto["grupo"]);
-            imagen = imagen.replace("#precio","$"+producto["precio"]);
+            imagen = imagen.replace("#precio","$"+(producto["precio"]*iva).toFixed(2));
             $(id_tabla).append(imagen);
         });
         $('.loader').fadeOut("slow");
@@ -50,7 +52,7 @@ function cargarCarousel(id_contenedor, busqueda) {
 			img_aux += img_carrusel;
 			img_aux = img_aux.replace("#imagen_carrusel", producto['imagen']);
 			img_aux = img_aux.replace("#descripcion", producto['descripcion'].substring(0,30));
-			img_aux = img_aux.replace("#precio", producto['moneda'] == "Pesos" ? producto['precio'] : (producto['precio']*tipo_cambio).toFixed(2));
+			img_aux = img_aux.replace("#precio", producto['moneda'] == "Pesos" ? (producto['precio']*iva).toFixed(2) : (producto['precio']*tipo_cambio*iva).toFixed(2));
 			img_aux = img_aux.replace("#link", "../../modulos/detalles_producto/index.php?categoria=&producto=" + producto['codigo_fabricante']);
 			switch(i) {
 				case 3:
