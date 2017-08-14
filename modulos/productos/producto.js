@@ -181,7 +181,7 @@ function cargarBusqueda(arr_productos) {
         }
         imagen = imagen.replace("#id_producto", producto["codigo_fabricante"]);
         imagen = imagen.replace("#imagen", producto["imagen"]);
-        imagen = imagen.replace("#descripcion", producto["descripcion"].substring(0,30) + "...<br>");
+        imagen = imagen.replace("#descripcion", producto["descripcion"].substring(0, 26) + "...<br>");
         imagen = imagen.replace("#costo", producto["moneda"] == "Pesos" ? (producto["precio"]*iva).toFixed(2) : (producto["precio"]*tipo_cambio*iva).toFixed(2));
         $(id_tabla).append(imagen);
     });

@@ -72,14 +72,6 @@ nav.sidebar, .main{
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
       color: #777;
     }
-    nav.sidebar{
-      position: sticky;
-      width: 236px;
-      height: 100%;
-      margin-left: 0px;
-      float: left;
-      margin-bottom: 0px;
-    }
 
     nav.sidebar li {
       width: 100%;
@@ -123,3 +115,15 @@ nav.sidebar, .main{
   section{
     padding-left: 15px;
   }
+
+/* SATANAS */
+    nav.sidebar {
+      position: sticky;
+      width: 200px;
+      height: 100%;
+      margin-left: 0px;
+      float: left;
+      margin-bottom: 0px;
+      margin-top: 10px;
+    }
+/***********/

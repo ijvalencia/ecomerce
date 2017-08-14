@@ -44,6 +44,11 @@
                                             </h3>
                                         </li>
                                         <li>
+                                            <h3>Impuestos:
+                                                $<a id="txt_iva"></a>
+                                            </h3>
+                                        </li>
+                                        <li>
                                             <h3>Envío:</h3> 
                                             <select id="selector_envio"></select>
                                             <!-- Arega un Modal, reviar para futuras versiones-->
