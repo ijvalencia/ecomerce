@@ -221,8 +221,16 @@ switch ($Menu) {
                 $orden = $_GET['orden'];
         else
             $orden = "normal";
+
+        if (isset($_GET['color'])) {
+            $color = $_GET['color'];
+        } else
+            $color = "";
+
+        if(empty($_GET['marca']))
+            $marca="undefined";
         //echo $variable, $posicion, $marca, $envio, $min, $max, $orden."<br>";
-        $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max, $orden);
+        $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max, $orden, $color);
         break;
 
     case "listadocantidad":
@@ -274,8 +282,14 @@ switch ($Menu) {
         if ($min == "undefined") {
             $min = 1;
         }
+        
+        if (isset($_GET['color'])) {
+            $color = $_GET['color'];
+        } else
+            $color = "";
+        
         //echo $posicion."<br>".$marca."<br>".$envio."<br>".$min."<br>".$max."<br>";
-        $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max, $orden);
+        $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max, $orden, $color);
         break;
 
     case "marcas":
@@ -299,8 +313,13 @@ switch ($Menu) {
                 $orden = $_GET['orden'];
         else
             $orden = "normal";
+        
+        if (isset($_GET['color'])) {
+            $color = $_GET['color'];
+        } else
+            $color = "";
 
-        $conexion->verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden);
+        $conexion->verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden, $color);
         break;
 
     case "memoria":
@@ -318,6 +337,19 @@ switch ($Menu) {
             $GB = $_GET['GB'];
             $conexion->verNumeroMemoria("GB", $GB, $_GET['grupo']);
         }
+        break;
+
+    case "contarColor":
+        $categoria = $_GET['categoria'];
+        $color = $_GET['color'];
+        $grupo=$_GET['grupo'];
+        $conexion->verCantidadColor($grupo, $color);
+        break;
+    
+    case "contarMarca":
+        $marca=$_GET['marca'];
+        $grupo=$_GET['grupo'];
+        $conexion->verCantidadMarca($grupo, $marca);
         break;
 }
 $conexion->cerrar();

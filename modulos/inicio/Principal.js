@@ -32,7 +32,7 @@ $(document).ready(function() {
             imagen = imagen.replace("#imagen", producto["imagen"]);
             imagen = imagen.replace("#descripcion",producto["descripcion"].substring(0,30)+"<br>");
             imagen = imagen.replace("des",producto["grupo"]);
-            imagen = imagen.replace("#precio","$"+(producto["precio"]*iva).toFixed(2));
+            imagen = imagen.replace("#precio","$"+ formatoMoneda(producto["precio"]*iva));
             $(id_tabla).append(imagen);
         });
         $('.loader').fadeOut("slow");
@@ -52,7 +52,7 @@ function cargarCarousel(id_contenedor, busqueda) {
 			img_aux += img_carrusel;
 			img_aux = img_aux.replace("#imagen_carrusel", producto['imagen']);
 			img_aux = img_aux.replace("#descripcion", producto['descripcion'].substring(0,30));
-			img_aux = img_aux.replace("#precio", producto['moneda'] == "Pesos" ? (producto['precio']*iva).toFixed(2) : (producto['precio']*tipo_cambio*iva).toFixed(2));
+			img_aux = img_aux.replace("#precio", formatoMoneda(producto['precio']*iva));
 			img_aux = img_aux.replace("#link", "../../modulos/detalles_producto/index.php?categoria=&producto=" + producto['codigo_fabricante']);
 			switch(i) {
 				case 3:
@@ -71,4 +71,11 @@ function cargarCarousel(id_contenedor, busqueda) {
 			}
 		});
 	});
+}
+
+function formatoMoneda(numero) {
+    numero = numero.toFixed(2).replace(/./g, function(c, i, a) {
+        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+    });
+    return numero;
 }

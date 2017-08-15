@@ -814,15 +814,18 @@ padding-bottom: 51px;
   width: 200px;
 }
 .nav .dropdown .menu li {
-  width: 200px;
+  width: 160px;
 }
-.nav .dropdown .menu li input,
 .nav .dropdown .menu li select {
-  width: 150px;
-  margin-left: -80px;
+  width: 160px;
+  margin-left: -40px;
 }
 nav .dropdown .menu li input[type = "number"] {
     width: 80px;
+  margin: 0px -15px 0px -60px;
+}
+nav .dropdown .menu li select option{
+    margin
 }
 nav .dropdown .menu li input[type = "radio"] {
   width: auto;
@@ -832,7 +835,7 @@ nav .dropdown .menu li input[type = "checkbox"] {
     display: block;
     width: 30px;
     height: auto;
-    margin: 10px 0px 0px 30px;
+    margin: 10px 0px 0px -20px;
 }
 nav .dropdown .menu li input span {
     margin: 0px 0px 0px 0px;
@@ -841,3 +844,4 @@ nav .dropdown .menu li input span {
     padding: 40px;
 }
 /***********/
+

@@ -67,7 +67,7 @@ function cargarProducto(codigo) {
             $('#img_producto').attr("src", articulo["imagen"]);
             $('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
             $('#descripcion_producto').append(articulo["descripcion"]);
-            $('#precio_producto').append((articulo["moneda"] === "Pesos" ? (articulo["precio"]*iva).toFixed(2) : (articulo["precio"]*articulo['tipocambio']*iva).toFixed(2)));
+            $('#precio_producto').append((articulo["moneda"] === "Pesos" ? formatoMoneda(articulo["precio"]*iva) : formatoMoneda(articulo["precio"]*articulo['tipocambio']*iva)));
             $('#cant_disponibles').append(total_disp);
             var ftecnica;
             ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"] : "NO EXISTE INFORMACION ADICIONAL";
@@ -111,3 +111,10 @@ $('#btn_comprar').click(function() {
 	    }
 	});
 });
+
+function formatoMoneda(numero) {
+    numero = numero.toFixed(2).replace(/./g, function(c, i, a) {
+        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+    });
+    return numero;
+}

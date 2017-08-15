@@ -22,7 +22,7 @@ function cargarCarousel(id_contenedor, busqueda){
 			img_aux += img_carrusel;
 			img_aux = img_aux.replace("#imagen_carrusel", producto['imagen']);
 			img_aux = img_aux.replace("#descripcion", producto['descripcion'].substring(0,30));
-			img_aux = img_aux.replace("#precio", producto['moneda'] == "Pesos" ? (producto['precio']*((parametros.iva/100)+1)).toFixed(2) : (producto['precio']*tipo_cambios*((parametros.iva/100)+1)).toFixed(2));
+			img_aux = img_aux.replace("#precio", formatoMoneda(producto['precio']*((parametros.iva/100)+1)));
 			img_aux = img_aux.replace("#link", "../../modulos/detalles_producto/index.php?categoria=&producto=" + producto['codigo_fabricante']);
 			switch(i) {
 				case 3:

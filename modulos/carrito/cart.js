@@ -113,9 +113,9 @@ $(document).ready(function () {
 });
 
 function mostrarArticulos() {
-var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4"><img src="link_imagen" class="img-responsive"/></div><div class="col-sm-8"><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price">$<span class="precios">precio_producto</span><br><b>IVA: </b>$<span class="ivas">precio_iva</span></td><td data-th="Quantity"><input class="numero_cantidad" type="number" value="1" min="1" max="maximo" style="width:60px" onchange="actualizarTotal()" onkeydown="return false" id="cantidad#n"></td><td class="actions" data-th=""><a onclick="borrarArticulo(#n)"><i class="fa fa-trash-o"></i></a></td></tr>';
+var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4"><img src="link_imagen" class="img-responsive" onerror="this.src=\'../../IMG/error.jpg\'"></div><div class="col-sm-8"><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price">$<span class="precios">precio_producto</span><br><b>IVA: </b>$<span class="ivas">precio_iva</span></td><td data-th="Quantity"><input class="numero_cantidad" type="number" value="1" min="1" max="maximo" style="width:60px" onchange="actualizarTotal()" onkeydown="return false" id="cantidad#n"></td><td class="actions" data-th=""><a onclick="borrarArticulo(#n)"><i class="fa fa-trash-o"></i></a></td></tr>';
     $.getJSON("../../bin/ingresar.php?categoria=getCarrito", function (dato) {
-        console.log(dato);
+        // console.log(dato);
 
         $.each(dato, function (j, valor) {
             var salida = tabla_producto;
@@ -123,24 +123,26 @@ var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-
             salida = salida.replace("maximo", parseFloat(valor['disponible']) + parseFloat(valor['disponibleCD']));
             salida = salida.replace("link_imagen", valor['imagen']);
             salida = salida.replace("nombre_producto", valor['descripcion']);
-            salida = salida.replace("precio_producto", valor['moneda'] === "Pesos" ? valor["precio"] + " " : (valor["precio"] * tipo_cambio).toFixed(2) + " ");
-            salida = salida.replace("precio_iva", valor['moneda'] === "Pesos" ? (valor["precio"]*(iva-1)).toFixed(2) +" " : (valor["precio"] * tipo_cambio *(iva-1)).toFixed(2) + " ");
+            salida = salida.replace("precio_producto", valor['moneda'] === "Pesos" ? formatoMoneda(parseFloat(valor["precio"])) + " " : formatoMoneda(valor["precio"] * tipo_cambio) + " ");
+            salida = salida.replace("precio_iva", valor['moneda'] === "Pesos" ? formatoMoneda(valor["precio"]*(iva-1)) + " " : formatoMoneda(valor["precio"] * tipo_cambio *(iva-1)) + " ");
             $('tbody').append(salida);
             // alert(salida);
         });
         var sub = 0;
-        var precios = $(".precios").text().trim().split(" ");
+        var precios = $(".precios").text().replace(/,/g, "").trim().split(" ");
         $.each($('.numero_cantidad'), function (i, valor) {
             sub += valor.value * precios[i];
         });
         var sub_iva = 0;
-        var ivas = $('.ivas').text().trim().split(" ");
+        var ivas = $('.ivas').text().replace(/,/g, "").trim().split(" ");
         $.each($('.numero_cantidad'), function (i, valor) {
             sub_iva += valor.value * ivas[i];
         });
-        $('#txt_subtotal').append(sub);
-        $('#txt_iva').append(sub_iva.toFixed(2));
-        $('#txt_total').append((parseFloat(sub) + parseFloat(sub_iva)).toFixed(2));
+        // console.log(ivas);
+        // console.log(precios);
+        $('#txt_subtotal').append(formatoMoneda(sub));
+        $('#txt_iva').append(formatoMoneda(sub_iva));
+        $('#txt_total').append(formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)));
         $('.loader').fadeOut("slow");
     });
 }
@@ -162,18 +164,25 @@ function actualizarTotal() {
     $('#txt_iva').empty();
     $('#txt_total').empty();
     var sub = 0;
-    var precios = $(".precios").text().trim().split(" ");
+    var precios = $('.precios').text().replace(/,/g, "").trim().split(" ");
     $.each($('.numero_cantidad'), function (i, valor) {
         sub += valor.value * precios[i];
     });
     var sub_iva = 0;
-    var ivas = $('.ivas').text().trim().split(" ");
+    var ivas = $('.ivas').text().replace(/,/g, "").trim().split(" ");
     $.each($('.numero_cantidad'), function (i, valor) {
         sub_iva += valor.value * ivas[i];
     });
     sub = sub.toFixed(2);
-    $('#txt_subtotal').append(sub);
-    $('#txt_iva').append(sub_iva.toFixed(2));
-    $('#txt_total').append((parseFloat(sub) + parseFloat(sub_iva)).toFixed(2));
+    $('#txt_subtotal').append(formatoMoneda(sub));
+    $('#txt_iva').append(formatoMoneda(sub_iva));
+    $('#txt_total').append(formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)));
+}
+
+function formatoMoneda(numero) {
+    numero = numero.toFixed(2).replace(/./g, function(c, i, a) {
+        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+    });
+    return numero;
 }
 

@@ -18,6 +18,9 @@ $('.dropdown-toggle').click(function() {
         case "btn_memoria":
             mostrar('#sub_memoria');
             break;
+        case "btn_color":
+            mostrar('#sub_color');
+            break;
         }
 });
 

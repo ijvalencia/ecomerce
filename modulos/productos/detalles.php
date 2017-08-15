@@ -20,6 +20,7 @@
                 <ol class="breadcrumb">
                     <li><a href="../../modulos/inicio/index.php">Inicio</a></li>
                     <li>Productos</li>
+                    <li><?php echo $_GET['subcategoria'] ?></li>
                 </ol>
             </div>
             <div class="col-sm-2 sidenav">
@@ -31,16 +32,8 @@
                             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
-                                        <a  class="dropdown-toggle" id="btn_marca">Marcas:<br></a>
-                                        <ul class="menu hidden" role="menu" id="sub_marca">
-                                            <center>
-                                                <li>
-                                                    <select id="marquitas" type="text" name="marcas">
-                                                        <option value="totaliti">Todas las marcas</option> 
-                                                    </select>
-                                                </li>
-                                            </center>
-                                        </ul>
+                                        <a class="dropdown-toggle" id="btn_marca">Por Marca:</a> 
+                                        <ul class="menu hidden" role="menu" id="sub_marca"><center id="marquitas"></center></ul>
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_disponible">Disponibilidad:</a>
@@ -70,16 +63,23 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_orden">Ordenar por:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_orden"><center>
-                                            <li><input type="radio" name="orden" value="normal" checked> Indiferente</li>
-                                            <li><input type="radio" name="orden" value="mayor"> Precio(mayor a menor)</li>
-                                            <li><input type="radio" name="orden" value="menor"> Precio(menor a mayor)  </li>
-                                            <li><input type="radio" name="orden" value="alfa"> A->Z  </li>
-                                            <li><input type="radio" name="orden" value="invalfa"> Z->A  </li></center>
+                                        <ul class="menu hidden" role="menu" id="sub_orden">
+                                            <li><select id="filtro_disponibilidad" type="text" name="orden">
+                                                    <option value="normal"> Indiferente</option>
+                                                    <option value="mayor"> Precio(mayor a menor)</option>
+                                                    <option value="menor"> Precio(menor a mayor)</option>
+                                                    <option value="alfa"> A->Z </option>
+                                                    <option value="invalfa"> Z->A </option>
+                                                </select></li>
                                         </ul>   
                                     </li>
                                     <li id="memorama" class="dropdown">
-
+                                        <a class="dropdown-toggle" id="btn_memoria">Por memoria:</a> 
+                                        <ul class="menu hidden" role="menu" id="sub_memoria"><center id="lista_memoria"></center></ul>
+                                    </li>
+                                    <li id="coloreamela" class="dropdown">
+                                        <a class="dropdown-toggle" id="btn_color">Por Color:</a> 
+                                        <ul class="menu hidden" role="menu" id="sub_color"><center id="lista_color"></center></ul>
                                     </li>
                                 </ul>
                             </div>

@@ -9,12 +9,11 @@
         <body>
            <script>var num;</script>
         <?php include'../../bin/navbar.php';?>        
-    <div class="line-navbar-left">
+    <!--<div class="line-navbar-left">
       <p class="lnl-nav-title">Categories</p>
       <ul class="lnl-nav">
-        <!-- The list will be automatically cloned from mega menu via jQuery -->
       </ul>
-    </div>   
+    </div>-->   
         <!-- Top content -->
         <div class="top-content"> 	
             <div class="inner-bg">

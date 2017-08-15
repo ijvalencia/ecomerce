@@ -25,10 +25,10 @@ class BD {
         }
         
         /* Conectar a BD Local */
-        /*$this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
-        if (mysqli_connect_errno($this->conexion)) {
-            echo "Error al conectar con MySQL: " . mysqli_connect_error();
-        }*/
+        // $this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
+        // if (mysqli_connect_errno($this->conexion)) {
+        //     echo "Error al conectar con MySQL: " . mysqli_connect_error();
+        // }
     }
 
     // Procedimiento para cerrar conexion
@@ -560,9 +560,22 @@ class BD {
     
     /* Anton */
 
-    public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax, $orden) {
+    public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax, $orden, $color) {
         $min = ($lugar - 1) * 20;
         $max = $min + 20;
+        if ($color !== "") {
+            $colores = explode("/", $color);
+            $color = "";
+            foreach ($colores as $col) {
+                if ($col !== "") {
+                    if ($color == "")
+                        $color = " color like '%" . $col . "%' ";
+                    else
+                        $color = $color . " or color like '%" . $col . "%' ";
+                }
+            }
+            $color = " and (" . $color . ") ";
+        }
 
         switch ($orden) {
             case "normal":
@@ -586,33 +599,45 @@ class BD {
                 break;
         }
 
-        if (!($marca == "undefined" || $envio == "undefined" )) {
-            if ($marca == "totaliti") {
-                if ($envio == "Local") {
-                    $sql = 'SELECT * FROM producto WHERE descripcion like "" grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 ' . $ordenamiento . ' limit ' . $min . "," . $max;
-                } else
-                if ($envio == "Foraneo") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 ' . $ordenamiento . ' limit ' . $min . "," . $max;
-                } else
-                if ($envio == "Indiferente") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' ' . $ordenamiento . ' limit ' . $min . "," . $max;
-                }
-            } else {
-                if ($envio == "Local") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '" ' . $ordenamiento . ' limit ' . $min . "," . $max;
-                } else
-                if ($envio == "Foraneo") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '" ' . $ordenamiento . ' limit ' . $min . "," . $max;
-                } else
-                if ($envio == "Indiferente") {
-                    $sql = 'SELECT * FROM producto WHERE grupo = "' . $subcat . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '" ' . $ordenamiento . ' limit ' . $min . "," . $max;
+        $ordenamiento = $color . $ordenamiento;
+
+        $filtros = ' AND precio >' . $Pmin . ' AND precio <' . $Pmax . '  ';
+
+        switch ($envio) {
+            case "Local":
+                $filtros .= " AND GDL >0 ";
+                break;
+
+            case "Foraneo":
+                $filtros .= " AND CDMX >0 ";
+                break;
+        }
+
+        if ($marca == "undefined")
+            $marca = "";
+
+        if ($marca !== "" || $marca == "totaliti") {
+            $marca_unica = explode("$", $marca);
+            $marca = "";
+            foreach ($marca_unica as $mar) {
+                if ($mar !== "") {
+                    if ($marca == "")
+                        $marca = " marca like '%" . $mar . "%' ";
+                    else
+                        $marca = $marca . " or marca like '%" . $mar . "%' ";
                 }
             }
-        } else {
-            $sql = "select * from producto where grupo='" . $subcat . "' " . $ordenamiento . " limit " . $min . "," . $max;
-        }
-        $buscado = $this->conexion->query($sql);
+            $marca = " and (" . $marca . ") ";
+        } else
+            $marca = "";
 
+
+        $filtros .= $marca . $ordenamiento;
+
+
+        $sql = "select * from producto where grupo='" . $subcat . "' " . $filtros . " limit " . $min . "," . $max;
+        //echo $sql . "<br>";
+        $buscado = $this->conexion->query($sql);
         error_reporting(0);
         for ($x = 0; $x < 20; $x++) {
             $fila = mysqli_fetch_array($buscado);
@@ -629,36 +654,66 @@ class BD {
         echo json_encode($articulos);
     }
 
-    public function verCantidad($grupo, $cantidad, $marca, $envio, $Pmin, $Pmax, $orden) {
-
-        if (!($marca == "undefined" || $envio == "undefined")) {
-            if ($marca == "totaliti") {
-                if ($envio == "Local") {
-                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0';
-                } else
-                if ($envio == "Foraneo") {
-                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0';
-                } else
-                if ($envio == "Indiferente") {
-                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax;
-                }
-            } else {
-                if ($envio == "Local") {
-                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND GDL >0 AND marca = "' . $marca . '"';
-                } else
-                if ($envio == "Foraneo") {
-                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND CDMX >0 AND marca = "' . $marca . '"';
-                } else
-                if ($envio == "Indiferente") {
-                    $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" AND precio >' . $Pmin . ' AND precio <' . $Pmax . ' AND marca = "' . $marca . '"';
+    public function verCantidad($grupo, $cantidad, $marca, $envio, $Pmin, $Pmax, $orden, $color) {
+        error_reporting(0);
+        $aux = $color;
+        if ($color !== "") {
+            $colores = explode("/", $color);
+            $color = "";
+            foreach ($colores as $col) {
+                if ($col !== "") {
+                    if ($color == "")
+                        $color = " color like '%" . $col . "%' ";
+                    else
+                        $color = $color . " or color like '%" . $col . "%' ";
                 }
             }
-        } else {
-            $sql = "select count(*) from producto where grupo='" . $grupo . "'";
+            $color = " and (" . $color . ") ";
         }
+
+        $filtros = ' AND precio >' . $Pmin . ' AND precio <' . $Pmax . '  ';
+
+        switch ($envio) {
+            case "Local":
+                $filtros .= " AND GDL >0 ";
+                break;
+
+            case "Foraneo":
+                $filtros .= " AND CDMX >0 ";
+                break;
+        }
+
+        if ($marca == "undefined")
+            $marca = "";
+
+        if ($marca !== "" || $marca == "totaliti") {
+            $marca_unica = explode("$", $marca);
+            $marca = "";
+            foreach ($marca_unica as $mar) {
+                if ($mar !== "") {
+                    if ($marca == "")
+                        $marca = " marca like '%" . $mar . "%' ";
+                    else
+                        $marca = $marca . " or marca like '%" . $mar . "%' ";
+                }
+            }
+            $marca = " and (" . $marca . ") ";
+        } else
+            $marca = "";
+
+
+        $filtros .= $marca . $ordenamiento;
+
+        $sql = "select count(*) from producto where grupo='" . $grupo . "'" . $color . $filtros;
+
+        if ($aux !== "")
+            $color = "&color=" . $aux;
+        else
+            $color = "";
+
         $cantidad_productos = $this->conexion->query($sql);
         if ($cantidad != 1) {
-            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
+            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . $color . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
         }
         $cantidad_grupo = mysqli_fetch_array($cantidad_productos);
         $cantidad_grupo['count(*)'] /= 20;
@@ -667,7 +722,7 @@ class BD {
             if ($cantidad == $x) {
                 echo '<u>';
             }
-            echo " <a href='detalles.php?extra=" . $x . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'>" . $x;
+            echo " <a href='detalles.php?extra=" . $x . $color . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'>" . $x;
 
             if ($cantidad == $x) {
                 echo "</u>";
@@ -675,23 +730,50 @@ class BD {
             echo "</a>  ";
         }
         if ($cantidad < $cantidad_grupo) {
-            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
+            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . $color . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
         }
 
         //echo "<br>".$grupo."<br>". $cantidad."<br>". $marca."<br>". $envio."<br>". $Pmin."<br>". $Pmax;
     }
 
     public function verMarcas($grupo) {
+        error_reporting(0);
         $sql = 'SELECT DISTINCT(marca) FROM producto WHERE grupo = "' . $grupo . '"';
         $cantidad_marcas = $this->conexion->query($sql);
         $x = 0;
         while ($fila = mysqli_fetch_array($cantidad_marcas)) {
-            echo $fila['marca'] . ";";
+            $marca[$x] = $fila['marca'];
             $x++;
+        }
+        $x = 0;
+        foreach ($marca as $numero_m) {
+            $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" and marca="'.$numero_m.'"';
+            $cantidad_marcas = $this->conexion->query($sql);
+            $fila=mysqli_fetch_array($cantidad_marcas);
+            $marca[$x].="%".$fila['count(*)'];
+            $x++;
+        }
+        foreach($marca as $verMarca)
+        {
+            echo $verMarca.";";
         }
     }
 
-    public function verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden) {
+    public function verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden, $color) {
+
+        if ($color !== "") {
+            $colores = explode("/", $color);
+            $color = "";
+            foreach ($colores as $col) {
+                if ($col !== "") {
+                    if ($color == "")
+                        $color = " color like '%" . $col . "%' ";
+                    else
+                        $color = $color . " or color like '%" . $col . "%' ";
+                }
+            }
+            $color = " and (" . $color . ") ";
+        }
 
         $sql_extra = "";
         if ($marca !== "totaliti")
@@ -727,7 +809,13 @@ class BD {
                 $ordenamiento = "order by descripcion desc";
                 break;
         }
-        $sql_extra = $sql_extra . " " . $ordenamiento;
+
+
+
+
+
+
+        $sql_extra = $sql_extra . $color . " " . $ordenamiento;
         error_reporting(0);
         $capacidades = explode("$", $capacidad[0]);
         $x = 0;
@@ -742,7 +830,7 @@ class BD {
                 $x++;
             }
         }
-            $y=0;
+        $y = 0;
         $capacidades = explode("$", $capacidad[1]);
         foreach ($capacidades as $busqueda) {
 
@@ -755,9 +843,9 @@ class BD {
                 $item[$y]->imagen = $recorrido['imagen'];
                 $item[$y]->codigo_fabricante = $recorrido['codigo_fabricante'];
                 if (!(in_array($item, $articulos->item[$y]))) {
-                $articulos->item[$x] = $item[$y];
-                $y++;
-                $x++;
+                    $articulos->item[$x] = $item[$y];
+                    $y++;
+                    $x++;
                 }
             }
         }
@@ -766,13 +854,14 @@ class BD {
     }
 
     public function verMemorias($categoria, $grupo) {
-        $sql = "select distinct(TB) from producto where not tb='' and grupo='" . $grupo . "'";
+        error_reporting(0);
+        $sql = "select distinct(TB) from producto where not tb='' and grupo='" . $grupo . "' order by TB asc";
         $resultado = $this->conexion->query($sql);
         while ($corrida = mysqli_fetch_array($resultado)) {
             echo $corrida['TB'] . "$";
         }
         echo "/";
-        $sql = "select distinct(GB) from producto where not gb='' and grupo='" . $grupo . "'";
+        $sql = "select distinct(GB) from producto where not gb='' and grupo='" . $grupo . "' order by GB asc";
         $resultado = $this->conexion->query($sql);
         while ($corrida = mysqli_fetch_array($resultado)) {
             echo $corrida['GB'] . "$";
@@ -783,6 +872,20 @@ class BD {
         error_reporting(0);
 
         $sql = "select count(" . $tipo . ") from producto where " . $tipo . "=" . $busqueda . " and grupo='" . $grupo . "'";
+        $resultado = $this->conexion->query($sql);
+        $corrida = mysqli_fetch_array($resultado);
+        echo $corrida[0];
+    }
+
+    public function verCantidadColor($grupo, $color) {
+        $sql = "SELECT count( * )FROM `producto` WHERE grupo='" . $grupo . "' and color LIKE '%" . $color . "%'";
+        $resultado = $this->conexion->query($sql);
+        $corrida = mysqli_fetch_array($resultado);
+        echo $corrida[0];
+    }
+
+    public function verCantidadMarca($grupo, $marca) {
+        $sql = "select count(*) from `producto` where grupo='" . $grupo . "' and marca='" . $marca . "'";
         $resultado = $this->conexion->query($sql);
         $corrida = mysqli_fetch_array($resultado);
         echo $corrida[0];
