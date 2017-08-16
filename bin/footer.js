@@ -42,8 +42,12 @@ function cargarCarousel(id_contenedor, busqueda){
 		});
 	});
 }
-
-
+function formatoMoneda(numero) {
+    numero = numero.toFixed(2).replace(/./g, function(c, i, a) {
+        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+    });
+    return numero;
+}
 /*var carruselfooter  = "<div class='col-md-3'><a href='#' class='thumbnail' id='sombreado'><img src='imagecarruselfooter' alt='Image' class='imegs'><p><hr><small>descripcionfooter</small>preciofooter</p></a></div>";
 var carruselfooter2 = "<div class='col-md-3'><a href='#' class='thumbnail' id='sombreado'><img src='imagecarruselfooter2' alt='Image' class='imegs'><p><hr><small>descripcionfooter2</small>preciofooter2</p></a></div>";
 var carruselfooter3 = "<div class='col-md-3'><a href='#' class='thumbnail' id='sombreado'><img src='imagecarruselfooter3' alt='Image' class='imegs'><p><hr><small>descripcionfooter3</small>preciofooter3</p></a></div>";

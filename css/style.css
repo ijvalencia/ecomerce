@@ -65,15 +65,12 @@ img{
     margin: 9px;
 }
 ::-moz-selection { background: #ffae4b; color: #fff; text-shadow: none; }
-::selection { background: #ffae4b; color: #fff; text-shadow: none; }
 
 .btn {
     display: block;
     background: #ffae4b;
     background-image: -webkit-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: -moz-linear-gradient(top, #ffae4b, #ffae4b);
-    background-image: -ms-linear-gradient(top, #ffae4b, #ffae4b);
-    background-image: -o-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: linear-gradient(to bottom, #ffae4b, #ffae4b);
     color: #ffffff;
    -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
@@ -88,8 +85,6 @@ img{
     background: #ff8400;
     background-image: -webkit-linear-gradient(top, #ff9317, #ffae4b);
     background-image: -moz-linear-gradient(top, #ff9317, #ffae4b);
-    background-image: -ms-linear-gradient(top, #ff9317, #ffae4b);
-    background-image: -o-linear-gradient(top, #ff9317, #ffae4b);
     background-image: linear-gradient(to bottom, #ff9317, #ffae4b);
     color: #ffffff;
   /*  background-image: url('../imgweb/loginred.png');*/
@@ -100,8 +95,6 @@ img{
     background: #ffae4b;
     background-image: -webkit-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: -moz-linear-gradient(top, #ffae4b, #ffae4b);
-    background-image: -ms-linear-gradient(top, #ffae4b, #ffae4b);
-    background-image: -o-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: linear-gradient(to bottom, #ffae4b, #ffae4b);
     color: #ffffff;
    -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
@@ -122,8 +115,6 @@ img{
     background: #ff8400;
     background-image: -webkit-linear-gradient(top, #ff9317, #ffae4b);
     background-image: -moz-linear-gradient(top, #ff9317, #ffae4b);
-    background-image: -ms-linear-gradient(top, #ff9317, #ffae4b);
-    background-image: -o-linear-gradient(top, #ff9317, #ffae4b);
     background-image: linear-gradient(to bottom, #ff9317, #ffae4b);
     color: #ffffff;
   /*  background-image: url('../imgweb/loginred.png');*/
@@ -139,7 +130,7 @@ img{
     font-weight: 300;
     line-height: 16px;
     color: #fff;
-    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    -webkit-border-radius: 4px; border-radius: 4px;
 }
 .btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active { outline: 0; opacity: 0.6; color: #fff; }
 
@@ -165,7 +156,7 @@ img{
     font-weight: 300;
     line-height: 16px;
     color: #fff;
-    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    -webkit-border-radius: 4px; border-radius: 4px;
 }
 .btn-link-2:hover, .btn-link-2:focus, 
 .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #fff; }
@@ -187,7 +178,7 @@ img{
     overflow: hidden;
     padding: 0 25px 15px 25px;
     background: #f3f3f3;
-    -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
     text-align: left;
 }
 
@@ -212,7 +203,7 @@ img{
 .form-bottom {
     padding: 25px 25px 30px 25px;
     background: #eee;
-    -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
     text-align: left;
 }
 
@@ -419,7 +410,6 @@ footer a:hover, footer a:focus { /*border-bottom: 1px dotted #ffae4b;*/ }
 }
 
 .navbar-nav > li > a {
-    padding-top: -10px;
     padding-bottom: 10px;
     line-height: 5px;
 }
@@ -509,9 +499,8 @@ div.controls input,div.controls select{
     margin-bottom:.5em;
 }
 #inputSeleccionado{
-    border-color:rgba(82,168,236,.8)
-        ;outline:0;outline:thin dotted \9;
-    -moz-box-shadow:0 0 8px rgba(82,168,236,.6);
+    border-color:rgba(82,168,236,.8);
+    outline:0;
     box-shadow:0 0 8px rgba(82,168,236,.6);
 }
 .bs-glyphicons{
@@ -727,7 +716,6 @@ hr {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
 }
 #mostrar:hover #mensaje{
     display:block;
@@ -876,8 +864,7 @@ hr {
 }
 
 .detallesPro{
-    margin-left: -11%;
-
+    margin-left: -2%;
 }
 
 #position{
@@ -891,19 +878,19 @@ hr {
 }
 
 .detallesorden{
-    margin-left: 56%;   
+    margin-left: 38%;   
 }
 
 .Preciosdetalle{
-    margin-top: -58px;
-    margin-left: -53px;   
+   margin-top: -58px;
+   margin-left:-420px;   
 }
 
 /*detalles descripcion  Detalles_orden.php*/
 .precioisquierda{
-    //float: right;        
-    margin-left: -28%;
-    margin-top: -76px;
+    /*float: right;*/        
+    margin-left: -5%;
+    margin-top: -12px;
 }
 
 .descrpicion{
@@ -925,7 +912,7 @@ hr {
 .imgderecha{
     float: left;
     margin-left:2%;
-    margin-top:-60px;
+    margin-top:-124px;
     text-align:center;  
 }
 
@@ -1029,31 +1016,6 @@ label {
     padding:10px;  
 }
 
-.inner-container::-webkit-scrollbar-track-piece
-{
-    background:transparent;
-}
-.inner-container::-webkit-scrollbar {
-	width: 0;
-	background: rgba(255,255,255,1);
-	}
-
-.inner-container::-webkit-scrollbar-button {
-	height: 0;
-	width: 0;
-        
-	}
-
-.inner-container::-webkit-scrollbar-thumb {
-	background:transparent;
-        background-color: rgba(255,255,255,1);
-	}
-        
-.inner-container::-webkit-scrollbar-track {
-	background:transparent;
-	box-shadow: none;
-}
-
 /*play Store*/
 #cuatro{
     margin-top: -157px;
@@ -1061,7 +1023,72 @@ label {
 /*mac Store*/
 #sinco{
     margin-top: -166px;
+    
 }
+.col-md-8 {
+    width: 66.66666667%;
+    float: right;
+    margin-right: 107px;
+}
+.check{
+    margin-left: 30px;
+}
+
+@media only screen and (max-width: 970px) and (min-width: 821px) {  
+    #sombreado{                    /*980px      821px*/
+      /* width: 90%;
+       margin-left: 97px;
+     */
+        width: 32%;  
+        float: right;
+        display: inline-block;
+        margin-left: 20px;
+    }
+}  
+  
+/* Para 800px */  
+@media only screen and (max-width: 920px) and (min-width: 621px) {  /*820  621*/
+   #sombreado{
+        /*min-width: 500px;
+        max-width: 900px;*/
+        width: 35%;    
+        float: right;
+        display: inline-block;
+        margin-left: 10px;
+    }
+   
+}  
+  
+/* Para 600px */  
+@media only screen and (max-width: 620px) and (min-width: 501px) {  
+   #sombreado{
+       width: 49%;
+float: right;
+display: inline-block;
+margin-left: 10px;
+    }
+}  
+  
+/* Para 480px */  
+@media only screen and (max-width: 500px) and (min-width: 341px) {  
+  
+     #sombreado{
+        width: 20%;  
+        float: right;
+        display: inline-block;
+        margin-left: 10px;
+    }
+}  
+  
+/* Para 320px */  
+@media only screen and (max-width: 340px) and (min-width: 5px)  {  
+    #sombreado{
+        width: 10%;
+        float: right ;    
+        display: inline-block;
+        margin-left: 10px;
+    }
+} 
 
 /*fin chuy*/
 /*SATANAS*/
@@ -1113,7 +1140,6 @@ label {
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
-    user-select:none;
     background-image:none;
     border:1px solid transparent;
     border-radius:4px
@@ -1124,4 +1150,15 @@ label {
 }
 .lnt-cart :hover {
     background-color: white;
+}
+.modal-backdrop {
+    top: 100px;
+    right: 0;
+    left: 0;
+    background-color: #000;
+    position: static;
+    margin-top: -52%;
+}
+#hover1:hover,#hover2:hover,#hover3:hover,#navbar_icon_carrito:hover{
+    background: #fff;
 }

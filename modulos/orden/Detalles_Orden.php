@@ -6,9 +6,8 @@
         <?php
         include '../../bin/head.php';
         include '../../bin/navbar.php';
-    ?>
+        ?>
     </head>
-
     <body style="background: #f2f2f2;">
         <br>
         <div class="panel panel-default row">
@@ -19,10 +18,11 @@
                 <div class="container-fluid bg-3 text-center">
                     <div class="panelessde">
                          <p class="detallesPro">Orden de comprar mas detallado </p><br>
-                         <p class="Precios" ></p>
-                        
+                         <p id="cantidad"></p>
+                         
                          <p class="precioisquierda" id="precios"></p>
-                         <p class="Precios" id="precioMonto"></p> 
+                         <p class="precioisquierda" id="fechasss"></p>
+                         <p class="precioisquierda" id="fecha"></p>
                          <p class="precioisquierda" id="preciosenvio"></p> <br><br>
                     </div>
                     
@@ -43,8 +43,8 @@
                     <div class="row">
                        <div class="panelessde">
                            <div id="pagos">
-                                <p class="detallesPro">Metodo de Pago</p>
-                                <img src="../../IMG/tarjeta.png" style="width: 30px" class="imgderecha img-circle">
+                                <p class="detallesPros">Metodo de Pago</p>
+                                <img src="../../IMG/tarjeta.png" style="width: 30px" class="img-circle">
                           </div>
                        </div>
                     </div>

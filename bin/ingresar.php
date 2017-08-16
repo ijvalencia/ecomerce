@@ -133,17 +133,12 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
-      case "direccioness":   
+     case "direccioness":   
          $idusuario = $_POST['idusuarios'];
          $conexion->getdireccionesusuario($idusuario);
       break;
-     /*
-      case "productosordenes":  
-        $id_orden = $_POST['id_orden'];   
-        $conexion->agregarProductosOrden($id_orden, $codigoF, $cantidad);  
-       break;*/
-   
-      case "agregarordenes":
+    
+  case "agregarordenes":
         $usuario = $_POST['idusuario'];
         $direccion = $_POST['direccion'];
         $envio = $_POST['idenvio'];
@@ -153,14 +148,13 @@ switch ($Menu) {
         $cantidad = $_POST['cantidad'];
         //echo json_encode('50');
         $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago,1,$codigoF,$cantidad);
-        
         break;
-
+    
     case "usuariordendetalles":
-        $id_usuariosdetalles = $_POST["usuario"];
-        $conexion->mostrarordenesdetalles($id_usuariosdetalles);
-        break;
-
+       $id_ordenproductodetalle=$_POST["usuario"];
+       $conexion->mostrarordenesdetalles($id_ordenproductodetalle);
+    break;
+    
     case "usuarioorden":
         $id_usuario = $_POST["usuario"];
         $conexion->mostrarordenes($id_usuario);

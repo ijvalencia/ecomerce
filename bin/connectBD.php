@@ -450,51 +450,6 @@ class BD {
         echo json_encode($arrnewfooter);
     }
     
-  /*  public function getcarruselfooter2(){
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
-        $arrnewfooter = [];
-        foreach ($this->conexion->query($sql) as $rownewfooter) {
-            array_push($arrnewfooter, $rownewfooter);
-        }
-        echo json_encode($arrnewfooter);
-    }
-    
-    public function getcarruselfooter3(){
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
-        $arrnewfooter = [];
-        foreach ($this->conexion->query($sql) as $rownewfooter) {
-            array_push($arrnewfooter, $rownewfooter);
-        }
-        echo json_encode($arrnewfooter);
-    }
-    
-    public function getcarruselfooter4(){
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
-        $arrnewfooter = [];
-        foreach ($this->conexion->query($sql) as $rownewfooter) {
-            array_push($arrnewfooter, $rownewfooter);
-        }
-        echo json_encode($arrnewfooter);
-    }
-    
-    public function getcarruselfooter5(){
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
-        $arrnewfooter = [];
-        foreach ($this->conexion->query($sql) as $rownewfooter) {
-            array_push($arrnewfooter, $rownewfooter);
-        }
-        echo json_encode($arrnewfooter);
-    }
-    
-    public function getcarruselfooter6(){
-        $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
-        $arrnewfooter = [];
-        foreach ($this->conexion->query($sql) as $rownewfooter) {
-            array_push($arrnewfooter, $rownewfooter);
-        }
-        echo json_encode($arrnewfooter);
-    }
-    */
     public function login($correo, $contra) {
         
         $sql = "SELECT id_usuario, nombre, apellidos, correo, contra FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
@@ -513,8 +468,8 @@ class BD {
         } 
     }
     
-    public function mostrarordenes($id_usuariosesion) {
-        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
+        public function mostrarordenes($id_usuariosesion) {
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
@@ -522,13 +477,14 @@ class BD {
         echo json_encode($arr);
     }
     
-    public function mostrarordenesdetalles($id_usuariosesiondetalle) {
-        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado, ordenes.metodo_pago,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,producto.precio,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesiondetalle . "'";
-        $arrdetalle = [];
+    public function mostrarordenesdetalles($id_ordenproductodetalle){ 
+        $sql="select producto.codigo_fabricante,producto.descripcion, producto.grupo, producto.marca, producto.imagen, ordenes.total,ordenes.fecha,ordenes.metodo_pago, productos_orden.cantidad from ordenes, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante='".$id_ordenproductodetalle."'";
+        //echo $sql."\n";
+        $arraydetalles=[];  
         foreach ($this->conexion->query($sql) as $rowordenardetalle) {
-            array_push($arrdetalle, $rowordenardetalle);
+            array_push($arraydetalles,  $rowordenardetalle);
         }
-        echo json_encode($arrdetalle);
+        echo json_encode($arraydetalles);
     }
 
     public function actualizarDatosUsuario($id, $nombre, $apellidos, $dia, $mes, $anio, $correos, $contra) {

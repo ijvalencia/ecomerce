@@ -12,28 +12,24 @@
     <body style="background: #f2f2f2;">
         <br> <!--class="panel-title"-->
         <div class="panel panel-default row">
-            <div class="panel-heading"> 
-                <h5 >ORDENES DE COMPRAS</h5>
+            <div class="panel-heading">
+               <h5>ORDENES DE COMPRAS</h5>
             </div>
-            <div class="panel-body row">
-                <div class="container-fluid bg-3 text-center">   
-                        <button class="btn btn-default" id="btncontacto">01-800-CVA</button>
-                        <!--<div id="nombre" class="detallesPro"></div>-->
-                        <div id="descripcion" class="detallesPro"></div>
-                        <div id="precio" class="Precios"></div>
-                        <a href="detalles_orden.php" id="btncontacto">Ver Detalles</a>
-                <div class="row">
-                    <div class="col-sm-2" id="position">
-                     <img src="imagen" id="imagen">
-                    </div>
-                </div>
-              </div>
-                </div>
-               <hr>
-        </div>
+                    <div id="contenido"></div>
+                    <!--<div id="nombre" class="detallesPro"></div>
+                       <div id="descripcion"></div>
+                       <div id="precio"></div>
+                       <a id="btncontacto">Ver Detalles</a>
+                   <div class="row">
+                    <div id="position">
+                     <img id="imagen">
+                   </div>
+                </div> -->
+            
+         
+      </div>
         <br>
         <br>
-        
         <!--class="panel-title"-->
         <!--
     <div class="panel panel-default row">
@@ -42,7 +38,6 @@
             </div>
         </div> 
         -->
-        
         <br>
        </body>
        <script src="orden.js"></script>

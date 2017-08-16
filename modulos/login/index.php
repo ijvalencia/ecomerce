@@ -46,6 +46,8 @@
                                             </div>
                                         </div>
 				                        <button type="button" class="btn" id="botonsesion">Iniciar Sesiòn</button>
+                                                        <br>
+                                                        <a href="#" class="contrasena" class="link" style="float: right;" >Olvidastes Contraseña</a> 
                                                     </form>
 			                    </div>
 		                    </div>

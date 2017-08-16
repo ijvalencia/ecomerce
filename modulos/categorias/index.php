@@ -22,14 +22,14 @@
 		<div class="container">
 			<div class="container" id="centrados">    
 				<div class="row">
-					<div class="col-md-8" id="recuadro_subcat">
+					<div class="col-md-7" id="recuadro_subcat">
 						<p class="titulo">Categorias relacionadas</p>
 					</div>
 					<div class="col-md-4">
 						<p class="titulo">COMPRAS 100% SEGURAS</p>
 						<img src="../../IMG/escudo.jpg" class="img-responsive" style="width:20px; height:20px; "alt="Image">
 						<ul>
-							<li class="contList1">° Paga seguro online o al recibir tu producto</li>
+							<li class="contList1">° Paga online o al recibir tu producto</li>
 							<li class="contList2">° Envíos a todo México</li><br>
 							<li class="contList3">° Devoluciones fáciles y sin costo</li>
 						</ul>

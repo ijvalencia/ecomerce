@@ -20,7 +20,7 @@
 			</ol>
 		  
             <!-- Imagen -->
-            <div class="col-md-8">    
+            <div class="col-md-7">    
                 <div class="modalZoom">
                     <img id="img_producto">
                 </div>

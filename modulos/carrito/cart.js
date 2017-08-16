@@ -3,9 +3,10 @@ var tipo_cambio;
 var iva;
 var sesion = "";
 var dato;
-var codigofabricante, direcion = 0, numeroorden;
+var codigofabricante, direcion = 0, numeroorden, subtotal;
 var txtcantidad0 = 0, txtcantidad1 = 0, txtcantidad2 = 0, txtcantidad3 = 0, txtcantidad4 = 0, txtcantidad5 = 0;
-
+var sub = 0;
+var sub_iva = 0;
 var datoss;
 
 $.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
@@ -56,6 +57,14 @@ $(document).ready(function () {
         });
         $('.loader').fadeOut("slow");
     });
+     
+    $('#abrir_tarjetas').on("click", function () {
+        $('#form_busqueda').hide();
+    });
+    $('#cerrar_tarjetas').on("click", function () {
+        $('#form_busqueda').show();
+           window.location.href = "../../modulos/orden/Orden.php";
+    });
     $('#btn_confirmar_compra').on("click", function () {
         //alert("hola"+sesion);
         if (sesion == "" || sesion == "invitado" || sesion == null) {
@@ -66,49 +75,40 @@ $(document).ready(function () {
         } else {
             if (parseFloat($('#txt_total').text()) > parametros["compra_maxima"]) {
                 jAlert("Para confirmar tu compra comunicate a " + parametros["no_cva"]);
-            } else {                
-                
-                $.ajax({
+            } else {
+                   $.ajax({
                     type: "get",
                     url: "../../bin/ingresar.php?categoria=getCarrito",
-                    success: function (mns){
-                       mns = JSON.parse(mns);
-                       codigofabricante = String(mns[0]["codigo_fabricante"]);
-                       var txtidconsulta = $("#selector_envio").val();
-                       var pago = "mastercard";
-                       alert(txtidconsulta+number+direcion);   
+                    success: function (mns) {
+                        mns = JSON.parse(mns);
+                        codigofabricante = String(mns[0]["codigo_fabricante"]);
+                        var txtidconsulta = $("#selector_envio").val();
+                        var pago = $("#selector_envio1").val();
+                      //  var pago = "mastercard";
+                        console.log(codigofabricante,txtidconsulta,pago);
+                        alert(txtidconsulta + number + direcion);
                         txtcantidad0 = $("#cantidad0").val();
-                          $.ajax({
+                        $.ajax({
                             type: "POST",
                             url: "../../bin/ingresar.php?categoria=agregarordenes",
-                            data: {"idusuario": number, "direccion":direcion, "idenvio": txtidconsulta, "subtotal": subtotal, "metodo_pago": pago, "codigoF": codigofabricante,"cantidad":txtcantidad0},
-                            success: function(mnss){
+                            data: {"idusuario": number, "direccion": direcion, "idenvio": txtidconsulta, "subtotal": formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)), "metodo_pago": pago, "codigoF": codigofabricante, "cantidad": txtcantidad0},
+                            success: function (mnss) {
                                 mnss = JSON.parse(mnss);
                                 numeroorden = String(mnss[0]["id_ordenes"]);
-                                alert("orden"+mnss[0]["id_ordenes"]+"number"+number);
-                                
-                          
-                            }
-                         });
-                       }
-                    });
-                    /*$.ajax({
-                        type:"POST",
-                        url: "../../bin/ingresar.php?categoria=productosordenes",
-                        data: {"id_orden":numeroorden,"codigoF": codigofabricante,"cantidad":txtcantidad0},
-                            success: function (mns1){
-                                jAlert("hola a todos productos orden"+mns1);
-                                  if (mns1 !== null) {
-                                     jAlert("COMPRA REALIZADA CON EXITO");
-                                } else if (mns1 === null){
-                                         jAlert("ERROR");
-                                    }
+
+                                if (numeroorden !== null) {
+                                    console.log(numeroorden);
+                                    jAlert("COMPRA REALIZADA");
+                                } else {
+                                    jAlert("Compra no Realizada");
                                 }
-                            });*/  
-                 }        
-                    //jAlert("entro"+datoss);
-              }
-            // Enviar a la pag de ordenes
+                                //alert("orden"+mnss[0]["id_ordenes"]+"number"+number);
+                            }
+                        });
+                    }
+                });
+              }        
+            }
     });
 });
 
@@ -128,12 +128,11 @@ var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-
             $('tbody').append(salida);
             // alert(salida);
         });
-        var sub = 0;
         var precios = $(".precios").text().replace(/,/g, "").trim().split(" ");
         $.each($('.numero_cantidad'), function (i, valor) {
             sub += valor.value * precios[i];
         });
-        var sub_iva = 0;
+        
         var ivas = $('.ivas').text().replace(/,/g, "").trim().split(" ");
         $.each($('.numero_cantidad'), function (i, valor) {
             sub_iva += valor.value * ivas[i];
@@ -174,6 +173,8 @@ function actualizarTotal() {
         sub_iva += valor.value * ivas[i];
     });
     sub = sub.toFixed(2);
+    subtotal=sub;
+    alert(subtotal);
     $('#txt_subtotal').append(formatoMoneda(sub));
     $('#txt_iva').append(formatoMoneda(sub_iva));
     $('#txt_total').append(formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)));

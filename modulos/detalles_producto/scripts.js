@@ -9,17 +9,17 @@ var iva;
 var parametros;
 var tipo_cambio;
 
-$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
-    parametros = datos;
-    iva = parseFloat(datos.iva);
-    iva = (iva/100)+1;
-    tipo_cambio = datos.tipo_cambio + datos.agregado;
-    $('#numero_comprar').append(datos.no_cva);
-});
-	
 $(document).ready(function() {
     	/* Mostrar producto */
-	cargarProducto($('#producto').attr("value"));
+        $.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
+            parametros = datos;
+            iva = parseFloat(datos.iva);
+            iva = (iva/100)+1;
+            tipo_cambio = datos.tipo_cambio + datos.agregado;
+            $('#numero_comprar').append(datos.no_cva);
+	    cargarProducto($('#producto').attr("value"));
+        });
+    
 	/* Zoom imagen del producto */
 	$('#img_producto').click(function() {
 		$('#modalZoom').show();
@@ -67,7 +67,7 @@ function cargarProducto(codigo) {
             $('#img_producto').attr("src", articulo["imagen"]);
             $('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
             $('#descripcion_producto').append(articulo["descripcion"]);
-            $('#precio_producto').append((articulo["moneda"] === "Pesos" ? formatoMoneda(articulo["precio"]*iva) : formatoMoneda(articulo["precio"]*articulo['tipocambio']*iva)));
+            $('#precio_producto').append(formatoMoneda(articulo["precio"]*iva));
             $('#cant_disponibles').append(total_disp);
             var ftecnica;
             ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"] : "NO EXISTE INFORMACION ADICIONAL";

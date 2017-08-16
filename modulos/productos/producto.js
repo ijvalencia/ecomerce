@@ -109,6 +109,26 @@ $(document).ready(function () {
             event.preventDefault();
             var productos_filtro = productos_busqueda.slice();
             /* Agregar marcas */
+            var marcas_filtro = [];
+            $.each($('#marquitas li input'), function(i, objeto) {
+                if (objeto.checked)
+                    marcas_filtro.push(objeto.value);
+            });
+            var aux = false;
+            for (var i = 0; i < productos_filtro.length; i++) {
+                aux = false;
+                for (var j = 0; j < marcas_filtro.length; j++) {
+                    if (productos_filtro[i].marca == marcas_filtro[j]) {
+                        aux = true;
+                        break;
+                    }
+                }
+                if (!aux) {
+                    productos_filtro.splice(i, 1);
+                    i--;
+                }
+            }
+            /* Filtro de diponibilidad */
             if ($('#filtro_disponibilidad').val() != "Indiferente") {
                 switch ($('#filtro_disponibilidad').val()) {
                     case "Local":
@@ -125,8 +145,9 @@ $(document).ready(function () {
                                 i--;
                             }
                         break;
-                                                         }
+                }
             }
+            /* Filtro precio */
             if ($('#filtro_miSalario').val() != "0" || $('#filtro_miExpectativa').val() != "250000") {
                 var min = parseFloat($('#filtro_miSalario').val());
                 var max = parseFloat($('#filtro_miExpectativa').val());
@@ -136,8 +157,9 @@ $(document).ready(function () {
                         i--;
                     }
             }
-            if ($('input[name=orden]:checked').val() != "normal") {
-                switch($('input[name=orden]:checked').val()) {
+            /* Ordenamientos */
+            if ($('#filtro_orden').val() != "normal") {
+                switch($('#filtro_orden').val()) {
                     case "mayor":
                         productos_filtro = productos_filtro.sort(function(a, b) {return b.precio - a.precio});
                         break;
@@ -150,8 +172,7 @@ $(document).ready(function () {
                     case "invalfa":
                         productos_filtro = productos_filtro.sort(function(a, b) {return ((a.descripcion < b.descripcion) ? 1 : ((a.descripcion > b.descripcion) ? -1 : 0));});
                         break;
-                                                           }
-                /* TERMINAR ORDENAMIENTO A->Z Y VICEVERSA */
+                }
             }
             cargarBusqueda(productos_filtro);
         });
@@ -214,12 +235,11 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
         for (var x = 0; x < respuesta.length - 1; x++)
         {
             var informacion = respuesta[x].split("%")
-            $('#marquitas').append('<li><input type="checkbox" name="marca' + x + '" value="' +
+            $('#marquitas').append('<li class="check"><input type="checkbox" name="marca' + x + '" value="' +
                     informacion[0] + '"> ' + informacion[0].substr(0, 8) + ' <u>(' + informacion[1] + ')</u></li>');
         }
 
     });
-
 
 
     //filtro color
@@ -234,15 +254,12 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
             {
                 if (respuesta !== "0")
                 {
-                    auxColor += '<li><input type="checkbox" name="' + color[x] + '" value="' + color[x] + '"> ' + color[x] + ' <u>(' + respuesta + ')</u></li>';
+                    auxColor += '<li class="check"><input  type="checkbox" name="' + color[x] + '" value="' + color[x] + '"> ' + color[x] + ' <u>(' + respuesta + ')</u></li>';
                 }
             }
         });
     }
-    if (auxColor == "")
-        $('#lista_color').hide();
-    else
-        $('#lista_color').append(auxColor);
+    $('#lista_color').append(auxColor);
 
 
 
@@ -267,7 +284,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                         async: false,
                         success: function (respuesta)
                         {
-                            contenido += '<li><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '"> ' + GB[x] + ' GB  <u>(' + respuesta + ')</u>' + '</li>';
+                            contenido += '<li class="check" ><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '"> ' + GB[x] + ' GB  <u>(' + respuesta + ')</u>' + '</li>';
                             x++;
                             if (x === GB.length - 1) {
                                 salir = true;
@@ -285,9 +302,8 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 $.ajax({
                     url: "../../bin/ingresar.php?categoria=cantidad_memoria&TB=" + TB[x] + "&grupo=" + crayola,
                     async: false,
-                    success: function (respuesta)
-                    {
-                        contenido1 += '<li><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '"> ' + TB[x] + ' TB  <u>(' + respuesta + ')</u>' + '</li>';
+                    success: function (respuesta) {
+                        contenido1 += '<li class="check"><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '"> ' + TB[x] + ' TB  <u>(' + respuesta + ')</u>' + '</li>';
                         x++;
                         if (x === TB.length - 1) {
                             texto2 += contenido1 + contenido;
@@ -310,12 +326,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 function (cantidad) {
                     $('#catidad').append(cantidad);
                 });
-
-
-
-
-
-
+                
     //productos
     $.ajax({
         type: "POST",
@@ -365,12 +376,17 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
             }
         }
     });
+    $('.loader').fadeOut("slow");
+    $.ajax({
+        url: "sidebar.js",
+        dataType: "script",
+        success: function () {}
+    });
 
-
-            $('.loader').fadeOut("slow");
-            $.ajax({
-                url: "sidebar.js",
-                dataType: "script",
-                success: function () {}});
-
+    // console.log($('#lista_color').text().length );
+    // console.log($('#lista_memoria').text().length );
+    if ($('#lista_color').text().length < 1)
+        $('#coloreamela').hide();
+    if ($('#lista_memoria').text().length < 1)
+        $('#memorama').hide();
 }

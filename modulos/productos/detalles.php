@@ -33,7 +33,7 @@
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_marca">Por Marca:</a> 
-                                        <ul class="menu hidden" role="menu" id="sub_marca"><center id="marquitas"></center></ul>
+                                        <ul class="menu hidden" role="menu" id="sub_marca"><span id="marquitas"></span></ul>
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_disponible">Disponibilidad:</a>
@@ -64,22 +64,22 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_orden">Ordenar por:</a>
                                         <ul class="menu hidden" role="menu" id="sub_orden">
-                                            <li><select id="filtro_disponibilidad" type="text" name="orden">
-                                                    <option value="normal"> Indiferente</option>
-                                                    <option value="mayor"> Precio(mayor a menor)</option>
-                                                    <option value="menor"> Precio(menor a mayor)</option>
-                                                    <option value="alfa"> A->Z </option>
-                                                    <option value="invalfa"> Z->A </option>
-                                                </select></li>
+                                            <li><select id="filtro_orden" type="text" name="orden">
+                                                <option value="normal"> Indiferente</option>
+                                                <option value="mayor"> Precio(mayor a menor)</option>
+                                                <option value="menor"> Precio(menor a mayor)</option>
+                                                <option value="alfa"> A->Z </option>
+                                                <option value="invalfa"> Z->A </option>
+                                            </select></li>
                                         </ul>   
                                     </li>
                                     <li id="memorama" class="dropdown">
                                         <a class="dropdown-toggle" id="btn_memoria">Por memoria:</a> 
-                                        <ul class="menu hidden" role="menu" id="sub_memoria"><center id="lista_memoria"></center></ul>
+                                        <ul class="menu hidden" role="menu" id="sub_memoria"><span id="lista_memoria"></span></ul>
                                     </li>
                                     <li id="coloreamela" class="dropdown">
                                         <a class="dropdown-toggle" id="btn_color">Por Color:</a> 
-                                        <ul class="menu hidden" role="menu" id="sub_color"><center id="lista_color"></center></ul>
+                                        <ul class="menu hidden" role="menu" id="sub_color"><span id="lista_color"></span></ul>
                                     </li>
                                 </ul>
                             </div>

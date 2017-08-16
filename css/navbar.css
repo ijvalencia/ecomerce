@@ -438,7 +438,8 @@ padding-bottom: 51px;
   padding: 13px 15px;
 }
 .line-navbar-two .lnt-search-form .form-control {
-  border: 2px solid #333333;
+    
+  border: 2px solid #D4D4D4;
   border-radius: 0;
   height: 50px;
   width: 215px;
@@ -702,9 +703,7 @@ padding-bottom: 51px;
 .line-navbar-left .lnl-nav li .lnl-sub-two {
   background-color: #1c1b24;
 }
-.line-navbar-left .lnl-nav li .lnl-sub-two li {
-  border-top-color: 1px solid #23222d;
-}
+
 .line-navbar-left .lnl-nav li .lnl-sub-two li a {
   color: #a7a9ac;
 }
@@ -735,11 +734,9 @@ padding-bottom: 51px;
   -o-transform: translate(250px, 0);
   transform: translate(250px, 0);
   opacity: 0.1;
-  filter: alpha(opacity=10);
 }
 .content-wrap.lnl-overlay {
   opacity: 0.1;
-  filter: alpha(opacity=10);
 }
 
 /* SATANAS */
@@ -779,8 +776,6 @@ padding-bottom: 51px;
   background: white;
   background-image: -webkit-linear-gradient(right, white, darkorange);
   background-image: -moz-linear-gradient(right, white, darkorange);
-  background-image: -ms-linear-gradient(right, white, darkorange);
-  background-image: -o-linear-gradient(right, white, darkorange);
   background-image: linear-gradient(to left, white, darkorange);
 }
 .line-navbar-two .lnt-dropdown-mega-menu .lnt-subcategroy-carousel-wrap .lnt-subcategory ul li a:hover {
@@ -824,9 +819,6 @@ nav .dropdown .menu li input[type = "number"] {
     width: 80px;
   margin: 0px -15px 0px -60px;
 }
-nav .dropdown .menu li select option{
-    margin
-}
 nav .dropdown .menu li input[type = "radio"] {
   width: auto;
 }
@@ -835,7 +827,7 @@ nav .dropdown .menu li input[type = "checkbox"] {
     display: block;
     width: 30px;
     height: auto;
-    margin: 10px 0px 0px -20px;
+    margin: 8px 0px 0px -30px;
 }
 nav .dropdown .menu li input span {
     margin: 0px 0px 0px 0px;
@@ -843,5 +835,8 @@ nav .dropdown .menu li input span {
 .separator {
     padding: 40px;
 }
-/***********/
+#lista_color, #lista_memoria, #marquitas {
+  text-align: left;
+}
+/*********/
 

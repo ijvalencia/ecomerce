@@ -1,7 +1,7 @@
 
 //$('.navbar-nav').append("<li>una tonteria</li>");
 $('.dropdown-toggle').click(function() {
-    console.log($(this).attr("id"));
+    // console.log($(this).attr("id"));
     switch($(this).attr("id")) {
         case "btn_marca":
             mostrar('#sub_marca');

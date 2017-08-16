@@ -105,13 +105,13 @@
                 <li class="dropdown">
                     <span id="nombre_usuario_nav"></span>
                     <div class="btn-group" role="group" aria-label="...">
-                        <a class="btn btn-default lnt-cart" href="../inicio/index.php">
+                        <a class="btn btn-default lnt-cart" href="../inicio/index.php" id="hover1">
                             <div class="background_icon_navbar">
                                 <img id="navbar_icon_envio" src="../../imgweb/envio.png" width="28px" height="28px">
                             </div>
                         </a>
                         <div class="btn-group" role="group">
-                            <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" > 
+                            <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" id="hover2"> 
                                 <div class="background_icon_navbar">
                                     <img id="navbar_icon_login" src="../../imgweb/login.png" width="28px" height="28px" style="-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,.4), rgba(0, 0, 0,.4))">
                                 </div>

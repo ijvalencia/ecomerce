@@ -75,9 +75,33 @@
                                             <h3>$<a id="txt_total"></a></h3>
                                         </li>
                                     </ul>
-                                    <button type="button" class="btn btn-default" id="btn_confirmar_compra" style="margin-left:40px">
-                                        Confirmar compra
-                                    </button>
+                                     <div class="container" style="width: 89%;">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" id="abrir_tarjetas">Realizar compra</button>
+                                       <div class="modal fade" id="myModal" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Realizar Compra</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Tipo de tarjeta</p>
+                                                        <select class="selectpicker" id="selector_envio1">
+                                                            <option value="Mastercard">Mastercard</option>
+                                                            <option value="American express">American express</option>
+                                                            <option value="Visa">Visa</option>
+                                                        </select>
+                                                        <button type="button" class="btn btn-default" id="btn_confirmar_compra">
+                                                            Confirmar compra
+                                                        </button>  
+                                                    </div>
+                                               <div class="modal-footer">
+                                                  <button type="button" class="btn btn-default" data-dismiss="modal"id="cerrar_tarjetas">Close</button>
+                                               </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row"></div>
                                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
                                         <input type="hidden" name="cmd" value="_xclick">
