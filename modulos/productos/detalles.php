@@ -32,8 +32,8 @@
                             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
-                                        <a class="dropdown-toggle" id="btn_marca">Por Marca:</a> 
-                                        <ul class="menu hidden" role="menu" id="sub_marca"><span id="marquitas"></span></ul>
+                                        <a class="dropdown-toggle" id="btn_marca">Por Marca:</a>
+                                        <ul class="menu hidden" role="menu" id="sub_marca"><center id="marquitas"></center></ul>
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_disponible">Disponibilidad:</a>
@@ -54,9 +54,9 @@
                                         <ul class="menu hidden" role="menu" id="sub_precio">
                                             <center>
                                                 <li>
-                                                    <input id="filtro_miSalario" value="0" name="min" type="number" min="0" max="250000">
+                                                    <input id="filtro_miSalario" value="<?php echo $_GET['priceMIN'];?>" name="min" type="number" min="0" max="250000">
                                                     <span class="separator"></span>
-                                                    <input id="filtro_miExpectativa" value="250000" name="max" type="number" min="0" max="250000">
+                                                    <input id="filtro_miExpectativa" value="<?php echo $_GET['priceMAX'];?>" name="max" type="number" min="0" max="250000">
                                                 </li>
                                             </center>
                                         </ul>   
@@ -65,21 +65,22 @@
                                         <a class="dropdown-toggle" id="btn_orden">Ordenar por:</a>
                                         <ul class="menu hidden" role="menu" id="sub_orden">
                                             <li><select id="filtro_orden" type="text" name="orden">
-                                                <option value="normal"> Indiferente</option>
-                                                <option value="mayor"> Precio(mayor a menor)</option>
-                                                <option value="menor"> Precio(menor a mayor)</option>
-                                                <option value="alfa"> A->Z </option>
-                                                <option value="invalfa"> Z->A </option>
-                                            </select></li>
+                                                    <option value="normal"> Indiferente</option>
+                                                    <option value="mayor"> Precio(mayor a menor)</option>
+                                                    <option value="menor"> Precio(menor a mayor)</option>
+                                                    <option value="alfa"> A->Z </option>
+                                                    <option value="invalfa"> Z->A </option>
+                                                </select>
+                                            </li>
                                         </ul>   
                                     </li>
-                                    <li id="memorama" class="dropdown">
-                                        <a class="dropdown-toggle" id="btn_memoria">Por memoria:</a> 
-                                        <ul class="menu hidden" role="menu" id="sub_memoria"><span id="lista_memoria"></span></ul>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" id="btn_memoria">Por Memoria:</a>
+                                        <ul class="menu hidden" role="menu" id="sub_memoria"><span id="memorama"></span></ul>
                                     </li>
-                                    <li id="coloreamela" class="dropdown">
-                                        <a class="dropdown-toggle" id="btn_color">Por Color:</a> 
-                                        <ul class="menu hidden" role="menu" id="sub_color"><span id="lista_color"></span></ul>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" id="btn_color">Por Color:</a>
+                                        <ul class="menu hidden" role="menu" id="sub_color"><span id="coloreamela"></span></ul> 
                                     </li>
                                 </ul>
                             </div>

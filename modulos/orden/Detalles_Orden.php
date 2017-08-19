@@ -42,7 +42,7 @@
                     <br> 
                     <div class="row">
                        <div class="panelessde">
-                           <div id="pagos">
+                          <div id="pagos">
                                 <p class="detallesPros">Metodo de Pago</p>
                                 <img src="../../IMG/tarjeta.png" style="width: 30px" class="img-circle">
                           </div>

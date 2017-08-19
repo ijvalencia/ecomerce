@@ -703,7 +703,9 @@ padding-bottom: 51px;
 .line-navbar-left .lnl-nav li .lnl-sub-two {
   background-color: #1c1b24;
 }
-
+.line-navbar-left .lnl-nav li .lnl-sub-two li {
+  border-top-color: 1px solid #23222d;
+}
 .line-navbar-left .lnl-nav li .lnl-sub-two li a {
   color: #a7a9ac;
 }
@@ -734,9 +736,11 @@ padding-bottom: 51px;
   -o-transform: translate(250px, 0);
   transform: translate(250px, 0);
   opacity: 0.1;
+  filter: alpha(opacity=10);
 }
 .content-wrap.lnl-overlay {
   opacity: 0.1;
+  filter: alpha(opacity=10);
 }
 
 /* SATANAS */
@@ -838,5 +842,5 @@ nav .dropdown .menu li input span {
 #lista_color, #lista_memoria, #marquitas {
   text-align: left;
 }
-/*********/
+/***********/
 

@@ -5,6 +5,15 @@ var bandera = false;
 var bandera2 = false;
 
 $(document).ready(function () {
+    
+    $('#link').on("click", function () {
+        $('#form_busqueda').hide();
+    });
+    
+    $('#closeddd').on("click", function () {
+        $('#form_busqueda').show();
+    });
+    
     $("#btn-enviar").attr("disabled", true);
       $("#botonsesion").on('click', function () {
         var txtusuario = $("input:text[id='form-mail']").val();

@@ -18,17 +18,17 @@ class BD {
     public function conectar() {
         $username = "desarrollo";
         $password = "Pa55w0rd!crm";
-
+        
         $this->conexion = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
         if (mysqli_connect_errno($this->conexion)) {
             echo "Error al conectar con MySQL: " . mysqli_connect_error();
         }
         
         /* Conectar a BD Local */
-        // $this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
-        // if (mysqli_connect_errno($this->conexion)) {
-        //     echo "Error al conectar con MySQL: " . mysqli_connect_error();
-        // }
+        //$this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
+        //if (mysqli_connect_errno($this->conexion)) {
+        //    echo "Error al conectar con MySQL: " . mysqli_connect_error();
+        //}
     }
 
     // Procedimiento para cerrar conexion
@@ -406,30 +406,26 @@ class BD {
 	}
 	/***********/
     /* parte del chuy */
-    public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado, $codigoF, $cantidad) {
+        
+    public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado) {
         date_default_timezone_set('America/Mexico_City');
         $fecha = date('d/m/Y H:i:s', time());
-        $sql = "INSERT INTO ordenes(id_usuario, id_direccion, id_envio, fecha, total, metodo_pago, estado)
-             VALUES ('" . $usuario . "','" . $direccion . "','" . $envio . "',
-             STR_TO_DATE('" . $fecha . "', '%d/%m/%Y %H:%i:%s'),'" .
-             $total . "','" . $metodo_pago . "'," . $estado . ")";
-        echo $this->conexion->query($sql) ? "1" : "0"; 
-      
-        $sql = "select id_ordenes from ordenes where id_usuario='".$usuario."' and estado='".$estado."' and fecha= STR_TO_DATE('".$fecha."','%d/%m/%Y %H:%i:%s')";
-         foreach ($this->conexion->query($sql) as $row) {
-            $row['id_ordenes'];
-            $sql = "INSERT INTO productos_orden (id_orden, id_producto, cantidad) VALUES('".$row['id_ordenes']."','".$codigoF."','".$cantidad."')";
-            echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-            
-           }
-              //$id_ordeness=[];
-     /* foreach($this->conexion->query($sql) as $rowidordenar){
-           array_push($id_ordeness , $rowidordenar);
-        }
-        echo json_encode($id_ordeness);  
-       */ 
-        
+           $sql = "INSERT INTO ordenes(id_usuario, id_direccion, id_envio, fecha, total, metodo_pago, estado)
+           VALUES ('".$usuario."','".$direccion."','".$envio . "',
+           STR_TO_DATE('".$fecha."', '%d/%m/%Y %H:%i:%s'),'" .
+           $total . "','" . $metodo_pago . "'," . $estado .")";
+//            echo $this->conexion->query($sql) ? "1" : "0";       
+            $sql= "select id_ordenes from ordenes where id_usuario='".$usuario."' and estado='".$estado."' and fecha=STR_TO_DATE('".$fecha."','%d/%m/%Y %H:%i:%s')";             
+            foreach($this->conexion->query($sql) as $row){
+              echo $row['id_ordenes'];
+            }  
     }
+    
+    public function producto_orden($id_codigo ,$codigoF, $cantidad){            
+            $sql = "INSERT INTO productos_orden (id_orden, id_producto, ccantidad)VALUES('".$id_codigo."','".$codigoF."','".$cantidad."')";
+            echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito           
+    }
+    
     public function getdireccionesusuario($idusuario){
           $sql = "select id_usuario, id_direccion from direccion  where id_usuario='".$idusuario."'";	
           $usuarioDireciones = [];
@@ -592,7 +588,7 @@ class BD {
 
 
         $sql = "select * from producto where grupo='" . $subcat . "' " . $filtros . " limit " . $min . "," . $max;
-        //echo $sql . "<br>";
+        
         $buscado = $this->conexion->query($sql);
         error_reporting(0);
         for ($x = 0; $x < 20; $x++) {
@@ -602,9 +598,6 @@ class BD {
                 $articulos->item[$x]->imagen = $fila['imagen'];
                 $articulos->item[$x]->codigo_fabricante = $fila['codigo_fabricante'];
                 $articulos->item[$x]->precio = $fila['precio'];
-                /* echo "<br>".$articulos->[$x]->descripcion;
-                  echo "<br>".$articulos->item[$x]->imagen;
-                  echo "<br>".$articulos->item[$x]->codigo_fabricante."<br>"; */
             }
         }
         echo json_encode($articulos);
@@ -626,6 +619,8 @@ class BD {
             }
             $color = " and (" . $color . ") ";
         }
+        
+        
 
         $filtros = ' AND precio >' . $Pmin . ' AND precio <' . $Pmax . '  ';
 
@@ -648,9 +643,9 @@ class BD {
             foreach ($marca_unica as $mar) {
                 if ($mar !== "") {
                     if ($marca == "")
-                        $marca = " marca like '%" . $mar . "%' ";
+                        $marca = " marca='" . $mar . "' ";
                     else
-                        $marca = $marca . " or marca like '%" . $mar . "%' ";
+                        $marca = $marca . " or marca='" . $mar . "'";
                 }
             }
             $marca = " and (" . $marca . ") ";
@@ -662,34 +657,14 @@ class BD {
 
         $sql = "select count(*) from producto where grupo='" . $grupo . "'" . $color . $filtros;
 
-        if ($aux !== "")
+        if ($aux !== "" || $aux !== null)
             $color = "&color=" . $aux;
         else
             $color = "";
 
         $cantidad_productos = $this->conexion->query($sql);
-        if ($cantidad != 1) {
-            echo "<center><a href='detalles.php?extra=" . ($cantidad - 1) . $color . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/izquierda.png' style='width:50px;heigth:auto;'></a>";
-        }
         $cantidad_grupo = mysqli_fetch_array($cantidad_productos);
-        $cantidad_grupo['count(*)'] /= 20;
-        $cantidad_grupo = ceil($cantidad_grupo['count(*)']);
-        for ($x = 1; $x <= $cantidad_grupo; $x++) {
-            if ($cantidad == $x) {
-                echo '<u>';
-            }
-            echo " <a href='detalles.php?extra=" . $x . $color . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'>" . $x;
-
-            if ($cantidad == $x) {
-                echo "</u>";
-            }
-            echo "</a>  ";
-        }
-        if ($cantidad < $cantidad_grupo) {
-            echo "<a href='detalles.php?extra=" . ($cantidad + 1) . $color . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'><img src='../../IMG/derecha.png' style='width:50px;heigth:auto;'></a>";
-        }
-
-        //echo "<br>".$grupo."<br>". $cantidad."<br>". $marca."<br>". $envio."<br>". $Pmin."<br>". $Pmax;
+        echo $cantidad_grupo['count(*)'];
     }
 
     public function verMarcas($grupo) {
@@ -703,20 +678,18 @@ class BD {
         }
         $x = 0;
         foreach ($marca as $numero_m) {
-            $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" and marca="'.$numero_m.'"';
+            $sql = 'SELECT count(*) FROM producto WHERE grupo = "' . $grupo . '" and marca="' . $numero_m . '"';
             $cantidad_marcas = $this->conexion->query($sql);
-            $fila=mysqli_fetch_array($cantidad_marcas);
-            $marca[$x].="%".$fila['count(*)'];
+            $fila = mysqli_fetch_array($cantidad_marcas);
+            $marca[$x] .= "%" . $fila['count(*)'];
             $x++;
         }
-        foreach($marca as $verMarca)
-        {
-            echo $verMarca.";";
+        foreach ($marca as $verMarca) {
+            echo $verMarca . ";";
         }
     }
 
     public function verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden, $color) {
-
         if ($color !== "") {
             $colores = explode("/", $color);
             $color = "";
@@ -732,8 +705,27 @@ class BD {
         }
 
         $sql_extra = "";
-        if ($marca !== "totaliti")
-            $sql_extra += " and marca='" . $marca . "' ";
+        if ($marca == "undefined")
+            $marca = "";
+
+        if ($marca !== "" || $marca == "totaliti") {
+            $marca_unica = explode("$", $marca);
+            $marca = "";
+            foreach ($marca_unica as $mar) {
+                if ($mar !== "") {
+                    if ($marca == "")
+                        $marca = " marca like '%" . $mar . "%' ";
+                    else
+                        $marca = $marca . " or marca like '%" . $mar . "%' ";
+                }
+            }
+            $marca = " and (" . $marca . ") ";
+        } else
+            $marca = "";
+        
+        $sql_extra=$marca;
+        
+        
         switch ($envio) {
             case "Foraneo":
                 $sql_extra += " and CDMX>0 ";
@@ -743,7 +735,6 @@ class BD {
                 $sql_extra += " and GDL>0 ";
                 break;
         }
-
         switch ($orden) {
             case "normal":
                 $ordenamiento = "";
@@ -765,14 +756,10 @@ class BD {
                 $ordenamiento = "order by descripcion desc";
                 break;
         }
-
-
-
-
-
-
         $sql_extra = $sql_extra . $color . " " . $ordenamiento;
         error_reporting(0);
+        
+        
         $capacidades = explode("$", $capacidad[0]);
         $x = 0;
         foreach ($capacidades as $busqueda) {
@@ -786,14 +773,15 @@ class BD {
                 $x++;
             }
         }
+        
+        
         $y = 0;
         $capacidades = explode("$", $capacidad[1]);
         foreach ($capacidades as $busqueda) {
-
+            
             $sql = "select * from producto where grupo='" . $categoria . "' and TB=" . $busqueda . $sql_extra;
             $resultado = $this->conexion->query($sql);
             while ($recorrido = mysqli_fetch_array($resultado)) {
-                //echo $item->descripcion."<br>";
                 $item[$y]->descripcion = $recorrido['descripcion'];
                 $item[$y]->precio = $recorrido['precio'];
                 $item[$y]->imagen = $recorrido['imagen'];

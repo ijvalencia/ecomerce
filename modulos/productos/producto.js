@@ -30,8 +30,6 @@ $(document).ready(function () {
     {
         for (var ver in get)
         {
-            //alert(ver);
-            //alert(get[ver]);
             if (ver == "busqueda_MG")
                 var memoriag = get[ver];
             if (ver == "busqueda_MT")
@@ -58,13 +56,13 @@ $(document).ready(function () {
             }
             if (ver == "subcategoria")
                 if (memoriag || memoriat)
-                    mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden, "&capacidadg=" + memoriag + "&capacidadt=" + memoriat, color);
+                    mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden, "&capacidadg=" + memoriag, "&capacidadt=" + memoriat, color);
                 else
-                    mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden, "", color);
+                    mostrarArticulos(get[ver], lugar, marca, envio, min, max, orden, "", "", color);
         }
     } else
         $('.loader').fadeOut("slow");
-    
+
     /* SATANAS */
     var supercategoria = $('#supercategoria').attr("value");
     var busqueda = $('#busqueda').attr("value");
@@ -72,16 +70,16 @@ $(document).ready(function () {
         $('#AquiGrupo').append("busqueda");
         $('.breadcrumb').empty().append('<li><a href="../../modulos/inicio/index.php">Inicio</a></li><li>Productos</li><li><a></a>Busqueda</li>');
         $('#memorama').hide();
-        $('#coloreamela').hide();
+        $('#coloreamela').hide();        
         busqueda = busqueda.trim().split(" ");
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=buscar",
-            data: {"categoria":supercategoria, "palabras":busqueda},
-            success: function(respuesta) {
+            data: {"categoria": supercategoria, "palabras": busqueda},
+            success: function (respuesta) {
                 respuesta = JSON.parse(respuesta);
-                $.each(respuesta, function(i, objeto) {
-                    $.each(objeto, function(j, producto) {
+                $.each(respuesta, function (i, objeto) {
+                    $.each(objeto, function (j, producto) {
                         productos_busqueda.push(producto);
                     });
                 });
@@ -92,8 +90,9 @@ $(document).ready(function () {
                 $('.loader').fadeOut("slow");
             }
         });
+
         /* Agrega filtro a busqueda */
-        $('#btn_filtramela').click(function(event) {
+        $('#btn_filtramela').click(function (event) {
             event.preventDefault();
             var productos_filtro = productos_busqueda.slice();
             /* Filtro de marcas */
@@ -105,7 +104,7 @@ $(document).ready(function () {
             var aux = false;
             if (marcas_filtro.length < 1)
                 productos_filtro = productos_busqueda.slice();
-            else
+            else {
                 for (var i = 0; i < productos_filtro.length; i++) {
                     aux = false;
                     for (var j = 0; j < marcas_filtro.length; j++) {
@@ -114,23 +113,24 @@ $(document).ready(function () {
                             break;
                         }
                     }
-                    if (!aux) {
+                    if (!aux) { 
                         productos_filtro.splice(i, 1);
                         i--;
                     }
                 }
+            }
             /* Filtro de diponibilidad */
             if ($('#filtro_disponibilidad').val() != "Indiferente") {
                 switch ($('#filtro_disponibilidad').val()) {
                     case "Local":
-                        for (var i = 0; i < productos_filtro.length; i++) 
+                        for (var i = 0; i < productos_filtro.length; i++)
                             if (productos_filtro[i].GDL == "0") {
                                 productos_filtro.splice(i, 1);
                                 i--;
                             }
                         break;
                     case "Foraneo":
-                        for (var i = 0; i < productos_filtro.length; i++) 
+                        for (var i = 0; i < productos_filtro.length; i++)
                             if (productos_filtro[i].CDMX == "0") {
                                 productos_filtro.splice(i, 1);
                                 i--;
@@ -142,7 +142,7 @@ $(document).ready(function () {
             if ($('#filtro_miSalario').val() != "0" || $('#filtro_miExpectativa').val() != "250000") {
                 var min = parseFloat($('#filtro_miSalario').val());
                 var max = parseFloat($('#filtro_miExpectativa').val());
-                for (var i = 0; i < productos_filtro.length; i++) 
+                for (var i = 0; i < productos_filtro.length; i++)
                     if (parseFloat(productos_filtro[i].precio) < min || parseFloat(productos_filtro[i].precio) > max) {
                         productos_filtro.splice(i, 1);
                         i--;
@@ -155,13 +155,13 @@ $(document).ready(function () {
                         productos_filtro = productos_filtro.sort(function(a, b) {return b.precio - a.precio});
                         break;
                     case "menor":
-                        productos_filtro = productos_filtro.sort(function(a, b) {return a.precio - b.precio});
+                        productos_filtro = productos_filtro.sort(function(a, b) {return a.precio - b.precio});                        
                         break;
                     case "alfa":
-                        productos_filtro = productos_filtro.sort(function(a, b) {return ((a.descripcion < b.descripcion) ? -1 : ((a.descripcion > b.descripcion) ? 1 : 0));});
+                        productos_filtro = productos_filtro.sort(function(a, b) {return ((a.descripcion < b.descripcion) ? -1 : ((a.descripcion > b.descripcion) ? 1 : 0)); });
                         break;
                     case "invalfa":
-                        productos_filtro = productos_filtro.sort(function(a, b) {return ((a.descripcion < b.descripcion) ? 1 : ((a.descripcion > b.descripcion) ? -1 : 0));});
+                        productos_filtro = productos_filtro.sort(function(a, b) {return ((a.descripcion < b.descripcion) ? 1 : ((a.descripcion > b.descripcion) ? -1 : 0)); });
                         break;
                 }
             }
@@ -177,18 +177,19 @@ $(document).ready(function () {
     /***********/
 });
 
+/* SATANAS */
 function cargarBusqueda(arr_productos) {
     $('ttbody').empty();
     var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img  src="#imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small></p><h4>$#costo<br>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
     html_imagen = html_imagen.replace("#cat", $('#subcategoria').attr("value"));
     //					console.log(html_imagen);
-    var tabla_producto='<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
+    var tabla_producto = '<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
     var id_tabla;
     var t = 0;
-    $.each(arr_productos, function(i, producto) {
+    $.each(arr_productos, function (i, producto) {
         var imagen = html_imagen;
         var tabla = tabla_producto;
-        if(i % 4 == 0 || t == 0) {
+        if (i % 4 == 0 || t == 0) {
             id_tabla = "#tabla_" + t;
             $('ttbody').append(tabla.replace("#id_tabla", t));
             t++;
@@ -260,9 +261,13 @@ function cargarCapacidad(productos_busqueda) {
         $('#lista_memoria').append('<li><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
     }
 }
+/***********/
+
 
 //grupo/categoria, paginacion/extra, marca, envio/(local/foraneo/indef), precio minimo, precio maximo, orden, filtro memoria, color
-function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, McPato, fascismo, vino, arcoiris) {
+function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, McPato, fascismo, vino1, vino2, arcoiris) {
+
+    var vino = vino1 + vino2;
 
     if (!arcoiris)
         arcoiris = "";
@@ -270,20 +275,37 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 
     $('#AquiGrupo').append(crayola);
 
+    if (avionpapel == "undefined")
+        $('#filtro_disponibilidad').val("Indiferente");
+    else
+        $('#filtro_disponibilidad').val(avionpapel);
+
+    if (!fascismo)
+        $('#filtro_orden').val("normal");
+    else
+        $('#filtro_orden').val(fascismo);
+
+
 
     //filtro de marcas
-    //alert("../../bin/ingresar.php?categoria=marcas&grupo=" + crayola);
     $.get("../../bin/ingresar.php?categoria=marcas&grupo=" + crayola, function (respuesta) {
         respuesta = respuesta.split(";");
         auxMarca = ""
         for (var x = 0; x < respuesta.length - 1; x++)
         {
-            var informacion = respuesta[x].split("%")
-            $('#marquitas').append('<li class="check"><input type="checkbox" name="marca' + x + '" value="' +
-                    informacion[0] + '"> ' + informacion[0].substr(0, 8) + ' <u>(' + informacion[1] + ')</u></li>');
+            var informacion = respuesta[x].split("%");
+            if (-1 !== marcador.indexOf(informacion[0]))
+                var check = "checked";
+            else
+                var check = "";
+            auxMarca += '<li><input type="checkbox" name="marca' + x + '" ' + check + ' value="' +
+                    informacion[0] + '"> ' + informacion[0].substr(0, 8) + ' <u>(' + informacion[1] + ')</u></li>';
         }
+        $('#marquitas').append(auxMarca);
+
 
     });
+
 
 
     //filtro color
@@ -298,12 +320,18 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
             {
                 if (respuesta !== "0")
                 {
-                    auxColor += '<li class="check"><input  type="checkbox" name="' + color[x] + '" value="' + color[x] + '"> ' + color[x] + ' <u>(' + respuesta + ')</u></li>';
+                    if (-1 !== arcoiris.indexOf(color[x]))
+                        var check = "checked";
+                    else
+                        var check = "";
+                    auxColor += '<li><input type="checkbox" name="' + color[x] + '" value="' + color[x] + '"' + check + '> ' + color[x] + ' <u>(' + respuesta + ')</u></li>';
                 }
             }
         });
     }
-    $('#lista_color').append(auxColor);
+    if (auxColor !== "")
+        $('#coloreamela').append(auxColor);
+
 
 
 
@@ -327,8 +355,12 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                         url: "../../bin/ingresar.php?categoria=cantidad_memoria&GB=" + GB[x] + "&grupo=" + crayola,
                         async: false,
                         success: function (respuesta)
-                        {
-                            contenido += '<li class="check" ><input type="checkbox" name="GB' + x + '" value="' + GB[x] + '"> ' + GB[x] + ' GB  <u>(' + respuesta + ')</u>' + '</li>';
+                        {//vino1 GB, vino2 TB
+                            if (-1 !== vino1.indexOf(GB[x]))
+                                var check = "checked";
+                            else
+                                var check = "";
+                            contenido += '<li><input type="checkbox"' + " " + check + ' name="GB' + x + '" value="' + GB[x] + '"> ' + GB[x] + ' GB  <u>(' + respuesta + ')</u>' + '</li>';
                             x++;
                             if (x === GB.length - 1) {
                                 salir = true;
@@ -346,17 +378,22 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 $.ajax({
                     url: "../../bin/ingresar.php?categoria=cantidad_memoria&TB=" + TB[x] + "&grupo=" + crayola,
                     async: false,
-                    success: function (respuesta) {
-                        contenido1 += '<li class="check"><input type="checkbox" name="TB' + x + '" value="' + TB[x] + '"> ' + TB[x] + ' TB  <u>(' + respuesta + ')</u>' + '</li>';
+                    success: function (respuesta)
+                    {
+                        if (-1 !== vino2.indexOf(TB[x]))
+                            var check = "checked";
+                        else
+                            var check = "";
+                        contenido1 += '<li><input type="checkbox"' + " " + check + ' name="TB' + x + '" value="' + TB[x] + '"> ' + TB[x] + ' TB  <u>(' + respuesta + ')</u>' + '</li>';
                         x++;
                         if (x === TB.length - 1) {
-                            texto2 += contenido1 + contenido;
-                            $('#lista_memoria').append(texto2);
                             salir = true;
                         }
                     }});
             }
         }
+        texto2 += contenido1 + contenido;
+        $('#memorama').append(texto2);
     });
 
 
@@ -365,12 +402,50 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
 
 
     //paginacion
-    if (vino == "")
+    if (vino == "") {
         $.get("../../bin/ingresar.php?categoria=listadocantidad&cantidad=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&minn=" + miSalario + "&maxn=" + McPato + "&orden=" + fascismo + "&grupo=" + crayola + arcoiris,
                 function (cantidad) {
-                    $('#catidad').append(cantidad);
+                    var URLactual = window.location + "";
+                    var extra = URLactual.indexOf("extra=");
+                    var amperson = URLactual.indexOf("&");
+                    var T1 = URLactual.substring(0, extra);
+                    var T2 = URLactual.substring(amperson, URLactual.length);
+                    paginacion = Math.ceil(cantidad / 20);
+                    var x = 1;
+                    var aux = 1;
+                    if (plastilina !== "1")
+                    {
+                        $('#catidad').append(" <a href='" + T1 + "extra=" + (plastilina - 1) + T2 + "'>" + '<img src="../../IMG/izquierda.png" style="width:50px;heigth:auto;">' + "</a>");
+                    }
+                    while (paginacion !== 0)
+                    {
+                        aux = x;
+                        if (x == plastilina)
+                        {
+                            var y = x;
+                            x = "<u>" + x + "</u>";
+                        }
+                        $('#catidad').append(" <a href='" + T1 + "extra=" + aux + T2 + "'>" + x + "</a> ");
+                        if (y)
+                        {
+                            x = y + 0;
+                            y = null;
+                        }
+                        x++;
+                        paginacion--;
+                    }
+                    if (plastilina < Math.ceil(cantidad / 20) + "")
+                    {
+                        plastilina++;
+                        $('#catidad').append(" <a href='" + T1 + "extra=" + plastilina + T2 + "'>" + '<img src="../../IMG/derecha.png" style="width:50px;heigth:auto;">' + "</a>");
+                        plastilina--;
+                    }
                 });
-                
+    }
+
+//"<a href='detalles.php?extra=" . $x . $color . '&marca=' . $marca . '&priceMIN=' . $Pmin . '&priceMAX=' . $Pmax . '&envio=' . $envio . "&orden=" . $orden . "&subcategoria=" . $grupo . "'>" . $x
+
+
     //productos
     $.ajax({
         type: "POST",
@@ -378,8 +453,6 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
         async: false,
         data: {},
         success: function (articulo) {
-            //console.log(articulo);
-            //alert("../../bin/ingresar.php?extra=" + plastilina + "&marca=" + marcador + "&envio=" + avionpapel + "&min=" + miSalario + "&max=" + McPato + "&orden=" + fascismo + "&categoria=" + crayola + vino + arcoiris);
             try {
                 var dato = JSON.parse(articulo);
             } catch (err) {
@@ -387,7 +460,6 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 return;
             }
             //console.log(dato);
-            //alert(dato.item.length);
             var imprimemela = "";
             if (dato == null) {
                 $('.loader').fadeOut("slow");
@@ -408,8 +480,8 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 salida = salida.replace("imagen", dato.item[y].imagen);
                 salida = salida.replace("compa", dato.item[y].codigo_fabricante);
                 salida = salida.replace("Texto", dato.item[y].descripcion.substring(26, 0));
-                salida = salida.replace("precio", "$" + formatoMoneda(parseFloat(dato.item[y].precio)) + "<br>");
-                //salida = salida.replace("precio_producto", "$" + valor['precio']);
+                salida = salida.replace("precio", "$" + formatoMoneda(parseFloat(dato.item[y].precio)) + "<br>");                
+                // salida = salida.replace("precio", "$" + dato.item[y].precio + "<br>");
                 imprimemela += salida;
                 if (x == 0 || y == dato.item.length - 1)
                 {
@@ -418,19 +490,16 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 }
 
             }
+            $('.loader').fadeOut("slow");
+
+            window.setTimeout($.ajax({
+                url: "sidebar.js",
+                dataType: "script",
+                success: function () {}}), 3000);
+
         }
     });
-    $('.loader').fadeOut("slow");
-    $.ajax({
-        url: "sidebar.js",
-        dataType: "script",
-        success: function () {}
-    });
 
-    // console.log($('#lista_color').text().length );
-    // console.log($('#lista_memoria').text().length );
-    if ($('#lista_color').text().length < 1)
-        $('#coloreamela').hide();
-    if ($('#lista_memoria').text().length < 1)
-        $('#memorama').hide();
+
+
 }

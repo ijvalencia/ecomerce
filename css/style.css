@@ -65,6 +65,7 @@ img{
     margin: 9px;
 }
 ::-moz-selection { background: #ffae4b; color: #fff; text-shadow: none; }
+::selection { background: #ffae4b; color: #fff; text-shadow: none; }
 
 .btn {
     display: block;
@@ -499,8 +500,9 @@ div.controls input,div.controls select{
     margin-bottom:.5em;
 }
 #inputSeleccionado{
-    border-color:rgba(82,168,236,.8);
-    outline:0;
+    border-color:rgba(82,168,236,.8)
+        ;outline:0;outline:thin dotted \9;
+    -moz-box-shadow:0 0 8px rgba(82,168,236,.6);
     box-shadow:0 0 8px rgba(82,168,236,.6);
 }
 .bs-glyphicons{
@@ -716,6 +718,7 @@ hr {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    user-select: none;
 }
 #mostrar:hover #mensaje{
     display:block;
@@ -888,7 +891,7 @@ hr {
 
 /*detalles descripcion  Detalles_orden.php*/
 .precioisquierda{
-    /*float: right;*/        
+    //float: right;        
     margin-left: -5%;
     margin-top: -12px;
 }
@@ -1016,29 +1019,59 @@ label {
     padding:10px;  
 }
 
+.inner-container::-webkit-scrollbar-track-piece
+{
+    background:transparent;
+}
+.inner-container::-webkit-scrollbar {
+	width: 0;
+	background: rgba(255,255,255,1);
+	}
+
+.inner-container::-webkit-scrollbar-button {
+	height: 0;
+	width: 0;
+        
+	}
+
+.inner-container::-webkit-scrollbar-thumb {
+	background:transparent;
+        background-color: rgba(255,255,255,1);
+	}
+        
+.inner-container::-webkit-scrollbar-track {
+	background:transparent;
+	box-shadow: none;
+}
 /*play Store*/
 #cuatro{
     margin-top: -157px;
 }
 /*mac Store*/
 #sinco{
-    margin-top: -166px;
-    
+    margin-top: -166px;    
 }
-.col-md-8 {
+#datosresponsive {
     width: 66.66666667%;
     float: right;
     margin-right: 107px;
 }
+
 .check{
     margin-left: 30px;
 }
 
+@media only screen and (max-width: 1000px) and (min-width: 971px) {  
+    #sombreado{                    /*980px      821px*/
+       width: 43%;
+       float: right;
+       display: inline-block;
+       margin-right: 18px;
+    }
+}  
+
 @media only screen and (max-width: 970px) and (min-width: 821px) {  
     #sombreado{                    /*980px      821px*/
-      /* width: 90%;
-       margin-left: 97px;
-     */
         width: 32%;  
         float: right;
         display: inline-block;
@@ -1049,29 +1082,24 @@ label {
 /* Para 800px */  
 @media only screen and (max-width: 920px) and (min-width: 621px) {  /*820  621*/
    #sombreado{
-        /*min-width: 500px;
-        max-width: 900px;*/
-        width: 35%;    
+        width: 42%;    
         float: right;
         display: inline-block;
         margin-left: 10px;
     }
-   
 }  
-  
+
 /* Para 600px */  
 @media only screen and (max-width: 620px) and (min-width: 501px) {  
    #sombreado{
        width: 49%;
-float: right;
-display: inline-block;
-margin-left: 10px;
+       float: right;
+       display: inline-block;
+       margin-left: 10px;
     }
-}  
-  
+}    
 /* Para 480px */  
 @media only screen and (max-width: 500px) and (min-width: 341px) {  
-  
      #sombreado{
         width: 20%;  
         float: right;
@@ -1140,6 +1168,7 @@ margin-left: 10px;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
+    user-select:none;
     background-image:none;
     border:1px solid transparent;
     border-radius:4px

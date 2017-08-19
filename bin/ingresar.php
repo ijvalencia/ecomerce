@@ -29,8 +29,7 @@ switch ($Menu) {
         $contra = $_POST['contra'];
         $conexion->login($correo, $contra);
         break;
-
-
+    
     /* SATANAS */
     case "envios":
         $conexion->getEnvios();
@@ -80,6 +79,7 @@ switch ($Menu) {
         } else
             echo "0";
         break;
+        
     case "getArticulo":
         if (isset($_GET['codigo'])) {
             $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
@@ -92,7 +92,7 @@ switch ($Menu) {
                 echo json_encode($articulo);
             }
         }
-        break;
+    break;
 
     case "articulos":
         //$filename= ("http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%&grupo=%&clave=%&codigo=%".$producto."&tc=1&promos=1&porcentaje=0");
@@ -120,7 +120,7 @@ switch ($Menu) {
         break;
     case "productosInicio":
         $conexion->productosInicio();
-        break;
+    break;
 
     case "borrarCarrito":
         $carrito = $_SESSION['carrito'];
@@ -143,26 +143,33 @@ switch ($Menu) {
         $direccion = $_POST['direccion'];
         $envio = $_POST['idenvio'];
         $total = $_POST['subtotal'];
-        $metodo_pago = $_POST['metodo_pago'];
+        $metodo_pago = $_POST['metodo_pago'];                
+        //echo json_encode('50');
+        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago,1);
+    break;
+        
+    case "productos_Odenes":
+        $id_codigo = $_POST['id_orden'];
         $codigoF  = $_POST['codigoF'];
         $cantidad = $_POST['cantidad'];
-        //echo json_encode('50');
-        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago,1,$codigoF,$cantidad);
-        break;
+        $conexion->producto_orden($id_codigo, $codigoF, $cantidad);
+        
+    break;
+    
     
     case "usuariordendetalles":
        $id_ordenproductodetalle=$_POST["usuario"];
        $conexion->mostrarordenesdetalles($id_ordenproductodetalle);
     break;
-    
+   
     case "usuarioorden":
         $id_usuario = $_POST["usuario"];
         $conexion->mostrarordenes($id_usuario);
-        break;
+    break;
 
     case "orden":
         $conexion->getOrdenes();
-        break;
+    break;
 
     case "UpdateUsuario":
         $id = $_POST["id_usuario"];
@@ -199,11 +206,10 @@ switch ($Menu) {
         break;
 
     /*     * ******* */
-    /* Anton */
+     /* Anton */
     case "aux":
         $variable = $_GET['categoria'];
         $posicion = $_GET['extra'];
-        //extra=1&marca=undefined&envio=undefined&min=undefined&max=undefined&categoria=OPTICOS;
         $marca = $_GET['marca'] or die("undefined");
         $envio = $_GET['envio'] or die("undefined");
         $min = $_GET['min'] + 1 or die("undefined");
@@ -220,7 +226,6 @@ switch ($Menu) {
             $color = $_GET['color'];
         } else
             $color = "";
-
         if(empty($_GET['marca']))
             $marca="undefined";
         //echo $variable, $posicion, $marca, $envio, $min, $max, $orden."<br>";
@@ -345,6 +350,7 @@ switch ($Menu) {
         $grupo=$_GET['grupo'];
         $conexion->verCantidadMarca($grupo, $marca);
         break;
+    
 }
 $conexion->cerrar();
 unset($conexion);

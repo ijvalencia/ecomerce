@@ -63,7 +63,7 @@ if (isset($memoriaGB)) {
     }
 }
 if (isset($memoriaTB)) {
-    var_dump($memoriaTB);
+    //var_dump($memoriaTB);
     $busqueda_memoria = $busqueda_memoria . "&busqueda_MT=";
 
     foreach ($memoriaTB as $aux) {

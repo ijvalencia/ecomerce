@@ -94,11 +94,11 @@
                                                         <button type="button" class="btn btn-default" id="btn_confirmar_compra">
                                                             Confirmar compra
                                                         </button>  
-                                                    </div>
-                                               <div class="modal-footer">
-                                                  <button type="button" class="btn btn-default" data-dismiss="modal"id="cerrar_tarjetas">Close</button>
-                                               </div>
+                                                      </div>
+                                                    <div class="modal-footer">
+                                                   <button type="button" class="btn btn-default" data-dismiss="modal"id="cerrar_tarjetas">Close</button>
                                                 </div>
+                                              </div>
                                             </div>
                                         </div>
                                     </div>

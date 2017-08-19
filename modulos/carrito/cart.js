@@ -2,20 +2,29 @@ var parametros;
 var tipo_cambio;
 var iva;
 var sesion = "";
-var dato;
-var codigofabricante, direcion = 0, numeroorden, subtotal;
-var txtcantidad0 = 0, txtcantidad1 = 0, txtcantidad2 = 0, txtcantidad3 = 0, txtcantidad4 = 0, txtcantidad5 = 0;
+var dato,txtcantidad;
+var direcion = 0, numeroorden, subtotal;
+var txtcantidad0 = 0;
 var sub = 0;
 var sub_iva = 0;
-var datoss;
 
-$(document).ready(function () {
+$(document).ready(function (){
     /*Obtener sesion y otros datos */
+     $.ajax({
+        url: "../../bin/ingresar.php?categoria=parametros",
+        async: false,
+        data: {},
+        success: function(resp){
+            resp = JSON.parse(resp);
+            parametros=resp;
+            tipo_cambio = parseFloat(resp["tipo_cambio"]) + parseFloat(resp["agregado"]);
+            iva = (resp.iva/100)+1;
+        }       
+    });
     $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
         sesion = datos;
     });
     /*Muestra los articulos */
-
     mostrarArticulos();
 
     /*Carga los envios */
@@ -51,14 +60,14 @@ $(document).ready(function () {
         });
         $('.loader').fadeOut("slow");
     });
-     
+
     $('#abrir_tarjetas').on("click", function () {
         $('#form_busqueda').hide();
     });
     $('#cerrar_tarjetas').on("click", function () {
-        $('#form_busqueda').show();
-           window.location.href = "../../modulos/orden/Orden.php";
+        $('#form_busqueda').show();        
     });
+
     $('#btn_confirmar_compra').on("click", function () {
         //alert("hola"+sesion);
         if (sesion == "" || sesion == "invitado" || sesion == null) {
@@ -70,47 +79,72 @@ $(document).ready(function () {
             if (parseFloat($('#txt_total').text()) > parametros["compra_maxima"]) {
                 jAlert("Para confirmar tu compra comunicate a " + parametros["no_cva"]);
             } else {
-                   $.ajax({
+                $.ajax({
                     type: "get",
                     url: "../../bin/ingresar.php?categoria=getCarrito",
-                    success: function (mns) {
+                    success: function (mns){
+                        //console.log(mns);    
                         mns = JSON.parse(mns);
-                        codigofabricante = String(mns[0]["codigo_fabricante"]);
-                        var txtidconsulta = $("#selector_envio").val();
-                        var pago = $("#selector_envio1").val();
-                      //  var pago = "mastercard";
-                        console.log(codigofabricante,txtidconsulta,pago);
-                        alert(txtidconsulta + number + direcion);
-                        txtcantidad0 = $("#cantidad0").val();
+                        
+                    
+                    //codigofabricante = String(mns[0]["codigo_fabricante"]);
+                    var txtidconsulta = $("#selector_envio").val();
+                    var pago = $("#selector_envio1").val();
+                        //var ivas = $('.ivas').text().replace(/,/g, "").trim().split(" ");
+                        
                         $.ajax({
                             type: "POST",
+                            async:true,  
                             url: "../../bin/ingresar.php?categoria=agregarordenes",
-                            data: {"idusuario": number, "direccion": direcion, "idenvio": txtidconsulta, "subtotal": formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)), "metodo_pago": pago, "codigoF": codigofabricante, "cantidad": txtcantidad0},
-                            success: function (mnss) {
-                                mnss = JSON.parse(mnss);
-                                numeroorden = String(mnss[0]["id_ordenes"]);
+                            data: {"idusuario": number, "direccion": direcion, "idenvio": txtidconsulta, "subtotal": formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)), "metodo_pago": pago},
+                           success: function(mnss){
+                               console.log("hola"+mnss);
+                           
+                               
+                            $.each($('.numero_cantidad'), function(i,valor) {
+                               sub_iva += valor.value; // * ivas[i];
+                               txtcantidad=valor.value;
+                               console.log(txtcantidad);
+                            });
+                            
+                           for (var m in mns){
+                                 $.ajax({
+                                    type: "POST",
+                                    async: true, 
+                                    url: "../../bin/ingresar.php?categoria=productos_Odenes",
+                                    data:{"id_orden":mnss, "codigoF":mns[m]["codigo_fabricante"], "cantidad":txtcantidad},
+                                 success: function(ordenesproductos){
+                                     jAlert(ordenesproductos);
+                                 }
+                            });
+                         }
+                                
+                              // mnss = JSON.parse(mnss);
+                              // numeroorden = String(mnss[0]["id_ordenes"]);
+                              // window.location.href = "../../modulos/orden/Orden.php";   
 
-                                if (numeroorden !== null) {
-                                    console.log(numeroorden);
-                                    jAlert("COMPRA REALIZADA");
-                                } else {
-                                    jAlert("Compra no Realizada");
-                                }
+                              // if(numeroorden !== null) {
+                                  //  console.log(numeroorden);
+                                    //jAlert("COMPRA REALIZADA");
+                              //}else {
+                                //    jAlert("Compra no Realizada");
+                                //}
                                 //alert("orden"+mnss[0]["id_ordenes"]+"number"+number);
                             }
                         });
-                    }
+                        
+                       
+                      }
                 });
-              }        
-            }
+            }            
+        }
     });
 });
 
-function mostrarArticulos() {
-var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4"><img src="link_imagen" class="img-responsive" onerror="this.src=\'../../IMG/error.jpg\'"></div><div class="col-sm-8"><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price">$<span class="precios">precio_producto</span><br><b>IVA: </b>$<span class="ivas">precio_iva</span></td><td data-th="Quantity"><input class="numero_cantidad" type="number" value="1" min="1" max="maximo" style="width:60px" onchange="actualizarTotal()" onkeydown="return false" id="cantidad#n"></td><td class="actions" data-th=""><a onclick="borrarArticulo(#n)"><i class="fa fa-trash-o"></i></a></td></tr>';
-    $.getJSON("../../bin/ingresar.php?categoria=getCarrito", function (dato) {
+function mostrarArticulos(){//esta ba en el input id="cantidad"
+    var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4"><img src="link_imagen" class="img-responsive" onerror="this.src=\'../../IMG/error.jpg\'"></div><div class="col-sm-8"><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price">$<span class="precios">precio_producto</span><br><b>IVA: </b>$<span class="ivas">precio_iva</span></td><td data-th="Quantity"><input class="numero_cantidad" value="1" type="number" min="1" max="maximo" style="width:60px" onchange="actualizarTotal()" onkeydown="return false"></td><td class="actions" data-th=""><a onclick="borrarArticulo(#n)"><i class="fa fa-trash-o"></i></a></td></tr>';
+        $.getJSON("../../bin/ingresar.php?categoria=getCarrito", function (dato) {
         // console.log(dato);
-
         $.each(dato, function (j, valor) {
             var salida = tabla_producto;
             salida = salida.replace(/#n/g, j);
@@ -118,21 +152,30 @@ var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-
             salida = salida.replace("link_imagen", valor['imagen']);
             salida = salida.replace("nombre_producto", valor['descripcion']);
             salida = salida.replace("precio_producto", valor['moneda'] === "Pesos" ? formatoMoneda(parseFloat(valor["precio"])) + " " : formatoMoneda(valor["precio"] * tipo_cambio) + " ");
-            salida = salida.replace("precio_iva", valor['moneda'] === "Pesos" ? formatoMoneda(valor["precio"]*(iva-1)) + " " : formatoMoneda(valor["precio"] * tipo_cambio *(iva-1)) + " ");
+            salida = salida.replace("precio_iva", valor['moneda'] === "Pesos" ? formatoMoneda(valor["precio"] * (iva - 1)) + " " : formatoMoneda(valor["precio"] * tipo_cambio * (iva - 1)) + " ");
+            
+            //salida = salida.replace("cantidad#n", valor['cantidad']);
+            
             $('tbody').append(salida);
-            // alert(salida);
+            imgs = valor['imagen'];
+            descri = valor['descripcion'];
+          
+            presios = valor['moneda'] === "Pesos" ? parseFloat(valor["precio"]) + "" :valor["precio"] * tipo_cambio+"";       
+            alert("IMG\n"+imgs+"DESCRIPCION\n"+descri+"PRESIOS\n"+presios+"cantidad"+txtcantidad0);
+            //children = $("tr td")[0].innerHTML;     
         });
+        //document.getElementById("campo1").value = campo1;
+
+        //   var sub=0;
         var precios = $(".precios").text().replace(/,/g, "").trim().split(" ");
         $.each($('.numero_cantidad'), function (i, valor) {
             sub += valor.value * precios[i];
         });
-        
+        // var sub_iva=0;
         var ivas = $('.ivas').text().replace(/,/g, "").trim().split(" ");
         $.each($('.numero_cantidad'), function (i, valor) {
-            sub_iva += valor.value * ivas[i];
-        });
-        // console.log(ivas);
-        // console.log(precios);
+            sub_iva += valor.value * ivas[i];    
+            });
         $('#txt_subtotal').append(formatoMoneda(sub));
         $('#txt_iva').append(formatoMoneda(sub_iva));
         $('#txt_total').append(formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)));
@@ -140,19 +183,7 @@ var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-
     });
 }
 
-function borrarArticulo(index) {
-    $('#tabla' + index).remove();
-    $.ajax({
-        url: "../../bin/ingresar.php?categoria=borrarCarrito",
-        type: "POST",
-        data: {"articulo": index},
-        success: function () {
-            actualizarTotal();
-        }
-    });
-}
-
-function actualizarTotal() {
+function actualizarTotal(){
     $('#txt_subtotal').empty();
     $('#txt_iva').empty();
     $('#txt_total').empty();
@@ -163,21 +194,34 @@ function actualizarTotal() {
     });
     var sub_iva = 0;
     var ivas = $('.ivas').text().replace(/,/g, "").trim().split(" ");
+    
     $.each($('.numero_cantidad'), function (i, valor) {
         sub_iva += valor.value * ivas[i];
+         uno = $(".numero_cantidad").val(); 
+         console.log("Actualizar valor 1"+valor.value+"valor final"+uno);
     });
     sub = sub.toFixed(2);
-    subtotal=sub;
-    alert(subtotal);
-    $('#txt_subtotal').append(formatoMoneda(sub));
-    $('#txt_iva').append(formatoMoneda(sub_iva));
-    $('#txt_total').append(formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)));
+    //alert(sub);
+    $('#txt_subtotal').append(sub);//formatoMoneda();
+    $('#txt_iva').append(sub_iva); //formatoMoneda();
+    $('#txt_total').append(parseFloat(sub) + parseFloat(sub_iva)); //formatoMoneda();
 }
 
+function borrarArticulo(index) {
+    console.log(index);
+    $('#tabla' + index).remove();
+    $.ajax({
+        url: "../../bin/ingresar.php?categoria=borrarCarrito",
+        type: "POST",
+        data: {"articulo": index},
+        success: function (hola) {
+            actualizarTotal();
+        }
+    });
+}
 function formatoMoneda(numero) {
-    numero = numero.toFixed(2).replace(/./g, function(c, i, a) {
+    numero = numero.toFixed(2).replace(/./g, function (c, i, a) {
         return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
     });
-    return numero;
+  return numero;
 }
-
