@@ -54,9 +54,9 @@
                                         <ul class="menu hidden" role="menu" id="sub_precio">
                                             <center>
                                                 <li>
-                                                    <input id="filtro_miSalario" value="<?php echo $_GET['priceMIN'];?>" name="min" type="number" min="0" max="250000">
+                                                    <input id="filtro_miSalario" value="<?php echo $_GET['priceMIN'];?>" name="min" type="number" min="1" max="250000">
                                                     <span class="separator"></span>
-                                                    <input id="filtro_miExpectativa" value="<?php echo $_GET['priceMAX'];?>" name="max" type="number" min="0" max="250000">
+                                                    <input id="filtro_miExpectativa" value="<?php echo $_GET['priceMAX'];?>" name="max" type="number" min="1" max="250000">
                                                 </li>
                                             </center>
                                         </ul>   
@@ -74,11 +74,11 @@
                                             </li>
                                         </ul>   
                                     </li>
-                                    <li class="dropdown">
+                                    <li class="dropdown" id="drop_memoria">
                                         <a class="dropdown-toggle" id="btn_memoria">Por Memoria:</a>
                                         <ul class="menu hidden" role="menu" id="sub_memoria"><span id="memorama"></span></ul>
                                     </li>
-                                    <li class="dropdown">
+                                    <li class="dropdown" id="drop_color">
                                         <a class="dropdown-toggle" id="btn_color">Por Color:</a>
                                         <ul class="menu hidden" role="menu" id="sub_color"><span id="coloreamela"></span></ul> 
                                     </li>

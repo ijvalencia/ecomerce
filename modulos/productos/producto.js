@@ -5,15 +5,19 @@ var tipo_cambio;
 var productos_busqueda = [];
 var iva;
 
-/* Obtiene los datos de la tabla de parametros*/
-$.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
-    tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
-    iva = parseFloat(datos["iva"]);
-    iva = (iva / 100) + 1;
-    //console.log(iva);
-});
+$(document).ready(function () {  
+    /* Obtiene los datos de la tabla de parametros*/
+    $.ajax({
+        url: "../../bin/ingresar.php?categoria=parametros",
+        async: false,
+        success: function (datos) {
+            datos = JSON.parse(datos);
+            tipo_cambio = parseFloat(datos.tipo_cambio) + parseFloat(datos.agregado);
+            iva = parseFloat(datos.iva);
+            iva = (iva / 100) + 1;
+        }
+    });
 
-$(document).ready(function () {
     var loc = document.location.href;
     if (loc.indexOf('?') > 0)
     {
@@ -69,15 +73,20 @@ $(document).ready(function () {
     if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda)) {
         $('#AquiGrupo').append("busqueda");
         $('.breadcrumb').empty().append('<li><a href="../../modulos/inicio/index.php">Inicio</a></li><li>Productos</li><li><a></a>Busqueda</li>');
-        $('#memorama').hide();
-        $('#coloreamela').hide();        
+        $('#drop_color').hide();
+        $('#drop_memoria').hide();
+        $('#filtro_miSalario').val("1");
+        $('#filtro_miExpectativa').val("250000");
         busqueda = busqueda.trim().split(" ");
+        
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=buscar",
             data: {"categoria": supercategoria, "palabras": busqueda},
             success: function (respuesta) {
                 respuesta = JSON.parse(respuesta);
+                console.log(respuesta);
+                /* Contiene mas de un sub arreglo, terminar y corregir */
                 $.each(respuesta, function (i, objeto) {
                     $.each(objeto, function (j, producto) {
                         productos_busqueda.push(producto);
@@ -142,11 +151,13 @@ $(document).ready(function () {
             if ($('#filtro_miSalario').val() != "0" || $('#filtro_miExpectativa').val() != "250000") {
                 var min = parseFloat($('#filtro_miSalario').val());
                 var max = parseFloat($('#filtro_miExpectativa').val());
-                for (var i = 0; i < productos_filtro.length; i++)
-                    if (parseFloat(productos_filtro[i].precio) < min || parseFloat(productos_filtro[i].precio) > max) {
+                for (var i = 0; i < productos_filtro.length; i++) {
+                    var precio_aux = parseFloat(productos_filtro[i].precio*iva);
+                    if (precio_aux < min || precio_aux > max) {
                         productos_filtro.splice(i, 1);
                         i--;
                     }
+                }
             }
             /* Ordenamientos */
             if ($('#filtro_orden').val() != "normal") {
@@ -229,6 +240,7 @@ function cargarMarcas(productos_busqueda) {
 
 function cargarColores(productos_busqueda) {
     var colores = [];
+    console.log(productos_busqueda);
     $.each(productos_busqueda, function(i, producto) {
         colores.push(producto.color.replace("/", ""));
     });
@@ -242,7 +254,7 @@ function cargarColores(productos_busqueda) {
     for (var i = 0; i < colores.length; i++) {
         $('#lista_color').append('<li class="check"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
     }
-    $('#coloreamela').show();
+    $('#drop_color').show();
 }
 
 function cargarCapacidad(productos_busqueda) {
@@ -259,7 +271,8 @@ function cargarCapacidad(productos_busqueda) {
     var auxMarca = "";
     for (var i = 0; i < marcas.length; i++) {
         $('#lista_memoria').append('<li><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
-    }
+    }   
+    $('#drop_memoria').show();
 }
 /***********/
 
