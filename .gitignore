@@ -1,7 +1,6 @@
-/nbproject/*
-/matenme.php
-/*.swp
-/*.swo
-/*.swn
-.DS_Store
+*.swp
+*.swo
+*.swn
 bin/.DS_Store
+.DS_Store
+modulos/.DS_Store

@@ -74,7 +74,6 @@ $(document).ready(function () {
         $('#memorama').hide();
         $('#coloreamela').hide();
         busqueda = busqueda.trim().split(" ");
-        var marcas = [];
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=buscar",
@@ -87,20 +86,9 @@ $(document).ready(function () {
                     });
                 });
                 cargarBusqueda(productos_busqueda);
-                $.each(productos_busqueda, function(i, producto) {
-                    marcas.push(producto.marca);
-                });
-                marcas.sort();
-                for (var i = 0; i < marcas.length - 1; i++) 
-                    if (marcas[i] == marcas[i+1]) {
-                        marcas.splice(i+1, 1);
-                        i--;
-                    }
-                var auxMarca = "";
-                for (var i = 0; i < marcas.length; i++) {
-                    // $('#marquitas').append('<option value="'+marcas[i]+'">'+marcas[i]+"</option>");
-                    $('#marquitas').append('<li><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
-                } 
+                cargarMarcas(productos_busqueda);
+                // cargarColores(productos_busqueda);
+                // cargarCapacidad(productos_busqueda);
                 $('.loader').fadeOut("slow");
             }
         });
@@ -108,26 +96,29 @@ $(document).ready(function () {
         $('#btn_filtramela').click(function(event) {
             event.preventDefault();
             var productos_filtro = productos_busqueda.slice();
-            /* Agregar marcas */
+            /* Filtro de marcas */
             var marcas_filtro = [];
             $.each($('#marquitas li input'), function(i, objeto) {
                 if (objeto.checked)
                     marcas_filtro.push(objeto.value);
             });
             var aux = false;
-            for (var i = 0; i < productos_filtro.length; i++) {
-                aux = false;
-                for (var j = 0; j < marcas_filtro.length; j++) {
-                    if (productos_filtro[i].marca == marcas_filtro[j]) {
-                        aux = true;
-                        break;
+            if (marcas_filtro.length < 1)
+                productos_filtro = productos_busqueda.slice();
+            else
+                for (var i = 0; i < productos_filtro.length; i++) {
+                    aux = false;
+                    for (var j = 0; j < marcas_filtro.length; j++) {
+                        if (productos_filtro[i].marca == marcas_filtro[j]) {
+                            aux = true;
+                            break;
+                        }
+                    }
+                    if (!aux) {
+                        productos_filtro.splice(i, 1);
+                        i--;
                     }
                 }
-                if (!aux) {
-                    productos_filtro.splice(i, 1);
-                    i--;
-                }
-            }
             /* Filtro de diponibilidad */
             if ($('#filtro_disponibilidad').val() != "Indiferente") {
                 switch ($('#filtro_disponibilidad').val()) {
@@ -215,6 +206,59 @@ function formatoMoneda(numero) {
         return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
     });
     return numero;
+}
+
+function cargarMarcas(productos_busqueda) {
+    var marcas = [];
+    $.each(productos_busqueda, function(i, producto) {
+        marcas.push(producto.marca);
+    });
+    marcas.sort();
+    for (var i = 0; i < marcas.length - 1; i++) 
+        if (marcas[i] == marcas[i+1]) {
+            marcas.splice(i+1, 1);
+            i--;
+        }
+    var auxMarca = "";
+    for (var i = 0; i < marcas.length; i++) {
+        // $('#marquitas').append('<option value="'+marcas[i]+'">'+marcas[i]+"</option>");
+        $('#marquitas').append('<li class="check"><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
+    } 
+}
+
+function cargarColores(productos_busqueda) {
+    var colores = [];
+    $.each(productos_busqueda, function(i, producto) {
+        colores.push(producto.color.replace("/", ""));
+    });
+    colores.sort();
+    for (var i = 0; i < colores.length - 1; i++) 
+        if (colores[i] == colores[i+1]) {
+            colores.splice(i+1, 1);
+            i--;
+        }
+    var aux_color = "";
+    for (var i = 0; i < colores.length; i++) {
+        $('#lista_color').append('<li class="check"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
+    }
+    $('#coloreamela').show();
+}
+
+function cargarCapacidad(productos_busqueda) {
+    var marcas = [];
+    $.each(productos_busqueda, function(i, producto) {
+        marcas.push(producto.marca);
+    });
+    marcas.sort();
+    for (var i = 0; i < marcas.length - 1; i++)
+        if (marcas[i] == marcas[i+1]) {
+            marcas.splice(i+1, 1);
+            i--;
+        }
+    var auxMarca = "";
+    for (var i = 0; i < marcas.length; i++) {
+        $('#lista_memoria').append('<li><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
+    }
 }
 
 //grupo/categoria, paginacion/extra, marca, envio/(local/foraneo/indef), precio minimo, precio maximo, orden, filtro memoria, color

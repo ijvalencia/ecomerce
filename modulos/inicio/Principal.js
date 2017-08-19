@@ -2,14 +2,18 @@ var tipo_cambio;
 var parametros;
 var iva;
 
-$.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
-    parametros = datos;
-    tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
-    iva = (datos.iva/100)+1;	
-});
-
 $(document).ready(function() {    
     /* SATANAS */
+    $.ajax({
+        url: "../../bin/ingresar.php?categoria=parametros",
+        async: false,
+        data: {},
+        success: function(resp) {
+            resp = JSON.parse(resp);
+            tipo_cambio = parseFloat(resp["tipo_cambio"]) + parseFloat(resp["agregado"]);
+            iva = (resp.iva/100)+1;
+        }       
+    });
 	var productos_busqueda = [];
 	$.getJSON("../../bin/ingresar.php?categoria=productosInicio", function(respuesta){
 		$.each(respuesta, function(i, objeto) {

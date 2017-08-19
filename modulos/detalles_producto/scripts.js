@@ -1,6 +1,6 @@
 var categorias_sin_cantidad = [ 
-	"SOFTWARE",
-	"categoria de prueba"
+    "SOFTWARE",
+    "categoria de prueba"
 ];
 
 var articulo;
@@ -13,10 +13,10 @@ $(document).ready(function() {
     	/* Mostrar producto */
         $.getJSON("../../bin/ingresar.php?categoria=parametros", function(datos) {
             parametros = datos;
-            iva = parseFloat(datos.iva);
+            iva = parseFloat(parametros.iva);
             iva = (iva/100)+1;
-            tipo_cambio = datos.tipo_cambio + datos.agregado;
-            $('#numero_comprar').append(datos.no_cva);
+            tipo_cambio = parseFloat(parametros.tipo_cambio) + parseFloat(parametros.agregado);
+            $('#numero_comprar').append(parametros.no_cva);
 	    cargarProducto($('#producto').attr("value"));
         });
     
@@ -33,11 +33,11 @@ $(document).ready(function() {
 	});
 	
 	$(document).keypress(function(e) {
-		var code = e.keyCode || e.which;
-		if(code == 27) { //Enter keycode
-			$('#modalZoom').hide();
-			$('#form_busqueda').show();
-		}
+	    var code = e.keyCode || e.which;
+	    if(code == 27) { //Enter keycode
+	    	$('#modalZoom').hide();
+	    	$('#form_busqueda').show();
+	    }
 	});
 });
 
@@ -67,7 +67,7 @@ function cargarProducto(codigo) {
             $('#img_producto').attr("src", articulo["imagen"]);
             $('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
             $('#descripcion_producto').append(articulo["descripcion"]);
-            $('#precio_producto').append(formatoMoneda(articulo["precio"]*iva));
+            $('#precio_producto').append(formatoMoneda(articulo.moneda == "Pesos" ? articulo.precio*iva : articulo.precio*iva*tipo_cambio));
             $('#cant_disponibles').append(total_disp);
             var ftecnica;
             ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"] : "NO EXISTE INFORMACION ADICIONAL";

@@ -9,12 +9,6 @@ var sub = 0;
 var sub_iva = 0;
 var datoss;
 
-$.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
-    parametros = datos;
-    tipo_cambio = parseFloat(datos["tipo_cambio"]) + parseFloat(datos["agregado"]);
-    iva = (datos.iva/100)+1;
-});
-
 $(document).ready(function () {
     /*Obtener sesion y otros datos */
     $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
