@@ -9,6 +9,7 @@ var sub = 0;
 var sub_iva = 0;
 
 $(document).ready(function (){
+       
     /*Obtener sesion y otros datos */
      $.ajax({
         url: "../../bin/ingresar.php?categoria=parametros",
@@ -26,7 +27,7 @@ $(document).ready(function (){
     });
     /*Muestra los articulos */
     mostrarArticulos();
-
+    
     /*Carga los envios */
     $.getJSON("../../bin/ingresar.php?categoria=envios", function (dato) {
         /*Inserta los datos si es Modal
@@ -68,25 +69,27 @@ $(document).ready(function (){
         $('#form_busqueda').show();        
     });
 
-    $('#btn_confirmar_compra').on("click", function () {
-        //alert("hola"+sesion);
-        if (sesion == "" || sesion == "invitado" || sesion == null) {
+    $('#btn_confirmar_compra').on("click", function (){
+        alert(sesion);
+        //if(sesion === "invitado,,0"){
+        if((sesion === "") || (sesion === "invitado") || (sesion === null)){
             jAlert("Registrate para poder seguir con tu compra");
             window.location.href = "../../modulos/login/index.php";
             window.close();
+            console.log("no loguiado");
             // Enviar a la pagina de registro
         } else {
-            if (parseFloat($('#txt_total').text()) > parametros["compra_maxima"]) {
-                jAlert("Para confirmar tu compra comunicate a " + parametros["no_cva"]);
-            } else {
+          if(parseFloat($('#txt_total').text()) > parametros["compra_maxima"]) {
+              jAlert("Para confirmar tu compra comunicate a " + parametros["no_cva"]);
+              console.log("parametro");
+          } else {
+                console.log("ya loguiados");
                 $.ajax({
                     type: "get",
                     url: "../../bin/ingresar.php?categoria=getCarrito",
                     success: function (mns){
                         //console.log(mns);    
-                        mns = JSON.parse(mns);
-                        
-                    
+                        mns = JSON.parse(mns);         
                     //codigofabricante = String(mns[0]["codigo_fabricante"]);
                     var txtidconsulta = $("#selector_envio").val();
                     var pago = $("#selector_envio1").val();
@@ -97,44 +100,39 @@ $(document).ready(function (){
                             async:true,  
                             url: "../../bin/ingresar.php?categoria=agregarordenes",
                             data: {"idusuario": number, "direccion": direcion, "idenvio": txtidconsulta, "subtotal": formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)), "metodo_pago": pago},
-                           success: function(mnss){
+                            success: function(mnss){
                                console.log("hola"+mnss);
-                           
                                
-                            $.each($('.numero_cantidad'), function(i,valor) {
+                            $.each($('.numero_cantidad'),function(i,valor){
                                sub_iva += valor.value; // * ivas[i];
                                txtcantidad=valor.value;
                                console.log(txtcantidad);
-                            });
+                           });
                             
-                           for (var m in mns){
-                                 $.ajax({
+                           for(var m in mns){
+                               $.ajax({
                                     type: "POST",
                                     async: true, 
                                     url: "../../bin/ingresar.php?categoria=productos_Odenes",
-                                    data:{"id_orden":mnss, "codigoF":mns[m]["codigo_fabricante"], "cantidad":txtcantidad},
-                                 success: function(ordenesproductos){
-                                     jAlert(ordenesproductos);
+                                    data:{"id_orden": mnss, "codigoF":mns[m]["codigo_fabricante"],"cantidad":txtcantidad},
+                                    success: function(ordenesproductos){
+                                     console.log("hola :"+ordenesproductos);   
+                          // numeroorden = String(mnss[0]["id_ordenes"]);
+                                    if(numeroorden !== null) { 
+                                           window.location.href = "../../modulos/orden/Orden.php";  
+                                  //  console.log(numeroorden);
+                                    jAlert("COMPRA REALIZADA");
+                                     }else {
+                                    jAlert("Compra no Realizada");
+                                 }
+                                //alert("orden"+mnss[0]["id_ordenes"]+"number"+number);
+                        
                                  }
                             });
-                         }
-                                
-                              // mnss = JSON.parse(mnss);
-                              // numeroorden = String(mnss[0]["id_ordenes"]);
-                              // window.location.href = "../../modulos/orden/Orden.php";   
-
-                              // if(numeroorden !== null) {
-                                  //  console.log(numeroorden);
-                                    //jAlert("COMPRA REALIZADA");
-                              //}else {
-                                //    jAlert("Compra no Realizada");
-                                //}
-                                //alert("orden"+mnss[0]["id_ordenes"]+"number"+number);
-                            }
-                        });
-                        
-                       
-                      }
+                          }   
+                        }
+                        });                        
+                     }
                 });
             }            
         }
@@ -161,7 +159,7 @@ function mostrarArticulos(){//esta ba en el input id="cantidad"
             descri = valor['descripcion'];
           
             presios = valor['moneda'] === "Pesos" ? parseFloat(valor["precio"]) + "" :valor["precio"] * tipo_cambio+"";       
-            alert("IMG\n"+imgs+"DESCRIPCION\n"+descri+"PRESIOS\n"+presios+"cantidad"+txtcantidad0);
+          //  alert("IMG\n"+imgs+"DESCRIPCION\n"+descri+"PRESIOS\n"+presios+"cantidad"+txtcantidad0);
             //children = $("tr td")[0].innerHTML;     
         });
         //document.getElementById("campo1").value = campo1;

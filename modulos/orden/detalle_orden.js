@@ -30,9 +30,9 @@ $(document).ready(function () {
                 
                   $("#cantidad").html("Numero de Piezas :"+informacion[0]["cantidad"]);
                   $("#descripcion").html("Descripcion del los Productos "+informacion[0]["descripcion"]);
-                  $("#precio").html("Precio total :$ "+informacion[0]["total"]);
+                  $("#precio").html("Precio  :$ "+informacion[0]["precio"]);
                   $("#fechasss").html("Fecha del pedido "+informacion[0]["fecha"]);
-                  $("#precios").html("Precio total :$ "+informacion[0]["total"]);
+                  $("#precios").html("Precio total :$ "+informacion[0]["precio"]);
                   $(".detallesPros").html("Tipo de pago:"+informacion[0]["metodo_pago"]);
                   $("#imagen").attr("src",informacion[0]['imagen']);
                //esta es el otro panel 
