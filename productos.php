@@ -4,10 +4,11 @@ echo "Empezo
 /* BD Server */
 $username = "desarrollo";
 $password = "Pa55w0rd!crm";
-//$con = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
-/* BD LOCAL */
-$con = mysqli_connect("127.0.0.1 ", "root", "", "ecommerce");
 
+/* BD LOCAL */
+$con = mysqli_connect("127.0.0.1", "root", "", "ecommerce");
+
+// $con = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
 if (mysqli_connect_errno($con)) {
     echo "Error al conectar con MySQL: " . mysqli_connect_error();
     exit();
@@ -108,7 +109,7 @@ $sql_borradas = "SELECT * FROM (SELECT id_categoria FROM relacion_categorias GRO
 
 foreach($con->query($sql_nuevas) as $n) {
     $sql = "INSERT INTO relacion_categorias (id_categoria, id_supercategoria) VALUES ('".$n['grupo']."','Miscelaneo')";
-    echo ($con->query($sql) ? "ingresado" : "no ingresado") . "
+    echo ($con->query($sql) ? "ingresado ".$n['grupo'] : "no ingresado ".$n['grupo']) . "
     ";
 }
 foreach($con->query($sql_borradas) as $b) {

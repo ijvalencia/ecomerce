@@ -20,15 +20,12 @@ class BD {
         $password = "Pa55w0rd!crm";
         
         $this->conexion = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
+        /* Conectar a BD Local */
+        // $this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
+        
         if (mysqli_connect_errno($this->conexion)) {
             echo "Error al conectar con MySQL: " . mysqli_connect_error();
         }
-        
-        /* Conectar a BD Local */
-        //$this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
-        //if (mysqli_connect_errno($this->conexion)) {
-        //    echo "Error al conectar con MySQL: " . mysqli_connect_error();
-        //}
     }
 
     // Procedimiento para cerrar conexion

@@ -355,7 +355,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
         respuesta = respuesta.split("/");
         var TB = respuesta[0].split("$");
         var GB = respuesta[1].split("$");
-        console.log(TB, GB);
+        // console.log(TB, GB);
         var texto2 = "";
         var contenido = "";
         if (!(GB[0] == "")) {

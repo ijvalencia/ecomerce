@@ -1,42 +1,41 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 04, 2017 at 12:29 PM
--- Server version: 5.5.46-0ubuntu0.14.04.2
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Servidor: localhost
+-- Tiempo de generación: 21-08-2017 a las 19:38:32
+-- Versión del servidor: 10.1.24-MariaDB
+-- Versión de PHP: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerce`
+-- Base de datos: `ecommerce`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `relacion_categorias`
+-- Estructura de tabla para la tabla `relacion_categorias`
 --
 
-CREATE TABLE IF NOT EXISTS `relacion_categorias` (
-  `id_rel_categoria` int(8) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `relacion_categorias` (
+  `id_rel_categoria` int(8) NOT NULL,
   `id_categoria` varchar(40) NOT NULL,
-  `id_supercategoria` varchar(40) NOT NULL,
-  PRIMARY KEY (`id_rel_categoria`),
-  KEY `id_categoria` (`id_categoria`,`id_supercategoria`),
-  KEY `id_categoria_2` (`id_categoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=108 ;
+  `id_supercategoria` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `relacion_categorias`
+-- Volcado de datos para la tabla `relacion_categorias`
 --
 
 INSERT INTO `relacion_categorias` (`id_rel_categoria`, `id_categoria`, `id_supercategoria`) VALUES
@@ -65,7 +64,6 @@ INSERT INTO `relacion_categorias` (`id_rel_categoria`, `id_categoria`, `id_super
 (5, 'CONMUTADORES', 'Redes de computo/telefonia'),
 (79, 'CONSUMIBLES', 'Accesorios/personal'),
 (8, 'CONTROL DE ACCESO Y ASISTENCIA', 'Redes de computo/telefonia'),
-(9, 'CONTROLES', 'Redes de computo/telefonia'),
 (4, 'DIGITALIZADOR', 'Redes de computo/telefonia'),
 (21, 'DISCOS DUROS', 'Almacenamiento'),
 (10, 'DISCOS DUROS', 'Redes de computo/telefonia'),
@@ -84,28 +82,19 @@ INSERT INTO `relacion_categorias` (`id_rel_categoria`, `id_categoria`, `id_super
 (43, 'IMPRESORAS', 'Equipo de computo'),
 (28, 'IMPRESORAS', 'Hogar/muebles'),
 (74, 'IMPRESORAS', 'Impresoras/escaner'),
-(97, 'JUGUETES', 'Software/juegos'),
-(82, 'KIOSKO', 'Accesorios/personal'),
-(44, 'KIOSKO', 'Equipo de computo'),
-(29, 'KIOSKO', 'Hogar/muebles'),
 (30, 'LINEA BLANCA', 'Hogar/muebles'),
 (83, 'MALETINES', 'Accesorios/personal'),
 (89, 'MALETINES', 'Seguridad'),
-(31, 'MAQUINAS DE COSER', 'Hogar/muebles'),
 (84, 'MEMORIAS', 'Accesorios/personal'),
 (22, 'MEMORIAS', 'Almacenamiento'),
 (39, 'MEMORIAS', 'Equipo de computo'),
 (45, 'MONITORES', 'Equipo de computo'),
 (36, 'MOUSE', 'Equipo de computo'),
-(32, 'MUEBLES PARA OFICINA', 'Hogar/muebles'),
 (46, 'MULTIFUNCIONALES', 'Equipo de computo'),
 (11, 'MULTIFUNCIONALES', 'Redes de computo/telefonia'),
 (65, 'OPTICOS', 'Audio y video'),
 (12, 'OPTICOS', 'Redes de computo/telefonia'),
-(47, 'PCS', 'Equipo de computo'),
-(85, 'PIZARRON', 'Accesorios/personal'),
-(100, 'POLIZA DE GARANTIAS COMPUTO GHIA 1 ANIO', 'Garantias'),
-(99, 'POLIZA DE GARANTIAS COMPUTO GHIA 2 ANIOS', 'Garantias'),
+(110, 'PCÂ´S', 'Miscelaneo'),
 (101, 'POLIZA DE SERVICIO', 'Garantias'),
 (103, 'POLIZA DE SERVICIO', 'Garantias'),
 (102, 'POLIZAS DE GARANTIA', 'Garantias'),
@@ -120,7 +109,6 @@ INSERT INTO `relacion_categorias` (`id_rel_categoria`, `id_categoria`, `id_super
 (50, 'REPRODUCTORES', 'Equipo de computo'),
 (51, 'SCANNER', 'Equipo de computo'),
 (72, 'SCANNER', 'Impresoras/escaner'),
-(17, 'SERVICIOS METROCARRIER', 'Redes de computo/telefonia'),
 (23, 'SERVIDORES', 'Almacenamiento'),
 (52, 'SOFTWARE', 'Equipo de computo'),
 (98, 'SOFTWARE', 'Software/juegos'),
@@ -147,6 +135,28 @@ INSERT INTO `relacion_categorias` (`id_rel_categoria`, `id_categoria`, `id_super
 (19, 'VIDEOGRABADORES', 'Redes de computo/telefonia'),
 (61, 'VIDEOPROYECTOR', 'Audio y video'),
 (60, 'VIDEOPROYECTOR', 'Equipo de computo');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `relacion_categorias`
+--
+ALTER TABLE `relacion_categorias`
+  ADD PRIMARY KEY (`id_rel_categoria`),
+  ADD KEY `id_categoria` (`id_categoria`,`id_supercategoria`),
+  ADD KEY `id_categoria_2` (`id_categoria`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `relacion_categorias`
+--
+ALTER TABLE `relacion_categorias`
+  MODIFY `id_rel_categoria` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
