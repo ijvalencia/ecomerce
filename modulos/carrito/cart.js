@@ -64,21 +64,59 @@ $(document).ready(function (){
 
     $('#abrir_tarjetas').on("click", function () {
         $('#form_busqueda').hide();
-    });
+        //var res=String(sesion);
+        //var resesion = res.substring(0,8);
+        
+  //  if((resesion === "") || (resesion === "invitado") || (resesion === null)){
+    //        jAlert("Registrate para poder seguir con tu compra");
+      //      window.location.href = "../../modulos/login/index.php";
+        //    window.close();
+          //  console.log("no loguiado");
+            // Enviar a la pagina de registro
+       // } else {
+         // if(parseFloat($('#txt_total').text()) > parametros["compra_maxima"]) {
+           //   jAlert("Para confirmar tu compra comunicate a " + parametros["no_cva"]);
+             // console.log("parametro");
+         // } else {
+              
+             $.ajax({
+                   type:"POST",
+                   url: "../../bin/ingresar.php?categoria=extraerCorreo",
+                   data: {"idusuariocompras": number},
+                   success: function (mns){
+                  alert(mns);
+                     if(mns === "1"){
+                      window.location.href = "../../modulos/login/index.php";
+                      window.close();
+                      jAlert("logueo"+mns);
+                      
+                   } else {
+                       jAlert("no logueo");
+                 }        
+              }
+            });
+          //} 
+        //} 
+     });
+    
     $('#cerrar_tarjetas').on("click", function () {
         $('#form_busqueda').show();        
     });
 
     $('#btn_confirmar_compra').on("click", function (){
-        alert(sesion);
+        var res=String(sesion);
+        var resesion = res.substring(0,8);
+        //alert("hola : :"+resesion+": :adios");
+       // console.log(res);
+       // console.log(resesion);
         //if(sesion === "invitado,,0"){
-        if((sesion === "") || (sesion === "invitado") || (sesion === null)){
+    if((resesion === "") || (resesion === "invitado") || (resesion === null)){
             jAlert("Registrate para poder seguir con tu compra");
             window.location.href = "../../modulos/login/index.php";
             window.close();
             console.log("no loguiado");
             // Enviar a la pagina de registro
-        } else {
+        }else {
           if(parseFloat($('#txt_total').text()) > parametros["compra_maxima"]) {
               jAlert("Para confirmar tu compra comunicate a " + parametros["no_cva"]);
               console.log("parametro");
@@ -101,20 +139,19 @@ $(document).ready(function (){
                             url: "../../bin/ingresar.php?categoria=agregarordenes",
                             data: {"idusuario": number, "direccion": direcion, "idenvio": txtidconsulta, "subtotal": formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)), "metodo_pago": pago},
                             success: function(mnss){
-                               console.log("hola"+mnss);
+                            console.log("hola"+mnss);
                                
                             $.each($('.numero_cantidad'),function(i,valor){
-                               sub_iva += valor.value; // * ivas[i];
-                               txtcantidad=valor.value;
-                               console.log(txtcantidad);
-                           });
-                            
+                               sub_iva += valor.value; //* ivas[i];
+                               txtcantidad=valor.value;     
+                           
+                            alert(txtcantidad);
                            for(var m in mns){
                                $.ajax({
                                     type: "POST",
                                     async: true, 
                                     url: "../../bin/ingresar.php?categoria=productos_Odenes",
-                                    data:{"id_orden": mnss, "codigoF":mns[m]["codigo_fabricante"],"cantidad":txtcantidad},
+                                    data:{"id_orden": mnss, "codigoF":mns[m]["codigo_fabricante"], "cantidad":txtcantidad},
                                     success: function(ordenesproductos){
                                      console.log("hola :"+ordenesproductos);   
                           // numeroorden = String(mnss[0]["id_ordenes"]);
@@ -129,7 +166,9 @@ $(document).ready(function (){
                         
                                  }
                             });
-                          }   
+                           
+                          }
+                          });
                         }
                         });                        
                      }

@@ -9,7 +9,6 @@
         ?>
     </head>
     <body>
-
         <!--<div class="loader"></div>-->
         <br>
         <!-- Imagenes de inicio -->

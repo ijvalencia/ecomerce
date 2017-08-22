@@ -403,8 +403,20 @@ class BD {
 	}
 	/***********/
     /* parte del chuy */
-        
-    public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado) {
+      public function validarContraseña($idusuarioss){
+          if ($idusuarioss!=null){
+        $sql = "select correo from usuario where id_usuario=".$idusuarioss;
+          $correo=[];
+            foreach($this->conexion->query($sql) as $rowcorreo){
+                array_push($correos, $rowcorreo);
+            }   
+             echo json_encode($correos);
+          }else{
+              echo json_encode('1');
+          }
+        }
+
+        public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado) {
         date_default_timezone_set('America/Mexico_City');
         $fecha = date('d/m/Y H:i:s', time());
            $sql = "INSERT INTO ordenes(id_usuario, id_direccion, id_envio, fecha, total, metodo_pago, estado)

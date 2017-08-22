@@ -133,10 +133,16 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
-     case "direccioness":   
+    case "extraerCorreo":
+        $idusuarioss = $_POST['idusuariocompras'];
+        $conexion->validarContraseña($idusuarioss);
+        
+    break;
+
+    case "direccioness":   
          $idusuario = $_POST['idusuarios'];
          $conexion->getdireccionesusuario($idusuario);
-      break;
+    break;
     
   case "agregarordenes":
         $usuario = $_POST['idusuario'];
