@@ -313,25 +313,43 @@ class BD {
     /*     * ****************** FIN DEL PELIGRUS ******************** */
 
 
-   	/* SATANAS */
+    /* SATANAS */
    	
-   	public function getCategorias() {
-		$sql = "SELECT * FROM super_categorias";
-		$datos = [];
-		foreach ($this->conexion->query($sql) as $row) {
-			array_push($datos, $row);
-		}
-		echo json_encode($datos);
-	}
-	
-	public function getSubcategorias($categoria) {
-		$sql = 'SELECT  id_supercategoria, id_categoria FROM relacion_categorias WHERE id_supercategoria = "'.$categoria.'"';
-		$datos = [];		
-		foreach ($this->conexion->query($sql) as $row) {
-			array_push($datos, $row);
-		}
-		echo json_encode($datos);
-	}
+    public function getCategorias() {
+    	$sql = "SELECT * FROM super_categorias";
+    	$datos = [];
+    	foreach ($this->conexion->query($sql) as $row) {
+    		array_push($datos, $row);
+    	}
+    	echo json_encode($datos);
+    }
+    
+    public function getSubcategorias($categoria) {
+        $sql = 'SELECT * FROM relacion_categorias WHERE id_supercategoria = "'.$categoria.'"';
+    	if ($categoria === "666")
+    		$sql = 'SELECT * FROM relacion_categorias WHERE 1';
+    	$datos = [];		
+    	foreach ($this->conexion->query($sql) as $row) {
+    		array_push($datos, $row);
+    	}
+    	echo json_encode($datos);
+    }
+
+    public function getEstadoCategoria($categoria) {
+        $sql = 'SELECT * FROM categoria WHERE nombre = "'.$categoria.'"';
+        if ($categoria === "666")
+            $sql = 'SELECT * FROM categoria';
+        $datos = [];
+        foreach ($this->conexion->query($sql) as $row) {
+    		array_push($datos, $row);
+    	}
+    	echo json_encode($datos);
+    }
+
+    public function eliminarCategoriasRepetidas() {
+        $sql = 'DELETE FROM categoria WHERE id_categoria IN (SELECT id_categoria FROM (SELECT * FROM categoria LEFT JOIN (SELECT MIN(id_categoria) AS id FROM categoria GROUP BY nombre) AS mantener ON mantener.id = categoria.id_categoria) AS res WHERE id IS NULL)';
+        echo $con->query($sql) ? "Borradas categorias duplicadas" : "Imposible borrar";
+    }
 
     public function getParametros() {
         $sql = "SELECT * FROM parametros WHERE 1";
