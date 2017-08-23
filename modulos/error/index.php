@@ -5,7 +5,7 @@
         <?php include '../../bin/navbar.php';?>
     </head>
     <body>
-        <?php// header('Location: Ecommerce/modulos/inicio/index.php');?>
+        <!-- <?php header('Location: Ecommerce/modulos/inicio/index.php');?>-->
         <div class="wrapper row2">
             <div id="container" class="clear">
                 <section id="error404" class="clear">

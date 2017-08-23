@@ -42,10 +42,10 @@ $.getJSON("../../bin/ingresar.php?categoria=getCategorias", function(respuesta) 
 	});
 	/* Cargar las cubcategorias*/
 	for (var i = 0; i < categorias.length; i++) {
-		$.getJSON("../../bin/ingresar.php?categoria=getSubcategorias&subcategoria="+categorias[i]["nombre"], function(subrespuesta) {
-			subcategorias.push(subrespuesta);
-			cargarLista(categorias[0]["id_super"]);
-		});
+	    $.getJSON("../../bin/ingresar.php?categoria=getSubcategorias&subcategoria="+categorias[i]["nombre"], function(subrespuesta) {
+	    	subcategorias.push(subrespuesta);
+	    	cargarLista(categorias[0]["id_super"]);
+	    });
 	}
 });
 

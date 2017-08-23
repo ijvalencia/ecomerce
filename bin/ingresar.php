@@ -110,6 +110,9 @@ switch ($Menu) {
     case "getSubcategorias":
         $conexion->getSubcategorias($_GET["subcategoria"]);
         break;
+    case "getEstadoCategoria":
+        $conexion->getEstadoCategoria($_GET["subcategoria"]);
+        break;
     case "parametros":
         $conexion->setTipoCambio();
         $conexion->getParametros();
