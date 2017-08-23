@@ -16,7 +16,7 @@ $(document).ready(function () {
                                  if(informacion===null){
                                    jAlert("Error");
                                  } else {
-                                window.location.href="Detalles_orden.php?codigofabricante="+codigofabricante;
+                                window.location.href="Detalles_Orden.php?codigofabricante="+codigofabricante;
                                 window.close();
                               }                   
                           }       
@@ -60,16 +60,4 @@ $(document).ready(function () {
             }
         }); 
     });
-    /*
-     $.getJSON("../../bin/ingresar.php?categoria=orden", function(respuesta) {
-     console.log(respuesta);
-     $.each(respuesta, function(i, valor){
-     image = tabla_productos;
-     image = image.replace("imgenes",valor['imagen']);
-     image = image.replace("descripcion",valor['descripcion']);
-     image = image.replace("marca",valor['marca']);
-     image = image.replace("precio","$"+valor['precio']);
-     $('.imgg').append(image);
-     });
-     });*/
 });

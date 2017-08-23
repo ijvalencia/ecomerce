@@ -403,19 +403,27 @@ class BD {
 	}
 	/***********/
     /* parte del chuy */
-      public function validarContraseña($idusuarioss){
-          if ($idusuarioss!=null){
-        $sql = "select correo from usuario where id_usuario=".$idusuarioss;
-          $correo=[];
-            foreach($this->conexion->query($sql) as $rowcorreo){
-                array_push($correos, $rowcorreo);
-            }   
-             echo json_encode($correos);
-          }else{
-              echo json_encode('1');
+ public function cuenta($cuentacorreos,$cuentaclave){
+    $sql = "select correo , contra from usuario where correo='".$cuentacorreos."'";
+       $datoss = $this->conexion->query($sql);
+     foreach($datoss as $row){    
+       if (($cuentacorreos == $row['correo']) && ($cuentaclave == $row['contra'])){
+           echo $row['correo']."||";
+           echo $row['contra']."||";
+             
+           
           }
-        }
-
+     }
+ }
+  
+  public function validarContrasena($idusuarioss){
+    $sql = "select correo from usuario where id_usuario=".$idusuarioss;
+    $correo=[];
+      foreach($this->conexion->query($sql) as $rowcorreo){
+             array_push($correo, $rowcorreo);
+       }
+            echo json_encode($correo);
+    }    
         public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado) {
         date_default_timezone_set('America/Mexico_City');
         $fecha = date('d/m/Y H:i:s', time());
@@ -423,7 +431,7 @@ class BD {
            VALUES ('".$usuario."','".$direccion."','".$envio . "',
            STR_TO_DATE('".$fecha."', '%d/%m/%Y %H:%i:%s'),'" .
            $total . "','" . $metodo_pago . "'," . $estado .")";
-//            echo $this->conexion->query($sql) ? "1" : "0";       
+           $this->conexion->query($sql) ? "1" : "0";       
             $sql= "select id_ordenes from ordenes where id_usuario='".$usuario."' and estado='".$estado."' and fecha=STR_TO_DATE('".$fecha."','%d/%m/%Y %H:%i:%s')";             
             foreach($this->conexion->query($sql) as $row){
               echo $row['id_ordenes'];
@@ -431,7 +439,7 @@ class BD {
     }
     
     public function producto_orden($id_codigo ,$codigoF, $cantidad){            
-            $sql = "INSERT INTO productos_orden (id_orden, id_producto, ccantidad)VALUES('".$id_codigo."','".$codigoF."','".$cantidad."')";
+            $sql = "INSERT INTO productos_orden (id_orden, id_producto, cantidad)VALUES('".$id_codigo."','".$codigoF."','".$cantidad."')";
             echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito           
     }
     
@@ -474,7 +482,7 @@ class BD {
     }
     
         public function mostrarordenes($id_usuariosesion) {
-        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
@@ -483,8 +491,7 @@ class BD {
     }
     
     public function mostrarordenesdetalles($id_ordenproductodetalle){ 
-        $sql="select producto.codigo_fabricante,producto.descripcion, producto.grupo, producto.marca, producto.imagen, ordenes.total,ordenes.fecha,ordenes.metodo_pago, productos_orden.cantidad from ordenes, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante='".$id_ordenproductodetalle."'";
-        //echo $sql."\n";
+        $sql="select producto.codigo_fabricante,producto.descripcion,producto.precio,producto.grupo, producto.marca, producto.imagen, ordenes.total,ordenes.fecha,ordenes.metodo_pago, productos_orden.cantidad from ordenes, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante LIKE'".$id_ordenproductodetalle."%'"; 
         $arraydetalles=[];  
         foreach ($this->conexion->query($sql) as $rowordenardetalle) {
             array_push($arraydetalles,  $rowordenardetalle);

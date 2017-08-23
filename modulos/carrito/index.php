@@ -92,8 +92,8 @@
                                                             <option value="Visa">Visa</option>
                                                         </select>
                                                         </label>
-                                                        <label>Correo: <input type="Email" name="txtcorreoss" id="txtemailcompra" class="form-correo form-control"></label>
-                                                        <label>Clave : <input type="text" name="txtclave" id="txtclavescompra" class="form-correo form-control"></label>
+                                                        <label>Correo: <input type="text" name="txtcorreoss" id="txtemailcompra" class="form-correo form-control"></label>
+                                                        <label>Clave : <input type="password" name="txtclave" id="txtclavescompra" class="form-correo form-control"></label>
                                                        <br>
                                                  <button type="button" class="btn btn-default" id="btn_confirmar_compra" style="margin-left: 85px;">Confirmar compra</button>
                                                  <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrar_tarjetas" style="margin-left: 238px; margin-top: -34px; width: 143px;">Canselar</button>

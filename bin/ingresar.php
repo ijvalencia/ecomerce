@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 include 'connectBD.php';
@@ -131,12 +130,17 @@ switch ($Menu) {
     case "getCarousel":
         $conexion->getCarousel($_GET['clave']);
         break;
-    /*     * ******** */
+    /********** */
     //parte del chuy
     case "extraerCorreo":
         $idusuarioss = $_POST['idusuariocompras'];
-        $conexion->validarContraseña($idusuarioss);
-        
+        $conexion->validarContrasena($idusuarioss);        
+    break;
+
+    case "compararcuentass":
+        $cuentacorreos = $_POST['usuariocorreo'];
+        $cuentaclave = $_POST['usuarioclave'];
+        $conexion->cuenta($cuentacorreos,$cuentaclave);        
     break;
 
     case "direccioness":   
