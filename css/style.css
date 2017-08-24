@@ -891,7 +891,7 @@ hr {
 
 /*detalles descripcion  Detalles_orden.php*/
 .precioisquierda{
-    //float: right;        
+    /*float: right; */       
     margin-left: -5%;
     margin-top: -12px;
 }

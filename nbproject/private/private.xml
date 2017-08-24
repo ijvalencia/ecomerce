@@ -3,17 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/ingresar.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/categorias.js</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/usuario/usuarios.js</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/bin/connectBD.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/orden/Detalles_Orden.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/carrito/cart.js</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/Login.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/productos/producto.js</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/orden/Orden.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/carrito/index.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/productos/detalles.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/orden/orden.js</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/css/style.css</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/inicio/Usuario_menu.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/orden/detalle_orden.js</file>
         </group>
     </open-files>
 </project-private>

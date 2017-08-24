@@ -118,3 +118,19 @@ function formatoMoneda(numero) {
     });
     return numero;
 }
+///    ANTON
+var producto=$('#producto').attr("value");
+        $.get("../../bin/ingresar.php?categoria=verNumeroComentarios&producto="+producto, function(respuesta) {
+            $('#comentarios').append("<a  href='#' onclick='vercomentario()'>"+respuesta+"</a>");
+        });
+var cargado=false;
+function vercomentario(){
+    
+    if(!cargado){
+        $.get("../../bin/ingresar.php?categoria=verComentarios&producto="+producto,
+        function (respuesta){
+            alert(respuesta);
+        })
+    }
+    cargado=true;
+}
