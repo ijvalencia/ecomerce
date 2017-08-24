@@ -191,7 +191,7 @@ $(document).ready(function () {
 /* SATANAS */
 function cargarBusqueda(arr_productos) {
     $('ttbody').empty();
-    var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img  src="#imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small></p><h4>$#costo<br>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
+    var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img src="#imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small></p><h4>$#costo<br>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
     html_imagen = html_imagen.replace("#cat", $('#subcategoria').attr("value"));
     //					console.log(html_imagen);
     var tabla_producto = '<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
@@ -233,10 +233,31 @@ function cargarMarcas(productos_busqueda) {
         }
     var auxMarca = "";
     for (var i = 0; i < marcas.length; i++) {
-        // $('#marquitas').append('<option value="'+marcas[i]+'">'+marcas[i]+"</option>");
-        $('#marquitas').append('<li class="check"><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
-    } 
+        if(i == 10) {
+            $('#marquitas').append("<separador></separador>");
+            for(j = i; j < marcas.length; j++)
+                $('separador').append('<li class="checkbox"><input type="checkbox" value="'+ marcas[j] +'">'+ marcas[j] +'</li>');
+            $('separador').append('<li><a style="color:#888">Ver menos <i class="fa fa-minus"></i></a></li>');
+            $('separador').hide();
+            break;
+        }
+        $('#marquitas').append('<li class="checkbox"><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
+    }
 }
+
+$('#mas_marcas').click(function() {
+    if($('#icono_marcas').attr("class").indexOf("plus") != -1) {
+        console.log("si");
+        $('#icono_marcas').attr("class", "fa fa-minus");
+        $('#txt_marcas').text("  menos");
+        $('separador').show();
+    } else {
+        console.log("no");
+        $('#icono_marcas').attr("class", "fa fa-plus");
+        $('#txt_marcas').text("ver más");
+        $('separador').hide();
+    }
+});
 
 function cargarColores(productos_busqueda) {
     var colores = [];

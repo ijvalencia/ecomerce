@@ -33,6 +33,8 @@
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_marca">Por Marca:</a>
+                                        <span class="separador"></span>
+                                        <a id="mas_marcas"><span id="txt_marcas">ver más</span><i id="icono_marcas" class="fa fa-plus"></i></a>
                                         <ul class="menu" role="menu" id="sub_marca"><center id="marquitas"></center></ul>
                                     </li>
                                     <li class="dropdown">
