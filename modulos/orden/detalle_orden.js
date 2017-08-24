@@ -12,7 +12,7 @@ $(document).ready(function () {
     if (params['codigofabricante']){
         var codigo = String(params['codigofabricante']);
         
-        codigofabricante = codigo.substr(13,12);
+        codigofabricante = codigo.substr(13,10);
         //alert(codigofabricante);
         console.log("hola mundo cruel"+codigofabricante,codigo);
         
@@ -27,7 +27,7 @@ $(document).ready(function () {
             //    alert(informacion); 
                     //console.log(informacion);
                 informacion = JSON.parse(informacion);
-                 
+                
                   $("#cantidad").html("Numero de Piezas :"+informacion[0]["cantidad"]);
                   $("#descripcion").html("Descripcion del los Productos "+informacion[0]["descripcion"]);
                   $("#precio").html("Precio  :$ "+informacion[0]["precio"]);

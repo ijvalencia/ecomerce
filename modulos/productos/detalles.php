@@ -39,7 +39,7 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_disponible">Disponibilidad:</a>
-                                        <ul class="menu" role="menu" id="sub_disponible">
+                                        <ul class="menu hidden" role="menu" id="sub_disponible">
                                             <center>
                                                 <li>
                                                     <select id="filtro_disponibilidad" type="text" name="envio">
@@ -53,7 +53,7 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_precio">Rango de precio:</a>
-                                        <ul class="menu" role="menu" id="sub_precio">
+                                        <ul class="menu hidden" role="menu" id="sub_precio">
                                             <center>
                                                 <li>
                                                     <input id="filtro_miSalario" value="<?php echo $_GET['priceMIN'];?>" name="min" type="number" min="1" max="250000">
@@ -65,7 +65,7 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_orden">Ordenar por:</a>
-                                        <ul class="menu" role="menu" id="sub_orden">
+                                        <ul class="menu hidden" role="menu" id="sub_orden">
                                             <li><select id="filtro_orden" type="text" name="orden">
                                                     <option value="normal"> Indiferente</option>
                                                     <option value="mayor"> Precio(mayor a menor)</option>
@@ -82,7 +82,7 @@
                                     </li>
                                     <li class="dropdown" id="drop_color">
                                         <a class="dropdown-toggle" id="btn_color">Por Color:</a>
-                                        <ul class="menu" role="menu" id="sub_color"><span id="coloreamela"></span></ul> 
+                                        <ul class="menu hidden" role="menu" id="sub_color"><span id="coloreamela"></span></ul> 
                                     </li>
                                 </ul>
                             </div>

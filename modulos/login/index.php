@@ -1,5 +1,4 @@
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,14 +46,13 @@
                                     </div>
                                     <button type="button" class="btn" id="botonsesion">Iniciar Sesiòn</button>
                                     <br>
-                                    <div class="container">
+                                    <div class="container" >
                                         <!-- Trigger the modal with a button -->
                                         <!--<button type="button" class="btn btn-info btn-lg" >Open Modal</button>-->
-                                        <a href="#" class="contrasena" id="link" style="float:left;" data-toggle="modal" data-target="#myModal">Olvidaste tu contraseña?<!--NO MAMEN -> Olvidastes Contraseña--></a>
+                                        <a href="#" class="contrasena" id="link" style="float:left;" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Olvidaste tu contraseña?</a>
                                         <!-- Modal -->
                                         <div class="modal fade" id="myModal" role="dialog">
                                             <div class="modal-dialog">
-
                                                 <!-- Modal content-->
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -62,18 +60,15 @@
                                                         <h4 class="modal-title">Restableser Contraseña</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p></p>
-                                                        <input type="email" name="txtemail" id="txtemail">
-                                                        
+                                                        <p>correo : </p>
+                                                          <input type="email" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" data-backdrop="static" data-keyboard="false"><br>                                       
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeddd">Close</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal" id="enviar">Enviar</button>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
-
                                     </div>  
                                 </form>
                             </div>
@@ -98,7 +93,6 @@
                         <div class="form-box">
                             <div class="form-top">
                                 <h5>REGISTRARSE</h5>
-
                                 <h6>Ingresa tus datos para empezar a comprar</h6>
                             </div>
                             <div class="form-bottom">
@@ -126,7 +120,8 @@
                                     <h6>Confirmar la contraseña</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="confirmacion">Confirma tu contraseña:</label>
-                                        <input type="password" name="confirmacion" class="form-confirmacion form-control" id="form-confirmacion">
+                                        <input type="password" name="confirmacion" class="form-confirmacion form-control" id="form-confirmacion"><br>
+                                        <div class="g-recaptcha" data-sitekey="6Ldf9S0UAAAAAPTSSoYQ-0kLt6CxWX-J-SIbwnz3" id="norobot"></div>
                                     </div>
                                     <div class="col-sm-12">
                                         <input style="width: 26px" type="checkbox"  class="col-sm-12" id="check-terminos"/>

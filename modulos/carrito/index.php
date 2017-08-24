@@ -9,7 +9,7 @@
 
     </head>
     <body>
-        
+
         <div class="top-content">
             <div class="container">
                 <div class="row">
@@ -76,7 +76,7 @@
                                         </li>
                                     </ul>
                                      <div class="container" style="width: 89%;">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" id="abrir_tarjetas">Realizar compra</button>
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" id="abrir_tarjetas" data-backdrop="static" data-keyboard="false">Realizar compra</button>
                                        <div class="modal fade" id="myModal" role="dialog">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -84,23 +84,25 @@
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title">Realizar Compra</h4>
                                                     </div>
-                                                <div class="modal-body">
-                                                      <label>Tipo de Tarjeta :
+                                                    <div class="modal-body">
+                                                        <p>Tipo de tarjeta</p>
                                                         <select class="selectpicker" id="selector_envio1">
                                                             <option value="Mastercard">Mastercard</option>
                                                             <option value="American express">American express</option>
                                                             <option value="Visa">Visa</option>
                                                         </select>
+
                                                         </label>
+                                                    <br>                                              
                                                         <label>Correo: <input type="text" name="txtcorreoss" id="txtemailcompra" class="form-correo form-control"></label>
                                                         <label>Clave : <input type="password" name="txtclave" id="txtclavescompra" class="form-correo form-control"></label>
-                                                       <br>
+                                      
+                                                        <div class="g-recaptcha" data-sitekey="6Ldf9S0UAAAAAPTSSoYQ-0kLt6CxWX-J-SIbwnz3" id="yorobot"></div>
+                                                       <br><br><br>
                                                  <button type="button" class="btn btn-default" id="btn_confirmar_compra" style="margin-left: 85px;">Confirmar compra</button>
                                                  <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrar_tarjetas" style="margin-left: 238px; margin-top: -34px; width: 143px;">Canselar</button>
+
                                                 </div>
-                                                  <div class="modal-footer">                      
-                                                 
-                                                  </div>
                                               </div>
                                             </div>
                                         </div>

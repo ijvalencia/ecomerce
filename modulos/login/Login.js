@@ -5,28 +5,28 @@ var bandera = false;
 var bandera2 = false;
 
 $(document).ready(function () {
-    
+
     $('#link').on("click", function () {
         $('#form_busqueda').hide();
     });
-    
+
     $('#closeddd').on("click", function () {
         $('#form_busqueda').show();
     });
-    
+
     $("#btn-enviar").attr("disabled", true);
-      $("#botonsesion").on('click', function () {
+    $("#botonsesion").on('click', function () {
         var txtusuario = $("input:text[id='form-mail']").val();
         var txtcontra = $("input:password[id='form-pass']").val();
-        
+
         if ((txtusuario === "") || (txtcontra === "")) {
             $('#form-mail').css({"border": "2px solid red"});
             $('#form-pass').css({"border": "2px solid red"});
         } else {
             $('#form-mail').css({"border": "2px solid Gainsboro"});
             $('#form-pass').css({"border": "2px solid Gainsboro"});
-            
-            if(bandera === false){
+
+            if (bandera === false) {
                 if (correo.test(txtusuario)) {
                     $('#form-mail').css({"border": "2px solid Gainsboro"});
                 } else {
@@ -41,7 +41,7 @@ $(document).ready(function () {
                     bandera = false;
                 }
             }
-            
+
             if ((correo.test(txtusuario)) && (txtcontra !== null)) {
                 bandera = true;
                 if (bandera === true) {
@@ -52,11 +52,11 @@ $(document).ready(function () {
                             "contra": txtcontra},
                         success: function (sessionmsj) {
                             if (sessionmsj === "") {
-                                jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");                   
-                            } else { 
-                                    history.back(); 
+                                jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");
+                            } else {
+                                history.back();
                             }
-                         }
+                        }
                     });
                 }
             }
@@ -78,20 +78,22 @@ $(document).ready(function () {
         var txtcorreo = $("input:text[id='form-correo']").val();
         var txtcontra = $("input:password[id='form-contra']").val();
         var txtconfir = $("input:password[id='form-confirmacion']").val();
-        var ckbterminos = $("input:checkbox[id='check-terminos']").val();
-
-        if ((txtnombre === "") || (txtapellido === "") || (txtcorreo === "") || (txtcontra === "") || (txtconfir === "")) {
+        //     var ckbterminos = $("input:checkbox[id='check-terminos']").val();
+        var norobot = $("#norobot").val();
+        if ((txtnombre === "") || (txtapellido === "") || (txtcorreo === "") || (txtcontra === "") || (txtconfir === "") || (norobot === " ")) {
             $('#form-nombre').css({"border": "2px solid red"});
             $('#form-apellidos').css({"border": "2px solid red"});
             $('#form-correo').css({"border": "2px solid red"});
             $('#form-contra').css({"border": "2px solid red"});
             $('#form-confirmacion').css({"border": "2px solid red"});
+            $('#norobot').css({"border": "2px solid red"});
         } else {
             $('#form-nombre').css({"border": "2px solid Gainsboro"});
             $('#form-apellidos').css({"border": "2px solid Gainsboro"});
             $('#form-correo').css({"border": "2px solid Gainsboro"});
             $('#form-contra').css({"border": "2px solid Gainsboro"});
             $('#form-confirmacion').css({"border": "2px solid Gainsboro"});
+            $("#norobot").css({"border": "2px solid Gainsboro"});
 
             if (bandera2 === false) {
                 if (Cadena.test(txtnombre)) {
@@ -130,10 +132,12 @@ $(document).ready(function () {
                     if (bandera2 === true) {
                         $.ajax({type: "POST",
                             url: "../../bin/ingresar.php?categoria=registro",
-                            data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir},
+                            data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
                             success: function (mns) {
-                                if (mns === 1) {
+                                if (mns === "1") {
                                     jAlert("LOS DATO REGISTRADO CON EXITO");
+                                    $.limpiartexto();
+
                                 } else if (mns === 0) {
                                     jAlert("ERROR");
                                 }
@@ -143,6 +147,30 @@ $(document).ready(function () {
                 }
             }
         }
+    });
+    $.limpiartexto = function () {
+        $("input:text[id='form-nombre']").val("");
+        $("input:text[id='form-apellidos']").val("");
+        $("input:text[id='form-correo']").val("");
+        $("input:text[id='form-contra']").val("");
+        $("input:text[id='form-confirmacion']").val("");
+    };
+
+    $("#enviar").on('click', function () {    
+        var txtemaill = $("input:text[id='txtemaill']").val();
+        var checkrobot = $("#norobot").val();
+        $.ajax({type: "POST",
+            url: "../../bin/ingresar.php?categoria=olvidecontrasena",
+            data: {"txtemaill":txtemaill , "checkrobot": checkrobot},
+            success: function (mns) {
+                if (mns === "1") {
+                    jAlert("LOS DATO REGISTRADO CON EXITO");
+                    $.limpiartexto();
+                } else if (mns === 0) {
+                    jAlert("ERROR");
+                }
+            }
+        });
     });
     $('.loader').fadeOut("slow");
 });

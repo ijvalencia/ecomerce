@@ -44,7 +44,9 @@ switch ($Menu) {
         break;
 
     case "sesion":
-        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
+        if(!(isset($_SESSION['apellidos'])))
+            $_SESSION['apellidos']="invitado";
+        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'] , $_SESSION['id'],);
         echo json_encode($usuario);
         break;
 
@@ -128,22 +130,49 @@ switch ($Menu) {
         $carrito = $_SESSION['carrito'];
         array_splice($carrito, $_POST['articulo']);
         $_SESSION['carrito'] = $carrito;
-        break;
+    break;
 
     case "getCarousel":
         $conexion->getCarousel($_GET['clave']);
-        break;
+    break;
     /********** */
     //parte del chuy
+
+    case "olvidecontrasena";
+        $correos_Email = $_POST['txtemaill'];
+         
+    break;
+    
     case "extraerCorreo":
+        
         $idusuarioss = $_POST['idusuariocompras'];
         $conexion->validarContrasena($idusuarioss);        
+        
     break;
 
     case "compararcuentass":
         $cuentacorreos = $_POST['usuariocorreo'];
         $cuentaclave = $_POST['usuarioclave'];
-        $conexion->cuenta($cuentacorreos,$cuentaclave);        
+        //$conexion->cuenta($cuentacorreos,$cuentaclave);        
+        $checkrobot = $_POST["checkrobot"];
+        
+        if(!$checkrobot){
+          echo '<h2>Please check the the captcha form.</h2>';
+          exit;
+        }
+	$secretKeyy = "";
+	$ip = $_SERVER['REMOTE_ADDR'];
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKeyy."&6Ldf9S0UAAAAAJqGqN5B525knKLVQ6u9ZKdSLj4Q".$checkrobot."&remoteip=".$ip);
+	$responseKeyss = json_decode($response,true);                                                       
+        if(intval($responseKeyss["success"]) !== 1) {
+            
+          echo '<h2>You are spammer ! Get the @$%K out</h2>';
+          
+        } else {
+            
+          echo '<h2>Thanks for posting comment.</h2>';
+          
+        }
     break;
 
     case "direccioness":   
@@ -165,8 +194,7 @@ switch ($Menu) {
         $id_codigo = $_POST['id_orden'];
         $codigoF  = $_POST['codigoF'];
         $cantidad = $_POST['cantidad'];
-        $conexion->producto_orden($id_codigo, $codigoF, $cantidad);
-        
+        $conexion->producto_orden($id_codigo, $codigoF, $cantidad);  
     break;
     
     
@@ -202,13 +230,12 @@ switch ($Menu) {
         echo $id;
         $conexion->getUsuario($id, $correo = null);
         break;
-
+    
     case "email":
         $correo = $_POST['correo'];
         $contra = $_POST['contra'];
         $conexion->login($correo, $contra);
         break;
-
 
     case "registro":
         $nombre = $_POST['nombre'];
@@ -216,6 +243,21 @@ switch ($Menu) {
         $correo = $_POST['correos'];
         $contrasena = $_POST['contrasena'];
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
+        $captcha = $_POST['robot'];
+        
+        if(!$captcha){
+          echo '<h2>Please check the the captcha form.</h2>';
+          exit;
+        }
+	$secretKey = "";
+	$ip = $_SERVER['REMOTE_ADDR'];
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6LeB4C0UAAAAAG85OPGoSHdarkupWs_qmTbUjAkB".$captcha."&remoteip=".$ip);
+	$responseKeys = json_decode($response,true);
+        if(intval($responseKeys["success"]) !== 1) {
+          echo '<h2>You are spammer ! Get the @$%K out</h2>';
+        } else {
+          echo '<h2>Thanks for posting comment.</h2>';
+        } 
         break;
 
     /*     * ******* */
@@ -364,6 +406,21 @@ switch ($Menu) {
         $conexion->verCantidadMarca($grupo, $marca);
         break;
     
+    case "meterComentario":
+        $comentario=$_GET['comentario'];
+        $calificacion=$_GET['calificacion'];
+        $usuario=$_GET['usuario'];
+        $producto=$_GET['producto'];
+        $conexion->verMeterComentario($usuario, $calificacion, $comentario, $producto);
+        break;
+    case "verNumeroComentarios":
+        $producto=$_GET['producto'];
+        $conexion->verNumeroComentarios($producto);
+        break;
+    case "verComentarios":
+        $producto=$_GET['producto'];
+        $conexion->verComentarios($producto);
+        break;
 }
 $conexion->cerrar();
 unset($conexion);
