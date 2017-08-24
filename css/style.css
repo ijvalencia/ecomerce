@@ -1193,23 +1193,17 @@ label {
     background: #fff;
 }
 
-#coloreamela, #memorama, #btn_marca, #btn_color {
+#coloreamela, #memorama, #btn_marca, #btn_memoria {
    text-align:left;
 }
-#mas_marca {
-    font-weight: bold;
-    font-size: 14px;
-    width: 80px;
-    margin: -16px 0px 0px 105px;
-}
-#mas_marcas {
+#mas_marcas, #mas_memorias {
     position: relative;
     display: block;
     margin: -35px 0px 0px 100px;
     font-weight: bold;
     font-size: 14px;
 }
-#mas_marcas i {
+#mas_marcas i, #mas_memorias i {
     margin: 0px 0px 0px 3px;
 }
 #yorobot{
