@@ -66,7 +66,8 @@ class BD {
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
         $tipo = 0;  // 0 para usuarios 1 para admin
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-        echo $this->conexion->query($sql) ? "1" : "0";
+       echo $this->conexion->query($sql) ? "1" : "0";
+       
         //echo $sql;
     }
 

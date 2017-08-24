@@ -68,7 +68,7 @@ $(document).ready(function () {
     
     $('#abrir_tarjetas').on("click", function () {
         $('#form_busqueda').hide();
-            alert("dato en blanco :"+number);
+       //     alert("dato en blanco :"+number);
             
         if((number === "")||(nombre === "invitado") || (number === undefined)) {
             jAlert("Favor de iniciar sesion");
@@ -89,7 +89,6 @@ $(document).ready(function () {
             });
         }
     });
-    
     $('#cerrar_tarjetas').on("click", function () {
         $('#form_busqueda').show();
     });
@@ -111,22 +110,25 @@ $(document).ready(function () {
                 console.log("parametro");
             } else {
                 console.log("ya loguiados");
-         /*     var cuentacorreos = $("input:text[id='txtemailcompra']").val();
-                var cuentaclave = $("input:password[id='txtclavescompra']").val();
+                //no borrar  se ocupan
+               var cuentacorreos = $("input:text[id='txtemailcompra']").val();
+               var cuentaclave = $("input:password[id='txtclavescompra']").val();
+               var checkrobot = $("#norobot").val();
+               
                alert(cuentacorreos + cuentaclave);
+               
                 $.ajax({
                     type: "POST",
                     url: "../../bin/ingresar.php?categoria=compararcuentass",
-                    data: {"usuariocorreo": cuentacorreos, "usuarioclave": cuentaclave},
+                    data: {"usuariocorreo": cuentacorreos, "usuarioclave": cuentaclave, "usuariorobot": checkrobot},
                     success: function (mnscompara) {
                        alert("hola" + mnscompara);
                     }
                 });
-         */
-                $.ajax({
-                    type: "get",
-                    url: "../../bin/ingresar.php?categoria=getCarrito",
-                    success: function (mns) {
+          $.ajax({
+               type: "get",
+               url: "../../bin/ingresar.php?categoria=getCarrito",
+               success: function (mns) {
                         console.log("getCarrito"+mns);    
                         mns = JSON.parse(mns);
                         var txtidconsulta = $("#selector_envio").val();
