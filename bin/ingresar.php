@@ -44,9 +44,9 @@ switch ($Menu) {
         break;
 
     case "sesion":
-        //if(isset($_SESSION['apellidos']));
-          //  $_SESSION['apellidos']="invitado";
-        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
+        if(!(isset($_SESSION['apellidos'])))
+            $_SESSION['apellidos']="invitado";
+        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'] , $_SESSION['id'],);
         echo json_encode($usuario);
         break;
 
@@ -406,6 +406,21 @@ switch ($Menu) {
         $conexion->verCantidadMarca($grupo, $marca);
         break;
     
+    case "meterComentario":
+        $comentario=$_GET['comentario'];
+        $calificacion=$_GET['calificacion'];
+        $usuario=$_GET['usuario'];
+        $producto=$_GET['producto'];
+        $conexion->verMeterComentario($usuario, $calificacion, $comentario, $producto);
+        break;
+    case "verNumeroComentarios":
+        $producto=$_GET['producto'];
+        $conexion->verNumeroComentarios($producto);
+        break;
+    case "verComentarios":
+        $producto=$_GET['producto'];
+        $conexion->verComentarios($producto);
+        break;
 }
 $conexion->cerrar();
 unset($conexion);

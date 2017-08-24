@@ -18,11 +18,11 @@ class BD {
     public function conectar() {
         $username = "desarrollo";
         $password = "Pa55w0rd!crm";
-        
+
         $this->conexion = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
         /* Conectar a BD Local */
         // $this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
-        
+
         if (mysqli_connect_errno($this->conexion)) {
             echo "Error al conectar con MySQL: " . mysqli_connect_error();
         }
@@ -83,13 +83,13 @@ class BD {
                 . $calle . "','"
                 . $exterior . "',"
                 . !is_null($interior) ? "'" . $interior . "','" : "NULL,'"
-                        . $cp . "','"
-                        . $ciudad . "',"
-                        . !is_null($colonia) ? "'" . $colonia . "'," : "NULL,"
-                                . !is_null($cruce1) ? "'" . $cruce1 . "'," : "NULL,"
-                                        . !is_null($cruce2) ? "'" . $cruce2 . "'," : "NULL,"
-                                                . !is_null($referencia) ? "'" . $referencia . "'" : "NULL"
-                                                        . ")";
+                . $cp . "','"
+                . $ciudad . "',"
+                . !is_null($colonia) ? "'" . $colonia . "'," : "NULL,"
+                . !is_null($cruce1) ? "'" . $cruce1 . "'," : "NULL,"
+                . !is_null($cruce2) ? "'" . $cruce2 . "'," : "NULL,"
+                . !is_null($referencia) ? "'" . $referencia . "'" : "NULL"
+                . ")";
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
 
@@ -125,6 +125,7 @@ class BD {
                 . ",'" . $megusta . "')";
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
+
     // Agrega numero de guia
     public function agregarGuiaOrden($orden, $guia) {
         $sql = "UPDATE ordenes SET guia='" . $guia . "' WHERE id_ordenes='" . $orden . "'";
@@ -314,8 +315,7 @@ class BD {
     /*     * ****************** FIN DEL PELIGRUS ******************** */
 
 
-    /* SATANAS */
-   	
+    /* SATANAS */   	
     public function getCategorias() {
     	$sql = "SELECT * FROM super_categorias";
     	$datos = [];
@@ -356,7 +356,6 @@ class BD {
         $sql = "SELECT * FROM parametros WHERE 1";
         foreach ($this->conexion->query($sql) as $row)
             echo json_encode($row);
-	
     }
 
     public function setTipoCambio() {
@@ -378,49 +377,49 @@ class BD {
         $sql = "UPDATE parametros SET agregado=" . $valor . " WHERE 1";
         $this->conexion->query($sql);
     }
-	
-	public function busqueda($categoria, $palabras) {
-		$sql = [];
-		if ($categoria === "Todo")
-			foreach ($palabras as $busqueda) {
-				array_push($sql, "SELECT * FROM producto WHERE INSTR(descripcion, ' ".$busqueda." ') OR INSTR(grupo, '".$busqueda."') GROUP BY codigo_fabricante ORDER BY departamento");
-			}
-		else
-			foreach ($palabras as $busqueda) {
-				array_push($sql, "SELECT * FROM (SELECT * FROM (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria = '".$categoria."') AS subcat INNER JOIN producto ON subcat.id_categoria = producto.grupo) AS grupos WHERE INSTR(descripcion, ' ".$busqueda." ') ORDER BY departamento");
-			}
-		$arr = [];
-		foreach ($sql as $consulta) {
-			$datos = [];		
-			foreach ($this->conexion->query($consulta) as $row) {
-				array_push($datos, $row);
-			}
-			array_push($arr, $datos);
-		}
-		echo json_encode($arr);
-	}
-	
-	public function productosInicio() {
-		$sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";	
-		$datos = [];
-		foreach ($this->conexion->query($sql) as $row) {
-			array_push($datos, $row);
-		}
-		echo json_encode($datos);            
-	}
-	
-	public function getCarousel($busqueda) {
-		if ($busqueda == "Todo")
-			$sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";	
-		else
-			$sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR' AND grupo = '".$busqueda."') AS resultados ORDER BY RAND() LIMIT 12";	
-		$datos = [];
-		foreach ($this->conexion->query($sql) as $row) {
-			array_push($datos, $row);
-		}
-		echo json_encode($datos);  
-	}
-	/***********/
+
+    public function busqueda($categoria, $palabras) {
+        $sql = [];
+        if ($categoria === "Todo")
+            foreach ($palabras as $busqueda) {
+                array_push($sql, "SELECT * FROM producto WHERE INSTR(descripcion, ' " . $busqueda . " ') OR INSTR(grupo, '" . $busqueda . "') GROUP BY codigo_fabricante ORDER BY departamento");
+            } else
+            foreach ($palabras as $busqueda) {
+                array_push($sql, "SELECT * FROM (SELECT * FROM (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria = '" . $categoria . "') AS subcat INNER JOIN producto ON subcat.id_categoria = producto.grupo) AS grupos WHERE INSTR(descripcion, ' " . $busqueda . " ') ORDER BY departamento");
+            }
+        $arr = [];
+        foreach ($sql as $consulta) {
+            $datos = [];
+            foreach ($this->conexion->query($consulta) as $row) {
+                array_push($datos, $row);
+            }
+            array_push($arr, $datos);
+        }
+        echo json_encode($arr);
+    }
+
+    public function productosInicio() {
+        $sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";
+        $datos = [];
+        foreach ($this->conexion->query($sql) as $row) {
+            array_push($datos, $row);
+        }
+        echo json_encode($datos);
+    }
+
+    public function getCarousel($busqueda) {
+        if ($busqueda == "Todo")
+            $sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";
+        else
+            $sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR' AND grupo = '" . $busqueda . "') AS resultados ORDER BY RAND() LIMIT 12";
+        $datos = [];
+        foreach ($this->conexion->query($sql) as $row) {
+            array_push($datos, $row);
+        }
+        echo json_encode($datos);
+    }
+
+    /*     * ******** */
     /* parte del chuy */
  public function cuenta($cuentacorreos,$cuentaclave){
     $sql = "select correo , contra from usuario where correo='".$cuentacorreos."'";
@@ -461,19 +460,18 @@ class BD {
             $sql = "INSERT INTO productos_orden (id_orden, id_producto, cantidad)VALUES('".$id_codigo."','".$codigoF."','".$cantidad."')";
             echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito           
     }
-    
-    public function getdireccionesusuario($idusuario){
-          $sql = "select id_usuario, id_direccion from direccion  where id_usuario='".$idusuario."'";	
-          $usuarioDireciones = [];
-	  foreach($this->conexion->query($sql) as $rowusuario) {
-		 
-              array_push($usuarioDireciones, $rowusuario);   
-	    }
-	echo json_encode($usuarioDireciones);  
-        }
-        
 
-    public function getcarruselfooter(){
+    public function getdireccionesusuario($idusuario) {
+        $sql = "select id_usuario, id_direccion from direccion  where id_usuario='" . $idusuario . "'";
+        $usuarioDireciones = [];
+        foreach ($this->conexion->query($sql) as $rowusuario) {
+
+            array_push($usuarioDireciones, $rowusuario);
+        }
+        echo json_encode($usuarioDireciones);
+    }
+
+    public function getcarruselfooter() {
         $sql = "SELECT imagen, descripcion, precio, departamento ,marca FROM producto WHERE departamento='A' order by rand(), precio desc limit 4";
         $arrnewfooter = [];
         foreach ($this->conexion->query($sql) as $rownewfooter) {
@@ -481,26 +479,25 @@ class BD {
         }
         echo json_encode($arrnewfooter);
     }
-    
+
     public function login($correo, $contra) {
-        
+
         $sql = "SELECT id_usuario, nombre, apellidos, correo, contra FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
         $datos = $this->conexion->query($sql);
-          if ($datos != false) {//Si la consulta funciona imprime los datos
-            foreach ($datos as $row){    
-              if ($correo === $row['correo'] || $contra === $row['contra']){
-                  echo $row['id_usuario']."||";
-                  echo $row['nombre']."||";
-                  echo $_SESSION['nombre'] = $row['nombre'];
-                  echo $_SESSION['apellidos'] = $row['apellidos'];
-                  //echo $_SESSION['Bienvenido'] = "Bienvenido :";
-                  echo $_SESSION['id'] = $row['id_usuario'];
+        if ($datos != false) {//Si la consulta funciona imprime los datos
+            foreach ($datos as $row) {
+                if ($correo === $row['correo'] || $contra === $row['contra']) {
+                    echo $row['id_usuario'] . "||";
+                    echo $row['nombre'] . "||";
+                    echo $_SESSION['nombre'] = $row['nombre'];
+                    echo $_SESSION['apellidos'] = $row['apellidos'];
+                    //echo $_SESSION['Bienvenido'] = "Bienvenido :";
+                    echo $_SESSION['id'] = $row['id_usuario'];
                 }
             }
-        } 
+        }
     }
-    
-        public function mostrarordenes($id_usuariosesion) {
+public function mostrarordenes($id_usuariosesion) {
         $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
@@ -508,12 +505,11 @@ class BD {
         }
         echo json_encode($arr);
     }
-    
-    public function mostrarordenesdetalles($id_ordenproductodetalle){ 
+<   public function mostrarordenesdetalles($id_ordenproductodetalle){ 
         $sql="select producto.codigo_fabricante,producto.descripcion,producto.precio,producto.grupo, producto.marca, producto.imagen, ordenes.total,ordenes.fecha,ordenes.metodo_pago, productos_orden.cantidad from ordenes, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante LIKE'".$id_ordenproductodetalle."%'"; 
         $arraydetalles=[];  
         foreach ($this->conexion->query($sql) as $rowordenardetalle) {
-            array_push($arraydetalles,  $rowordenardetalle);
+            array_push($arraydetalles, $rowordenardetalle);
         }
         echo json_encode($arraydetalles);
     }
@@ -544,7 +540,7 @@ class BD {
             echo $row['tipo'] . "||";
         }
     }
-    
+
     /* Anton */
 
     public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax, $orden, $color) {
@@ -623,7 +619,7 @@ class BD {
 
 
         $sql = "select * from producto where grupo='" . $subcat . "' " . $filtros . " limit " . $min . "," . $max;
-        
+
         $buscado = $this->conexion->query($sql);
         error_reporting(0);
         for ($x = 0; $x < 20; $x++) {
@@ -654,8 +650,8 @@ class BD {
             }
             $color = " and (" . $color . ") ";
         }
-        
-        
+
+
 
         $filtros = ' AND precio >' . $Pmin . ' AND precio <' . $Pmax . '  ';
 
@@ -757,10 +753,10 @@ class BD {
             $marca = " and (" . $marca . ") ";
         } else
             $marca = "";
-        
-        $sql_extra=$marca;
-        
-        
+
+        $sql_extra = $marca;
+
+
         switch ($envio) {
             case "Foraneo":
                 $sql_extra += " and CDMX>0 ";
@@ -793,8 +789,8 @@ class BD {
         }
         $sql_extra = $sql_extra . $color . " " . $ordenamiento;
         error_reporting(0);
-        
-        
+
+
         $capacidades = explode("$", $capacidad[0]);
         $x = 0;
         foreach ($capacidades as $busqueda) {
@@ -808,12 +804,12 @@ class BD {
                 $x++;
             }
         }
-        
-        
+
+
         $y = 0;
         $capacidades = explode("$", $capacidad[1]);
         foreach ($capacidades as $busqueda) {
-            
+
             $sql = "select * from producto where grupo='" . $categoria . "' and TB=" . $busqueda . $sql_extra;
             $resultado = $this->conexion->query($sql);
             while ($recorrido = mysqli_fetch_array($resultado)) {
@@ -870,4 +866,45 @@ class BD {
         echo $corrida[0];
     }
 
+    public function verMeterComentario($usuario, $calificacion, $comentario, $producto) {
+        $sql = "select * from `usuario` where id_usuario='" . $usuario . "'";
+        $resultado = $this->conexion->query($sql);
+        if ($corrida = mysqli_fetch_array($resultado)) {
+            $sql = "select * from `comentarios` where id_usuario='" . $usuario . "' and codigo_fabricante='".$producto."'";
+            $resultado = $this->conexion->query($sql);
+            if (!($corrida = mysqli_fetch_array($resultado))) {
+                $sql= "INSERT INTO `comentarios`("
+                        . " `id_usuario`, `codigo_fabricante`, `comentario`, `calificacion`) "
+                        . "VALUES ('".$usuario."','".$producto."','".$comentario."','".$calificacion."')";
+                echo $this->conexion->query($sql)? "Se ingreso el comentario con exito": "Problemas al ingresar el comentario";
+            }
+            else
+                echo "Ya comentaste este producto";
+        } else {
+            echo "Inicia sesion para poder comentar";
+        }
+    }
+
+    function verNumeroComentarios($producto){
+        $sql="SELECT count(*) FROM `comentarios` WHERE codigo_fabricante ='".$producto."'";
+        $resultado= $this->conexion->query($sql);
+        $corrida=mysqli_fetch_array($resultado);
+        if($corrida[0]!=="0")
+            echo "(<u>".$corrida[0]."</u>)";
+        else {
+            echo "";
+        }
+    }
+    
+    function verComentarios($producto){
+        $sql="SELECT * FROM `comentarios` WHERE codigo_fabricante ='".$producto."'";
+        $resultado= $this->conexion->query($sql);
+        while($corrida=mysqli_fetch_array($resultado))
+        {
+            echo $corrida[1]."---";
+            echo $corrida[2]."---";
+            echo $corrida[3]."---";
+            echo $corrida[4]."////";
+        }
+    }
 }

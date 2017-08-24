@@ -9,7 +9,7 @@
 
     </head>
     <body>
-        
+
         <div class="top-content">
             <div class="container">
                 <div class="row">
@@ -84,13 +84,14 @@
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title">Realizar Compra</h4>
                                                     </div>
-                                                <div class="modal-body">
-                                                      <label>Tipo de Tarjeta :
+                                                    <div class="modal-body">
+                                                        <p>Tipo de tarjeta</p>
                                                         <select class="selectpicker" id="selector_envio1">
                                                             <option value="Mastercard">Mastercard</option>
                                                             <option value="American express">American express</option>
                                                             <option value="Visa">Visa</option>
                                                         </select>
+
                                                         </label>
                                                     <br>                                              
                                                         <label>Correo: <input type="text" name="txtcorreoss" id="txtemailcompra" class="form-correo form-control"></label>
@@ -100,10 +101,8 @@
                                                        <br><br><br>
                                                  <button type="button" class="btn btn-default" id="btn_confirmar_compra" style="margin-left: 85px;">Confirmar compra</button>
                                                  <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrar_tarjetas" style="margin-left: 238px; margin-top: -34px; width: 143px;">Canselar</button>
+
                                                 </div>
-                                                  <div class="modal-footer">                      
-                                                 
-                                                  </div>
                                               </div>
                                             </div>
                                         </div>
