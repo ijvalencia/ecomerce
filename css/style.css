@@ -1188,6 +1188,11 @@ label {
     position: static;
     margin-top: -52%;
 }
+
 #hover1:hover,#hover2:hover,#hover3:hover,#navbar_icon_carrito:hover{
     background: #fff;
+}
+
+#coloreamela,#memorama{
+   text-align:left;
 }

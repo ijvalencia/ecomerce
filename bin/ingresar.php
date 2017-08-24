@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 include 'connectBD.php';
@@ -113,6 +112,9 @@ switch ($Menu) {
     case "getSubcategorias":
         $conexion->getSubcategorias($_GET["subcategoria"]);
         break;
+    case "getEstadoCategoria":
+        $conexion->getEstadoCategoria($_GET["subcategoria"]);
+        break;
     case "parametros":
         $conexion->setTipoCambio();
         $conexion->getParametros();
@@ -133,12 +135,23 @@ switch ($Menu) {
     case "getCarousel":
         $conexion->getCarousel($_GET['clave']);
         break;
-    /*     * ******** */
+    /********** */
     //parte del chuy
-     case "direccioness":   
+    case "extraerCorreo":
+        $idusuarioss = $_POST['idusuariocompras'];
+        $conexion->validarContrasena($idusuarioss);        
+    break;
+
+    case "compararcuentass":
+        $cuentacorreos = $_POST['usuariocorreo'];
+        $cuentaclave = $_POST['usuarioclave'];
+        $conexion->cuenta($cuentacorreos,$cuentaclave);        
+    break;
+
+    case "direccioness":   
          $idusuario = $_POST['idusuarios'];
          $conexion->getdireccionesusuario($idusuario);
-      break;
+    break;
     
   case "agregarordenes":
         $usuario = $_POST['idusuario'];
