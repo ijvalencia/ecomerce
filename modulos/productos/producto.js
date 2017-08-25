@@ -71,9 +71,11 @@ $(document).ready(function () {
 
     /* SATANAS */
     var supercategoria = $('#supercategoria').attr("value");
+    $('#categoria_elegida').text(supercategoria);
+    $('#entrada_categoria').attr("value", supercategoria);
     var busqueda = $('#busqueda').attr("value");
     if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda)) {
-        $('#AquiGrupo').append("busqueda");
+        $('#AquiGrupo').append(busqueda);
         $('.breadcrumb').empty().append('<li><a href="../../modulos/inicio/index.php">Inicio</a></li><li>Productos</li><li><a></a>Busqueda</li>');
         $('#drop_color').hide();
         $('#drop_memoria').hide();
@@ -106,6 +108,7 @@ $(document).ready(function () {
         $('#btn_filtramela').click(function (event) {
             event.preventDefault();
             var productos_filtro = productos_busqueda.slice();
+ 
             /* Filtro de marcas */
             var marcas_filtro = [];
             $.each($('#marquitas li input'), function(i, objeto) {
@@ -179,7 +182,56 @@ $(document).ready(function () {
                 }
             }
             /* Filtro memoria */
+            var aux_gb = [], aux_tb = [];
+            $.each($('#memorama li input:checked'), function(i, objeto) {
+                var opc = objeto.value.indexOf("TB") == -1 ? "GB" : "TB";
+                switch(opc) {
+                    case "GB":
+                        aux_gb.push(parseInt(objeto.value));
+                        break;
+                    case "TB":
+                        aux_tb.push(parseInt(objeto.value));
+                        break;
+                }
+            });
+            // console.log(aux_gb);
+            // console.log(aux_tb);
+            for(var i = 0; (aux_gb.length != 0 || aux_tb.length) && i < productos_filtro.length; i++) {
+                aux = false;
+                for(var j = 0; productos_filtro[i].GB != "0" && j < aux_gb.length; j++)
+                    if(parseInt(productos_filtro[i].GB) == aux_gb[j]) {
+                        aux = true;
+                        break;
+                    }
+                for(var j = 0; productos_filtro[i].TB != "0" && j < aux_tb.length; j++)
+                    if(parseInt(productos_filtro[i].TB) == aux_tb[j]) {
+                        aux = true;
+                        break;
+                    }
+                if (!aux) {
+                    productos_filtro.splice(i, 1);
+                    i--;
+                }
+            }
             /* Filtro color */
+            var filtro_colores = [];
+            $.each($('#coloreamela li input:checked'), function(i, objeto) {
+                filtro_colores.push(objeto.value);
+            });
+            for(var i = 0; filtro_colores.length != 0 && i < productos_filtro.length; i++) {
+                aux = false;
+                for(var j = 0; productos_filtro[i].color != null && j < filtro_colores.length; j++)
+                    if(productos_filtro[i].color == filtro_colores[j]) {
+                        aux = true;
+                        break;
+                    }
+                if (!aux) {
+                    productos_filtro.splice(i, 1);
+                    i--;
+                }
+            }
+            /****************/
+            // console.log(productos_filtro);
             cargarBusqueda(productos_filtro);
         });
         $.ajax({
@@ -189,6 +241,12 @@ $(document).ready(function () {
             }
         });
     }
+    $('#mas_marcas').click(function() {
+        mostrarMasMenos('#icono_marcas', '#txt_marcas', 'separador');
+    });
+    $('#mas_memorias').click(function() {
+        mostrarMasMenos('#icono_memorias', '#txt_memorias', 'separador1');
+    });
     /***********/
 });
 
@@ -271,7 +329,7 @@ function cargarCapacidad(productos_busqueda) {
         }
     var id_capacidad = "#memorama";
     var aux = true, i = 0;
-    for (; i < TB.length; i++) {
+    for (; i < GB.length; i++) {
         if(aux && i == 10) {
             $(id_capacidad).append("<separador1></separador1>");
             id_capacidad = 'separador1';
@@ -279,9 +337,9 @@ function cargarCapacidad(productos_busqueda) {
             $('#mas_memorias').show();
             aux = false;
         }
-        $(id_capacidad).append('<li><input type="checkbox">'+ TB[i] +' TB</li>');
+        $(id_capacidad).append('<li><input type="checkbox" value="'+ GB[i] +'GB">'+ GB[i] +' GB</li>');
     }
-    for (var j = 0; j < GB.length; j++, i++) {
+    for (var j = 0; j < TB.length; j++, i++) {
         if(aux && i == 10) {
             $(id_capacidad).append("<separador1></separador1>");
             id_capacidad = 'separador1';
@@ -289,36 +347,34 @@ function cargarCapacidad(productos_busqueda) {
             $('#mas_memorias').show();
             aux = false;
         }
-        $(id_capacidad).append('<li><input type="checkbox">'+ GB[j] +' GB</li>');
+        $(id_capacidad).append('<li><input type="checkbox" value="'+ TB[j] +'TB">'+ TB[j] +' TB</li>');
     }
-    $('#drop_memoria').show();
+    if(GB.length != 0 && TB.length != 0)
+        $('#drop_memoria').show();
 }
 
 function cargarColores(productos_busqueda) {
     var colores = [];
-    // console.log(productos_busqueda);
     $.each(productos_busqueda, function(i, producto) {
         colores.push(producto.color);
     });
     colores.sort();
-    for (var i = 0; i < colores.length - 1; i++) 
-        if (colores[i] == colores[i+1]) {
-            colores.splice(i+1, 1);
-            i--;
+    if(colores.length != 1)
+        for (var i = 0; i < colores.length - 1; i++) {
+            if (colores[i] == colores[i+1]) {
+                colores.splice(i+1, 1);
+                i--;
+            }
         }
+    else if(colores[0] == null)
+        colores = [];
     for (var i = 0; i < colores.length; i++) {
-        $('#coloreamela').append('<li class="checkbox"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
+        if (colores[i] != null)
+            $('#coloreamela').append('<li class="checkbox"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
     }
-    $('#drop_color').show();
+    if(colores.length != 0)
+        $('#drop_color').show();
 }
-
-$('#mas_marcas').click(function() {
-    mostrarMasMenos('#icono_marcas', '#txt_marcas', 'separador');
-});
-
-$('#mas_memorias').click(function() {
-    mostrarMasMenos('#icono_memorias', '#txt_memorias', 'separador1');
-});
 
 function mostrarMasMenos(icono, txt, separador) {
     if($(icono).attr("class").indexOf("plus") != -1) {
@@ -362,9 +418,6 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 $(auxMarca).append("<separador></separador>");
                 auxMarca = 'separador';
                 $(auxMarca).hide();
-                $('#mas_marcas').click(function() {
-                    mostrarMasMenos('#icono_marcas', '#txt_marcas', 'separador');
-                });
                $('#mas_marcas').show();
             }
             var informacion = respuesta[x].split("%");
@@ -468,12 +521,8 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
         $('#memorama').append(texto2);
         if(contenido.length < 1)
             $('#drop_memoria').hide();
-        if (aux_separador) {
+        if (aux_separador)
             $('separador1').hide();
-            $('#mas_memorias').click(function() {
-                mostrarMasMenos('#icono_memorias', '#txt_memorias', 'separador1');
-            });
-        }
     });
 
     //paginacion

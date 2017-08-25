@@ -120,7 +120,7 @@ foreach($con->query($sql_borradas) as $b) {
     ";
 }
 
-$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE"];
+$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE","NARANJA","DORADO"];
 foreach ($colores as $col) {
 	$sql_colores = "UPDATE producto SET color='".$col."' WHERE descripcion LIKE '%".$col."%' AND color=''";
 	$con->query($sql_colores);
