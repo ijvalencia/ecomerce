@@ -33,11 +33,13 @@
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_marca">Por Marca:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_marca"><center id="marquitas"></center></ul>
+                                        <span class="separador"></span>
+                                        <a id="mas_marcas"><span id="txt_marcas">ver más</span><i id="icono_marcas" class="fa fa-plus"></i></a>
+                                        <ul class="menu" role="menu" id="sub_marca"><center id="marquitas"></center></ul>
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_disponible">Disponibilidad:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_disponible">
+                                        <ul class="menu" role="menu" id="sub_disponible">
                                             <center>
                                                 <li>
                                                     <select id="filtro_disponibilidad" type="text" name="envio">
@@ -51,7 +53,7 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_precio">Rango de precio:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_precio">
+                                        <ul class="menu" role="menu" id="sub_precio">
                                             <center>
                                                 <li>
                                                     <input id="filtro_miSalario" value="<?php echo $_GET['priceMIN'];?>" name="min" type="number" min="1" max="250000">
@@ -63,7 +65,7 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" id="btn_orden">Ordenar por:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_orden">
+                                        <ul class="menu" role="menu" id="sub_orden">
                                             <li><select id="filtro_orden" type="text" name="orden">
                                                     <option value="normal"> Indiferente</option>
                                                     <option value="mayor"> Precio(mayor a menor)</option>
@@ -75,12 +77,14 @@
                                         </ul>   
                                     </li>
                                     <li class="dropdown" id="drop_memoria">
-                                        <a class="dropdown-toggle" id="btn_memoria">Por Memoria:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_memoria"><span id="memorama"></span></ul>
+                                        <a class="dropdown-toggle" id="btn_memoria">Memoria:</a>
+                                        <span class="separador"></span>
+                                        <a id="mas_memorias"><span id="txt_memorias">ver más</span><i id="icono_memorias" class="fa fa-plus"></i></a>
+                                        <ul class="menu" role="menu" id="sub_memoria"><span id="memorama"></span></ul>
                                     </li>
                                     <li class="dropdown" id="drop_color">
-                                        <a class="dropdown-toggle" id="btn_color">Por Color:</a>
-                                        <ul class="menu hidden" role="menu" id="sub_color"><span id="coloreamela"></span></ul> 
+                                        <a class="dropdown-toggle" id="btn_color">Color:</a>
+                                        <ul class="menu" role="menu" id="sub_color"><span id="coloreamela"></span></ul> 
                                     </li>
                                 </ul>
                             </div>

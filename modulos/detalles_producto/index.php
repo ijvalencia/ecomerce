@@ -6,6 +6,7 @@
     </head>
     <body>
         <?php
+        header('Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7');
         echo '<span class="hidden" id="producto" value="' . $_GET['producto'] . '"></span>';
         echo '<span class="hidden" id="categoria" value="' . $_GET['categoria'] . '"></span>';
         ?>
@@ -65,9 +66,9 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Comentarios del producto</h4>
+                                        <h4 class="modal-title">Comentarios del producto</h4><button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div id="comentarios-de-usuarios" class="modal-body">
                                         
                                     </div>
                                 </div>
@@ -79,7 +80,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                        <h4 class="modal-title">Calificar Producto</h4>
+                                        <h4 class="modal-title">Calificar Producto</h4><button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="comentario.php?producto=<?php echo $_GET['producto'] ?>" method="post" role="form" class="login-form" id="commentForm">
@@ -97,7 +98,7 @@
                                             <div class="form-group">
                                                 <h6>Comentario:</h6>
                                                 <label class="sr-only" for="form-password">Contraseña:</label>
-                                                <textarea maxlength="150" name="comentario" placeholder="Max. 150 caracteres."></textarea>
+                                                <textarea maxlength="250" name="comentario" placeholder="Max. 250 caracteres."></textarea>
                                             </div>
                                             <center><input type="submit" class="btn" id="botonsesion" value="Enviar Comentario"></center>
                                             <!--<div class="modal-footer">

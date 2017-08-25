@@ -109,8 +109,10 @@ $sql_borradas = "SELECT * FROM (SELECT id_categoria FROM relacion_categorias GRO
 
 foreach($con->query($sql_nuevas) as $n) {
     $sql = "INSERT INTO relacion_categorias (id_categoria, id_supercategoria) VALUES ('".$n['grupo']."','Miscelaneo')";
+    $sql2 = 'INSERT INTO categoria (nombre) values ("'.$n['grupo'].'")';
     echo ($con->query($sql) ? "ingresado ".$n['grupo'] : "no ingresado ".$n['grupo']) . "
     ";
+    $con->query($sql2);
 }
 foreach($con->query($sql_borradas) as $b) {
     $sql = "DELETE FROM relacion_categorias WHERE id_categoria = '".$b['id_categoria']."'";
@@ -118,7 +120,7 @@ foreach($con->query($sql_borradas) as $b) {
     ";
 }
 
-$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE"];
+$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE","NARANJA","DORADO"];
 foreach ($colores as $col) {
 	$sql_colores = "UPDATE producto SET color='".$col."' WHERE descripcion LIKE '%".$col."%' AND color=''";
 	$con->query($sql_colores);
