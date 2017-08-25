@@ -9,6 +9,7 @@
     <script src="../../bin/bootstrap.min.js"></script>
     <script src="../../bin/footer.js"></script>
     <script src="../../bin/categorias.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

@@ -35,7 +35,7 @@ $(document).ready(function() {
             imagen = imagen.replace("#id_producto", producto["codigo_fabricante"]);
             imagen = imagen.replace("#imagen", producto["imagen"]);
             imagen = imagen.replace("#descripcion",producto["descripcion"].substring(0,30)+"<br>");
-            imagen = imagen.replace("des",producto["grupo"]);
+            imagen = imagen.replace("des", producto["grupo"].substring(0,19) + "...");
             imagen = imagen.replace("#precio","$"+ formatoMoneda(producto["precio"]*iva));
             $(id_tabla).append(imagen);
         });
