@@ -5,7 +5,7 @@ var tipo_cambio;
 var productos_busqueda = [];
 var iva;
 
-$(document).ready(function () {  
+$(document).ready(function () {
     /* Obtiene los datos de la tabla de parametros*/
     $.ajax({
         url: "../../bin/ingresar.php?categoria=parametros",
@@ -78,7 +78,7 @@ $(document).ready(function () {
         $('#filtro_miSalario').val("1");
         $('#filtro_miExpectativa').val("250000");
         busqueda = busqueda.trim().split(" ");
-        
+
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=buscar",
@@ -106,7 +106,7 @@ $(document).ready(function () {
             var productos_filtro = productos_busqueda.slice();
             /* Filtro de marcas */
             var marcas_filtro = [];
-            $.each($('#marquitas li input'), function(i, objeto) {
+            $.each($('#marquitas li input'), function (i, objeto) {
                 if (objeto.checked)
                     marcas_filtro.push(objeto.value);
             });
@@ -122,7 +122,7 @@ $(document).ready(function () {
                             break;
                         }
                     }
-                    if (!aux) { 
+                    if (!aux) {
                         productos_filtro.splice(i, 1);
                         i--;
                     }
@@ -152,7 +152,7 @@ $(document).ready(function () {
                 var min = parseFloat($('#filtro_miSalario').val());
                 var max = parseFloat($('#filtro_miExpectativa').val());
                 for (var i = 0; i < productos_filtro.length; i++) {
-                    var precio_aux = parseFloat(productos_filtro[i].precio*iva);
+                    var precio_aux = parseFloat(productos_filtro[i].precio * iva);
                     if (precio_aux < min || precio_aux > max) {
                         productos_filtro.splice(i, 1);
                         i--;
@@ -161,18 +161,26 @@ $(document).ready(function () {
             }
             /* Ordenamientos */
             if ($('#filtro_orden').val() != "normal") {
-                switch($('#filtro_orden').val()) {
+                switch ($('#filtro_orden').val()) {
                     case "mayor":
-                        productos_filtro = productos_filtro.sort(function(a, b) {return b.precio - a.precio});
+                        productos_filtro = productos_filtro.sort(function (a, b) {
+                            return b.precio - a.precio
+                        });
                         break;
                     case "menor":
-                        productos_filtro = productos_filtro.sort(function(a, b) {return a.precio - b.precio});                        
+                        productos_filtro = productos_filtro.sort(function (a, b) {
+                            return a.precio - b.precio
+                        });
                         break;
                     case "alfa":
-                        productos_filtro = productos_filtro.sort(function(a, b) {return ((a.descripcion < b.descripcion) ? -1 : ((a.descripcion > b.descripcion) ? 1 : 0)); });
+                        productos_filtro = productos_filtro.sort(function (a, b) {
+                            return ((a.descripcion < b.descripcion) ? -1 : ((a.descripcion > b.descripcion) ? 1 : 0));
+                        });
                         break;
                     case "invalfa":
-                        productos_filtro = productos_filtro.sort(function(a, b) {return ((a.descripcion < b.descripcion) ? 1 : ((a.descripcion > b.descripcion) ? -1 : 0)); });
+                        productos_filtro = productos_filtro.sort(function (a, b) {
+                            return ((a.descripcion < b.descripcion) ? 1 : ((a.descripcion > b.descripcion) ? -1 : 0));
+                        });
                         break;
                 }
             }
@@ -208,13 +216,13 @@ function cargarBusqueda(arr_productos) {
         imagen = imagen.replace("#id_producto", producto["codigo_fabricante"]);
         imagen = imagen.replace("#imagen", producto["imagen"]);
         imagen = imagen.replace("#descripcion", producto["descripcion"].substring(0, 26) + "...<br>");
-        imagen = imagen.replace("#costo", producto["moneda"] == "Pesos" ? formatoMoneda(producto["precio"]*iva) : formatoMoneda(producto["precio"]*tipo_cambio*iva));
+        imagen = imagen.replace("#costo", producto["moneda"] == "Pesos" ? formatoMoneda(producto["precio"] * iva) : formatoMoneda(producto["precio"] * tipo_cambio * iva));
         $(id_tabla).append(imagen);
     });
 }
 
 function formatoMoneda(numero) {
-    numero = numero.toFixed(2).replace(/./g, function(c, i, a) {
+    numero = numero.toFixed(2).replace(/./g, function (c, i, a) {
         return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
     });
     return numero;
@@ -222,56 +230,56 @@ function formatoMoneda(numero) {
 
 function cargarMarcas(productos_busqueda) {
     var marcas = [];
-    $.each(productos_busqueda, function(i, producto) {
+    $.each(productos_busqueda, function (i, producto) {
         marcas.push(producto.marca);
     });
     marcas.sort();
-    for (var i = 0; i < marcas.length - 1; i++) 
-        if (marcas[i] == marcas[i+1]) {
-            marcas.splice(i+1, 1);
+    for (var i = 0; i < marcas.length - 1; i++)
+        if (marcas[i] == marcas[i + 1]) {
+            marcas.splice(i + 1, 1);
             i--;
         }
     var auxMarca = "";
     for (var i = 0; i < marcas.length; i++) {
         // $('#marquitas').append('<option value="'+marcas[i]+'">'+marcas[i]+"</option>");
-        $('#marquitas').append('<li class="check"><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
-    } 
+        $('#marquitas').append('<li class="check"><input type="checkbox" value="' + marcas[i] + '">' + marcas[i] + '</li>');
+    }
 }
 
 function cargarColores(productos_busqueda) {
     var colores = [];
     console.log(productos_busqueda);
-    $.each(productos_busqueda, function(i, producto) {
+    $.each(productos_busqueda, function (i, producto) {
         colores.push(producto.color.replace("/", ""));
     });
     colores.sort();
-    for (var i = 0; i < colores.length - 1; i++) 
-        if (colores[i] == colores[i+1]) {
-            colores.splice(i+1, 1);
+    for (var i = 0; i < colores.length - 1; i++)
+        if (colores[i] == colores[i + 1]) {
+            colores.splice(i + 1, 1);
             i--;
         }
     var aux_color = "";
     for (var i = 0; i < colores.length; i++) {
-        $('#lista_color').append('<li class="check"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
+        $('#lista_color').append('<li class="check"><input type="checkbox" value="' + colores[i] + '">' + colores[i] + '</li>');
     }
     $('#drop_color').show();
 }
 
 function cargarCapacidad(productos_busqueda) {
     var marcas = [];
-    $.each(productos_busqueda, function(i, producto) {
+    $.each(productos_busqueda, function (i, producto) {
         marcas.push(producto.marca);
     });
     marcas.sort();
     for (var i = 0; i < marcas.length - 1; i++)
-        if (marcas[i] == marcas[i+1]) {
-            marcas.splice(i+1, 1);
+        if (marcas[i] == marcas[i + 1]) {
+            marcas.splice(i + 1, 1);
             i--;
         }
     var auxMarca = "";
     for (var i = 0; i < marcas.length; i++) {
-        $('#lista_memoria').append('<li><input type="checkbox" value="'+ marcas[i] +'">'+ marcas[i] +'</li>');
-    }   
+        $('#lista_memoria').append('<li><input type="checkbox" value="' + marcas[i] + '">' + marcas[i] + '</li>');
+    }
     $('#drop_memoria').show();
 }
 /***********/
@@ -480,7 +488,26 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
             }
             for (var y = 0; y < dato.item.length; y++)
             {
-                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=' + crayola + '&producto=compa" class="thumbnail  container_img_producto" id=sombreado><img  src="imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto...</small></p><h4>precio<br>&#9733;&#9733;&#9733;&#9733;&#9733;(0)</h4></a></div>';
+                var aux = "";
+                $.ajax({
+                    url: "../../bin/ingresar.php?categoria=verNumeroComentarios&producto=" + dato.item[y].codigo_fabricante,
+                    async: false,
+                    success: function (numerocalificacion)
+                    {
+                        $.ajax({
+                            url: "../../bin/ingresar.php?categoria=verSoloCalificacionC&producto=" + dato.item[y].codigo_fabricante,
+                            async: false,
+                            success: function (cantidadcalificacion)
+                            {
+                                for (var x = 0; x < cantidadcalificacion; x++)
+                                {
+                                    aux += "&#9733;";
+                                }
+                                aux += numerocalificacion;
+                                //&#9733;&#9733;&#9733;&#9733;&#9733;(0)
+                            }});
+                    }});
+                tabla_producto = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=' + crayola + '&producto=compa" class="thumbnail  container_img_producto" id=sombreado><img  src="imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>Texto...</small></p><h4>precio<br>calishi</h4></a></div>';
                 if (x == 0)
                     tabla_producto = '<div class="container-fluid bg-3 text-center">' + tabla_producto;
                 if (x == 3)
@@ -490,10 +517,11 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                 } else
                     x++;
                 var salida = tabla_producto;
+                salida = salida.replace("calishi", aux);
                 salida = salida.replace("imagen", dato.item[y].imagen);
                 salida = salida.replace("compa", dato.item[y].codigo_fabricante);
                 salida = salida.replace("Texto", dato.item[y].descripcion.substring(26, 0));
-                salida = salida.replace("precio", "$" + formatoMoneda(parseFloat(dato.item[y].precio)) + "<br>");                
+                salida = salida.replace("precio", "$" + formatoMoneda(parseFloat(dato.item[y].precio)) + "<br>");
                 // salida = salida.replace("precio", "$" + dato.item[y].precio + "<br>");
                 imprimemela += salida;
                 if (x == 0 || y == dato.item.length - 1)
