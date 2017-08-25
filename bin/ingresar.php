@@ -139,8 +139,8 @@ switch ($Menu) {
     //parte del chuy
 
     case "olvidecontrasena";
-        $correos_Email = $_POST['txtemaill'];
-         
+        $correos_Email = $_POST['emaill'];    
+      //  $conexion->revicioncorreos($correos_Email);
     break;
     
     case "extraerCorreo":

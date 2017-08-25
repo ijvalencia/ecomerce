@@ -64,9 +64,7 @@ $(document).ready(function (){
 
     $('#abrir_tarjetas').on("click", function () {
         $('#form_busqueda').hide();
-
-		//     alert("dato en blanco :"+number);
-            
+	//     alert("dato en blanco :"+number);
         if((number === "")||(nombre === "invitado") || (number === undefined)) {
             jAlert("Favor de iniciar sesion");
             window.location.href = "../../modulos/login/index.php";
@@ -86,12 +84,13 @@ $(document).ready(function (){
             });
         }
     });
+    
     $('#cerrar_tarjetas').on("click", function () {
         $('#form_busqueda').show();        
     });
 
     $('#btn_confirmar_compra').on("click", function (){
-        alert(sesion);
+        //alert(sesion);
         //if(sesion === "invitado,,0"){
         if((sesion === "") || (sesion === "invitado") || (sesion === null)){
             jAlert("Registrate para poder seguir con tu compra");
@@ -105,7 +104,6 @@ $(document).ready(function (){
               console.log("parametro");
           } else {
                 console.log("ya loguiados");
-<<<<<<< HEAD
                 //no borrar  se ocupan
                var cuentacorreos = $("input:text[id='txtemailcompra']").val();
                var cuentaclave = $("input:password[id='txtclavescompra']").val();

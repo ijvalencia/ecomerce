@@ -61,7 +61,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <p>correo : </p>
-                                                          <input type="email" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" data-backdrop="static" data-keyboard="false"><br>                                       
+                                                          <input type="text" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" data-backdrop="static" data-keyboard="false"><br>                                       
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal" id="enviar">Enviar</button>

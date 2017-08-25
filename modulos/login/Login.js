@@ -158,15 +158,18 @@ $(document).ready(function () {
 
     $("#enviar").on('click', function () {    
         var txtemaill = $("input:text[id='txtemaill']").val();
-        var checkrobot = $("#norobot").val();
-        $.ajax({type: "POST",
+        alert("hola"+txtemaill);
+       /* var checkrobot = $("#norobot").val(); */
+        $.ajax({
+            type: "POST",
             url: "../../bin/ingresar.php?categoria=olvidecontrasena",
-            data: {"txtemaill":txtemaill , "checkrobot": checkrobot},
-            success: function (mns) {
-                if (mns === "1") {
+            data: {"emaill":txtemaill},
+            success: function (mns){
+                jAlert(mns);
+                if(mns === "1"){
                     jAlert("LOS DATO REGISTRADO CON EXITO");
                     $.limpiartexto();
-                } else if (mns === 0) {
+                } else if (mns === 0){
                     jAlert("ERROR");
                 }
             }

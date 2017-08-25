@@ -418,9 +418,24 @@ class BD {
         }
         echo json_encode($datos);
     }
+    /***********/
+    /*parte del chuy */
+//public function revicioncorreos($correos_Email){
+  //$titulo  = "Recordar contraseña ";  
+  //$message  = "hola mundo de email";  
+ // $headers .= "MIME-Version: 1.0\r\n"; 
+ // $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+ // $headers .= "From: Israel de jesus valencia trejo<jesusvalenciatrejo@gmail.com>\r\n";
+  
+  //echo $correos_Email;
+  
+ // if(mail($correos_Email, $titulo,$message, $headers)) {
+   // echo 'Su correo se envio';      
+//  }else{
+  //  echo 'Error de envio';
+ // }
+//}    
 
-    /*     * ******** */
-    /* parte del chuy */
  public function cuenta($cuentacorreos,$cuentaclave){
     $sql = "select correo , contra from usuario where correo='".$cuentacorreos."'";
        $datoss = $this->conexion->query($sql);
@@ -505,7 +520,7 @@ public function mostrarordenes($id_usuariosesion) {
         }
         echo json_encode($arr);
     }
-<   public function mostrarordenesdetalles($id_ordenproductodetalle){ 
+   public function mostrarordenesdetalles($id_ordenproductodetalle){ 
         $sql="select producto.codigo_fabricante,producto.descripcion,producto.precio,producto.grupo, producto.marca, producto.imagen, ordenes.total,ordenes.fecha,ordenes.metodo_pago, productos_orden.cantidad from ordenes, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante LIKE'".$id_ordenproductodetalle."%'"; 
         $arraydetalles=[];  
         foreach ($this->conexion->query($sql) as $rowordenardetalle) {
