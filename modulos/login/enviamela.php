@@ -59,11 +59,8 @@ $message = Swift_Message::newInstance()
 // Enviamos el mensaje
 echo $mailer->send($message)? "enviado":"no enviado";
 */
-
+/*
 include_once '../../lib/swiftmailer-master/lib/swift_required.php';
-
-
-
 require "vendor/swiftmailer/swiftmailer/lib/swift_required.php";
 
 // Configuración
@@ -99,5 +96,5 @@ else
 {
     echo "Mensaje fallido";
 }
-}
+}*/
 ?>

@@ -47,16 +47,15 @@
                         </div>
                         <a id="btn_comprar" class="btn btn-lg">Comprar Ahora</a>
                     </div>
+                    
                     <!---Anton-->
-
-
-
-                    <div class="ec-stars-wrapper" data-toggle="modal" data-target="#myModal">
-                        <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-                        <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-                        <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-                        <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-                        <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+                    
+                    <div class="ec-stars-wrapper" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
+                        <a href="#" data-value="1" title="Votar con 1 estrellas" class="estrellas">&#9733;</a>
+                        <a href="#" data-value="2" title="Votar con 2 estrellas" class="estrellas">&#9733;</a>
+                        <a href="#" data-value="3" title="Votar con 3 estrellas" class="estrellas">&#9733;</a>
+                        <a href="#" data-value="4" title="Votar con 4 estrellas" class="estrellas">&#9733;</a>
+                        <a href="#" data-value="5" title="Votar con 5 estrellas" class="estrellas">&#9733;</a>
                     </div>
                     <div id="comentarios" class="ec-stars-wrapper" data-toggle="modal" data-target="#vercomentarios">
 
@@ -149,6 +148,16 @@
             <link href="calificacion.css" rel="stylesheet" type="text/css"/>
             <br/>
         </div>
+        
+        <script>
+  $('.estrellas').on("click", function () {
+    $('#form_busqueda').hide();     
+   });
+    
+  $('#botonsesion').on("click", function () {
+    $('#form_busqueda').show();
+  });
+        </script>
         <?php include '../../bin/footer.php' ?>
     </body>
 </html>
