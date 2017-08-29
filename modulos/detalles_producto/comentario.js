@@ -21,16 +21,8 @@ $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
                 {
                     alert(resultado);
                 } else {
-                    if (confirm("Ya tienes comentario en este producto, presiona OK para eliminarlo."))
-                    {
-                        avan = 1;
-                        $.get("../../bin/ingresar.php?categoria=eliminarComentario&usuario=" + number + "&producto=" + producto,
-                                function (eliminar)
-                                {
-                                    alert(eliminar);
+                                    alert("Ya comento este producto, si desea agregar mas comentarios realice otra compra.");
                                     history.back();
-                                })
-                    }
                 }
                 if (avan == 0)
                     history.back();

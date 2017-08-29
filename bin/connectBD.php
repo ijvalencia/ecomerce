@@ -61,7 +61,7 @@ class BD {
         echo strcmp($pass['contra'], $contra); // 0 si son iguales
     }
 
-    
+    /* Agregar datos */
     // telefono, inerior, colonia, cruce 1 y 2, referencia pueden ser NULL
     public function agregarDireccion($direccion, $usuario, $nombre, $apellidos, $celular, $telefono, $calle, $exterior, $interior, $cp, $ciudad, $colonia, $cruce1, $cruce2) {
         $sql = "INSERT INTO direccion (id_usuario, nombre, apellidos, celular, telefono,
@@ -551,9 +551,8 @@ class BD {
             }
         }
     }
-    
-public function mostrarordenes($id_usuariosesion) {
-       $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
+
+    public function mostrarordenes($id_usuariosesion) {
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
@@ -561,9 +560,9 @@ public function mostrarordenes($id_usuariosesion) {
         echo json_encode($arr);
     }
 
-   public function mostrarordenesdetalles($id_ordenproductodetalle){ 
-        $sql="select producto.codigo_fabricante,producto.descripcion,producto.precio,producto.grupo, producto.marca, producto.imagen, ordenes.total,ordenes.fecha,ordenes.metodo_pago, productos_orden.cantidad from ordenes, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante LIKE'".$id_ordenproductodetalle."%'"; 
-        $arraydetalles=[];  
+    public function mostrarordenesdetalles($id_ordenproductodetalle) {
+        $sql = "select producto.codigo_fabricante,producto.descripcion,producto.precio,producto.grupo, producto.marca, producto.imagen, ordenes.total,ordenes.fecha,ordenes.metodo_pago, productos_orden.cantidad from ordenes, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante LIKE'" . $id_ordenproductodetalle . "%'";
+        $arraydetalles = [];
         foreach ($this->conexion->query($sql) as $rowordenardetalle) {
             array_push($arraydetalles, $rowordenardetalle);
         }
@@ -923,18 +922,33 @@ public function mostrarordenes($id_usuariosesion) {
     }
 
     public function verMeterComentario($usuario, $calificacion, $comentario, $producto) {
+        header("Content-Type: text/html;charset=utf-8");
         $sql = "select * from `usuario` where id_usuario='" . $usuario . "'";
         $resultado = $this->conexion->query($sql);
         if ($corrida = mysqli_fetch_array($resultado)) {
-            $sql = "select * from `comentarios` where id_usuario='" . $usuario . "' and codigo_fabricante='" . $producto . "'";
+            $veces_comprado = 0;
+            $sql = "select * from `ordenes` where id_usuario='" . $usuario . "'";
             $resultado = $this->conexion->query($sql);
-            if (!($corrida = mysqli_fetch_array($resultado))) {
+            //recorre todas las ordenes del usuario y busca cuales coinciden con el producto
+            while ($corrida = mysqli_fetch_array($resultado)) {
+                $sql_orden = "select * from `productos_orden` where id_orden='" . $corrida['id_ordenes'] . "' and id_producto='" . $producto . "'";
+                $resultado_orden = $this->conexion->query($sql_orden);
+                if ($corrida_orden = mysqli_fetch_array($resultado_orden)) {
+                    $veces_comprado++;
+                }
+            }
+            $sql = "select count(*) from `comentarios` where id_usuario='" . $usuario . "' and codigo_fabricante='" . $producto . "'";
+            $resultado = $this->conexion->query($sql);
+            $corrida = mysqli_fetch_array($resultado);
+            if ($corrida['count(*)'] < $veces_comprado) {
                 $sql = "INSERT INTO `comentarios`("
                         . " `id_usuario`, `codigo_fabricante`, `comentario`, `calificacion`) "
                         . "VALUES ('" . $usuario . "','" . $producto . "','" . $comentario . "','" . $calificacion . "')";
                 echo $this->conexion->query($sql) ? "Se ingreso el comentario con exito" : "Problemas al ingresar el comentario";
+            } elseif ($corrida['count(*)'] !== "0") {
+                echo "Ha pasado el limite de comentarios permitidos, para poder hacer mas comentarios lo invitamos a realizar otra compra.";
             } else
-                echo "Ya comentaste el producto";
+                echo "Debe comprar este producto para poder comentarlo";
         } else {
             echo "Inicia sesion para poder comentar";
         }
@@ -950,38 +964,34 @@ public function mostrarordenes($id_usuariosesion) {
             echo "";
         }
     }
-    function verSoloCalificacionC($producto){
-        $sql="SELECT AVG(calificacion) FROM `comentarios` WHERE codigo_fabricante ='" . $producto . "'";
+
+    function verSoloCalificacionC($producto) {
+        $sql = "SELECT AVG(calificacion) FROM `comentarios` WHERE codigo_fabricante ='" . $producto . "'";
         $resultado = $this->conexion->query($sql);
         $corrida = mysqli_fetch_array($resultado);
         echo ceil($corrida[0]);
     }
 
     function verComentarios($producto) {
-        header('Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7');
+        header("Content-Type: text/html;charset=utf-8");
         $sql = "SELECT * FROM `comentarios` WHERE codigo_fabricante ='" . $producto . "'";
         $resultado = $this->conexion->query($sql);
         while ($corrida = mysqli_fetch_array($resultado)) {
             $sql = "SELECT * FROM `usuario` WHERE id_usuario='" . $corrida[1] . "'";
             $usuario = $this->conexion->query($sql);
             $usuario = mysqli_fetch_array($usuario);
-            $corrida[5]=$corrida[1];
+            $corrida[5] = $corrida[1];
             $corrida[1] = $usuario[1] . " " . $usuario[2];
             echo $corrida[1] . " --- ";
             echo $corrida[2] . " --- ";
             $corrida[3] = wordwrap($corrida[3], 26, "\n", true);
             echo $corrida[3] . " --- ";
-            for($y=0;$y<$corrida[4];$y++)
+            for ($y = 0; $y < $corrida[4]; $y++)
                 echo "&#9733;";
             echo " --- ";
             echo $corrida[5];
             echo "////";
         }
-    }
-    
-    function verborrarComentario($usuario, $producto){
-        $sql = "DELETE FROM comentarios WHERE id_usuario=" . $usuario . " AND codigo_fabricante='" . $producto."'";
-        echo $this->conexion->query($sql) ? "Comentario borrado con exito" : "El comentario no ha sido borrado, intente nuevamente en unos minutos";
     }
 
 }
