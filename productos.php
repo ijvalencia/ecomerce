@@ -82,12 +82,16 @@ for ($x = 0; $x <= $total_articulos - 1; $x++) {
         //echo "<br>" . $GB . "--" . $TB;
     }
     //$cadenaP[$posicion - 4] . $cadenaP[$posicion - 3] . $cadenaP[$posicion - 2] . $cadenaP[$posicion - 1];
-
+    $aux = true;
     if($articulos->item[$x]->moneda=="Dolares")
     {
         $articulos->item[$x]->precio*=$articulos->item[$x]->tipocambio;
         $articulos->item[$x]->moneda="Pesos";
-
+        if ($aux) {
+            $sql_tipocambio = 'UPDATE parametros SET tipocambio = "'.$articulos->item[$x]->tipocambio.'" WHERE 1';
+            $con->query($sql_tipocambio);
+            $aux = false;
+        }
     }
     if ($articulos->item[$x]->disponible < 0)
         $articulos->item[$x]->disponible = 0;
@@ -125,6 +129,11 @@ foreach ($colores as $col) {
 	$sql_colores = "UPDATE producto SET color='".$col."' WHERE descripcion LIKE '%".$col."%' AND color=''";
 	$con->query($sql_colores);
 }
+
+$sql_repetidas = 'DELETE FROM categoria WHERE id_categoria IN (SELECT id_categoria FROM (SELECT * FROM categoria LEFT JOIN (SELECT MIN(id_categoria) AS id FROM categoria GROUP BY nombre) AS mantener ON mantener.id = categoria.id_categoria) AS res WHERE id IS NULL)';
+echo $con->query($sql_repetidas) ? "Borradas categorias duplicadas
+    " : "Imposible borrar
+";
 /***********/
 
 echo "
