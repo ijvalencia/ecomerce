@@ -138,16 +138,21 @@ switch ($Menu) {
     /********** */
     //parte del chuy
 
-    case "olvidecontrasena";
+    case "cambiarContraseña":
+     $txtantiguoscontra = $_POST['antiguacontrasena'];    
+     $txtnuevocontra = $_POST['nuevacontrasena'];
+     $conexion->cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra);
+    break;
+        
+    case "olvidecontrasena":
+        //correo para enviar a gimail
         $correos_Email = $_POST['emaill'];    
-      //  $conexion->revicioncorreos($correos_Email);
+        $conexion->revicioncorreos($correos_Email);
     break;
     
     case "extraerCorreo":
-        
         $idusuarioss = $_POST['idusuariocompras'];
         $conexion->validarContrasena($idusuarioss);        
-        
     break;
 
     case "compararcuentass":

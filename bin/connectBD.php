@@ -61,16 +61,7 @@ class BD {
         echo strcmp($pass['contra'], $contra); // 0 si son iguales
     }
 
-    /* Agregar datos */
-
-    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
-        $tipo = 0;  // 0 para usuarios 1 para admin
-        $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-       echo $this->conexion->query($sql) ? "1" : "0";
-       
-        //echo $sql;
-    }
-
+    
     // telefono, inerior, colonia, cruce 1 y 2, referencia pueden ser NULL
     public function agregarDireccion($direccion, $usuario, $nombre, $apellidos, $celular, $telefono, $calle, $exterior, $interior, $cp, $ciudad, $colonia, $cruce1, $cruce2) {
         $sql = "INSERT INTO direccion (id_usuario, nombre, apellidos, celular, telefono,
@@ -415,27 +406,77 @@ class BD {
         echo json_encode($datos);
     }
     /***********/
-    /*parte del chuy */
-//public function revicioncorreos($correos_Email){
-  //$titulo  = "Recordar contraseña ";  
-  //$message  = "hola mundo de email";  
- // $headers .= "MIME-Version: 1.0\r\n"; 
- // $headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
- // $headers .= "From: Israel de jesus valencia trejo<jesusvalenciatrejo@gmail.com>\r\n";
-  
-  //echo $correos_Email;
-  
- // if(mail($correos_Email, $titulo,$message, $headers)) {
-   // echo 'Su correo se envio';      
-//  }else{
-  //  echo 'Error de envio';
- // }
-//}    
+    /* parte del chuy*/
+    /* Agregar datos */
 
-    /*     * ******** */
-    /* parte del chuy */
+    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {    
+       // $add=rand(10,3000);
+        $tipo = 0;  // 0 para usuarios 1 para admin
+        $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
+        $this->conexion->query($sql) ? "1" : "0";       
+        //echo $add;    
+    }
+    
+    public function confirmacion(){
+       
+    }
 
-    public function cuenta($cuentacorreos, $cuentaclave) {
+  public function cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra){
+      $sql ="select id_usuario, contra from usuario where contra='".$txtnuevocontra."'";
+         // $this->conexion->query($sql) ? "1" : "0";
+    foreach ($this->conexion->query($sql) as $row){
+            $row['id_usuario'];
+            $row['contra'];
+            if($row['contra'] === $txtnuevocontra){
+                echo 'LA CONTRASEÑA YA ESTA REGISTRADA FAVOR DE PONER OTRA';
+            } else if ($row['contra'] == null) {
+             $sql = "UPDATE usuario SET contra='".$txtnuevocontra."' WHERE contra='".$txtantiguoscontra."'";
+             echo $this->conexion->query($sql) ? "1" : "0";
+             echo $sql;
+         }
+      }
+   }
+    
+  public function revicioncorreos($correos_Email) {
+    require  'PHPMailer/PHPMailerAutoload.php';
+    $titulo  = "Recordar contraseña";  
+    $d=rand(10,3000);      
+    $message  = "Tu password es :".$d;
+    
+	$mail = new PHPMailer();
+	$mail->setFrom('jesusvalenciatrejo7@gmail.com','Mensaje de prueba');
+	$mail->addAddress($correos_Email, $message);
+	$mail->Subject = $titulo;
+	$mail->isHTML(true);
+	$mail->CharSet = 'UTF-8';
+        $body = '
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Soporte Softernium</title>       
+    </head>
+    <body>
+        <div id="cuerpo">
+            <a href="http://127.0.0.1/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>                                          
+             '.$message.'
+        </div>
+    <div id="pie">
+        Este mensaje fue dirigido a &lt;
+        '.$correos_Email.'&gt;Este correo es enviado de forma automáticamente para validar su cuneta de confirmacion o de cambio de contraseña.
+    </div>
+    </body>
+    </html>';
+       	$mail->Body = $body;
+       if(!$mail->send()){
+            echo "<p class='text-danger'>.Mensaje no enviado.</p>";
+         } else {
+            //echo $body;
+          
+            echo '1';
+           }
+        }    
+        
+        public function cuenta($cuentacorreos, $cuentaclave) {
         $sql = "select correo , contra from usuario where correo='" . $cuentacorreos . "'";
         $datoss = $this->conexion->query($sql);
         foreach ($datoss as $row) {

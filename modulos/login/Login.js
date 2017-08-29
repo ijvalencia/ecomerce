@@ -10,7 +10,7 @@ $(document).ready(function () {
         $('#form_busqueda').hide();
     });
 
-    $('#closeddd').on("click", function () {
+    $('#enviar').on("click", function () {
         $('#form_busqueda').show();
     });
 
@@ -155,19 +155,19 @@ $(document).ready(function () {
         $("input:text[id='form-contra']").val("");
         $("input:text[id='form-confirmacion']").val("");
     };
-
+    
     $("#enviar").on('click', function () {    
         var txtemaill = $("input:text[id='txtemaill']").val();
-        alert("hola"+txtemaill);
+       // alert("hola"+txtemaill);
        /* var checkrobot = $("#norobot").val(); */
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=olvidecontrasena",
             data: {"emaill":txtemaill},
             success: function (mns){
-                jAlert(mns);
+           //     jAlert(mns);
                 if(mns === "1"){
-                    jAlert("LOS DATO REGISTRADO CON EXITO");
+                    jAlert("ACIDO ENVIADO UN LINK");
                     $.limpiartexto();
                 } else if (mns === 0){
                     jAlert("ERROR");

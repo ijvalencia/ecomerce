@@ -60,8 +60,9 @@
                                                         <h4 class="modal-title">Restableser Contraseña</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>correo : </p>
-                                                          <input type="text" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" data-backdrop="static" data-keyboard="false"><br>                                       
+                                                        <label>correo :<input type="text" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" class="form-control" style="margin-left: 73px; margin-top: -31px;"></label>
+                                                        <a href="RecuperarContrasena.php">Recuperar Mi Contraseña</a>
+                                                        <br>                                       
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal" id="enviar">Enviar</button>
