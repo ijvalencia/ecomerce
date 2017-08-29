@@ -176,7 +176,7 @@ switch ($Menu) {
         }
 	$secretKeyy = "";
 	$ip = $_SERVER['REMOTE_ADDR'];
-        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKeyy."&6Ldf9S0UAAAAAJqGqN5B525knKLVQ6u9ZKdSLj4Q".$checkrobot."&remoteip=".$ip);
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKeyy."&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX".$checkrobot."&remoteip=".$ip);
 	$responseKeyss = json_decode($response,true);                                                       
         if(intval($responseKeyss["success"]) !== 1) {
             

@@ -122,7 +122,7 @@
                                     <div class="form-group">
                                         <label class="sr-only" for="confirmacion">Confirma tu contraseña:</label>
                                         <input type="password" name="confirmacion" class="form-confirmacion form-control" id="form-confirmacion"><br>
-                                        <div class="g-recaptcha" data-sitekey="6Ldf9S0UAAAAAPTSSoYQ-0kLt6CxWX-J-SIbwnz3" id="norobot"></div>
+                                        <div class="g-recaptcha" data-sitekey="6Ld_1i0UAAAAAICeMTzxRahb9jFR8HA5IHAE5wmc" id="norobot"></div>
                                     </div>
                                     <div class="col-sm-12">
                                         <input style="width: 26px" type="checkbox"  class="col-sm-12" id="check-terminos"/>
