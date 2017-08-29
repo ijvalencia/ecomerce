@@ -407,6 +407,7 @@ switch ($Menu) {
         break;
     
     case "meterComentario":
+        header("Content-Type: text/html;charset=utf-8");
         $comentario=$_GET['comentario'];
         $calificacion=$_GET['calificacion'];
         $usuario=$_GET['usuario'];
@@ -418,18 +419,13 @@ switch ($Menu) {
         $conexion->verNumeroComentarios($producto);
         break;
     case "verComentarios":
-        header('Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7');
+        header("Content-Type: text/html;charset=utf-8");
         $producto=$_GET['producto'];
         $conexion->verComentarios($producto);
         break;
     case "verSoloCalificacionC":
         $producto=$_GET['producto'];
         $conexion->verSoloCalificacionC($producto);
-        break;
-    case "eliminarComentario":
-        $usuario=$_GET['usuario'];
-        $producto=$_GET['producto'];
-        $conexion->verborrarComentario($usuario, $producto);
         break;
 }
 $conexion->cerrar();

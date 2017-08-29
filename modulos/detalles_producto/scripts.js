@@ -139,18 +139,7 @@ $.get("../../bin/ingresar.php?categoria=verNumeroComentarios&producto=" + produc
 
 
 //  funciones
-function eliminarComentario()
-{
-    if (confirm("¿Seguro que desea eliminar su comentario?"))
-    {
-        $.get("../../bin/ingresar.php?categoria=eliminarComentario&usuario=" + number + "&producto=" + producto,
-                function (eliminar)
-                {
-                    alert(eliminar);
-                    location.reload(true);
-                });
-    }
-}
+
 function vercomentario() {
 
     if (!cargado) {
@@ -164,7 +153,7 @@ function vercomentario() {
                         var imprimir = respuesta[x].split("---");
                         if (imprimir[4] == " " + number)
                         {
-                            aux = "<a  href='#' title='Borrar mi comentario' onclick='eliminarComentario()'>";
+                            aux = "<a  href='#' title='Eres el autor de este comentario'>";
                             aux1 = "</a>";
                         }
                         $('#comentarios-de-usuarios').append("<center><table width='80%'><tr><td width='30%'><b>" + aux + imprimir[0] + aux1
