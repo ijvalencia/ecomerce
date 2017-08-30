@@ -369,15 +369,22 @@ class BD {
         $sql = [];
         if ($categoria === "Todo")
             foreach ($palabras as $busqueda) {
-                array_push($sql, "SELECT * FROM producto WHERE INSTR(descripcion, ' " . $busqueda . " ') OR INSTR(grupo, '" . $busqueda . "') GROUP BY codigo_fabricante ORDER BY departamento");
-            } else
+                if(substr($busqueda, -1) == 'S')
+                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
+                array_push($sql, "SELECT * FROM producto WHERE descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' GROUP BY codigo_fabricante ORDER BY departamento");
+            } 
+        else
             foreach ($palabras as $busqueda) {
-                array_push($sql, "SELECT * FROM (SELECT * FROM (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria = '" . $categoria . "') AS subcat INNER JOIN producto ON subcat.id_categoria = producto.grupo) AS grupos WHERE INSTR(descripcion, ' " . $busqueda . " ') ORDER BY departamento");
+                if(substr($busqueda, -1) == 'S')
+                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
+                array_push($sql, "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='".$categoria."')) AS res WHERE descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' ORDER BY departamento");
             }
         $arr = [];
         foreach ($sql as $consulta) {
             $datos = [];
             foreach ($this->conexion->query($consulta) as $row) {
+                // if(sizeof($datos) >= 100)
+                //     break;
                 array_push($datos, $row);
             }
             array_push($arr, $datos);
