@@ -146,7 +146,6 @@ switch ($Menu) {
     break;
     /********** */
     //parte del chuy
-
     case "cambiarContraseña":
      $txtantiguoscontra = $_POST['antiguacontrasena'];    
      $txtnuevocontra = $_POST['nuevacontrasena'];
@@ -265,7 +264,7 @@ switch ($Menu) {
         }
 	$secretKey = "";
 	$ip = $_SERVER['REMOTE_ADDR'];
-        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6LeB4C0UAAAAAG85OPGoSHdarkupWs_qmTbUjAkB".$captcha."&remoteip=".$ip);
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX".$captcha."&remoteip=".$ip);
 	$responseKeys = json_decode($response,true);
         if(intval($responseKeys["success"]) !== 1) {
           echo '<h2>You are spammer ! Get the @$%K out</h2>';

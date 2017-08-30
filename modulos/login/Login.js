@@ -126,20 +126,20 @@ $(document).ready(function () {
                     $('#form-confirmacion').css({"border": "2px solid red"});
                     bandera2 = false;
                 }
-
                 if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== null && (txtconfir !== null))) {
                     bandera2 = true;
-                    if (bandera2 === true) {
+                    if (bandera2 === true){
                         $.ajax({type: "POST",
-                            url: "../../bin/ingresar.php?categoria=registro",
+                           // url: "../../bin/ingresar.php?categoria=registro",
                             data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
                             success: function (mns) {
                                 if (mns === "1") {
                                     jAlert("LOS DATO REGISTRADO CON EXITO");
                                     $.limpiartexto();
-
                                 } else if (mns === 0) {
                                     jAlert("ERROR");
+                                } else if (mns==="00"){
+                                    jAlert("EL CORREO O LA CONTRASEÑA YA ESTA REGISTRADA");
                                 }
                             }
                         });
@@ -148,12 +148,50 @@ $(document).ready(function () {
             }
         }
     });
+    $("#btn-enviar").on('click', function () {
+        
+        var txtnombredire = $("input:text[id='txtnombred']").val();
+        var txtapellidodire = $("input:text[id='txtapellidod']").val();
+        var txttelefono = $("input:text[id='txttelefonod']").val();
+        var txttelefono2d = $("input:text[id='txttelefono2d']").val();
+        
+        var txtcalled = $("input:text[id='txtcalled']").val();
+        var txtexteriord = $("input:text[id='txtexteriord']").val(); 
+        var txtinteriord = $("input:text[id='txtinteriord']").val();
+        var txtcpd = $("input:text[id='txtcpd']").val();
+        var txtselectestadosd = $("selectestadosd").val();
+        var txtciudadd = $("input:text[id='txtciudadd']").val();
+        var txtcruserod = $("input:text[id='txtcruserod']").val();
+        var txtcrusero2 = $("input:text[id='txtcruserod2']").val();
+        var txtreferncia = $("input:text[id='txtreferncia']").val();
+        
+       if ((txttelefono === "") || (txtcalled === "") || (txtexteriord === "") || (txtcpd === "") || (txtselectestadosd === "") || (txtciudadd === " ") ||(txtcruserod === " ") || (txtcrusero2 === " ")){
+            $('#txttelefonod').css({"border": "2px solid red"});
+            $('#txtcalled').css({"border": "2px solid red"});
+            $('#txtexteriord').css({"border": "2px solid red"});
+            $('#txtcpd').css({"border": "2px solid red"});
+            $('#txtselectestadosd').css({"border": "2px solid red"});
+            $('#txtciudadd').css({"border": "2px solid red"});
+            $('#txtcruserod').css({"border": "2px solid red"});
+            $('#txtcrusero2').css({"border": "2px solid red"});
+        } else {
+            $('#txttelefonod').css({"border": "2px solid Gainsboro"});
+            $('#txtcalled').css({"border": "2px solid Gainsboro"});
+            $('#txtexteriord').css({"border": "2px solid Gainsboro"});
+            $('#txtcpd').css({"border": "2px solid Gainsboro"});
+            $('#txtselectestadosd').css({"border": "2px solid Gainsboro"});
+            $('#txtciudadd').css({"border": "2px solid Gainsboro"});
+            $('#txtcruserod').css({"border": "2px solid Gainsboro"});
+            $('#txtcrusero2').css({"border": "2px solid Gainsboro"});
+        }
+     });
+    
     $.limpiartexto = function () {
         $("input:text[id='form-nombre']").val("");
         $("input:text[id='form-apellidos']").val("");
         $("input:text[id='form-correo']").val("");
-        $("input:text[id='form-contra']").val("");
-        $("input:text[id='form-confirmacion']").val("");
+        $("input:password[id='form-contra']").val("");
+        $("input:password[id='form-confirmacion']").val("");
     };
     
     $("#enviar").on('click', function () {    

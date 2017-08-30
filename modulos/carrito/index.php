@@ -97,7 +97,7 @@
                                                         <label>Correo: <input type="text" name="txtcorreoss" id="txtemailcompra" class="form-correo form-control"></label>
                                                         <label>Clave : <input type="password" name="txtclave" id="txtclavescompra" class="form-correo form-control"></label>
                                       
-                                                        <div class="g-recaptcha" data-sitekey="6Ldf9S0UAAAAAPTSSoYQ-0kLt6CxWX-J-SIbwnz3" id="yorobot"></div>
+                                                        <div class="g-recaptcha" data-sitekey="6Ld_1i0UAAAAAICeMTzxRahb9jFR8HA5IHAE5wmc" id="yorobot"></div>
                                                        <br><br><br>
                                                  <button type="button" class="btn btn-default" id="btn_confirmar_compra" style="margin-left: 85px;">Confirmar compra</button>
                                                  <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrar_tarjetas" style="margin-left: 238px; margin-top: -34px; width: 143px;">Canselar</button>

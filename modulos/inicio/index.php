@@ -67,11 +67,11 @@
         <div class="container">
             <div class="container-fluid bg-3 text-center">    
                 <div class="row">
-                    <div class="col-md-1"><img src="../../IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="" style="color: black">PROTECCIÓN AL COMPRADOR</a></div>
-                    <div class="col-md-1"><img src="../../IMG/pagos/oxxo.png" width="10%" height="10%" ><a href="" class="tipoletra">PAGA AL RECIBIR O EN OXXO</a></div>
-                    <div class="col-md-1"><img src="../../IMG/pagos/atencion-cliente.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA POR TELÉFONO</a></div>
-                    <!--<div class="col-md-1"><img src="../../IMG/envio.png" width="10%" height="10%" ><a href="" class="tipoletra">ENVIOS A TODO MÉXICO</a></div>-->
-                    <div class="col-md-1"><img src="../../IMG/pagos/telefono.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA EN LA APP</a></div>
+                    <div class="col-md-1" id="letras"><img src="../../IMG/escudo.jpg" width="10%" height="10%" ><a href="" class="" style="color: black">PROTECCIÓN AL COMPRADOR</a></div>
+                    <!--<div class="col-md-1"><img src="../../IMG/pagos/oxxo.png" width="10%" height="10%" ><a href="" class="tipoletra">PAGA AL RECIBIR O EN OXXO</a></div>-->
+                    <div class="col-md-1" id="letras"><img src="../../IMG/pagos/atencion-cliente.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA POR TELÉFONO</a></div>
+                    <!--<div class="col-md-1"><img src="../../IMG/envio.png" width="10%" height="10%" ><a href="" class="tipoletra">ENVIOS A TODO MÉXICO</a></div>
+                    <div class="col-md-1"><img src="../../IMG/pagos/telefono.png" width="10%" height="10%" ><a href="" class="tipoletra">COMPRA EN LA APP</a></div>-->
                 </div>
             </div>
         </div>
@@ -128,11 +128,10 @@
             <div class="container">
                 <div class="container-fluid bg-3 text-center">    
                     <div class="row">
-                        <div class="col-md-1" id="iconos"><img src="../../IMG/pagos/get-money.png" width="20%" height="20%"><p class="popular">Pago contra entrega</p></div>
+                        <!--<div class="col-md-1" id="iconos"><img src="../../IMG/pagos/get-money.png" width="20%" height="20%"><p class="popular">Pago contra entrega</p></div>-->
                         <div class="col-md-1" id="iconos"><img src="../../IMG/pagos/logo visa.png" width="20%" height="20%"><p class="popular">Tarjeta Visa</p></div>
                         <div class="col-md-1" id="iconos"><img src="../../IMG/pagos/MasterCard.png" width="20%" height="20%"><p class="popular">Tarjetas Mastercard</p></div>
                         <div class="col-md-1" id="iconos"><img src="../../IMG/pagos/amex_american_express.png" width="20%" height="20%"><p class="popular">Tarjetas American Express</p></div>
-                        <div class="col-md-1" id="iconos"><img src="../../IMG/pagos/oxxo.png" width="20%" height="20%"><p class="popular">Pago en OXXO</p></div>
                         <div class="col-md-1" id="iconos"><img src="../../IMG/pagos/PayPal.svg.png" width="20%" height="20%"><p class="popular">Paypal</p></div>
                         <!--<div class="col-md-1" id="iconos"><img src="../../IMG/.jpg" width="20%" height="20%"><p class="popular">Tarjetas bancarias</p></div>-->
                     </div>
@@ -144,29 +143,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             <p class="">ACERCA DE</p>             
-                            <a class="claseizquierda">Vender en...</a><br>
                             <a class="claseizquierda">¿Quienes somos?</a><br>
-                            <a class="claseizquierda">Trabaja Con nosotros</a><br>
-                            <a class="claseizquierda">Terminos de Uso</a><br>
-                            <a class="claseizquierda">Procteccion de Propiedad Intelectual</a><br>
-                            <a class="claseizquierda">Programas de Lealtad</a><br>
-                            <a class="claseizquierda">Vuelvete un Afiliado</a><br>
+                            <a class="claseizquierda">Mision y Vision</a><br>
+                            <a class="claseizquierda">google maps</a><br>
                             <a class="claseizquierda">Legales</a><br>
-                            <a class="claseizquierda">Direcctorio</a><br>
-                            <a class="claseizquierda">Login</a><br>
                         </div>
                         <div class="col-md-4">
                             <p class="">SERVICIOS AL CLIENTE</p>             
-                            <a class="claseizquierda" >Preguntas frecuentes</a><br>
-                            <a class="claseizquierda" >Contacto</a><br>
+                            <a class="claseizquierda" >Contacto Chat</a><br>
                             <a class="claseizquierda" >Formato de Pago</a><br>
                             <a class="claseizquierda" >Politicas de Privacidad</a><br>
                             <a class="claseizquierda" >Politicas de Envios Devoluciones y Cancelaciones</a><br>
-                            <a class="claseizquierda" >Terminos y Condiciones Generales</a><br>
-                            <a class="claseizquierda" >Terminos y Condiciones de Venta para productos Marketplace</a><br>
-                            <a class="claseizquierda" >Politica de venta de productos</a><br>
-                            <a class="claseizquierda" >internacionales</a><br>
-                        </div>
+                            <a class="claseizquierda" >pagos por medio de correo electronicos</a><br>
+                             </div>
                         <div class="col-md-4">
                             <!--<p class="">.... LATINOAMÉRICA</p>
 <div class="panelizquierda">
@@ -192,14 +181,13 @@
 <a class="claseizquierda">Computacion</a><br>
 <a class="claseizquierda">Calendario Dias Festivos</a><br>
 </div>-->
-
                             <div class="col-md-4">
                                 <p class="titulo"> Siguenos:</p>
                                 <a href="https://es-la.facebook.com/"><img id="uno" src="../../IMG/pagos/facebook.png" class="img-circle"></a>
                                 <a href="https://plus.google.com/about?hl=es"><img id="dos" src="../../IMG/pagos/google+.png"  class="img-circle"></a>
                                 <a href="https://www.linkedin.com/"><img src="../../IMG/pagos/in.png" class="img-circle" id="tres"></a>
-                                <a href=""><img src="../../IMG/pagos/google-play.png" id="cuatro"></a>
-                                <a href=""><img src="../../IMG/pagos/app_Store.png" id="sinco"></a>
+                            <!--<a href=""><img src="../../IMG/pagos/google-play.png" id="cuatro"></a>
+                                <a href=""><img src="../../IMG/pagos/app_Store.png" id="sinco"></a>-->
 
                             </div>
                             <!--</div>-->

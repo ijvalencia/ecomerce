@@ -61,7 +61,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <label>correo :<input type="text" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" class="form-control" style="margin-left: 73px; margin-top: -31px;"></label>
-                                                        <a href="RecuperarContrasena.php">Recuperar Mi Contraseña</a>
+                                                        <a href="RecuperarContrasena.php"></a>
                                                         <br>                                       
                                                     </div>
                                                     <div class="modal-footer">
@@ -132,8 +132,41 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn" id="btn-enviar">Guardar</button>      
-                                </form>
+                                    <button type="button" class="btn" id="btn-enviar" data-toggle="modal" data-target="#largeModal" data-backdrop="static" data-keyboard="false">Guardar</button>
+                                    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Continuar con el registro</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!--<h3>Continuar con el registro</h3>-->
+                                                    <label>Nombre :<input type="text" name="txtnombre" class="form-control" id="txtnombred"></label>
+                                                    <label>Apellido :<input type="text" name="txtapellido" class="form-control" id="txtapellidod"></label>
+                                                    <label>Telefono :<input type="text" name="txttelefono" class="form-control" id="txttelefonod"></label><br>
+                                                    <label>Telefono 2 :<input type="text" name="txttelefono2" class="form-control" id="txttelefono2d"></label><br>
+                                                    <label>Calle :<input type="text" name="txtcalle" class="form-control" id="txtcalled"></label><br>
+                                                    <label>Exterior :<input type="text" name="txtexterior" class="form-control" id="txtexteriord"></label><br>
+                                                    <label>Interior :<input type="text" name="txtinterior" class="form-control" id="txtinteriord"></label><br>
+                                                    <label>CP :<input type="text" name="txtcp" class="form-control" id="txtcpd"></label><br><br><br><br>
+                                                   
+                                                    <label>Estados :<select class="form-control" id="selectestadosd"></select></label>
+                                                    <label>Ciudad :<input type="text" name="txtciudad" class="form-control" id="txtciudadd"></label>
+                                                    <label>Cruseros :<input type="text" name="txtcrusero" class="form-control" id="txtcruserod"></label>
+                                                    <label>Cruseros 2 :<input type="text" name="txtcrusero2" class="form-control" id="txtcruserod2"></label><br>
+                                                    <label>Referencia :<input type="text" name="txtreferencia" class="form-control" id="txtreferncia"></label><br>
+                                                </div>
+                                                <br><br><br><br><br>
+                                                <div class="modal-footer">
+                                                  <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                  <button type="button" class="btn btn-primary" id="btn-direccion">Guardar</button>
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                              </form>
                             </div>
                         </div>          	
                     </div>

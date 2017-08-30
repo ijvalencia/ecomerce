@@ -411,31 +411,31 @@ class BD {
 
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {    
        // $add=rand(10,3000);
-        $tipo = 0;  // 0 para usuarios 1 para admin
-        $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-        $this->conexion->query($sql) ? "1" : "0";       
-        //echo $add;    
+       $Buscarsql = "select correo, contra from usuario where correo='".$correo."' || contra='".$contra."'";     
+       $buscar = $this->conexion->query($Buscarsql);
+       if ($buscar!=null){
+        foreach ($buscar as $row) {
+            if (($correo == $row['correo']) || ($contra == $row['contra'])) {
+                 $row['correo'];
+                 $row['contra'];
+                 echo '00';
+            }
+       }
+   } else {
+       $tipo = 0;  // 0 para usuarios 1 para admin
+       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
+       echo $this->conexion->query($sql) ? "1" : "0";      
+            }
     }
     
     public function confirmacion(){
        
     }
 
-  public function cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra){
-      $sql ="select id_usuario, contra from usuario where contra='".$txtnuevocontra."'";
-         // $this->conexion->query($sql) ? "1" : "0";
-    foreach ($this->conexion->query($sql) as $row){
-            $row['id_usuario'];
-            $row['contra'];
-            if($row['contra'] === $txtnuevocontra){
-                echo 'LA CONTRASEÑA YA ESTA REGISTRADA FAVOR DE PONER OTRA';
-            } else if ($row['contra'] == null) {
-             $sql = "UPDATE usuario SET contra='".$txtnuevocontra."' WHERE contra='".$txtantiguoscontra."'";
-             echo $this->conexion->query($sql) ? "1" : "0";
-             echo $sql;
-         }
-      }
-   }
+  public function cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra){ 
+    $sql = "UPDATE usuario SET contra='".$txtnuevocontra."' WHERE contra='".$txtantiguoscontra."'";
+        echo $this->conexion->query($sql) ? "1" : "0";
+}
     
   public function revicioncorreos($correos_Email) {
     require  'PHPMailer/PHPMailerAutoload.php';
@@ -551,8 +551,8 @@ class BD {
             }
         }
     }
-
     public function mostrarordenes($id_usuariosesion) {
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
