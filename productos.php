@@ -98,7 +98,7 @@ for ($x = 0; $x <= $total_articulos - 1; $x++) {
     if ($articulos->item[$x]->disponibleCD < 0)
         $articulos->item[$x]->disponibleCD = 0;
     if ($articulos->item[$x]->disponible != 0 || $articulos->item[$x]->disponibleCD != 0)
-        $sql = "INSERT INTO producto VALUES ('" . $articulos->item[$x]->codigo_fabricante . "','" . $articulos->item[$x]->descripcion . "','" . $articulos->item[$x]->grupo . "','" . $articulos->item[$x]->marca . "','" . $articulos->item[$x]->Departamento . "','" . $articulos->item[$x]->precio . "','" . $articulos->item[$x]->moneda . "','" . $articulos->item[$x]->imagen . "','" . $articulos->item[$x]->tipocambio . "','" . $articulos->item[$x]->disponible . "','" . $articulos->item[$x]->disponibleCD . "','" . $GB . "','" . $TB . "', '')";
+        $sql = "INSERT INTO producto VALUES ('" . strpos($articulo->item[$x]->descripcion, "GHIA") ? $articulos->item[x]->clave : $articulos->item[$x]->codigo_fabricante . "','" . $articulos->item[$x]->descripcion . "','" . $articulos->item[$x]->grupo . "','" . $articulos->item[$x]->marca . "','" . $articulos->item[$x]->Departamento . "','" . $articulos->item[$x]->precio . "','" . $articulos->item[$x]->moneda . "','" . $articulos->item[$x]->imagen . "','" . $articulos->item[$x]->tipocambio . "','" . $articulos->item[$x]->disponible . "','" . $articulos->item[$x]->disponibleCD . "','" . $GB . "','" . $TB . "', '')";
     //echo $sql."<br>";
     echo $con->query($sql) ? "ingresado ".$articulos->item[$x]->codigo_fabricante."
     " : "no ingresado ".$articulos->item[$x]->codigo_fabricante."
