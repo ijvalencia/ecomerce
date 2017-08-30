@@ -95,7 +95,7 @@
                             </ul>
                         </div>
                         <!--Entrada de busqueda -->
-                        <input name="busqueda" id="entrada_busqueda" type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Buscar" minlength="1" maxlength="20">
+                        <input name="busqueda" id="entrada_busqueda" type="text" class="form-control lnt-search-input" aria-label="Search" placeholder="Buscar" minlength="1" maxlength="40">
                     </div>
                 </div>
                 <!-- boton de busqueda-->
