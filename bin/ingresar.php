@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 include 'connectBD.php';
@@ -28,7 +29,7 @@ switch ($Menu) {
         $contra = $_POST['contra'];
         $conexion->login($correo, $contra);
         break;
-    
+
     /* SATANAS */
     case "envios":
         $conexion->getEnvios();
@@ -44,9 +45,9 @@ switch ($Menu) {
         break;
 
     case "sesion":
-        if(!(isset($_SESSION['apellidos'])))
-            $_SESSION['apellidos']="invitado";
-        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'] , $_SESSION['id'],);
+        if (!(isset($_SESSION['apellidos'])))
+            $_SESSION['apellidos'] = "invitado";
+        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
         echo json_encode($usuario);
         break;
 
@@ -80,10 +81,10 @@ switch ($Menu) {
         } else
             echo "0";
         break;
-        
+
     case "getArticulo":
         if (isset($_GET['codigo'])) {
-            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
             if (!$data) {
@@ -92,8 +93,8 @@ switch ($Menu) {
                 $articulo = simplexml_load_string($data);
                 if (sizeof($articulo) > 1) {
                     foreach ($articulo->item as $objeto) {
-                        if(strcmp($objeto->codigo_fabricante, $_GET['codigo']) == 0) {
-                            echo '{"item":'.json_encode($objeto).'}';
+                        if (strcmp($objeto->codigo_fabricante, $_GET['codigo']) == 0) {
+                            echo '{"item":' . json_encode($objeto) . '}';
                             break;
                         }
                     }
@@ -102,7 +103,7 @@ switch ($Menu) {
                 }
             }
         }
-    break;
+        break;
 
     case "articulos":
         //$filename= ("http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&marca=%&grupo=%&clave=%&codigo=%".$producto."&tc=1&promos=1&porcentaje=0");
@@ -133,98 +134,96 @@ switch ($Menu) {
         break;
     case "productosInicio":
         $conexion->productosInicio();
-    break;
+        break;
 
     case "borrarCarrito":
         $carrito = $_SESSION['carrito'];
         array_splice($carrito, $_POST['articulo']);
         $_SESSION['carrito'] = $carrito;
-    break;
+        break;
 
     case "getCarousel":
         $conexion->getCarousel($_GET['clave']);
-    break;
-    /********** */
+        break;
+    /*     * ******** */
     //parte del chuy
 
     case "cambiarContraseña":
-     $txtantiguoscontra = $_POST['antiguacontrasena'];    
-     $txtnuevocontra = $_POST['nuevacontrasena'];
-     $conexion->cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra);
-    break;
-        
+        $txtantiguoscontra = $_POST['antiguacontrasena'];
+        $txtnuevocontra = $_POST['nuevacontrasena'];
+        $conexion->cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra);
+        break;
+
     case "olvidecontrasena":
         //correo para enviar a gimail
-        $correos_Email = $_POST['emaill'];    
+        $correos_Email = $_POST['emaill'];
         $conexion->revicioncorreos($correos_Email);
-    break;
-    
+        break;
+
     case "extraerCorreo":
         $idusuarioss = $_POST['idusuariocompras'];
-        $conexion->validarContrasena($idusuarioss);        
-    break;
+        $conexion->validarContrasena($idusuarioss);
+        break;
 
     case "compararcuentass":
         $cuentacorreos = $_POST['usuariocorreo'];
         $cuentaclave = $_POST['usuarioclave'];
         //$conexion->cuenta($cuentacorreos,$cuentaclave);        
         $checkrobot = $_POST["checkrobot"];
-        
-        if(!$checkrobot){
-          echo '<h2>Please check the the captcha form.</h2>';
-          exit;
-        }
-	$secretKeyy = "";
-	$ip = $_SERVER['REMOTE_ADDR'];
-        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKeyy."&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX".$checkrobot."&remoteip=".$ip);
-	$responseKeyss = json_decode($response,true);                                                       
-        if(intval($responseKeyss["success"]) !== 1) {
-            
-          echo '<h2>You are spammer ! Get the @$%K out</h2>';
-          
-        } else {
-            
-          echo '<h2>Thanks for posting comment.</h2>';
-          
-        }
-    break;
 
-    case "direccioness":   
-         $idusuario = $_POST['idusuarios'];
-         $conexion->getdireccionesusuario($idusuario);
-    break;
-    
-  case "agregarordenes":
+        if (!$checkrobot) {
+            echo '<h2>Please check the the captcha form.</h2>';
+            exit;
+        }
+        $secretKeyy = "";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKeyy . "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX" . $checkrobot . "&remoteip=" . $ip);
+        $responseKeyss = json_decode($response, true);
+        if (intval($responseKeyss["success"]) !== 1) {
+
+            echo '<h2>You are spammer ! Get the @$%K out</h2>';
+        } else {
+
+            echo '<h2>Thanks for posting comment.</h2>';
+        }
+        break;
+
+    case "direccioness":
+        $idusuario = $_POST['idusuarios'];
+        $conexion->getdireccionesusuario($idusuario);
+        break;
+
+    case "agregarordenes":
         $usuario = $_POST['idusuario'];
         $direccion = $_POST['direccion'];
         $envio = $_POST['idenvio'];
         $total = $_POST['subtotal'];
-        $metodo_pago = $_POST['metodo_pago'];                
+        $metodo_pago = $_POST['metodo_pago'];
         //echo json_encode('50');
-        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago,1);
-    break;
-        
+        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, 1);
+        break;
+
     case "productos_Odenes":
         $id_codigo = $_POST['id_orden'];
-        $codigoF  = $_POST['codigoF'];
+        $codigoF = $_POST['codigoF'];
         $cantidad = $_POST['cantidad'];
-        $conexion->producto_orden($id_codigo, $codigoF, $cantidad);  
-    break;
-    
-    
+        $conexion->producto_orden($id_codigo, $codigoF, $cantidad);
+        break;
+
+
     case "usuariordendetalles":
-       $id_ordenproductodetalle=$_POST["usuario"];
-       $conexion->mostrarordenesdetalles($id_ordenproductodetalle);
-    break;
-   
+        $id_ordenproductodetalle = $_POST["usuario"];
+        $conexion->mostrarordenesdetalles($id_ordenproductodetalle);
+        break;
+
     case "usuarioorden":
         $id_usuario = $_POST["usuario"];
         $conexion->mostrarordenes($id_usuario);
-    break;
+        break;
 
     case "orden":
         $conexion->getOrdenes();
-    break;
+        break;
 
     case "UpdateUsuario":
         $id = $_POST["id_usuario"];
@@ -244,7 +243,7 @@ switch ($Menu) {
         echo $id;
         $conexion->getUsuario($id, $correo = null);
         break;
-    
+
     case "email":
         $correo = $_POST['correo'];
         $contra = $_POST['contra'];
@@ -258,24 +257,24 @@ switch ($Menu) {
         $contrasena = $_POST['contrasena'];
         $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         $captcha = $_POST['robot'];
-        
-        if(!$captcha){
-          echo '<h2>Please check the the captcha form.</h2>';
-          exit;
+
+        if (!$captcha) {
+            echo '<h2>Please check the the captcha form.</h2>';
+            exit;
         }
-	$secretKey = "";
-	$ip = $_SERVER['REMOTE_ADDR'];
-        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6LeB4C0UAAAAAG85OPGoSHdarkupWs_qmTbUjAkB".$captcha."&remoteip=".$ip);
-	$responseKeys = json_decode($response,true);
-        if(intval($responseKeys["success"]) !== 1) {
-          echo '<h2>You are spammer ! Get the @$%K out</h2>';
+        $secretKey = "";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&6LeB4C0UAAAAAG85OPGoSHdarkupWs_qmTbUjAkB" . $captcha . "&remoteip=" . $ip);
+        $responseKeys = json_decode($response, true);
+        if (intval($responseKeys["success"]) !== 1) {
+            echo '<h2>You are spammer ! Get the @$%K out</h2>';
         } else {
-          echo '<h2>Thanks for posting comment.</h2>';
-        } 
+            echo '<h2>Thanks for posting comment.</h2>';
+        }
         break;
 
     /*     * ******* */
-     /* Anton */
+    /* Anton */
     case "aux":
         $variable = $_GET['categoria'];
         $posicion = $_GET['extra'];
@@ -295,8 +294,8 @@ switch ($Menu) {
             $color = $_GET['color'];
         } else
             $color = "";
-        if(empty($_GET['marca']))
-            $marca="undefined";
+        if (empty($_GET['marca']))
+            $marca = "undefined";
         //echo $variable, $posicion, $marca, $envio, $min, $max, $orden."<br>";
         $conexion->VerSelectivo($variable, $posicion, $marca, $envio, $min, $max, $orden, $color);
         break;
@@ -350,12 +349,12 @@ switch ($Menu) {
         if ($min == "undefined") {
             $min = 1;
         }
-        
+
         if (isset($_GET['color'])) {
             $color = $_GET['color'];
         } else
             $color = "";
-        
+
         //echo $posicion."<br>".$marca."<br>".$envio."<br>".$min."<br>".$max."<br>";
         $conexion->verCantidad($variable, $posicion, $marca, $envio, $min, $max, $orden, $color);
         break;
@@ -381,7 +380,7 @@ switch ($Menu) {
                 $orden = $_GET['orden'];
         else
             $orden = "normal";
-        
+
         if (isset($_GET['color'])) {
             $color = $_GET['color'];
         } else
@@ -410,36 +409,41 @@ switch ($Menu) {
     case "contarColor":
         $categoria = $_GET['categoria'];
         $color = $_GET['color'];
-        $grupo=$_GET['grupo'];
+        $grupo = $_GET['grupo'];
         $conexion->verCantidadColor($grupo, $color);
         break;
-    
+
     case "contarMarca":
-        $marca=$_GET['marca'];
-        $grupo=$_GET['grupo'];
+        $marca = $_GET['marca'];
+        $grupo = $_GET['grupo'];
         $conexion->verCantidadMarca($grupo, $marca);
         break;
-    
+
     case "meterComentario":
         header("Content-Type: text/html;charset=utf-8");
-        $comentario=$_GET['comentario'];
-        $calificacion=$_GET['calificacion'];
-        $usuario=$_GET['usuario'];
-        $producto=$_GET['producto'];
+        $comentario = $_GET['comentario'];
+        $calificacion = $_GET['calificacion'];
+        $usuario = $_GET['usuario'];
+        $producto = $_GET['producto'];
         $conexion->verMeterComentario($usuario, $calificacion, $comentario, $producto);
         break;
     case "verNumeroComentarios":
-        $producto=$_GET['producto'];
+        $producto = $_GET['producto'];
         $conexion->verNumeroComentarios($producto);
         break;
     case "verComentarios":
         header("Content-Type: text/html;charset=utf-8");
-        $producto=$_GET['producto'];
+        $producto = $_GET['producto'];
         $conexion->verComentarios($producto);
         break;
     case "verSoloCalificacionC":
-        $producto=$_GET['producto'];
+        $producto = $_GET['producto'];
         $conexion->verSoloCalificacionC($producto);
+        break;
+    case "verlike":
+        $producto = $_GET['producto'];
+        $usuario = $_GET['usuario'];
+        $conexion->verlike($producto, $usuario);
         break;
 }
 $conexion->cerrar();

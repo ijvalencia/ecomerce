@@ -38,11 +38,32 @@ $(document).ready(function () {
             $('#form_busqueda').show();
         }
     });
+
+    //Anton
+    var producto = $('#producto').attr("value");
+    var nombre;
+    var apellido;
+    var number;
+    //aqui esta fallando
+    $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
+        sesion = datos;
+        console.log(sesion);
+        var stringB = new String(sesion);
+        var field = stringB.split(",");
+        nombre = field[0];
+        apellido = field[1];
+        number = field[2];
+        $.get("../../bin/ingresar.php?categoria=verlike&usuario=" + number + "&producto=" + producto,
+                function (respuesta) {
+
+                });
+    });
+    //fin Anton
 });
 
 function cargarProducto(codigo) {
     if (codigo.length > 3) {
-        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function(datos) {
+        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function (datos) {
             console.log(datos);
             if (datos['item'] == undefined || datos['item'][1] != undefined) {
                 window.location.replace("../../modulos/error/index.php");
@@ -121,7 +142,7 @@ function formatoMoneda(numero) {
 
 
 ///    ANTON
-
+// cargar comentarios
 var cargado = false;
 var number = 0;
 $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {

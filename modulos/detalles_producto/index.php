@@ -59,7 +59,8 @@
                     </div>
                     <div id="comentarios" class="ec-stars-wrapper" data-toggle="modal" data-target="#vercomentarios">
 
-                    </div>
+                    </div><br>
+                    <a href="#"><i id="icono_marcas" class="fa fa-thumbs-o-up">Me gusta</i></a>
                     <div class="container">
                         <div class="modal fade" id="vercomentarios" role="dialog">
 
