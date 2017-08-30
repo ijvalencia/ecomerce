@@ -84,7 +84,9 @@ switch ($Menu) {
 
     case "getArticulo":
         if (isset($_GET['codigo'])) {
-            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
+            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            if(strpos($_GET['codigo'], "GHIA"))
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
             if (!$data) {
@@ -147,7 +149,6 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
-
     case "cambiarContraseña":
         $txtantiguoscontra = $_POST['antiguacontrasena'];
         $txtnuevocontra = $_POST['nuevacontrasena'];
@@ -262,12 +263,12 @@ switch ($Menu) {
             echo '<h2>Please check the the captcha form.</h2>';
             exit;
         }
-        $secretKey = "";
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&6LeB4C0UAAAAAG85OPGoSHdarkupWs_qmTbUjAkB" . $captcha . "&remoteip=" . $ip);
-        $responseKeys = json_decode($response, true);
-        if (intval($responseKeys["success"]) !== 1) {
-            echo '<h2>You are spammer ! Get the @$%K out</h2>';
+	   	$secretKey = "";
+	   	$ip = $_SERVER['REMOTE_ADDR'];
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX".$captcha."&remoteip=".$ip);
+	   	$responseKeys = json_decode($response,true);
+        if(intval($responseKeys["success"]) !== 1) {
+          echo '<h2>You are spammer ! Get the @$%K out</h2>';
         } else {
             echo '<h2>Thanks for posting comment.</h2>';
         }

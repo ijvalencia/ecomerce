@@ -2,7 +2,7 @@ var bandera=false;
 
 $(document).ready(function (){
     
-    var txtbuscar = $("input:text[id='entrada_busqueda']").val();
+    var txtbuscar = $("input:text[id='entrada_busqueda']").val().trim();
    //Comprobamos la longitud de caracteres
 	if (txtbuscar.length>1){
 		return true;

@@ -370,15 +370,22 @@ class BD {
         $sql = [];
         if ($categoria === "Todo")
             foreach ($palabras as $busqueda) {
-                array_push($sql, "SELECT * FROM producto WHERE INSTR(descripcion, ' " . $busqueda . " ') OR INSTR(grupo, '" . $busqueda . "') GROUP BY codigo_fabricante ORDER BY departamento");
-            } else
+                if(substr($busqueda, -1) == 'S')
+                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
+                array_push($sql, "SELECT * FROM producto WHERE descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' GROUP BY codigo_fabricante ORDER BY departamento");
+            } 
+        else
             foreach ($palabras as $busqueda) {
-                array_push($sql, "SELECT * FROM (SELECT * FROM (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria = '" . $categoria . "') AS subcat INNER JOIN producto ON subcat.id_categoria = producto.grupo) AS grupos WHERE INSTR(descripcion, ' " . $busqueda . " ') ORDER BY departamento");
+                if(substr($busqueda, -1) == 'S')
+                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
+                array_push($sql, "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='".$categoria."')) AS res WHERE descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' ORDER BY departamento");
             }
         $arr = [];
         foreach ($sql as $consulta) {
             $datos = [];
             foreach ($this->conexion->query($consulta) as $row) {
+                // if(sizeof($datos) >= 100)
+                //     break;
                 array_push($datos, $row);
             }
             array_push($arr, $datos);
@@ -417,40 +424,48 @@ class BD {
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
         $this->conexion->query($sql) ? "1" : "0";
         //echo $add;    
+/*=======
+    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {    
+       // $add=rand(10,3000);
+       $Buscarsql = "select correo, contra from usuario where correo='".$correo."' || contra='".$contra."'";     
+       $buscar = $this->conexion->query($Buscarsql);
+       if ($buscar!=null){
+        foreach ($buscar as $row) {
+            if (($correo == $row['correo']) || ($contra == $row['contra'])) {
+                 $row['correo'];
+                 $row['contra'];
+                 echo '00';
+            }
+       }
+   } else {
+       $tipo = 0;  // 0 para usuarios 1 para admin
+       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
+       echo $this->conexion->query($sql) ? "1" : "0";      
+            }
+>>>>>>> f215525b9426271560ebe9bf70dd2ddbdbfc7fcd*/
     }
 
     public function confirmacion() {
         
     }
 
-    public function cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra) {
-        $sql = "select id_usuario, contra from usuario where contra='" . $txtnuevocontra . "'";
-        // $this->conexion->query($sql) ? "1" : "0";
-        foreach ($this->conexion->query($sql) as $row) {
-            $row['id_usuario'];
-            $row['contra'];
-            if ($row['contra'] === $txtnuevocontra) {
-                echo 'LA CONTRASEÑA YA ESTA REGISTRADA FAVOR DE PONER OTRA';
-            } else if ($row['contra'] == null) {
-                $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'";
-                echo $this->conexion->query($sql) ? "1" : "0";
-                echo $sql;
-            }
-        }
-    }
-
-    public function revicioncorreos($correos_Email) {
-        require 'PHPMailer/PHPMailerAutoload.php';
-        $titulo = "Recordar contraseña";
-        $d = rand(10, 3000);
-        $message = "Tu password es :" . $d;
-
-        $mail = new PHPMailer();
-        $mail->setFrom('jesusvalenciatrejo7@gmail.com', 'Mensaje de prueba');
-        $mail->addAddress($correos_Email, $message);
-        $mail->Subject = $titulo;
-        $mail->isHTML(true);
-        $mail->CharSet = 'UTF-8';
+  public function cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra){ 
+    $sql = "UPDATE usuario SET contra='".$txtnuevocontra."' WHERE contra='".$txtantiguoscontra."'";
+        echo $this->conexion->query($sql) ? "1" : "0";
+}
+    
+  public function revicioncorreos($correos_Email) {
+    require  'PHPMailer/PHPMailerAutoload.php';
+    $titulo  = "Recordar contraseña";  
+    $d=rand(10,3000);      
+    $message  = "Tu password es :".$d;
+    
+	$mail = new PHPMailer();
+	$mail->setFrom('jesusvalenciatrejo7@gmail.com','Mensaje de prueba');
+	$mail->addAddress($correos_Email, $message);
+	$mail->Subject = $titulo;
+	$mail->isHTML(true);
+	$mail->CharSet = 'UTF-8';
         $body = '
     <html>
     <head>
@@ -553,8 +568,8 @@ class BD {
             }
         }
     }
-
     public function mostrarordenes($id_usuariosesion) {
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);

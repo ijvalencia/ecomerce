@@ -85,24 +85,23 @@ function cargarLista(numero) {
 function busquedaCat(index) {
 	$('#categoria_elegida').empty();
 	if (index == 666) 
-		$('#categoria_elegida').append("Todo");
+	    $('#categoria_elegida').append("Todo");
 	else 
-		$('#categoria_elegida').append(categorias[index]["nombre"]);
+	    $('#categoria_elegida').append(categorias[index]["nombre"]);
 	$('#entrada_categoria').attr("value", $('#categoria_elegida').text());
 //	console.log($('#categoria_elegida').text());
 }
 
 /* terminar de probar */
 $('#btn_enviar').click(function(e) {
-	e.preventDefault();
-	var busqueda = $('#entrada_busqueda').val().toUpperCase();
-	$.each(subcategorias, function(i, subcat) {
-		$.each(subcat, function(j, subs) {
-			if (busqueda.indexOf(subs["id_categoria"]) != -1) {
-				alert("SI");
-				window.location.replace("../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria="+subs["id_categoria"]);
-			}
-		});
-	});
+    e.preventDefault();
+    var busqueda = $('#entrada_busqueda').val().toUpperCase();
+    $.each(subcategorias, function(i, subcat) {
+        $.each(subcat, function(j, subs) {
+    	    if (busqueda.indexOf(subs["id_categoria"]) != -1) {
+    	        window.location.replace("../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria="+subs["id_categoria"]);
+    	    }
+        });
+    });
 });
 

@@ -152,8 +152,10 @@ $(document).ready(function (){
                                     data:{"id_orden": mnss, "codigoF":mns[m]["codigo_fabricante"],"cantidad":txtcantidad},
                                     success: function(ordenesproductos){
                                      console.log("hola :"+ordenesproductos);   
+                                     alert("datos"+ordenesproductos);
                           // numeroorden = String(mnss[0]["id_ordenes"]);
                                     if(numeroorden !== null) { 
+                                        borrarArticulo("0");
                                            window.location.href = "../../modulos/orden/Orden.php";  
                                   //  console.log(numeroorden);
                                     jAlert("COMPRA REALIZADA");

@@ -573,6 +573,7 @@ form .row{
     font-family: "Arial", serif;
 
 }
+
 .fuente{
     text-align : justify;    
     font-family: "Arial", serif;
@@ -591,9 +592,9 @@ form .row{
     margin-left: 3px;    
     font-size: 14px; 
 }
-.col-md-1 {
-    margin-left: -21px;
-    width: 264px;
+.col-md-1{
+     margin-left: 69px;
+     width: 275px;
     /*width: 16.6667%;
       margin-left:10px;
      margin-left: -47px;
@@ -823,7 +824,7 @@ hr {
     position: absolute;
     top: 15px;
     right: 35px;
-    color: #f1f1f1;
+    color: #000;
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
@@ -831,7 +832,7 @@ hr {
 }
 .close:hover,
 .close:focus {
-    color: #bbb;
+    color: #000;
     text-decoration: none;
     cursor: pointer;
 }
@@ -1212,4 +1213,14 @@ label {
 
 #panels{
     margin-left: 31%;
+}
+
+#selectestadosd{
+  width: 443px;
+  margin-left: 0px;  
+}
+
+#letras{
+    margin-left: 149px;
+    width: 329px; 
 }
