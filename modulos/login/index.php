@@ -145,22 +145,27 @@
                                                     <label>Nombre :<input type="text" name="txtnombre" class="form-control" id="txtnombred"></label>
                                                     <label>Apellido :<input type="text" name="txtapellido" class="form-control" id="txtapellidod"></label>
                                                     <label>Telefono :<input type="text" name="txttelefono" class="form-control" id="txttelefonod"></label><br>
-                                                    <label>Telefono 2 :<input type="text" name="txttelefono2" class="form-control" id="txttelefono2d"></label><br>
+                                                    <label>Telefono 2 :<input type="text" name="txttelefono2" class="form-control" id="txttelefono2d" value="0"></label><br>
                                                     <label>Calle :<input type="text" name="txtcalle" class="form-control" id="txtcalled"></label><br>
                                                     <label>Exterior :<input type="text" name="txtexterior" class="form-control" id="txtexteriord"></label><br>
-                                                    <label>Interior :<input type="text" name="txtinterior" class="form-control" id="txtinteriord"></label><br>
+                                                    <label>Interior :<input type="text" name="txtinterior" class="form-control" id="txtinteriord" value="0"></label><br>
                                                     <label>CP :<input type="text" name="txtcp" class="form-control" id="txtcpd"></label><br><br><br><br>
                                                    
-                                                    <label>Estados :<select class="form-control" id="selectestadosd"></select></label>
+                                                    <label>Estados :<select class="form-control" id="selectestadosd">
+                                                            <option value="1">zapopan</option>    
+                                                    </select></label>
                                                     <label>Ciudad :<input type="text" name="txtciudad" class="form-control" id="txtciudadd"></label>
+                                                    <label>Colonia :<input type="text" name="txtcolonia" class="form-control" id="txtcolonia"></label>
                                                     <label>Cruseros :<input type="text" name="txtcrusero" class="form-control" id="txtcruserod"></label>
                                                     <label>Cruseros 2 :<input type="text" name="txtcrusero2" class="form-control" id="txtcruserod2"></label><br>
-                                                    <label>Referencia :<input type="text" name="txtreferencia" class="form-control" id="txtreferncia"></label><br>
+                                                    <label>Referencia :<input type="text" name="txtreferencia" class="form-control" id="txtreferncia" value="0"></label><br>
+                                                    <label>Datos Adicionales :<input type="checkbox" name="checkbox" class="form-control" id="RAcheckbox"></label>
+                                                    
                                                 </div>
-                                                <br><br><br><br><br>
+                                                <br><br><br><br><br><br><br>
                                                 <div class="modal-footer">
                                                   <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                  <button type="button" class="btn btn-primary" id="btn-direccion">Guardar</button>
+                                                  <button type="button" class="btn btn-primary" id="btn-direccion" data-dismiss="modal">Guardar</button>
                                                 </div>
                                                 <br>
                                             </div>

@@ -414,7 +414,7 @@ class BD {
         echo json_encode($datos);
     }
 
-    /*     * ******** */
+    /********** */
     /* parte del chuy */
     /* Agregar datos */
 
@@ -422,29 +422,19 @@ class BD {
         // $add=rand(10,3000);
         $tipo = 0;  // 0 para usuarios 1 para admin
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-        $this->conexion->query($sql) ? "1" : "0";
+        echo $this->conexion->query($sql) ? "1" : "0";
         //echo $add;    
-/*=======
-    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {    
-       // $add=rand(10,3000);
-       $Buscarsql = "select correo, contra from usuario where correo='".$correo."' || contra='".$contra."'";     
-       $buscar = $this->conexion->query($Buscarsql);
-       if ($buscar!=null){
-        foreach ($buscar as $row) {
-            if (($correo == $row['correo']) || ($contra == $row['contra'])) {
-                 $row['correo'];
-                 $row['contra'];
-                 echo '00';
-            }
-       }
-   } else {
-       $tipo = 0;  // 0 para usuarios 1 para admin
-       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-       echo $this->conexion->query($sql) ? "1" : "0";      
-            }
->>>>>>> f215525b9426271560ebe9bf70dd2ddbdbfc7fcd*/
     }
-
+    public function agregardirecciones($txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
+        $sql="SELECT id_usuario FROM usuario"; 
+         foreach ($this->conexion->query($sql) as $row) {
+            $row['id_usuario'];
+        }
+        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$row['id_usuario'].",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
+       // echo $sqlInser;
+        echo $this->conexion->query($sqlInser) ? "1" : "0";      
+    }
+    
     public function confirmacion() {
         
     }
@@ -587,9 +577,12 @@ class BD {
     }
 
     public function actualizarDatosUsuario($id, $nombre, $apellidos, $dia, $mes, $anio, $correos, $contra) {
-        $sql = "UPDATE usuario SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "',dia='" . $dia . "', mes='" . $mes . "',anio='" . $anio . "' ,correo='" . $correos . "',contra='" . $contra . "' WHERE id_usuario='" . $id . "'";
-        echo $sql;
+        $sql = "UPDATE usuario SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "',dia='" . $dia . "', mes='" . $mes . "',anio='" . $anio . "' ,correo='" . $correos . "',contra='" . $contra . "' WHERE id_usuario='" . $id . "'";     
+        $sqld = "UPDATE direccion SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "' WHERE id_usuario='".$id."'";  
+//  echo $sql;
+        
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
+        echo $this->conexion->query($sqld) ? "1" : "0";
     }
 
     public function getUsuario($id, $correo) {

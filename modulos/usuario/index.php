@@ -34,7 +34,7 @@
                                       <div class="col-xs-5">
                                        <div class="form-group">
                                            <select class="selectpicker form-control tamaño" id="fechadia" name="cmbfechas">
-                                            <option value="">Selecionar..</option>
+                                            <option value="0">Selecionar..</option>
                                             <option value="01">01</option>
                                             <option value="02">02</option>
                                             <option value="03">03</option>        
@@ -65,12 +65,13 @@
                                             <option value="29">28</option>
                                             <option value="29">29</option>
                                             <option value="30">30</option>
+                                            <option value="31">31</option>
                                            </select>
                                     </div>
                                     
                                        <div class="form-group">
                                            <select class="selectpicker form-control tamaño" id="fechames" name="cbxmes">
-                                            <option value="">Selecionar..</option>
+                                            <option value="0">Selecionar..</option>
                                             <option value="1">Enero</option>
                                             <option value="2">Febrero</option>
                                             <option value="3">Marzo</option>        
@@ -89,33 +90,72 @@
                                      
                                         <div class="form-group">
                                             <select  class="selectpicker form-control tamaño" id="fechaanio" name="cmbxanio">
-                                            <option value="">Selecionar..</option>
-                                            <option value="1">1800</option>
-                                            <option value="2">1801</option>
-                                            <option value="3">1802</option>        
-                                            <option value="4">1803</option>
-                                            <option value="5">1804</option>
-                                            <option value="6">1805</option>  
-                                            <option value="1">1806</option>
-                                            <option value="2">1807</option>
-                                            <option value="3">1808</option>        
-                                            <option value="4">1809</option>
-                                            <option value="5">1810</option>
-                                            <option value="6">1811</option>  
-                                        
-                                            <option value="1"></option>
-                                            <option value="2"></option>
-                                            <option value="3"></option>        
-                                            <option value="4"></option>
-                                            <option value="5"></option>
-                                            <option value="6"></option>  
-                                        
+                                            <option value="0">Selecionar..</option>
+                                            <option value="1">1950</option>
+                                            <option value="2">1951</option>
+                                            <option value="3">1952</option>        
+                                            <option value="4">1953</option>
+                                            <option value="5">1954</option>
+                                            <option value="6">1955</option>  
+                                            <option value="7">1956</option>
+                                            <option value="8">1957</option>
+                                            <option value="9">1958</option>        
+                                            <option value="10">1959</option>
+                                            <option value="11">1960</option>
+                                            <option value="12">1961</option>
+                                            <option value="13">1962</option>        
+                                            <option value="14">1963</option>
+                                            <option value="15">1964</option>
+                                            <option value="16">1965</option>  
+                                            <option value="17">1966</option>
+                                            <option value="18">1967</option>
+                                            <option value="19">1968</option>        
+                                            <option value="20">1970</option>
+                                            <option value="21">1971</option>
+                                            <option value="22">1972</option>
+                                            <option value="23">1973</option>        
+                                            <option value="24">1974</option>
+                                            <option value="25">1975</option>
+                                            <option value="26">1976</option>  
+                                            <option value="27">1977</option>
+                                            <option value="28">1978</option>
+                                            <option value="29">1979</option>        
+                                            <option value="30">1980</option>
+                                            <option value="31">1981</option>
+                                            <option value="32">1982</option>        
+                                            <option value="33">1983</option>
+                                            <option value="34">1984</option>
+                                            <option value="35">1985</option>  
+                                            <option value="36">1986</option>
+                                            <option value="37">1987</option>
+                                            <option value="38">1988</option>        
+                                            <option value="39">1989</option>
+                                            <option value="40">1990</option>
+                                            <option value="41">1991</option>
+                                            <option value="42">1992</option>
+                                            <option value="43">1993</option>        
+                                            <option value="44">1994</option>
+                                            <option value="45">1995</option>
+                                            <option value="46">1996</option>  
+                                            <option value="47">1997</option>
+                                            <option value="48">1998</option>
+                                            <option value="49">1999</option>        
+                                            <option value="50">2000</option>
+                                            <option value="51">2001</option>
+                                            <option value="52">2002</option>        
+                                            <option value="53">2003</option>
+                                            <option value="54">2004</option>
+                                            <option value="55">2005</option>  
+                                            <option value="56">2006</option>
+                                            <option value="57">2007</option>
+                                           
                                         </select>
                                     </div>
                                 </div>
                             </div>
                          </div>
                             
+                            <!--
                          <div class="col-md-12">
                             <div class="row">
                                    <label  class="col-lg-2 control-label" id="sexo">Sexo:</label>
@@ -123,6 +163,7 @@
                                    <label class="required">Masculino<input id="check-sexo" name="sexo" value="Masculino" type="radio">&nbsp;&nbsp;</label>  
                             </div>
                         </div>
+                            -->
                             
                         <div class="col-md-12">
                             <div class="row">

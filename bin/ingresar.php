@@ -114,6 +114,7 @@ switch ($Menu) {
         $articulo = simplexml_load_file($filename);
         echo json_encode($articulo);
         break;
+    
     case "cerrar":
         session_destroy();
         header('Location: ../index.php');
@@ -149,6 +150,25 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
+    case "registrodirecion":
+        $txtnombredire = $_POST['nombredire'];
+        $txtapellidodire = $_POST['apellidodire'];
+        $txttelefonodire = $_POST['telefono'];
+        $txttelefono2dire = $_POST['telefono2'];
+        $txtcalledire = $_POST['calle'];
+        $txtexteriordire = $_POST['exterior'];
+        $txtinteriordire = $_POST['interior'];
+        $txtcodigopostaldire = $_POST['codigopostal'];
+        $txtselectestado = $_POST['selectestado'];
+        $txtciudad = $_POST['ciudad'];
+        $colonia =$_POST["colonia"];
+        $txtcruseros = $_POST['cruseros'];
+        $txtcrusero2 = $_POST['crusero2'];
+        $txtreferencia = $_POST['referencia'];
+       
+        $conexion->agregardirecciones($txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
+    break;
+
     case "cambiarContraseña":
         $txtantiguoscontra = $_POST['antiguacontrasena'];
         $txtnuevocontra = $_POST['nuevacontrasena'];
@@ -238,7 +258,7 @@ switch ($Menu) {
         $pass = $_POST["passwor"];
         $conexion->actualizarDatosUsuario($id, $nombre, $apellido, $fechadia, $fechames, $fechaanio, $email, $pass);
         break;
-
+    
     case "MostrarUsuarioId":
         $id = $_POST["id"];
         echo $id;

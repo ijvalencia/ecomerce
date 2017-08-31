@@ -43,7 +43,7 @@ $("#btnguardar").on('click', function (){
           var txtemai = $("#txtemail").val();                                 
           var txtpassw = $("input:password[id='txtpassw']").val();
           
-            if ((txtnombre === "") || (txtapellido === "") || (txtemai === "") || (txtpassw === "")) {
+          if ((txtnombre === "") || (txtapellido === "") || (txtemai === "") || (txtpassw === "")) {
             $('#txtnombre').css({"border": "2px solid red"});
             $('#txtapellido').css({"border": "2px solid red"});
             $('#txtemail').css({"border": "2px solid red"});
@@ -88,32 +88,22 @@ $("#btnguardar").on('click', function (){
                 "fechadia":cmbfechadia,
                 "fechames":cmbfechames,
                 "fechaanio":cmbfechaanio,
-               // "sexo":sexo,
                 "email": txtemai,
                 "passwor":txtpassw
             },       
-        success: function(sessionmsj){   
-            // var loginobtenido = sessionmsj.split('||');
-              //alert(sessionmsj);
-             // $("#").html(loginobtenido[0]);
-             // $("#login").(loginobtenido[1]);
-             // $("#").html(loginobtenido[2]);    
-             // window.location.href="http://localhost/Ecommerce/modulos/inicio/index.php";
-             // window.close();
-       //      $.limpiarusuarios();
+        success: function(sessionmsj){           
+            jAlert("GUARDANDO Y CERRANDO SESION PARA ACTUALIZAR LOS DATOS");
+                $.ajax({type: "POST",
+                url: "../../bin/ingresar.php?categoria=cerrar",
+                success: function(sesiones){   
+                 window.location.href="../../modulos/inicio/index.php";
+                 window.close();
+                }
+            });
         }
-       
-     });
+      });
      }
     }
    }
  }); 
- // $.limpiarusuarios = function (){
-   //           $("input:text[id='txtnombre']").val("");
-     //         $("input:text[id='txtapellido']").val("");
-       //       $("input:text[id='txtemail']").val("");
-         //     $("input:text[id='txtpassw']").val("");
-            //$("input:text[id='']").val(""); 
-            //$("input:hidden[id='']").val("0");
- //}; 
 });
