@@ -84,9 +84,12 @@ switch ($Menu) {
 
     case "getArticulo":
         if (isset($_GET['codigo'])) {
-            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
-            if(strpos($_GET['codigo'], "GHIA"))
+            $resp = $conexion->getExcepciones($_GET['codigo']);
+            if($resp === "1") {
                 $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            } else {
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            }
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
             if (!$data) {

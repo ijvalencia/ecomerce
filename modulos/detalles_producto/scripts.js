@@ -64,7 +64,7 @@ $(document).ready(function () {
 function cargarProducto(codigo) {
     if (codigo.length > 3) {
         $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function (datos) {
-            console.log(datos);
+            // console.log(datos);
             if (datos['item'] == undefined || datos['item'][1] != undefined) {
                 window.location.replace("../../modulos/error/index.php");
                 $('.loader').fadeOut("slow");
@@ -110,8 +110,8 @@ function cargarProducto(codigo) {
             $('.loader').fadeOut("slow");
         });
     } else {
-        // window.location.replace("../../modulos/error/index.php");
-//        $('.loader').fadeOut("slow");
+        window.location.replace("../../modulos/error/index.php");
+        $('.loader').fadeOut("slow");
     }
 }
 

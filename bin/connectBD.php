@@ -414,6 +414,17 @@ class BD {
         echo json_encode($datos);
     }
 
+    public function getExcepciones($codigo) {
+        $sql = "SELECT marca FROM producto WHERE codigo_fabricante = '".$codigo."'";
+        $sql_excepcion = "SELECT marca FROM excepciones_marcas WHERE 1";
+        foreach($this->conexion->query($sql) as $res)
+            $aux = $res['marca'];
+        foreach($this->conexion->query($sql_excepcion) as $res)
+            if($res['marca'] == $aux)
+                return "1";
+        return "0";
+    }
+
     /*     * ******** */
     /* parte del chuy */
     /* Agregar datos */
