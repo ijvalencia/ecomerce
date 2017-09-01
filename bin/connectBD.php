@@ -423,11 +423,8 @@ class BD {
         return "0";
     }
 
-<<<<<<< HEAD
-    /***********/
-=======
+
     /*     * ******** */
->>>>>>> d0914e6345698aa08c50a34eb7b0534ce6f93a31
     /* parte del chuy */
     /* Agregar datos */
 
@@ -453,7 +450,7 @@ class BD {
         
     }*/
 
-<<<<<<< HEAD
+
     public function estado() {
         $sql = "SELECT estado_id, estado from estados";
         $estados = $this->conexion->query($sql);
@@ -462,12 +459,8 @@ class BD {
         }
     }
     
-    public function cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra){ 
-        $sql = "UPDATE usuario SET contra='".$txtnuevocontra."' WHERE contra='".$txtantiguoscontra."'";
-=======
     public function cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra) {
-        $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'";
->>>>>>> d0914e6345698aa08c50a34eb7b0534ce6f93a31
+        $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'"; 
         echo $this->conexion->query($sql) ? "1" : "0";
     }
 
@@ -587,13 +580,8 @@ class BD {
     }
 
     public function mostrarordenes($id_usuariosesion) {
-<<<<<<< HEAD
         $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,ordenes.fecha,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and  ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."' order by ordenes.fecha DESC";
-        //$sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
-=======
-        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesion . "'";
->>>>>>> d0914e6345698aa08c50a34eb7b0534ce6f93a31
-        $arr = [];
+         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
         }

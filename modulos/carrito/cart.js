@@ -9,7 +9,6 @@ var sub = 0;
 var sub_iva = 0;
 
 $(document).ready(function (){
-       
     /*Obtener sesion y otros datos */
      $.ajax({
         url: "../../bin/ingresar.php?categoria=parametros",
@@ -48,6 +47,7 @@ $(document).ready(function (){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
+        
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=direccioness",
@@ -139,11 +139,10 @@ $(document).ready(function (){
                                console.log("todo"+mnss);
                                
                             $.each($('.numero_cantidad'),function(i,valor){
-                               sub_iva += valor.value; // * ivas[i];
+                               sub_iva += valor.value;// * ivas[i];
                                txtcantidad=valor.value;
                                console.log(txtcantidad);
-                           });
-                            
+                           });  
                            for(var m in mns){
                                $.ajax({
                                     type: "POST",

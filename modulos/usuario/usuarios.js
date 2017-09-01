@@ -80,7 +80,7 @@ $("#btnguardar").on('click', function (){
                 bandera = true;
                 if (bandera === true) { 
                     //console.log(ides);
-        $.ajax({type: "POST",
+          $.ajax({type: "POST",
                 url: "../../bin/ingresar.php?categoria=UpdateUsuario",
                 data:{
                 "id_usuario":number,    
