@@ -74,7 +74,8 @@ $(document).ready(function () {
     $('#categoria_elegida').text(supercategoria);
     $('#entrada_categoria').attr("value", supercategoria);
     var busqueda = $('#busqueda').attr("value").trim();
-    if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda)) {
+//    console.log(busqueda.length);
+    if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda) && busqueda.length != 0) {
         $('#AquiGrupo').append(busqueda);
         $('.breadcrumb').empty().append('<li><a href="../../modulos/inicio/index.php">Inicio</a></li><li>Productos</li><li><a></a>Busqueda</li>');
         $('#drop_color').hide();
@@ -89,17 +90,19 @@ $(document).ready(function () {
                 data: {"categoria": supercategoria, "palabras": busqueda},
                 success: function (respuesta) {
                     respuesta = JSON.parse(respuesta);
-                    // console.log(respuesta);
-                    /* Contiene mas de un sub arreglo, terminar y corregir */
-                    $.each(respuesta, function (i, objeto) {
-                        $.each(objeto, function (j, producto) {
-                            productos_busqueda.push(producto);
+                    if(respuesta[0].length > 0) {
+                        /* Contiene mas de un sub arreglo, terminar y corregir */
+                        $.each(respuesta, function (i, objeto) {
+                            $.each(objeto, function (j, producto) {
+                                productos_busqueda.push(producto);
+                            });
                         });
-                    });
-                    cargarBusqueda(productos_busqueda);
-                    cargarMarcas(productos_busqueda);
-                    cargarColores(productos_busqueda);
-                    cargarCapacidad(productos_busqueda);
+                        cargarBusqueda(productos_busqueda);
+                        cargarMarcas(productos_busqueda);
+                        cargarColores(productos_busqueda);
+                        cargarCapacidad(productos_busqueda);
+                    } else
+                        $('ttbody').append('<h2><center>Ningun producto encontrado<br>Por favor verifica tu busqueda</center></h2>');
                     $('.loader').fadeOut("slow");
                 }
             });
@@ -239,12 +242,13 @@ $(document).ready(function () {
                 /****************/
                 cargarBusqueda(productos_filtro);
             });
-            $.ajax({
-                url: "../../modulos/productos/sidebar.js",
-                dataType: "script",
-                success: function () {
-                }
-            });
+            if(respuesta[0].length > 0)
+                $.ajax({
+                    url: "../../modulos/productos/sidebar.js",
+                    dataType: "script",
+                    success: function () {
+                    }
+                });
         } else
             $('ttbody').append('<h2><center>Ningun producto encontrado<br>Por favor verifica tu busqueda</center></h2>');
     } else
@@ -255,6 +259,7 @@ $(document).ready(function () {
     $('#mas_memorias').click(function() {
         mostrarMasMenos('#icono_memorias', '#txt_memorias', 'separador1');
     });
+    $('.loader').fadeOut("slow");
     /***********/
 });
 
@@ -420,6 +425,11 @@ function mostrarMasMenos(icono, txt, separador) {
 
 //grupo/categoria, paginacion/extra, marca, envio/(local/foraneo/indef), precio minimo, precio maximo, orden, filtro memoria, color
 function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, McPato, fascismo, vino1, vino2, arcoiris) {
+    if (crayola == "" || jQuery.isEmptyObject(crayola) || crayola == "undefined") {
+        $('ttbody').append('<h2><center>Ningun producto encontrado<br>Por favor verifica tu busqueda</center></h2>');
+        $('.loader').fadeOut("slow");
+        return;
+    }
     var vino = vino1 + vino2;
     if (!arcoiris)
         arcoiris = "";

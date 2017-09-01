@@ -118,7 +118,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu" id="menuloginid">
                                 <li><a href="../login/index.php"><img src="../../imgweb/login.png" width="25px" height="25px" >Iniciar sesion</a></li>
-                                <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><img src="../../imgweb/lapis.png" width="20px" height="20px" >Mis Perfil</a></li>
+                                <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><img src="../../imgweb/lapis.png" width="20px" height="20px" >Mis Datos Personales</a></li>
                                 <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/envio.png" width="25px" height="25px" >Mis Pedidos</a></li>
                                 <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ofertas</a></li>				
                                 <li class="ocultar"><a id="info" href="../orden/Orden.php"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ordenes</a></li>

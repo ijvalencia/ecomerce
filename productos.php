@@ -6,9 +6,9 @@ $username = "desarrollo";
 $password = "Pa55w0rd!crm";
 
 /* BD LOCAL */
-$con = mysqli_connect("127.0.0.1", "root", "", "ecommerce");
+// $con = mysqli_connect("127.0.0.1", "root", "", "ecommerce");
 
-// $con = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
+$con = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
 if (mysqli_connect_errno($con)) {
     echo "Error al conectar con MySQL: " . mysqli_connect_error();
     exit();
@@ -97,13 +97,14 @@ for ($x = 0; $x <= $total_articulos - 1; $x++) {
         $articulos->item[$x]->disponible = 0;
     if ($articulos->item[$x]->disponibleCD < 0)
         $articulos->item[$x]->disponibleCD = 0;
+    $codigo = "";
+    $codigo = $articulos->item[$x]->marca == "GHIA" ? $articulos->item[$x]->clave : $articulos->item[$x]->codigo_fabricante;
     if ($articulos->item[$x]->disponible != 0 || $articulos->item[$x]->disponibleCD != 0)
-        $sql = "INSERT INTO producto VALUES ('" . strpos($articulo->item[$x]->descripcion, "GHIA") ? $articulos->item[x]->clave : $articulos->item[$x]->codigo_fabricante . "','" . $articulos->item[$x]->descripcion . "','" . $articulos->item[$x]->grupo . "','" . $articulos->item[$x]->marca . "','" . $articulos->item[$x]->Departamento . "','" . $articulos->item[$x]->precio . "','" . $articulos->item[$x]->moneda . "','" . $articulos->item[$x]->imagen . "','" . $articulos->item[$x]->tipocambio . "','" . $articulos->item[$x]->disponible . "','" . $articulos->item[$x]->disponibleCD . "','" . $GB . "','" . $TB . "', '')";
+        $sql = "INSERT INTO producto VALUES ('".$codigo."','".$articulos->item[$x]->descripcion."','".$articulos->item[$x]->grupo."','".$articulos->item[$x]->marca."','".$articulos->item[$x]->Departamento."','".$articulos->item[$x]->precio."','".$articulos->item[$x]->moneda."','".$articulos->item[$x]->imagen."','".$articulos->item[$x]->tipocambio."','".$articulos->item[$x]->disponible."','".$articulos->item[$x]->disponibleCD."','".$GB."','".$TB."', '')";
     //echo $sql."<br>";
     echo $con->query($sql) ? "ingresado ".$articulos->item[$x]->codigo_fabricante."
     " : "no ingresado ".$articulos->item[$x]->codigo_fabricante."
     ";
-    //echo "<br>" . $articulos->item[$x]->codigo_fabricante . "---------" . $articulos->item[$x]->descripcion . "-------" . $articulos->item[$x]->grupo . "----------" . $articulos->item[$x]->marca . "----------" . $articulos->item[$x]->Departamento . "-------------" . $articulos->item[$x]->precio . "---------------" . $articulos->item[$x]->moneda . "---------" . $articulos->item[$x]->imagen . "-------------" . $articulos->item[$x]->tipocambio . "----------" . $articulos->item[$x]->disponible . "----" . $articulos->item[$x]->disponibleCD . "-------" . $GB . "------" . $TB . "<br>";
 }
 
 /* SATANAS */

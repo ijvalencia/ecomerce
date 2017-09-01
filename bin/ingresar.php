@@ -88,9 +88,12 @@ switch ($Menu) {
 
     case "getArticulo":
         if (isset($_GET['codigo'])) {
-            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
-            if(strpos($_GET['codigo'], "GHIA"))
+            $resp = $conexion->getExcepciones($_GET['codigo']);
+            if($resp === "1") {
                 $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            } else {
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            }
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
             if (!$data) {
@@ -118,6 +121,7 @@ switch ($Menu) {
         $articulo = simplexml_load_file($filename);
         echo json_encode($articulo);
         break;
+    
     case "cerrar":
         session_destroy();
         header('Location: ../index.php');
@@ -153,6 +157,25 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
+    case "registrodirecion":
+        $txtnombredire = $_POST['nombredire'];
+        $txtapellidodire = $_POST['apellidodire'];
+        $txttelefonodire = $_POST['telefono'];
+        $txttelefono2dire = $_POST['telefono2'];
+        $txtcalledire = $_POST['calle'];
+        $txtexteriordire = $_POST['exterior'];
+        $txtinteriordire = $_POST['interior'];
+        $txtcodigopostaldire = $_POST['codigopostal'];
+        $txtselectestado = $_POST['selectestado'];
+        $txtciudad = $_POST['ciudad'];
+        $colonia =$_POST["colonia"];
+        $txtcruseros = $_POST['cruseros'];
+        $txtcrusero2 = $_POST['crusero2'];
+        $txtreferencia = $_POST['referencia'];
+       
+        $conexion->agregardirecciones($txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
+    break;
+
     case "cambiarContraseña":
         $txtantiguoscontra = $_POST['antiguacontrasena'];
         $txtnuevocontra = $_POST['nuevacontrasena'];
@@ -242,7 +265,7 @@ switch ($Menu) {
         $pass = $_POST["passwor"];
         $conexion->actualizarDatosUsuario($id, $nombre, $apellido, $fechadia, $fechames, $fechaanio, $email, $pass);
         break;
-
+    
     case "MostrarUsuarioId":
         $id = $_POST["id"];
         echo $id;
