@@ -16,9 +16,9 @@ $(document).ready(function () {
                                  if(informacion===null){
                                    jAlert("Error");
                                  } else {
-                                window.location.href="Detalles_orden.php?codigofabricante="+codigofabricante;
+                                window.location.href="Detalles_Orden.php?codigofabricante="+codigofabricante;
                                 window.close();
-                              }                   
+                             }                   
                           }       
                       });
 	            //console.log("Se presionó el Boton con Id :"+ id);

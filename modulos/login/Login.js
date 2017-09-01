@@ -1,5 +1,6 @@
 /* global sesion */
 var correo = /[-A-Za-z0-9._]+[@][A-Za-z]+[.]{1}[A-Za-z]+/;
+var expresion = /^[A-Za-záéíóúñüàè]+$/i;
 var Cadena = /[A-Za-z]+/;
 var bandera = false;
 var bandera2 = false;
@@ -71,7 +72,15 @@ $(document).ready(function () {
             }
         }
     });
-
+    
+        $.ajax({
+            type: "POST",
+            url: "../../bin/ingresar.php?categoria=estados",
+         success: function (mns) {       
+            $("#selectestadosd").html(mns);
+            }
+        });
+        
     //Validar los terminio de la para guardar
     $("#check-terminos").click(function () {
         if ($("#check-terminos").is(':checked')) {
@@ -148,6 +157,7 @@ $(document).ready(function () {
                                     $.desactivar();
                                     $("input:text[id='txtnombred']").val(txtnombre);
                                     $("input:text[id='txtapellidod']").val(txtapellido);
+                                     
                                   
                                 } else if (mns === 0) {
                                     jAlert("ERROR");

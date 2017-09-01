@@ -153,6 +153,10 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
+    case "estados":
+        $conexion->estado();
+    break;
+
     case "registrodirecion":
         $txtnombredire = $_POST['nombredire'];
         $txtapellidodire = $_POST['apellidodire'];
