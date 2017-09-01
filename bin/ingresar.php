@@ -47,6 +47,10 @@ switch ($Menu) {
     case "sesion":
         if (!(isset($_SESSION['apellidos'])))
             $_SESSION['apellidos'] = "invitado";
+        if (!(isset($_SESSION['nombre'])))
+            $_SESSION['nombre'] = "";
+        if (!(isset($_SESSION['id'])))
+            $_SESSION['id'] = "0";
         $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
         echo json_encode($usuario);
         break;
@@ -472,6 +476,15 @@ switch ($Menu) {
         $producto = $_GET['producto'];
         $usuario = $_GET['usuario'];
         $conexion->verlike($producto, $usuario);
+        break;
+    case "vermeterlike":
+        $producto = $_GET['producto'];
+        $usuario = $_GET['usuario'];
+        $conexion->vermeterlike($producto, $usuario);        
+        break;
+    case "vernumerolike":
+        $producto=$_GET['producto'];
+        $conexion->vernumerolike($producto);
         break;
 }
 $conexion->cerrar();
