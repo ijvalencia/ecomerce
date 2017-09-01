@@ -47,6 +47,10 @@ switch ($Menu) {
     case "sesion":
         if (!(isset($_SESSION['apellidos'])))
             $_SESSION['apellidos'] = "invitado";
+        if (!(isset($_SESSION['nombre'])))
+            $_SESSION['nombre'] = "";
+        if (!(isset($_SESSION['id'])))
+            $_SESSION['id'] = "0";
         $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
         echo json_encode($usuario);
         break;
@@ -87,6 +91,7 @@ switch ($Menu) {
             $resp = $conexion->getExcepciones($_GET['codigo']);
             if($resp === "1") {
                 $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+<<<<<<< HEAD
             } else {
                 $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
             }
@@ -98,6 +103,13 @@ switch ($Menu) {
                 $context = stream_context_create(array('http' => array('timeout' => 3)));
                 $data = file_get_contents($filename, false, $context);
             }
+=======
+            } else {
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            }
+            $context = stream_context_create(array('http' => array('timeout' => 3)));
+            $data = file_get_contents($filename, false, $context);
+>>>>>>> origin/develop
             if (!$data) {
                 echo "{}";
             } else {
@@ -159,6 +171,10 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
+    case "estados":
+        $conexion->estado();
+    break;
+
     case "registrodirecion":
         $txtnombredire = $_POST['nombredire'];
         $txtapellidodire = $_POST['apellidodire'];
@@ -474,6 +490,15 @@ switch ($Menu) {
         $producto = $_GET['producto'];
         $usuario = $_GET['usuario'];
         $conexion->verlike($producto, $usuario);
+        break;
+    case "vermeterlike":
+        $producto = $_GET['producto'];
+        $usuario = $_GET['usuario'];
+        $conexion->vermeterlike($producto, $usuario);
+        break;
+    case "vernumerolike":
+        $producto=$_GET['producto'];
+        $conexion->vernumerolike($producto);
         break;
 }
 $conexion->cerrar();

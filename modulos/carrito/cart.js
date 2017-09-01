@@ -9,7 +9,6 @@ var sub = 0;
 var sub_iva = 0;
 
 $(document).ready(function (){
-       
     /*Obtener sesion y otros datos */
      $.ajax({
         url: "../../bin/ingresar.php?categoria=parametros",
@@ -48,6 +47,7 @@ $(document).ready(function (){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
+
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=direccioness",
@@ -116,7 +116,7 @@ $(document).ready(function (){
                     url: "../../bin/ingresar.php?categoria=compararcuentass",
                     data: {"usuariocorreo": cuentacorreos, "usuarioclave": cuentaclave, "usuariorobot": checkrobot},
                     success: function (mnscompara) {
-                       alert("hola" + mnscompara);
+                    //   alert("hola" + mnscompara);
                     }
                 });
                 $.ajax({
@@ -136,14 +136,13 @@ $(document).ready(function (){
                             url: "../../bin/ingresar.php?categoria=agregarordenes",
                             data: {"idusuario": number, "direccion": direcion, "idenvio": txtidconsulta, "subtotal": formatoMoneda(parseFloat(sub) + parseFloat(sub_iva)), "metodo_pago": pago},
                             success: function(mnss){
-                               console.log("hola"+mnss);
+                               console.log("todo"+mnss);
                                
                             $.each($('.numero_cantidad'),function(i,valor){
-                               sub_iva += valor.value; // * ivas[i];
+                               sub_iva += valor.value;// * ivas[i];
                                txtcantidad=valor.value;
                                console.log(txtcantidad);
                            });
-                            
                            for(var m in mns){
                                $.ajax({
                                     type: "POST",
@@ -151,13 +150,12 @@ $(document).ready(function (){
                                     url: "../../bin/ingresar.php?categoria=productos_Odenes",
                                     data:{"id_orden": mnss, "codigoF":mns[m]["codigo_fabricante"],"cantidad":txtcantidad},
                                     success: function(ordenesproductos){
-                                     console.log("hola :"+ordenesproductos);   
+                                     console.log("orden :"+ordenesproductos);
+                                     console.log("idorden"+mnss+"codigoF"+mns[m]+"Cantidad"+txtcantidad);
                                      alert("datos"+ordenesproductos);
-                          // numeroorden = String(mnss[0]["id_ordenes"]);
-                                    if(numeroorden !== null) { 
-                                        borrarArticulo("0");
-                                           window.location.href = "../../modulos/orden/Orden.php";  
-                                  //  console.log(numeroorden);
+                                    if(numeroorden !== null) {
+                                          window.location.href = "../../modulos/orden/Orden.php";
+                                          borrarArticulo("0");
                                     jAlert("COMPRA REALIZADA");
                                      }else {
                                     jAlert("Compra no Realizada");

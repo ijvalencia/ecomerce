@@ -14,13 +14,13 @@ $(document).ready(function (){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
-        
+         //alert(number);
            $.ajax({
             type:"POST",
             url: "../../bin/ingresar.php?categoria=MostrarUsuarioId",
             data:{"id":number},
             success: function(sessionmsj){   
-     
+
         var datosusuario = sessionmsj.split('||');        
            $("#txtnombre").val(datosusuario[1]);
            $("#txtapellido").val(datosusuario[2]);
@@ -33,7 +33,8 @@ $(document).ready(function (){
     
 $("#btnguardar").on('click', function (){
           var id = number;
-          var ides=id[0];
+          //var ides = id[0];
+          alert(id+"este es el bueno"+number);
           var txtnombre = $("input:text[id='txtnombre']").val();
           var txtapellido  = $("input:text[id='txtapellido']").val();  
           var cmbfechadia  = $("#fechadia").val();  
@@ -74,15 +75,15 @@ $("#btnguardar").on('click', function (){
                     $('#txtemail').css({"border": "2px solid red"});
                     bandera = false;
                 }
-            }
+
            if ((cadena.test(txtnombre)) && (cadena.test(txtapellido)) && (correo.test(txtemai)) && (txtpassw !== null)) {
                 bandera = true;
                 if (bandera === true) {
-
-        $.ajax({type: "POST",
+                    //console.log(ides);
+          $.ajax({type: "POST",
                 url: "../../bin/ingresar.php?categoria=UpdateUsuario",
                 data:{
-                "id_usuario":ides,    
+                "id_usuario":number,
                 "nombre":txtnombre,
                 "apellido":txtapellido,
                 "fechadia":cmbfechadia,
@@ -98,12 +99,13 @@ $("#btnguardar").on('click', function (){
                 success: function(sesiones){   
                  window.location.href="../../modulos/inicio/index.php";
                  window.close();
-                }
-            });
+               }
+             });
+            }
+          });
         }
-      });
+       }
      }
-    }
    }
  }); 
 });
