@@ -241,24 +241,24 @@ $(document).ready(function () {
                 }
                 /****************/
                 cargarBusqueda(productos_filtro);
+                $("html, body").animate({ scrollTop: 0 }, "slow");
             });
-            if(respuesta[0].length > 0)
-                $.ajax({
-                    url: "../../modulos/productos/sidebar.js",
-                    dataType: "script",
-                    success: function () {
-                    }
-                });
+            $.ajax({
+                url: "../../modulos/productos/sidebar.js",
+                dataType: "script",
+                success: function () {
+                }
+            });
+            $('#mas_marcas').click(function() {
+                mostrarMasMenos('#icono_marcas', '#txt_marcas', 'separador');
+            });
+            $('#mas_memorias').click(function() {
+                mostrarMasMenos('#icono_memorias', '#txt_memorias', 'separador1');
+            });
         } else
             $('ttbody').append('<h2><center>Ningun producto encontrado<br>Por favor verifica tu busqueda</center></h2>');
     } else
         $('ttbody').append('<h2><center>Ningun producto encontrado<br>Por favor verifica tu busqueda</center></h2>');
-    $('#mas_marcas').click(function() {
-        mostrarMasMenos('#icono_marcas', '#txt_marcas', 'separador');
-    });
-    $('#mas_memorias').click(function() {
-        mostrarMasMenos('#icono_memorias', '#txt_memorias', 'separador1');
-    });
     $('.loader').fadeOut("slow");
     /***********/
 });
@@ -661,12 +661,20 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
             }
             $('.loader').fadeOut("slow");
 
-            window.setTimeout($.ajax({
-                url: "sidebar.js",
+            window.setTimeout(
+                $.ajax({
+                url: "../../modulos/productos/sidebar.js",
                 dataType: "script",
-                success: function(){}
-            }), 3000);
-
+                success: function() {
+                }
+                }),3000
+            );
+            $('#mas_marcas').click(function() {
+                mostrarMasMenos('#icono_marcas', '#txt_marcas', 'separador');
+            });
+            $('#mas_memorias').click(function() {
+                mostrarMasMenos('#icono_memorias', '#txt_memorias', 'separador1');
+            });
         }
     });
 }

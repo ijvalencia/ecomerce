@@ -384,8 +384,8 @@ class BD {
         foreach ($sql as $consulta) {
             $datos = [];
             foreach ($this->conexion->query($consulta) as $row) {
-                // if(sizeof($datos) >= 100)
-                //     break;
+                if(sizeof($datos) >= 100)
+                    break;
                 array_push($datos, $row);
             }
             array_push($arr, $datos);
