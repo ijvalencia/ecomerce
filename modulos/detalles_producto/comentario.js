@@ -21,8 +21,8 @@ $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
                 {
                     alert(resultado);
                 } else {
-                                    alert("Ya comento este producto, si desea agregar mas comentarios realice otra compra.");
-                                    history.back();
+                    alert("Ya comento este producto, si desea agregar mas comentarios realice otra compra.");
+                    history.back();
                 }
                 if (avan == 0)
                     history.back();

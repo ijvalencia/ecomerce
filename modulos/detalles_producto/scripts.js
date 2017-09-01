@@ -2,12 +2,17 @@ var categorias_sin_cantidad = [
     "SOFTWARE",
     "categoria de prueba"
 ];
+var producto = $('#producto').attr("value");
+var nombre;
+var apellido;
+var number;
+
 
 var articulo;
 var iva;
 var parametros;
 var tipo_cambio;
-
+var like;
 $(document).ready(function () {
     /* Mostrar producto */
     $.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
@@ -40,11 +45,7 @@ $(document).ready(function () {
     });
 
     //Anton
-    var producto = $('#producto').attr("value");
-    var nombre;
-    var apellido;
-    var number;
-    //aqui esta fallando
+
     $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
         sesion = datos;
         console.log(sesion);
@@ -55,12 +56,22 @@ $(document).ready(function () {
         number = field[2];
         $.get("../../bin/ingresar.php?categoria=verlike&usuario=" + number + "&producto=" + producto,
                 function (respuesta) {
+                    like = respuesta;
+                    mostrarlike('#icono_like');
 
                 });
     });
-    //fin Anton
-});
 
+});
+$('#like').click(function () {
+
+    $.get("../../bin/ingresar.php?categoria=vermeterlike&usuario=" + number + "&producto=" + producto,
+            function (respuesta) {
+                like = respuesta;
+            });
+    mostrarlike('#icono_like');
+});
+//fin Anton
 function cargarProducto(codigo) {
     if (codigo.length > 3) {
         $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function (datos) {
@@ -107,7 +118,6 @@ function cargarProducto(codigo) {
                     break;
                 }
             }
-            $('.loader').fadeOut("slow");
         });
     } else {
         // window.location.replace("../../modulos/error/index.php");
@@ -184,3 +194,24 @@ function vercomentario() {
     }
     cargado = true;
 }
+
+function mostrarlike(icono) {
+    $(icono).text("Anton");
+    $.ajax({
+        url: "../../bin/ingresar.php?categoria=vernumerolike&producto=" + producto,
+        async: false,
+        success: function (respuesta) {
+            if (like == "like") {
+                $(icono).attr("class", "fa fa-thumbs-up");
+                $(icono).text("Te gusto" + respuesta);
+                //alert(like + " negro es existe el like");
+            } else {
+                $(icono).attr("class", "fa fa-thumbs-o-up");
+                $(icono).text("Me gusta" + respuesta);
+                //alert(like + " blanco es no existe el like");
+            }
+            $('.loader').fadeOut("slow");
+        }
+    });
+}
+

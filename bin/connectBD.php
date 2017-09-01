@@ -370,15 +370,14 @@ class BD {
         $sql = [];
         if ($categoria === "Todo")
             foreach ($palabras as $busqueda) {
-                if(substr($busqueda, -1) == 'S')
+                if (substr($busqueda, -1) == 'S')
                     $busqueda = substr($busqueda, strlen($busqueda) - 1);
-                array_push($sql, "SELECT * FROM producto WHERE descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' GROUP BY codigo_fabricante ORDER BY departamento");
-            } 
-        else
+                array_push($sql, "SELECT * FROM producto WHERE descripcion LIKE '%" . $busqueda . "%' OR grupo LIKE '%" . $busqueda . "%' GROUP BY codigo_fabricante ORDER BY departamento");
+            } else
             foreach ($palabras as $busqueda) {
-                if(substr($busqueda, -1) == 'S')
+                if (substr($busqueda, -1) == 'S')
                     $busqueda = substr($busqueda, strlen($busqueda) - 1);
-                array_push($sql, "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='".$categoria."')) AS res WHERE descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' ORDER BY departamento");
+                array_push($sql, "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE descripcion LIKE '%" . $busqueda . "%' OR grupo LIKE '%" . $busqueda . "%' ORDER BY departamento");
             }
         $arr = [];
         foreach ($sql as $consulta) {
@@ -424,48 +423,48 @@ class BD {
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
         $this->conexion->query($sql) ? "1" : "0";
         //echo $add;    
-/*=======
-    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {    
-       // $add=rand(10,3000);
-       $Buscarsql = "select correo, contra from usuario where correo='".$correo."' || contra='".$contra."'";     
-       $buscar = $this->conexion->query($Buscarsql);
-       if ($buscar!=null){
-        foreach ($buscar as $row) {
-            if (($correo == $row['correo']) || ($contra == $row['contra'])) {
-                 $row['correo'];
-                 $row['contra'];
-                 echo '00';
-            }
-       }
-   } else {
-       $tipo = 0;  // 0 para usuarios 1 para admin
-       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-       echo $this->conexion->query($sql) ? "1" : "0";      
-            }
->>>>>>> f215525b9426271560ebe9bf70dd2ddbdbfc7fcd*/
+        /* =======
+          public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
+          // $add=rand(10,3000);
+          $Buscarsql = "select correo, contra from usuario where correo='".$correo."' || contra='".$contra."'";
+          $buscar = $this->conexion->query($Buscarsql);
+          if ($buscar!=null){
+          foreach ($buscar as $row) {
+          if (($correo == $row['correo']) || ($contra == $row['contra'])) {
+          $row['correo'];
+          $row['contra'];
+          echo '00';
+          }
+          }
+          } else {
+          $tipo = 0;  // 0 para usuarios 1 para admin
+          $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
+          echo $this->conexion->query($sql) ? "1" : "0";
+          }
+          >>>>>>> f215525b9426271560ebe9bf70dd2ddbdbfc7fcd */
     }
 
     public function confirmacion() {
         
     }
 
-  public function cambio_de_contrasena($txtantiguoscontra,$txtnuevocontra){ 
-    $sql = "UPDATE usuario SET contra='".$txtnuevocontra."' WHERE contra='".$txtantiguoscontra."'";
+    public function cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra) {
+        $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'";
         echo $this->conexion->query($sql) ? "1" : "0";
-}
-    
-  public function revicioncorreos($correos_Email) {
-    require  'PHPMailer/PHPMailerAutoload.php';
-    $titulo  = "Recordar contraseña";  
-    $d=rand(10,3000);      
-    $message  = "Tu password es :".$d;
-    
-	$mail = new PHPMailer();
-	$mail->setFrom('jesusvalenciatrejo7@gmail.com','Mensaje de prueba');
-	$mail->addAddress($correos_Email, $message);
-	$mail->Subject = $titulo;
-	$mail->isHTML(true);
-	$mail->CharSet = 'UTF-8';
+    }
+
+    public function revicioncorreos($correos_Email) {
+        require 'PHPMailer/PHPMailerAutoload.php';
+        $titulo = "Recordar contraseña";
+        $d = rand(10, 3000);
+        $message = "Tu password es :" . $d;
+
+        $mail = new PHPMailer();
+        $mail->setFrom('jesusvalenciatrejo7@gmail.com', 'Mensaje de prueba');
+        $mail->addAddress($correos_Email, $message);
+        $mail->Subject = $titulo;
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
         $body = '
     <html>
     <head>
@@ -568,8 +567,9 @@ class BD {
             }
         }
     }
+
     public function mostrarordenes($id_usuariosesion) {
-        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."'";
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesion . "'";
         $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
@@ -1011,8 +1011,6 @@ class BD {
         }
     }
 
-    
-
     function verlike($producto, $usuario) {
         if ($usuario !== "0") {
             $sql = "SELECT count(*) FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and id_usuario='" . $usuario . "'";
@@ -1028,19 +1026,59 @@ class BD {
             echo "nolike";
     }
 
-}
-function verdireccion_ip() {
-        if (isset($_SERVER["HTTP_CLIENT_IP"])) {
-            return $_SERVER["HTTP_CLIENT_IP"];
-        } elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-            return $_SERVER["HTTP_X_FORWARDED_FOR"];
-        } elseif (isset($_SERVER["HTTP_X_FORWARDED"])) {
-            return $_SERVER["HTTP_X_FORWARDED"];
-        } elseif (isset($_SERVER["HTTP_FORWARDED_FOR"])) {
-            return $_SERVER["HTTP_FORWARDED_FOR"];
-        } elseif (isset($_SERVER["HTTP_FORWARDED"])) {
-            return $_SERVER["HTTP_FORWARDED"];
+    function vermeterlike($producto, $usuario) {
+        if ($usuario !== "0") {
+            $sql = "SELECT count(*) FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and id_usuario='" . $usuario . "'";
         } else {
-            return $_SERVER["REMOTE_ADDR"];
+            $direccion = verdireccion_ip();
+            $sql = "SELECT count(*) FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and direccion_ip='" . $direccion . "'";
+        }
+        $consulta = $this->conexion->query($sql);
+        $corrida = mysqli_fetch_array($consulta);
+        if ($corrida[0] > 0) {
+            if ($usuario !== "0") {
+                $sql = "delete FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and id_usuario='" . $usuario . "'";
+            } else {
+                $direccion = verdireccion_ip();
+                $sql = "delete FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and direccion_ip='" . $direccion . "'";
+            }
+            echo $consulta = $this->conexion->query($sql)?"nolike":"like";
+        }
+        else
+        {
+            if ($usuario !== "0") {
+                $sql = "insert into `like_usuario_producto`(`id_usuario`, `codigo_fabricante`) values ('".$usuario."','".$producto."')";
+            } else {
+                $direccion = verdireccion_ip();
+                $sql = "insert into `like_usuario_producto`(`direccion_ip`, `codigo_fabricante`) values ('".$direccion."','".$producto."')";
+            }
+            echo $consulta = $this->conexion->query($sql)?"like":"nolike";
         }
     }
+
+    function vernumerolike($producto){
+        $sql="select count(*) from `like_usuario_producto` where codigo_fabricante='".$producto."'";
+        $consulta= $this->conexion->query($sql);
+        $corrida= mysqli_fetch_array($consulta);
+        if($corrida[0]>0){
+            echo "(".$corrida[0].")";
+        }else
+            echo "";
+    }
+}
+
+function verdireccion_ip() {
+    if (isset($_SERVER["HTTP_CLIENT_IP"])) {
+        return $_SERVER["HTTP_CLIENT_IP"];
+    } elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+        return $_SERVER["HTTP_X_FORWARDED_FOR"];
+    } elseif (isset($_SERVER["HTTP_X_FORWARDED"])) {
+        return $_SERVER["HTTP_X_FORWARDED"];
+    } elseif (isset($_SERVER["HTTP_FORWARDED_FOR"])) {
+        return $_SERVER["HTTP_FORWARDED_FOR"];
+    } elseif (isset($_SERVER["HTTP_FORWARDED"])) {
+        return $_SERVER["HTTP_FORWARDED"];
+    } else {
+        return $_SERVER["REMOTE_ADDR"];
+    }
+}

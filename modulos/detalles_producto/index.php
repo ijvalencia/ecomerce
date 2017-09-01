@@ -58,9 +58,8 @@
                         <a href="#" data-value="5" title="Votar con 5 estrellas" class="estrellas">&#9733;</a>
                     </div>
                     <div id="comentarios" class="ec-stars-wrapper" data-toggle="modal" data-target="#vercomentarios">
-
                     </div><br>
-                    <a href="#"><i id="icono_marcas" class="fa fa-thumbs-o-up">Me gusta</i></a>
+                    <a id="like" href="#" title="Me gusta ;)"><i id="icono_like" class="fa fa-thumbs-o-up">Me gusta</i></a>
                     <div class="container">
                         <div class="modal fade" id="vercomentarios" role="dialog">
 
