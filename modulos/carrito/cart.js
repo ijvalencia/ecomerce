@@ -47,7 +47,7 @@ $(document).ready(function (){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
-        
+
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=direccioness",
@@ -142,7 +142,7 @@ $(document).ready(function (){
                                sub_iva += valor.value;// * ivas[i];
                                txtcantidad=valor.value;
                                console.log(txtcantidad);
-                           });  
+                           });
                            for(var m in mns){
                                $.ajax({
                                     type: "POST",
@@ -153,8 +153,8 @@ $(document).ready(function (){
                                      console.log("orden :"+ordenesproductos);
                                      console.log("idorden"+mnss+"codigoF"+mns[m]+"Cantidad"+txtcantidad);
                                      alert("datos"+ordenesproductos);
-                                    if(numeroorden !== null) {            
-                                          window.location.href = "../../modulos/orden/Orden.php";  
+                                    if(numeroorden !== null) {
+                                          window.location.href = "../../modulos/orden/Orden.php";
                                           borrarArticulo("0");
                                     jAlert("COMPRA REALIZADA");
                                      }else {

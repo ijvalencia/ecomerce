@@ -72,15 +72,15 @@ $(document).ready(function () {
             }
         }
     });
-    
+
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=estados",
-         success: function (mns) {       
+         success: function (mns) {
             $("#selectestadosd").html(mns);
             }
         });
-        
+
     //Validar los terminio de la para guardar
     $("#check-terminos").click(function () {
         if ($("#check-terminos").is(':checked')) {
@@ -157,7 +157,7 @@ $(document).ready(function () {
                                     $.desactivar();
                                     $("input:text[id='txtnombred']").val(txtnombre);
                                     $("input:text[id='txtapellidod']").val(txtapellido);
-                                     
+
                                   
                                 } else if (mns === 0) {
                                     jAlert("ERROR");

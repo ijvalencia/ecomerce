@@ -14,13 +14,13 @@ $(document).ready(function (){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
-         //alert(number);  
+         //alert(number);
            $.ajax({
             type:"POST",
             url: "../../bin/ingresar.php?categoria=MostrarUsuarioId",
             data:{"id":number},
             success: function(sessionmsj){   
-      
+
         var datosusuario = sessionmsj.split('||');        
            $("#txtnombre").val(datosusuario[1]);
            $("#txtapellido").val(datosusuario[2]);
@@ -75,15 +75,15 @@ $("#btnguardar").on('click', function (){
                     $('#txtemail').css({"border": "2px solid red"});
                     bandera = false;
                 }
-                
+
            if ((cadena.test(txtnombre)) && (cadena.test(txtapellido)) && (correo.test(txtemai)) && (txtpassw !== null)) {
                 bandera = true;
-                if (bandera === true) { 
+                if (bandera === true) {
                     //console.log(ides);
           $.ajax({type: "POST",
                 url: "../../bin/ingresar.php?categoria=UpdateUsuario",
                 data:{
-                "id_usuario":number,    
+                "id_usuario":number,
                 "nombre":txtnombre,
                 "apellido":txtapellido,
                 "fechadia":cmbfechadia,

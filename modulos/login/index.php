@@ -140,10 +140,10 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     <h4 class="modal-title" id="myModalLabel">Continuar con el registro</h4>
                                                 </div>
-                                                 
+
                                                 <div class="modal-body">
                                                     <!--<h3>Continuar con el registro</h3>-->
-                                                   
+
                                                     <label>Nombre :<input type="text" name="txtnombre" class="form-control" id="txtnombred"></label>
                                                     <label>Apellido :<input type="text" name="txtapellido" class="form-control" id="txtapellidod"></label>
                                                     <label>Telefono :<input type="text" name="txttelefono" class="form-control" id="txttelefonod"></label><br>
@@ -154,7 +154,7 @@
                                                     <label>CP :<input type="text" name="txtcp" class="form-control" id="txtcpd"></label><br><br><br><br>
                                                    
                                                     <label>Estados :<select class="form-control" id="selectestadosd"  accept-charset="utf-8">
-                                                              
+
                                                     </select></label>
                                                     <label>Ciudad :<input type="text" name="txtciudad" class="form-control" id="txtciudadd"></label>
                                                     <label>Colonia :<input type="text" name="txtcolonia" class="form-control" id="txtcolonia"></label>
@@ -164,7 +164,7 @@
                                                     <label>Datos Adicionales :<input type="checkbox" name="checkbox" class="form-control" id="RAcheckbox"></label>
                                                     
                                                 </div>
-                                             
+
                                                 <br><br><br><br><br><br><br>
                                                   <div class="modal-footer">
                                                     <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
@@ -182,7 +182,7 @@
             </div>
         </div>
         <!-- Footer -->
-        <script src="../../modulos/login/Login.js" charset="utf-8"></script> 
+        <script src="../../modulos/login/Login.js" charset="utf-8"></script>
      <!--<script> $("#commentForm").validate();</script>-->
     </body>
 </html>
