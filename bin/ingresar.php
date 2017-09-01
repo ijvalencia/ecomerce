@@ -486,6 +486,16 @@ switch ($Menu) {
         $producto=$_GET['producto'];
         $conexion->vernumerolike($producto);
         break;
+    case "vermeterfavorito":
+        $producto = $_GET['producto'];
+        $usuario = $_GET['usuario'];
+        $conexion->vermeterfavorito($producto, $usuario);      
+        break;
+    case "verfavorito":
+        $producto = $_GET['producto'];
+        $usuario = $_GET['usuario'];
+        $conexion->verfavorito($producto, $usuario);      
+        break;
 }
 $conexion->cerrar();
 unset($conexion);

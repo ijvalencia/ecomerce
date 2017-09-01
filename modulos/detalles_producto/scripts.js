@@ -13,6 +13,7 @@ var iva;
 var parametros;
 var tipo_cambio;
 var like;
+var fav;
 $(document).ready(function () {
     /* Mostrar producto */
     $.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
@@ -56,9 +57,15 @@ $(document).ready(function () {
         number = field[2];
         $.get("../../bin/ingresar.php?categoria=verlike&usuario=" + number + "&producto=" + producto,
                 function (respuesta) {
+
                     like = respuesta;
                     mostrarlike('#icono_like');
-
+                });
+        $.get("../../bin/ingresar.php?categoria=verfavorito&usuario=" + number + "&producto=" + producto,
+                function (respuesta) {
+                    fav = respuesta;
+                    //alert(fav);
+                    mostrarfavorito("#icono_fav");
                 });
     });
 
@@ -68,8 +75,19 @@ $('#like').click(function () {
     $.get("../../bin/ingresar.php?categoria=vermeterlike&usuario=" + number + "&producto=" + producto,
             function (respuesta) {
                 like = respuesta;
+                mostrarlike('#icono_like');
             });
-    mostrarlike('#icono_like');
+
+});
+$('#fav').click(function () {
+
+    $.get("../../bin/ingresar.php?categoria=vermeterfavorito&usuario=" + number + "&producto=" + producto,
+            function (respuesta) {
+                //alert(respuesta);
+                fav = respuesta;
+                mostrarfavorito('#icono_fav');
+            });
+
 });
 //fin Anton
 function cargarProducto(codigo) {
@@ -213,5 +231,19 @@ function mostrarlike(icono) {
             $('.loader').fadeOut("slow");
         }
     });
+}
+function mostrarfavorito(icono) {
+    $(icono).text("Anton");
+    if (fav == "presente") {
+        $(icono).attr("class", "fa fa-star");
+        //alert(fav + " estrella llena");
+        $(icono).text("Favoritos");
+    } else {
+        $(icono).attr("class", "fa fa-star-o");
+        //alert(fav + " estrella vacia");
+        $(icono).text("Agregar a favoritos");
+    }
+    $('.loader').fadeOut("slow");
+
 }
 

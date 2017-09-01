@@ -412,17 +412,17 @@ class BD {
         }
         echo json_encode($datos);
     }
+
     public function getExcepciones($codigo) {
-        $sql = "SELECT marca FROM producto WHERE codigo_fabricante = '".$codigo."'";
+        $sql = "SELECT marca FROM producto WHERE codigo_fabricante = '" . $codigo . "'";
         $sql_excepcion = "SELECT marca FROM excepciones_marcas WHERE 1";
-        foreach($this->conexion->query($sql) as $res)
+        foreach ($this->conexion->query($sql) as $res)
             $aux = $res['marca'];
-        foreach($this->conexion->query($sql_excepcion) as $res)
-            if($res['marca'] == $aux)
+        foreach ($this->conexion->query($sql_excepcion) as $res)
+            if ($res['marca'] == $aux)
                 return "1";
         return "0";
     }
-
 
     /*     * ******** */
     /* parte del chuy */
@@ -434,33 +434,33 @@ class BD {
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
         echo $this->conexion->query($sql) ? "1" : "0";
         //echo $add;    
-
     }
-    public function agregardirecciones($txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
-        $sql="SELECT id_usuario FROM usuario"; 
-         foreach ($this->conexion->query($sql) as $row) {
+
+    public function agregardirecciones($txtnombredire, $txtapellidodire, $txttelefonodire, $txttelefono2dire, $txtcalledire, $txtexteriordire, $txtinteriordire, $txtcodigopostaldire, $txtselectestado, $txtciudad, $colonia, $txtcruseros, $txtcrusero2, $txtreferencia) {
+        $sql = "SELECT id_usuario FROM usuario";
+        foreach ($this->conexion->query($sql) as $row) {
             $row['id_usuario'];
         }
-        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$row['id_usuario'].",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
-       // echo $sqlInser;
-        echo $this->conexion->query($sqlInser) ? "1" : "0";      
+        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (" . $row['id_usuario'] . ",'" . $txtnombredire . "','" . $txtapellidodire . "'," . $txttelefonodire . "," . $txttelefono2dire . ",'" . $txtcalledire . "'," . $txtexteriordire . "," . $txtinteriordire . "," . $txtcodigopostaldire . "," . $txtselectestado . ",'" . $txtciudad . "','" . $colonia . "','" . $txtcruseros . "','" . $txtcrusero2 . "','" . $txtreferencia . "')";
+        // echo $sqlInser;
+        echo $this->conexion->query($sqlInser) ? "1" : "0";
     }
-    /*
-    public function confirmacion() {
-        
-    }*/
 
+    /*
+      public function confirmacion() {
+
+      } */
 
     public function estado() {
         $sql = "SELECT estado_id, estado from estados";
         $estados = $this->conexion->query($sql);
         foreach ($estados as $rowestados) {
-          echo utf8_encode("<option value='".$rowestados['estado_id']."'>".$rowestados['estado']."</option>");
+            echo utf8_encode("<option value='" . $rowestados['estado_id'] . "'>" . $rowestados['estado'] . "</option>");
         }
     }
-    
+
     public function cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra) {
-        $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'"; 
+        $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'";
         echo $this->conexion->query($sql) ? "1" : "0";
     }
 
@@ -580,8 +580,8 @@ class BD {
     }
 
     public function mostrarordenes($id_usuariosesion) {
-        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,ordenes.fecha,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and  ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$id_usuariosesion."' order by ordenes.fecha DESC";
-         $arr = [];
+        $sql = "select usuario.id_usuario,usuario.nombre,usuario.apellidos,ordenes.estado,ordenes.fecha,direccion.nombre,productos_orden.cantidad,producto.codigo_fabricante,producto.descripcion,producto.precio,producto.marca,ordenes.total,producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and  ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='" . $id_usuariosesion . "' order by ordenes.fecha DESC";
+        $arr = [];
         foreach ($this->conexion->query($sql) as $rowordenar) {
             array_push($arr, $rowordenar);
         }
@@ -598,10 +598,10 @@ class BD {
     }
 
     public function actualizarDatosUsuario($id, $nombre, $apellidos, $dia, $mes, $anio, $correos, $contra) {
-        $sql = "UPDATE usuario SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "',dia='" . $dia . "', mes='" . $mes . "',anio='" . $anio . "' ,correo='" . $correos . "',contra='" . $contra . "' WHERE id_usuario='" . $id . "'";     
-        $sqld = "UPDATE direccion SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "' WHERE id_usuario='".$id."'";  
-       //echo $sql;
-        
+        $sql = "UPDATE usuario SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "',dia='" . $dia . "', mes='" . $mes . "',anio='" . $anio . "' ,correo='" . $correos . "',contra='" . $contra . "' WHERE id_usuario='" . $id . "'";
+        $sqld = "UPDATE direccion SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "' WHERE id_usuario='" . $id . "'";
+        //echo $sql;
+
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
         echo $this->conexion->query($sqld) ? "1" : "0";
     }
@@ -1057,31 +1057,67 @@ class BD {
                 $direccion = verdireccion_ip();
                 $sql = "delete FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and direccion_ip='" . $direccion . "'";
             }
-            echo $consulta = $this->conexion->query($sql)?"nolike":"like";
-        }
-
-    
-        else
-        {
+            echo $consulta = $this->conexion->query($sql) ? "nolike" : "like";
+        } else {
             if ($usuario !== "0") {
-                $sql = "insert into `like_usuario_producto`(`id_usuario`, `codigo_fabricante`) values ('".$usuario."','".$producto."')";
+                $sql = "insert into `like_usuario_producto`(`id_usuario`, `codigo_fabricante`) values ('" . $usuario . "','" . $producto . "')";
             } else {
                 $direccion = verdireccion_ip();
-                $sql = "insert into `like_usuario_producto`(`direccion_ip`, `codigo_fabricante`) values ('".$direccion."','".$producto."')";
+                $sql = "insert into `like_usuario_producto`(`direccion_ip`, `codigo_fabricante`) values ('" . $direccion . "','" . $producto . "')";
             }
-            echo $consulta = $this->conexion->query($sql)?"like":"nolike";
+            echo $consulta = $this->conexion->query($sql) ? "like" : "nolike";
         }
     }
 
-    function vernumerolike($producto){
-        $sql="select count(*) from `like_usuario_producto` where codigo_fabricante='".$producto."'";
-        $consulta= $this->conexion->query($sql);
-        $corrida= mysqli_fetch_array($consulta);
-        if($corrida[0]>0){
-            echo "(".$corrida[0].")";
-        }else
+    function vernumerolike($producto) {
+        $sql = "select count(*) from `like_usuario_producto` where codigo_fabricante='" . $producto . "'";
+        $consulta = $this->conexion->query($sql);
+        $corrida = mysqli_fetch_array($consulta);
+        if ($corrida[0] > 0) {
+            echo "(" . $corrida[0] . ")";
+        } else
             echo "";
     }
+
+    function vermeterfavorito($producto, $usuario) {
+        $sql = "select * from `usuario` where id_usuario='" . $usuario . "'";
+        $resultado = $this->conexion->query($sql);
+        if ($corrida = mysqli_fetch_array($resultado)) {
+            $sql = "select count(*) from `favoritos` where id_usuario='" . $usuario . "' and codigo_fabricante='" . $producto . "'";
+            $resultado = $this->conexion->query($sql);
+            $corrida = mysqli_fetch_array($resultado);
+            if ($corrida[0] > 0) {
+                $sql = "delete FROM `favoritos` WHERE codigo_fabricante ='" . $producto . "' and id_usuario='" . $usuario . "'";
+                echo $consulta = $this->conexion->query($sql) ? "ausente" : "presente";
+            } else {
+                $sql = "insert into `favoritos`(`id_usuario`, `codigo_fabricante`) values ('" . $usuario . "','" . $producto . "')";
+                echo $consulta = $this->conexion->query($sql) ? "presente" : "ausente";
+            }
+        } else {
+            echo "Inicia sesion para agregar el producto a favoritos";
+        }
+    }
+
+    function verfavorito($producto, $usuario) {
+        if ($usuario !== "0") {
+            $sql = "select * from `usuario` where id_usuario='" . $usuario . "'";
+            $resultado = $this->conexion->query($sql);
+            if ($corrida = mysqli_fetch_array($resultado)) {
+                $sql = "select count(*) from `favoritos` where id_usuario='" . $usuario . "' and codigo_fabricante='" . $producto . "'";
+                $resultado = $this->conexion->query($sql);
+                $corrida = mysqli_fetch_array($resultado);
+                if ($corrida[0] > 0) {
+                    echo "presente";
+                } else {
+                    echo "ausente";
+                }
+            } else {
+                echo "Inicia sesion para agregar el producto a favoritos";
+            }
+        } else
+            echo "";
+    }
+
 }
 
 function verdireccion_ip() {

@@ -40,10 +40,11 @@
                         <div class="product-price-container option-container">
                             <span id="descripcion_producto"></span>
                             <br>
+                            <a id="fav" href="#" title="Favoritos"><i id="icono_fav" class="fa fa-star-o">Agregar a favoritos</i></a>
                             <h4><a>$<span id="precio_producto"></span></a></h4>
                             <br>
                             Disponibles: <a id="cant_disponibles"></a>
-                            <br><br>
+                            <br>
                         </div>
                         <a id="btn_comprar" class="btn btn-lg">Comprar Ahora</a>
                     </div>
@@ -60,6 +61,7 @@
                     <div id="comentarios" class="ec-stars-wrapper" data-toggle="modal" data-target="#vercomentarios">
                     </div><br>
                     <a id="like" href="#" title="Me gusta ;)"><i id="icono_like" class="fa fa-thumbs-o-up">Me gusta</i></a>
+                    <br>
                     <div class="container">
                         <div class="modal fade" id="vercomentarios" role="dialog">
 
