@@ -365,29 +365,38 @@ class BD {
     }
 
     public function busqueda($categoria, $palabras) {
-        $sql = [];
-        if ($categoria === "Todo")
-            foreach ($palabras as $busqueda) {
-                if (substr($busqueda, -1) == 'S')
-                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
-                array_push($sql, "SELECT * FROM producto WHERE descripcion LIKE '%" . $busqueda . "%' OR grupo LIKE '%" . $busqueda . "%' GROUP BY codigo_fabricante ORDER BY departamento");
-            } else
-            foreach ($palabras as $busqueda) {
-                if (substr($busqueda, -1) == 'S')
-                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
-                array_push($sql, "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE descripcion LIKE '%" . $busqueda . "%' OR grupo LIKE '%" . $busqueda . "%' ORDER BY departamento");
+        if ($categoria === "Todo") {
+            if (sizeof($palabras) == 1)
+                $sql_inicio = "SELECT * FROM producto WHERE descripcion LIKE '%".$palabras[0]."%' OR grupo LIKE '%".$palabras[0]."%' OR marca LIKE '%".$palabras[0]."%' GROUP BY codigo_fabricante ORDER BY departamento";
+            else {
+                $sql_inicio = "SELECT * FROM producto WHERE codigo_fabricante <> NULL ";
+                $sql_fin = " GROUP BY codigo_fabricante ORDER BY departamento";
+                foreach ($palabras as $busqueda) {
+                    if (substr($busqueda, -1) == 'S' || substr($busqueda, -1) == 's')
+                        $busqueda = substr($busqueda, 0, sizeof($busqueda) -2);
+                    $sql_inicio = $sql_inicio."AND descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' OR marca LIKE '%".$busqueda."%'";
+                }
+                $sql_inicio = $sql_inicio.$sql_fin;
             }
-        $arr = [];
-        foreach ($sql as $consulta) {
-            $datos = [];
-            foreach ($this->conexion->query($consulta) as $row) {
-                // if(sizeof($datos) >= 100)
-                //     break;
-                array_push($datos, $row);
+        } else {
+            if (sizeof($palabras) == 1)
+                $sql_inicio = "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE descripcion LIKE '%".$palabras[0]."%' OR grupo LIKE '%".$palabras[0]."%' OR marca LIKE '%".$palabras[0]."%' GROUP BY codigo_fabricante ORDER BY departamento";
+            else {
+                $sql_inicio = "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE codigo_fabricante <> NULL ";
+                $sql_fin = " GROUP BY codigo_fabricante ORDER BY departamento";
+                foreach ($palabras as $busqueda) {
+                    if (substr($busqueda, -1) == 'S')
+                        $busqueda = substr($busqueda, 0, sizeof($busqueda) -2);
+                    $sql_inicio = $sql_inicio."AND descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' OR marca LIKE '%".$busqueda."%'";
+                }
+                $sql_inicio = $sql_inicio.$sql_fin;
             }
-            array_push($arr, $datos);
         }
-        echo json_encode($arr);
+        $datos = [];
+        foreach ($this->conexion->query($sql_inicio) as $row) {
+            array_push($datos, $row);
+        }
+        echo json_encode($datos);
     }
 
     public function productosInicio() {
@@ -414,11 +423,12 @@ class BD {
     public function getExcepciones($codigo) {
         $sql = "SELECT marca FROM producto WHERE codigo_fabricante = '" . $codigo . "'";
         $sql_excepcion = "SELECT marca FROM excepciones_marcas WHERE 1";
-        foreach ($this->conexion->query($sql) as $res)
+        foreach ($this->conexion->query($sql) as $res) {
             $aux = $res['marca'];
-        foreach ($this->conexion->query($sql_excepcion) as $res)
-            if ($res['marca'] == $aux)
-                return "1";
+            foreach ($this->conexion->query($sql_excepcion) as $res)
+                if ($res['marca'] == $aux)
+                    return "1";
+        }
         return "0";
     }
 
@@ -429,6 +439,10 @@ class BD {
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
         // $add=rand(10,3000);
         $tipo = 0;  // 0 para usuarios 1 para admin
+        $sql = "SELECT 1 AS res FROM usuario WHERE correo = '".$correo."'";
+        foreach($this->conexion->query($sql) as $res)
+            if($res['res'] == "1")
+                return "ec";
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
         echo $this->conexion->query($sql) ? "1" : "0";
         //echo $add;    

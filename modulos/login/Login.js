@@ -16,10 +16,7 @@ $(document).ready(function () {
     });
     
     $("#btn-enviar").attr("disabled", true);
-    
-    
-    
-      
+
     $("#botonsesion").on('click', function () {
         var txtusuario = $("input:text[id='form-mail']").val();
         var txtcontra = $("input:password[id='form-pass']").val();
@@ -147,14 +144,29 @@ $(document).ready(function () {
                             url: "../../bin/ingresar.php?categoria=registro",
                             data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
                             success: function (mns) {
-                                if (mns === "1") {
-                                    jAlert("SE REGISTRARO CON EXITO");
- 
-                                } else if (mns === 0) {
-                                    jAlert("ERROR");
-                                } else if (mns==="00"){
-                                    jAlert("EL CORREO O LA CONTRASEÑA YA ESTA REGISTRADA");
+                                switch(mns) {
+                                    case "e":
+                                    case "0":
+                                        jAlert("Ocurrio un error en el registro");
+                                        break;
+                                    case "1":
+                                        jAlert("Se mando un correo de confirmacion a la direccion que proporcionaste, por favor verificalo");
+                                        break;
+                                    case "c":
+                                        jAlert("Por favor verifica que no eres un robot");
+                                        break;
+                                    default:
+                                        jAlert("Algo salio mal, intentalo de nuevo");
+                                        break;
                                 }
+//                                if (mns === "1") {
+//                                    jAlert("SE HA REGISTRADO CON EXITO");
+//
+//                                } else if (mns === 0) {
+//                                    jAlert("ERROR");
+//                                } else if (mns==="00"){
+//                                    jAlert("EL CORREO YA ESTA REGISTRADO");
+//                                }
                             }
                         });
                     }
@@ -182,7 +194,7 @@ $(document).ready(function () {
             success: function (mns){
            //     jAlert(mns);
                 if(mns === "1"){
-                    jAlert("ACIDO ENVIADO UN LINK");
+                    jAlert("Ha sido enviado un link al correo que proporcionaste");
                     $.limpiartexto();
                 } else if (mns === 0){
                     jAlert("ERROR");

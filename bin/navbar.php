@@ -16,6 +16,7 @@
                 <span class="fa fa-bars"></span>
             </button>
             <a class="navbar-brand" href="#"></a>
+            <ul>
                 <li><a href="#"></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>

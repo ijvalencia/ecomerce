@@ -49,7 +49,7 @@ $(document).ready(function () {
 
     $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
         sesion = datos;
-        console.log(sesion);
+//        console.log(sesion);
         var stringB = new String(sesion);
         var field = stringB.split(",");
         nombre = field[0];
@@ -92,9 +92,8 @@ $('#fav').click(function () {
 //fin Anton
 function cargarProducto(codigo) {
     if (codigo.length > 3) {
-        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function (datos) {
-            // console.log(datos);
-            if (datos['item'] == undefined || datos['item'][1] != undefined) {
+        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function(datos) {1
+            if (datos['item'] == undefined || datos['item'][1] != undefined || datos.length <= 0) {
                 window.location.replace("../../modulos/error/index.php");
                 $('.loader').fadeOut("slow");
                 return;
@@ -123,11 +122,6 @@ function cargarProducto(codigo) {
             ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"] : "NO EXISTE INFORMACION ADICIONAL";
             $('#descripcion_producto2').append(articulo.ficha_tecnica);
             $('#descripcion_producto2').append("<br>");
-            /*var fcomercial = articulo["ficha_comercial"];
-             if (!jQuery.isEmptyObject(fcomercial)) {
-             fcomercial = fcomercial.replace("/13", "<br>");
-             $('#descripcion_producto2').append(fcomercial);
-             }*/
             $('#codigo_fabricante').append(articulo["codigo_fabricante"]);
             $('#tiempo_garantia').append(articulo["garantia"].replace("NI", "Ñ"));
             for (var i = 0; i < categorias_sin_cantidad.length; i++) {
@@ -149,7 +143,7 @@ $('#btn_comprar').click(function () {
         url: "../../bin/ingresar.php?categoria=setCarrito",
         data: {"articulo": articulo},
         success: function (resp) {
-            console.log(resp);
+//            console.log(resp);
             if (resp !== "0") {
                 jAlert("Agregado al carrito");
                 window.location.href = "../../modulos/carrito/index.php";
@@ -175,7 +169,7 @@ var cargado = false;
 var number = 0;
 $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
     sesion = datos;
-    console.log(sesion);
+//    console.log(sesion);
     var stringB = new String(sesion);
     var field = stringB.split(",");
     number = field[2];
