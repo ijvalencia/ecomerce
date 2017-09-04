@@ -2,6 +2,7 @@ $(document).ready(function (){
    $("#btncambiar").on('click', function(){    
      var txtantiguapass = $("input:password[id='id_antiguapass']").val();
      var txtnuevapass = $("input:password[id='id_nuevapass']").val();
+   //  var txtcuneta = $("input:password[id='id_emailssss']").val(); falta 
            if ((txtantiguapass === "") || (txtnuevapass === "")) {
             $('#id_antiguapass').css({"border": "2px solid red"});
             $('#id_nuevapass').css({"border": "2px solid red"});

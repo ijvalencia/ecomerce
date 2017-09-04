@@ -162,6 +162,7 @@ switch ($Menu) {
     break;
 
     case "registrodirecion":
+        $number = $_POST['usuario'];
         $txtnombredire = $_POST['nombredire'];
         $txtapellidodire = $_POST['apellidodire'];
         $txttelefonodire = $_POST['telefono'];
@@ -177,7 +178,7 @@ switch ($Menu) {
         $txtcrusero2 = $_POST['crusero2'];
         $txtreferencia = $_POST['referencia'];
        
-        $conexion->agregardirecciones($txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
+        $conexion->agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
     break;
 
     case "cambiarContraseña":

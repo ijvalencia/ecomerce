@@ -1,6 +1,6 @@
 /* global sesion */
 var correo = /[-A-Za-z0-9._]+[@][A-Za-z]+[.]{1}[A-Za-z]+/;
-var expresion = /^[A-Za-záéíóúñüàè]+$/i;
+//var expresion = /^[A-Za-záéíóúñüàè]+$/i;
 var Cadena = /[A-Za-z]+/;
 var bandera = false;
 var bandera2 = false;
@@ -16,12 +16,7 @@ $(document).ready(function () {
     });
     
     $("#btn-enviar").attr("disabled", true);
-    $("#txtnombred").attr("disabled", true);
-    $("#txtapellidod").attr("disabled", true);
     
-    $("#txttelefono2d").attr("disabled", true);
-    $("#txtinteriord").attr("disabled", true);
-    $("#txtreferncia").attr("disabled", true);
     
     
       
@@ -72,14 +67,6 @@ $(document).ready(function () {
             }
         }
     });
-    
-        $.ajax({
-            type: "POST",
-            url: "../../bin/ingresar.php?categoria=estados",
-         success: function (mns) {       
-            $("#selectestadosd").html(mns);
-            }
-        });
         
     //Validar los terminio de la para guardar
     $("#check-terminos").click(function () {
@@ -153,12 +140,7 @@ $(document).ready(function () {
                             data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
                             success: function (mns) {
                                 if (mns === "1") {
-                                    jAlert("LOS DATO REGISTRADO NO HEMOS TERMINADO EL REGISTRO");
-                                    $.desactivar();
-                                    $("input:text[id='txtnombred']").val(txtnombre);
-                                    $("input:text[id='txtapellidod']").val(txtapellido);
-                                     
-                                  
+                                    jAlert("SE REGISTRARO CON EXITO");
                                 } else if (mns === 0) {
                                     jAlert("ERROR");
                                 } else if (mns==="00"){
@@ -172,187 +154,12 @@ $(document).ready(function () {
         }
     });
     
-$.activar = function () {
-    $("#txttelefonod").attr("disabled", true);
-   // $("#txttelefono2d").attr("disabled", true);
-    $("#txtcalled").attr("disabled", true);
-    $("#txtexteriord").attr("disabled", true);
-   // $("#txtinteriord").attr("disabled", true);
-    $("#txtcpd").attr("disabled", true);
-    $("#selectestadosd").attr("disabled", true);
-    $("#txtciudadd").attr("disabled", true);
-    $("#txtcolonia").attr("disabled", true);
-    $("#txtcruserod").attr("disabled", true);
-    $("#txtcruserod2").attr("disabled", true);
-   // $("#txtreferncia").attr("disabled", true);
-    $("#btn-direccion").attr("disabled", true);
-};
-
-$.desactivar = function () {
-    $("#txttelefonod").attr("disabled", false);
-   // $("#txttelefono2d").attr("disabled", false);
-    $("#txtcalled").attr("disabled", false);
-    $("#txtexteriord").attr("disabled", false);
-   // $("#txtinteriord").attr("disabled", false);
-    $("#txtcpd").attr("disabled", false);
-    $("#selectestadosd").attr("disabled", false);
-    $("#txtciudadd").attr("disabled", false);
-    $("#txtcolonia").attr("disabled", false);
-    $("#txtcruserod").attr("disabled", false);
-    $("#txtcruserod2").attr("disabled", false);
-   // $("#txtreferncia").attr("disabled", false);
-    $("#btn-direccion").attr("disabled", false);
-};
-
-$("#btn-direccion").on('click', function () {
-        var txtnombredire = $("input:text[id='txtnombred']").val();
-        var txtapellidodire = $("input:text[id='txtapellidod']").val();
-        var txttelefono = $("input:text[id='txttelefonod']").val();
-        var txttelefono2d = $("input:text[id='txttelefono2d']").val();   
-        var txtcalled = $("input:text[id='txtcalled']").val();
-        var txtexteriord = $("input:text[id='txtexteriord']").val(); 
-        var txtinteriord = $("input:text[id='txtinteriord']").val(); 
-        var txtcpd = $("input:text[id='txtcpd']").val();
-        var txtselectestadosd = $("#selectestadosd").val();
-        var txtciudadd = $("input:text[id='txtciudadd']").val();
-        var txtcolonia = $("input:text[id='txtcolonia']").val();
-        var txtcruserod = $("input:text[id='txtcruserod']").val();
-        var txtcrusero2 = $("input:text[id='txtcruserod2']").val();
-        var txtreferncia = $("input:text[id='txtreferncia']").val();
-     
-        if ((txttelefono2d==="") || (txtinteriord==="")||(txtreferncia==="")){
-            $('#txttelefono2d').css({"border": "2px solid red"});
-            $('#txtinteriord').css({"border": "2px solid red"});
-            $('#txtreferncia').css({"border": "2px solid red"});
-            jAlert("DATOS OBLIGATORIOS CUANDO ESCOJISTES EL DATOS ADICIONALES");
-        }else{
-            $('#txttelefono2d').css({"border": "2px solid Gainsboro"});
-            $('#txtinteriord').css({"border": "2px solid Gainsboro"});
-            $('#txtreferncia').css({"border": "2px solid Gainsboro"});   
-        }
-       if ((txttelefono === "") || (txtcalled === "") || (txtexteriord === "") || (txtcpd === "") || (txtselectestadosd === "") || (txtciudadd === "") || (txtcolonia==="") || (txtcruserod === "") || (txtcrusero2 === "")){
-            $('#txttelefonod').css({"border": "2px solid red"});
-            $('#txtcalled').css({"border": "2px solid red"});
-            $('#txtexteriord').css({"border": "2px solid red"});
-            $('#txtcpd').css({"border": "2px solid red"});
-            $('#selectestadosd').css({"border": "2px solid red"});
-            $('#txtciudadd').css({"border": "2px solid red"});
-            $('#txtcolonia').css({"border": "2px solid red"});
-            $('#txtcruserod').css({"border": "2px solid red"});
-            $('#txtcruserod2').css({"border": "2px solid red"});
-        }
-        else {
-            $('#txttelefonod').css({"border": "2px solid Gainsboro"});
-            $('#txtcalled').css({"border": "2px solid Gainsboro"});
-            $('#txtexteriord').css({"border": "2px solid Gainsboro"});
-            $('#txtcpd').css({"border": "2px solid Gainsboro"});
-            $('#selectestadosd').css({"border": "2px solid Gainsboro"});
-            $('#txtciudadd').css({"border": "2px solid Gainsboro"});
-            $('#txtcolonia').css({"border": "2px solid Gainsboro"});
-            $('#txtcruserod').css({"border": "2px solid Gainsboro"});
-            $('#txtcruserod2').css({"border": "2px solid Gainsboro"});
-        
-            if(bandera===false){
-                if (numerico.test(txttelefono)) {
-                    $('#txttelefonod').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txttelefonod').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                
-                if (Cadena.test(txtcalled)) {
-                    $('#txtcalled').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txtcalled').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }  
-                if (numerico.test(txtexteriord)) {
-                    $('#txtexteriord').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txtexteriord').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                
-                if (numerico.test(txtcpd)) {
-                    $('#txtcpd').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txtcpd').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                
-                if (numerico.test(txtselectestadosd)) {
-                    $('#selectestadosd').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#selectestadosd').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                if (Cadena.test(txtciudadd)) {
-                    $('#txtciudadd').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txtciudadd').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                if (Cadena.test(txtcolonia)) {
-                    $('#txtcruserod2').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txtcruserod2').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                if (Cadena.test(txtcruserod)) {
-                    $('#txtcruserod').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txtcruserod').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                if (Cadena.test(txtcrusero2)) {
-                    $('#txtcruserod2').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#txtcruserod2').css({"border": "2px solid red"});
-                    bandera3 = false;
-                }
-                
-            if ((numerico.test(txttelefono)) || (Cadena.test(txtcalled)) || (numerico.text(txtexteriord)) || (numerico.text(txtcpd)) || (numerico.text(txtselectestadosd)) || (Cadena.test(txtciudadd)) || (Cadena.test(txtcolonia)) || (Cadena.test(txtcruserod)) || (Cadena.test(txtcrusero2))){    
-                    bandera3 = true;
-                     if (bandera3 === true){
-                   $.ajax({
-                    type: "POST",
-                    url: "../../bin/ingresar.php?categoria=registrodirecion",
-                    data: {"nombredire":txtnombredire ,"apellidodire":txtapellidodire, "telefono":txttelefono, "telefono2":txttelefono2d, "calle":txtcalled , "exterior":txtexteriord, "interior":txtinteriord, "codigopostal":txtcpd, "selectestado":txtselectestadosd ,"ciudad":txtciudadd,"colonia":txtcolonia, "cruseros":txtcruserod, "crusero2":txtcrusero2, "referencia":txtreferncia},
-                        success: function (mns) {
-                            if (mns === "1"){
-                           jAlert("LOS DATO REGISTRADO CON EXITO");
-                             $.limpiartexto();
-                             $.activar();
-                        } else if (mns === 0) {
-                           jAlert("ERROR");
-                        } 
-                    }
-                });
-              }
-            }
-          }
-       }
-   });
     $.limpiartexto = function () {
         $("input:text[id='form-nombre']").val("");
         $("input:text[id='form-apellidos']").val("");
         $("input:text[id='form-correo']").val("");
         $("input:password[id='form-contra']").val("");
         $("input:password[id='form-confirmacion']").val("");   
-        $("input:text[id='txtnombred']").val("");
-        $("input:text[id='txtapellidod']").val("");
-        $("input:text[id='txttelefonod']").val("");
-        $("input:text[id='txttelefono2d']").val("");   
-        $("input:text[id='txtcalled']").val("");
-        $("input:text[id='txtexteriord']").val(""); 
-        $("input:text[id='txtinteriord']").val("");
-        $("input:text[id='txtcpd']").val("");
-        $("#selectestadosd").val("");
-        $("input:text[id='txtciudadd']").val("");
-        $("input:text[id='txtcolonia']").val("");
-        $("input:text[id='txtcruserod']").val("");
-        $("input:text[id='txtcruserod2']").val("");
-        $("input:text[id='txtreferncia']").val("");
     };
     
     $("#enviar").on('click', function () {    
@@ -374,22 +181,5 @@ $("#btn-direccion").on('click', function () {
             }
         });
     });
-     $("#RAcheckbox").click(function () {
-        if ($("#RAcheckbox").is(':checked')) {
-      
-            $("#txtinteriord").attr("disabled", false);
-            $("#txtreferncia").attr("disabled", false);
-            $("#txttelefono2d").attr("disabled", false);
-            
-           } else {
-            $("#txtinteriord").attr("disabled", true);
-            $("#txtreferncia").attr("disabled", true);
-            $("#txttelefono2d").attr("disabled",true); 
-            $("input:text[id='txtinteriord']").val("0");   
-            $("input:text[id='txtreferncia']").val("0");
-            $("input:text[id='txttelefono2d']").val("0");
-        }
-    });
-    
     $('.loader').fadeOut("slow");
 });

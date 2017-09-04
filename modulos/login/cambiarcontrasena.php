@@ -19,6 +19,12 @@
                             </div>
                             <div class="form-bottom">
                              <form role="form" class="login-form" id="commentForm">
+                                  <div class="form-group">
+                                        <h6>Introduce tu cuenta:</h6>
+                                        <label class="sr-only" for="form-correo">Introdusca tu correo:</label>
+                                        <input type="password" name="correo" placeholder="Ejemplo : B@rB@C0@" class="form-correo form-control" id="id_emailssss">
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <h6>Contraseña Actual</h6>
                                         <label class="sr-only" for="form-correo">Contraseña Actual</label>

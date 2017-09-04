@@ -16,7 +16,7 @@
                             <div class="col-md-12">
                                 <label for="ejemplo_email_3" class="col-lg-2">Nombre:</label>
                                 <div class="col-xs-5">
-                                    <input class="form-control" type="text" placeholder="Ejemplo: Juan " id="txtnombre" name="txtnombres">
+                                    <input class="form-control" type="text" placeholder="Ejemplo: Juan " id="txtnombre" name="txtnombres"maxlength="30">
                                 </div>
                             </div>
                             <br><br>
@@ -24,7 +24,7 @@
                                 <label for="ejemplo_email_3" class="col-lg-2 control-label">Apellidos:</label>
                                 <div class="col-xs-5">
                                     <!--<label class="form-label required" id="apellidos">Apellidos</label>-->
-                                    <input class="form-control" placeholder="Ejemplo: Perez" type="text" id="txtapellido" name="txtapellidos">
+                                    <input class="form-control" placeholder="Ejemplo: Perez" type="text" id="txtapellido" name="txtapellidos" maxlength="30">
                                 </div>
                             </div>
                             <br> <br>
@@ -155,21 +155,12 @@
                             </div>
                          </div>
                             
-                            <!--
-                         <div class="col-md-12">
-                            <div class="row">
-                                   <label  class="col-lg-2 control-label" id="sexo">Sexo:</label>
-                                   <label class="required">Femenino <input id="check-sexo" name="sexo" value="Feminino"  type="radio" checked=""></label>&nbsp;&nbsp;        
-                                   <label class="required">Masculino<input id="check-sexo" name="sexo" value="Masculino" type="radio">&nbsp;&nbsp;</label>  
-                            </div>
-                        </div>
-                            -->
                             
                         <div class="col-md-12">
                             <div class="row">
                                      <label  class="col-lg-2 control-label" id="sexo">Email:</label>
                                     <div class="col-xs-5">
-                                        <input  class="form-control" placeholder="ejemplo@correo.com" type="email" id="txtemail" name="txtemail">
+                                        <input  class="form-control" placeholder="ejemplo@correo.com" type="email" id="txtemail" name="txtemail" maxlength="30">
                                     </div>
                                 </div>
                         </div>
@@ -177,7 +168,7 @@
                               <div class="row">
                                      <label  class="col-lg-2 control-label" id="sexo">Contraseña:</label>
                                     <div class="col-xs-5">
-                                        <input class="form-control" placeholder="Cambiar Contraseña" type="password" id="txtpassw">
+                                        <input class="form-control" placeholder="Cambiar Contraseña" type="password" id="txtpassw" maxlength="30">
                                     </div>
                               </div>    
                                 <button type="button" class="btn" id="btnguardar">Guardar</button>

@@ -34,7 +34,7 @@ $(document).ready(function (){
 $("#btnguardar").on('click', function (){
           var id = number;
           //var ides = id[0];
-          alert(id+"este es el bueno"+number);
+        //  alert(id+"este es el bueno"+number);
           var txtnombre = $("input:text[id='txtnombre']").val();
           var txtapellido  = $("input:text[id='txtapellido']").val();  
           var cmbfechadia  = $("#fechadia").val();  
@@ -91,9 +91,9 @@ $("#btnguardar").on('click', function (){
                 "fechaanio":cmbfechaanio,
                 "email": txtemai,
                 "passwor":txtpassw
-            },       
+        },       
         success: function(sessionmsj){           
-            jAlert("GUARDANDO Y CERRANDO SESION PARA ACTUALIZAR LOS DATOS");
+             jAlert("GUARDANDO Y CERRANDO SESION PARA ACTUALIZAR LOS DATOS");
                 $.ajax({type: "POST",
                 url: "../../bin/ingresar.php?categoria=cerrar",
                 success: function(sesiones){   

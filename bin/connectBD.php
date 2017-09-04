@@ -300,8 +300,6 @@ class BD {
     }
 
     /*     * ****************** FIN DEL PELIGRUS ******************** */
-
-
     /* SATANAS */
 
     public function getCategorias() {
@@ -434,15 +432,10 @@ class BD {
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
         echo $this->conexion->query($sql) ? "1" : "0";
         //echo $add;    
-
     }
-    public function agregardirecciones($txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
-        $sql="SELECT id_usuario FROM usuario"; 
-         foreach ($this->conexion->query($sql) as $row) {
-            $row['id_usuario'];
-        }
-        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$row['id_usuario'].",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
-       // echo $sqlInser;
+    
+    public function agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
+        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$number.",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
         echo $this->conexion->query($sqlInser) ? "1" : "0";      
     }
     /*
@@ -467,11 +460,11 @@ class BD {
     public function revicioncorreos($correos_Email) {
         require 'PHPMailer/PHPMailerAutoload.php';
         $titulo = "Recordar contraseña";
-        $d = rand(10, 3000);
-        $message = "Tu password es :" . $d;
+      //  $d = rand(10, 3000);
+        $message = "Tu password es :";
 
         $mail = new PHPMailer();
-        $mail->setFrom('jesusvalenciatrejo7@gmail.com', 'Mensaje de prueba');
+        $mail->setFrom('crm@coeficiente.mx', 'Mensaje de prueba');// jesusvalenciatrejo7@gmail.com
         $mail->addAddress($correos_Email, $message);
         $mail->Subject = $titulo;
         $mail->isHTML(true);
@@ -485,7 +478,7 @@ class BD {
     <body>
         <div id="cuerpo">
             <a href="http://127.0.0.1/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>                                          
-             ' . $message . '
+            ' . $message . '
         </div>
     <div id="pie">
         Este mensaje fue dirigido a &lt;
