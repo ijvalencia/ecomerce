@@ -64,7 +64,22 @@ $(document).ready(function (){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
+/*<<<<<<< HEAD
         
+=======
+
+        $.ajax({
+            type: "POST",
+            url: "../../bin/ingresar.php?categoria=direccioness",
+            data: {"idusuarios": number},
+            success: function (mnsdireccion) {
+                // console.log(mnsdireccion);
+                // Esta madre da indefinido, corregir
+                mnsdireccion = JSON.parse(mnsdireccion);
+                direcion = String(mnsdireccion[0]["id_direccion"]);
+            }
+        });
+>>>>>>> 8a52799419268e4d739845d4780a387cc0b264a3*/
         $('.loader').fadeOut("slow");
     });
 
@@ -334,7 +349,7 @@ $(document).ready(function (){
                                sub_iva += valor.value;// * ivas[i];
                                txtcantidad=valor.value;
                                console.log(txtcantidad);
-                           });  
+                           });
                            for(var m in mns){
                                $.ajax({
                                     type: "POST",
@@ -345,8 +360,8 @@ $(document).ready(function (){
                                      console.log("orden :"+ordenesproductos);
                                      console.log("idorden"+mnss+"codigoF"+mns[m]+"Cantidad"+txtcantidad);
                                      alert("datos"+ordenesproductos);
-                                    if(numeroorden !== null) {            
-                                          window.location.href = "../../modulos/orden/Orden.php";  
+                                    if(numeroorden !== null) {
+                                          window.location.href = "../../modulos/orden/Orden.php";
                                           borrarArticulo("0");
                                       jAlert("COMPRA REALIZADA");
                                      }else {

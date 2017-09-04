@@ -6,7 +6,7 @@ $username = "desarrollo";
 $password = "Pa55w0rd!crm";
 
 /* BD LOCAL */
-// $con = mysqli_connect("127.0.0.1", "root", "", "ecommerce");
+//$con = mysqli_connect("127.0.0.1", "root", "", "ecommerce");
 
 $con = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
 if (mysqli_connect_errno($con)) {
@@ -98,7 +98,12 @@ for ($x = 0; $x <= $total_articulos - 1; $x++) {
     if ($articulos->item[$x]->disponibleCD < 0)
         $articulos->item[$x]->disponibleCD = 0;
     $codigo = "";
-    $codigo = $articulos->item[$x]->marca == "GHIA" ? $articulos->item[$x]->clave : $articulos->item[$x]->codigo_fabricante;
+    if (($articulos->item[$x]->codigo_fabricante == "HP" || $articulos->item[$x]->codigo_fabricante == "BROTHER") && sizeof($articulos->item[$x]->grupo) < 2) {
+        $codigo = $articulos->item[$x]->clave;
+        $articulos->item[$x]->marca = $articulos->item[$x]->codigo_fabricante;
+        $articulos->item[$x]->grupo = "CONSUMIBLES";
+    } else
+        $codigo = $articulos->item[$x]->marca == "GHIA" ? $articulos->item[$x]->clave : $articulos->item[$x]->codigo_fabricante;
     if ($articulos->item[$x]->disponible != 0 || $articulos->item[$x]->disponibleCD != 0)
         $sql = "INSERT INTO producto VALUES ('".$codigo."','".$articulos->item[$x]->descripcion."','".$articulos->item[$x]->grupo."','".$articulos->item[$x]->marca."','".$articulos->item[$x]->Departamento."','".$articulos->item[$x]->precio."','".$articulos->item[$x]->moneda."','".$articulos->item[$x]->imagen."','".$articulos->item[$x]->tipocambio."','".$articulos->item[$x]->disponible."','".$articulos->item[$x]->disponibleCD."','".$GB."','".$TB."', '')";
     //echo $sql."<br>";

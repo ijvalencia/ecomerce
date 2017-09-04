@@ -67,7 +67,15 @@ $(document).ready(function () {
             }
         }
     });
-        
+        $.ajax({
+            type: "POST",
+            url: "../../bin/ingresar.php?categoria=estados",
+         success: function (mns) {
+            $("#selectestadosd").html(mns);
+            }
+        });
+
+
     //Validar los terminio de la para guardar
     $("#check-terminos").click(function () {
         if ($("#check-terminos").is(':checked')) {
@@ -141,6 +149,7 @@ $(document).ready(function () {
                             success: function (mns) {
                                 if (mns === "1") {
                                     jAlert("SE REGISTRARO CON EXITO");
+ 
                                 } else if (mns === 0) {
                                     jAlert("ERROR");
                                 } else if (mns==="00"){
