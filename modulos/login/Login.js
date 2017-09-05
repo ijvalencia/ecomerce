@@ -143,15 +143,33 @@ $(document).ready(function () {
                             url: "../../bin/ingresar.php?categoria=registro",
                             data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
                             success: function (mns) {
-                                //    alert(mns);
-                                if (mns === "1") {
-                                    jAlert("SE REGISTRARO CON EXITO FAVOR DE CONFIRMAR EN SU CORREO");
-                                    $.limpiartexto();
-                                } else if (mns === 0) {
-                                    jAlert("ERROR");
-                                } /*else if (mns==="00"){
-                                 jAlert("EL CORREO O LA CONTRASEÑA YA ESTA REGISTRADA");
-                                 }*/
+
+    
+                                switch(mns) {
+                                    case "e":
+                                    case "0":
+                                        jAlert("Ocurrio un error en el registro");
+                                        break;
+                                    case "1":
+                                        jAlert("Se mando un correo de confirmacion a la direccion que proporcionaste, por favor verificalo");
+										 $.limpiartexto();
+                                        break;
+                                    case "c":
+                                        jAlert("Por favor verifica que no eres un robot");
+                                        break;
+                                    default:
+                                        jAlert("Algo salio mal, intentalo de nuevo");
+                                        break;
+                                }
+//                                if (mns === "1") {
+//                                    jAlert("SE HA REGISTRADO CON EXITO");
+//
+//                                } else if (mns === 0) {
+//                                    jAlert("ERROR");
+//                                } else if (mns==="00"){
+//                                    jAlert("EL CORREO YA ESTA REGISTRADO");
+//                                }
+
                             }
                         });
                     }
@@ -169,7 +187,6 @@ $(document).ready(function () {
 
     $("#enviar").on('click', function () {
         var txtemaill = $("input:text[id='txtemaill']").val();
-
         // alert("hola"+txtemaill);
         /* var checkrobot = $("#norobot").val(); */
         if (txtemaill === "") {

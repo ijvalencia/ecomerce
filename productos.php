@@ -98,7 +98,7 @@ for ($x = 0; $x <= $total_articulos - 1; $x++) {
     if ($articulos->item[$x]->disponibleCD < 0)
         $articulos->item[$x]->disponibleCD = 0;
     $codigo = "";
-    if (($articulos->item[$x]->codigo_fabricante == "HP" || $articulos->item[$x]->codigo_fabricante == "BROTHER") && sizeof($articulos->item[$x]->grupo) < 2) {
+    if (($articulos->item[$x]->codigo_fabricante == "HP" || $articulos->item[$x]->codigo_fabricante == "BROTHER" || $articulos->item[$x]->codigo_fabricante == "EC LINE") && sizeof($articulos->item[$x]->grupo) < 2) {
         $codigo = $articulos->item[$x]->clave;
         $articulos->item[$x]->marca = $articulos->item[$x]->codigo_fabricante;
         $articulos->item[$x]->grupo = "CONSUMIBLES";
@@ -130,7 +130,7 @@ foreach($con->query($sql_borradas) as $b) {
     ";
 }
 
-$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE","NARANJA","DORADO"];
+$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE","NARANJA","DORADO","CYAN","MAGENTA"];
 foreach ($colores as $col) {
 	$sql_colores = "UPDATE producto SET color='".$col."' WHERE descripcion LIKE '%".$col."%' AND color=''";
 	$con->query($sql_colores);

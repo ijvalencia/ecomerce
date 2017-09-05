@@ -74,7 +74,7 @@ $(document).ready(function () {
     $('#categoria_elegida').text(supercategoria);
     $('#entrada_categoria').attr("value", supercategoria);
     var busqueda = $('#busqueda').attr("value").trim();
-//    console.log(busqueda.length);
+    console.log(busqueda);
     if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda) && busqueda.length != 0) {
         $('#AquiGrupo').append(busqueda);
         $('.breadcrumb').empty().append('<li><a href="../../modulos/inicio/index.php">Inicio</a></li><li>Productos</li><li><a></a>Busqueda</li>');
@@ -82,20 +82,18 @@ $(document).ready(function () {
         $('#drop_memoria').hide();
         $('#filtro_miSalario').val("1");
         $('#filtro_miExpectativa').val("250000");
-        busqueda = busqueda.split(" ");
+        busqueda = busqueda.toUpperCase().split(" ");
         if(busqueda.length >= 1) {
             $.ajax({
                 type: "POST",
                 url: "../../bin/ingresar.php?categoria=buscar",
                 data: {"categoria": supercategoria, "palabras": busqueda},
-                success: function (respuesta) {
+                success: function(respuesta) {
+                    console.log(respuesta);
                     respuesta = JSON.parse(respuesta);
-                    if(respuesta[0].length > 0) {
-                        /* Contiene mas de un sub arreglo, terminar y corregir */
-                        $.each(respuesta, function (i, objeto) {
-                            $.each(objeto, function (j, producto) {
-                                productos_busqueda.push(producto);
-                            });
+                    if(respuesta.length > 0) {
+                        $.each(respuesta, function (j, producto) {
+                            productos_busqueda.push(producto);
                         });
                         cargarBusqueda(productos_busqueda);
                         cargarMarcas(productos_busqueda);
@@ -111,7 +109,7 @@ $(document).ready(function () {
             $('#btn_filtramela').click(function (event) {
                 event.preventDefault();
                 var productos_filtro = productos_busqueda.slice();
-            
+
                 /* Filtro de marcas */
                 var marcas_filtro = [];
                 $.each($('#marquitas li input'), function (i, objeto) {
@@ -268,7 +266,7 @@ function cargarBusqueda(arr_productos) {
     $('ttbody').empty();
     var html_imagen = '<div class="col-md-3"><a href="../detalles_producto/index.php?categoria=#cat&producto=#id_producto" class="thumbnail  container_img_producto" id=sombreado><img src="#imagen" class="img-responsive" style="width:100%; height: 55%;" alt="Image" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small></p><h4>$#costo<br>#calificacion</h4></a></div>';
     html_imagen = html_imagen.replace("#cat", $('#subcategoria').attr("value"));
-    //					console.log(html_imagen);
+
     var tabla_producto = '<div class="container-fluid bg-3 text-center" id="tabla_#id_tabla"></div>';
     var id_tabla;
     var t = 0;

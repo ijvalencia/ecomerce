@@ -96,21 +96,23 @@ switch ($Menu) {
             }
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
-            if (!$data) {
-                echo "{}";
-            } else {
+            if ($data) {
                 $articulo = simplexml_load_string($data);
                 if (sizeof($articulo) > 1) {
-                    foreach ($articulo->item as $objeto) {
-                        if (strcmp($objeto->codigo_fabricante, $_GET['codigo']) == 0) {
-                            echo '{"item":' . json_encode($objeto) . '}';
-                            break;
-                        }
-                    }
-                } else {
+                    echo "{}";
+                } else if (sizeof($articulo) < 1) {
+                    $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+                    $context = stream_context_create(array('http' => array('timeout' => 3)));
+                    $data = file_get_contents($filename, false, $context);
+                    $articulo = simplexml_load_string($data);
+                    if (sizeof($articulo) < 1)
+                        echo "{}";
+                    else
+                        echo json_encode($articulo);
+                } else
                     echo json_encode($articulo);
-                }
-            }
+            } else
+                echo "{}";
         }
         break;
 
@@ -295,22 +297,25 @@ switch ($Menu) {
         $apellido = $_POST['apellido'];
         $correo = $_POST['correos'];
         $contrasena = $_POST['contrasena'];
-        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         $captcha = $_POST['robot'];
-
         if (!$captcha) {
-           // echo '<h2>Please check the the captcha form.</h2>';
-            exit;
+
+          
+        //  exit;
+
+            echo 'c';
+            break;
+
         }
-	   	$secretKey = "";
+	   	$secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
 	   	$ip = $_SERVER['REMOTE_ADDR'];
-        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX".$captcha."&remoteip=".$ip);
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey.$captcha."&remoteip=".$ip);
 	   	$responseKeys = json_decode($response,true);
-        if(intval($responseKeys["success"]) !== 1) {
-            //echo '<h2>You are spammer ! Get the @$%K out</h2>';
-        } else {
-            //echo '<h2>Thanks for posting comment.</h2>';
-        }
+
+        if(intval($responseKeys["success"]) !== 1)
+            echo 'e';
+        else
+            $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
     /*     * ******* */
