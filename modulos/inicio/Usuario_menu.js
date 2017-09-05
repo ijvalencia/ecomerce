@@ -15,8 +15,8 @@ $(document).ready(function(){
             apellido = field[1];
             number = field[2];
 
-            if(nombre.indexOf("invitado")) {
-                $(".ocultar").hide();
+            if(nombre !== "invitado") {
+                $(".ocultar").show();
             }
         });
     }

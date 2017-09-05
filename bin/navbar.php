@@ -16,7 +16,6 @@
                 <span class="fa fa-bars"></span>
             </button>
             <a class="navbar-brand" href="#"></a>
-            <ul>
                 <li><a href="#"></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>
@@ -26,7 +25,6 @@
                     </ul>
                 </li>
                 <li><a href="#"></a></li>
-            </ul>
             <form class="navbar-form navbar-left lno-search-form visible-xs" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">

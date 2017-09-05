@@ -15,33 +15,17 @@ if ((isset($_GET['capacidadg'])) || (isset($_GET['capacidadt']))) {
 
 switch ($Menu) {
 // registro de para login
-    case "registro":
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $correo = $_POST['correos'];
-        $contrasena = $_POST['contrasena'];
-        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
-        break;
-
-//inicio de sesionen
-    case "email":
-        $correo = $_POST['correo'];
-        $contra = $_POST['contra'];
-        $conexion->login($correo, $contra);
-        break;
+//    case "registro":
+//        $nombre = $_POST['nombre'];
+//        $apellido = $_POST['apellido'];
+//        $correo = $_POST['correos'];
+//        $contrasena = $_POST['contrasena'];
+//        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
+//        break;
 
     /* SATANAS */
     case "envios":
         $conexion->getEnvios();
-        break;
-
-    case "agregarOrden":
-        $usuario = $_POST['usuario'];
-        $direccion = $_POST['direccion'];
-        $envio = $_POST['envio'];
-        $total = $_POST['total'];
-        $metodo_pago = $_POST['metodo_pago'];
-        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, 1);
         break;
 
     case "sesion":
@@ -138,7 +122,6 @@ switch ($Menu) {
         $conexion->getEstadoCategoria($_GET["subcategoria"]);
         break;
     case "parametros":
-        $conexion->setTipoCambio();
         $conexion->getParametros();
         break;
     case "buscar":
@@ -299,13 +282,9 @@ switch ($Menu) {
         $contrasena = $_POST['contrasena'];
         $captcha = $_POST['robot'];
         if (!$captcha) {
-
-          
         //  exit;
-
             echo 'c';
             break;
-
         }
 	   	$secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
 	   	$ip = $_SERVER['REMOTE_ADDR'];
