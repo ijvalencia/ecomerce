@@ -108,7 +108,7 @@
                                         <label class="sr-only" for="form-apellidos">Apellidos</label>
                                         <input type="text" name="apellidos" placeholder="Ejemplo: López González" class="form-apellidos form-control" id="form-apellidos" maxlength="30">
                                     </div>
-                                    <h6>Correo:</h6>
+                                    <h6>Correo Actual:</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-correo">Correo</label>
                                         <input type="text" name="correo" placeholder="Ej: mi_correo@gmail.com" class="form-correo form-control" id="form-correo" maxlength="30">
@@ -132,9 +132,9 @@
                                             </label>
                                         </div>
                                     </div>
-
-                                   <!-- <button type="button" class="btn" id="btn-enviar" >Guardar</button>
-
+                                    
+                                    <button type="button" class="btn" id="btn-enviar" >Guardar</button>
+<!--
                                     <button type="button" class="btn" id="btn-enviar" data-toggle="modal" data-target="#largeModal" data-backdrop="static" data-keyboard="false">Guardar</button>
                                     <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">

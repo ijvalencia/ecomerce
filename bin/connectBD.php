@@ -425,35 +425,60 @@ class BD {
     /*     * ******** */
     /* parte del chuy */
     /* Agregar datos */
-
+    
+    public function confirmacion($confirmacionclave,$confirmacioncorreo) {
+      $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
+       echo $this->conexion->query($sql) ? "1" : "0";    
+    } 
+    
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
-        // $add=rand(10,3000);
-        $tipo = 0;  // 0 para usuarios 1 para admin
+   $tipo = 0;  // 0 para usuarios 1 para admin
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
         echo $this->conexion->query($sql) ? "1" : "0";
+            require 'PHPMailer/PHPMailerAutoload.php';
+        $titulo = "Confirmacion Correo electronico";
+        $add=rand(10,3000);
+        $message = "tu Clave de confirmacion".$add;
+        $mail = new PHPMailer();
+        $mail->setFrom('crm@coeficiente.mx', 'Confirmar tu Correo Electronico');// jesusvalenciatrejo7@gmail.com
+        $mail->addAddress($correo,$message);
+        $mail->Subject = $titulo;
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $body = '
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Soporte Softernium</title>       
+    </head>
+    <body>
+        <div id="cuerpo">
+            <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta</a>          
+             '.$message.'
+        </div>
+    <div id="pie">
+        Este mensaje fue dirigido a &lt;
+        '.$correo.'&gt;Este correo es enviado de forma automÃ¡ticamente para validar su cuneta de confirmacion de su cuenta.
+    </div>
+    </body>
+    </html>';
+        $mail->Body = $body;
+        if (!$mail->send()) {
+            echo "<p class='text-danger'>.Mensaje no enviado.</p>";
+        } else {
+            //echo $body;
+            //echo '1';
+        }
         //echo $add;    
     }
+         
+    
     
     public function agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
         $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$number.",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
 	echo $this->conexion->query($sqlInser) ? "1" : "0";      
 	}
-/*
-    public function agregardirecciones($txtnombredire, $txtapellidodire, $txttelefonodire, $txttelefono2dire, $txtcalledire, $txtexteriordire, $txtinteriordire, $txtcodigopostaldire, $txtselectestado, $txtciudad, $colonia, $txtcruseros, $txtcrusero2, $txtreferencia) {
-        $sql = "SELECT id_usuario FROM usuario";
-        foreach ($this->conexion->query($sql) as $row) {
-            $row['id_usuario'];
-        }
-        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (" . $row['id_usuario'] . ",'" . $txtnombredire . "','" . $txtapellidodire . "'," . $txttelefonodire . "," . $txttelefono2dire . ",'" . $txtcalledire . "'," . $txtexteriordire . "," . $txtinteriordire . "," . $txtcodigopostaldire . "," . $txtselectestado . ",'" . $txtciudad . "','" . $colonia . "','" . $txtcruseros . "','" . $txtcrusero2 . "','" . $txtreferencia . "')";
-        // echo $sqlInser;
-        echo $this->conexion->query($sqlInser) ? "1" : "0";
->>>>>>> 8a52799419268e4d739845d4780a387cc0b264a3
-    }
-*/
-    /*
-      public function confirmacion() {
-
-      } */
+        
 
     public function estado() {
         $sql = "SELECT estado_id, estado from estados";
@@ -463,19 +488,19 @@ class BD {
         }
     }
 
-    public function cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra) {
-        $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'";
+    public function cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra) {
+        $sql = "UPDATE usuario SET  contra='". $txtnuevocontra . "' WHERE  correo='".$txtcorreosUpdate."'";
         echo $this->conexion->query($sql) ? "1" : "0";
     }
-
+    
     public function revicioncorreos($correos_Email) {
         require 'PHPMailer/PHPMailerAutoload.php';
         $titulo = "Recordar contraseña";
       //  $d = rand(10, 3000);
-        $message = "Tu password es :";
-
+        $message = "Mensaje de recuperar la contraseña";
+        
         $mail = new PHPMailer();
-        $mail->setFrom('crm@coeficiente.mx', 'Mensaje de prueba');// jesusvalenciatrejo7@gmail.com
+        $mail->setFrom('crm@coeficiente.mx', 'Reuperar tu Contraseña de tu tienda');// jesusvalenciatrejo7@gmail.com
         $mail->addAddress($correos_Email, $message);
         $mail->Subject = $titulo;
         $mail->isHTML(true);
@@ -488,7 +513,7 @@ class BD {
     </head>
     <body>
         <div id="cuerpo">
-            <a href="http://127.0.0.1/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>                                          
+            <a href="http://10.1.0.49/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>                                          
             ' . $message . '
         </div>
     <div id="pie">
@@ -503,7 +528,7 @@ class BD {
         } else {
             //echo $body;
 
-            echo '1';
+            //echo '1';
         }
     }
 
@@ -565,19 +590,21 @@ class BD {
         echo json_encode($arrnewfooter);
     }
 
-    public function login($correo, $contra) {
-
-        $sql = "SELECT id_usuario, nombre, apellidos, correo, contra FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
+    public function login($correo, $contra) {     
+        $sql = "SELECT id_usuario, nombre, apellidos, correo, contra, confirmacion FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
         $datos = $this->conexion->query($sql);
         if ($datos != false) {//Si la consulta funciona imprime los datos
             foreach ($datos as $row) {
-                if ($correo === $row['correo'] || $contra === $row['contra']) {
+                if ($correo === $row['correo'] && $contra === $row['contra']  && ($row["confirmacion"]!= null) ) {
                     echo $row['id_usuario'] . "||";
                     echo $row['nombre'] . "||";
+                    
                     echo $_SESSION['nombre'] = $row['nombre'];
                     echo $_SESSION['apellidos'] = $row['apellidos'];
                     //echo $_SESSION['Bienvenido'] = "Bienvenido :";
                     echo $_SESSION['id'] = $row['id_usuario'];
+                }else{
+                    echo '1';
                 }
             }
         }

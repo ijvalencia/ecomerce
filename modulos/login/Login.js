@@ -4,22 +4,22 @@ var correo = /[-A-Za-z0-9._]+[@][A-Za-z]+[.]{1}[A-Za-z]+/;
 var Cadena = /[A-Za-z]+/;
 var bandera = false;
 var bandera2 = false;
-var bandera3 =false;
+var bandera3 = false;
 var numerico = /[0-9]+/;
+var Confirmacion = 1;
 
 $(document).ready(function () {
+
+
     $('#link').on("click", function () {
         $('#form_busqueda').hide();
     });
     $('#enviar').on("click", function () {
         $('#form_busqueda').show();
     });
-    
+
     $("#btn-enviar").attr("disabled", true);
-    
-    
-    
-      
+
     $("#botonsesion").on('click', function () {
         var txtusuario = $("input:text[id='form-mail']").val();
         var txtcontra = $("input:password[id='form-pass']").val();
@@ -55,32 +55,28 @@ $(document).ready(function () {
                         data: {
                             "correo": txtusuario,
                             "contra": txtcontra},
-                        success: function (sessionmsj){
-                            if (sessionmsj === "") {
+                        success: function (sessionmsj) {
+                            if (sessionmsj === ""){
                                 jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");
-                            } else {
-                                history.back();
-                            }
+                            }else if (sessionmsj === "1"){
+                                jAlert("Falta Su Clave de Confirmacion");                            
+                            } 
+                            else {
+                              window.location.href = "http://10.1.0.49/Ecommerce/modulos/inicio/index.php";
+                              //window.close();
+                              history.back();
+                            } 
                         }
                     });
                 }
             }
         }
     });
-        $.ajax({
-            type: "POST",
-            url: "../../bin/ingresar.php?categoria=estados",
-         success: function (mns) {
-            $("#selectestadosd").html(mns);
-            }
-        });
-
-
     //Validar los terminio de la para guardar
     $("#check-terminos").click(function () {
         if ($("#check-terminos").is(':checked')) {
             $("#btn-enviar").attr("disabled", false);
-            $.activar();
+            // $.activar();
         } else {
             $("#btn-enviar").attr("disabled", true);
         }
@@ -110,7 +106,7 @@ $(document).ready(function () {
             $("#norobot").css({"border": "2px solid Gainsboro"});
 
             if (bandera2 === false) {
-                if (Cadena.test(txtnombre)){
+                if (Cadena.test(txtnombre)) {
                     $('#form-nombre').css({"border": "2px solid Gainsboro"});
                 } else {
                     $('#form-nombre').css({"border": "2px solid red"});
@@ -142,19 +138,20 @@ $(document).ready(function () {
                 }
                 if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== null && (txtconfir !== null))) {
                     bandera2 = true;
-                    if (bandera2 === true){
+                    if (bandera2 === true) {
                         $.ajax({type: "POST",
                             url: "../../bin/ingresar.php?categoria=registro",
                             data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
                             success: function (mns) {
+                                //    alert(mns);
                                 if (mns === "1") {
-                                    jAlert("SE REGISTRARO CON EXITO");
- 
+                                    jAlert("SE REGISTRARO CON EXITO FAVOR DE CONFIRMAR EN SU CORREO");
+                                    $.limpiartexto();
                                 } else if (mns === 0) {
                                     jAlert("ERROR");
-                                } else if (mns==="00"){
-                                    jAlert("EL CORREO O LA CONTRASEÑA YA ESTA REGISTRADA");
-                                }
+                                } /*else if (mns==="00"){
+                                 jAlert("EL CORREO O LA CONTRASEÑA YA ESTA REGISTRADA");
+                                 }*/
                             }
                         });
                     }
@@ -162,33 +159,51 @@ $(document).ready(function () {
             }
         }
     });
-    
     $.limpiartexto = function () {
         $("input:text[id='form-nombre']").val("");
         $("input:text[id='form-apellidos']").val("");
         $("input:text[id='form-correo']").val("");
         $("input:password[id='form-contra']").val("");
-        $("input:password[id='form-confirmacion']").val("");   
+        $("input:password[id='form-confirmacion']").val("");
     };
-    
-    $("#enviar").on('click', function () {    
+
+    $("#enviar").on('click', function () {
         var txtemaill = $("input:text[id='txtemaill']").val();
-       // alert("hola"+txtemaill);
-       /* var checkrobot = $("#norobot").val(); */
-        $.ajax({
-            type: "POST",
-            url: "../../bin/ingresar.php?categoria=olvidecontrasena",
-            data: {"emaill":txtemaill},
-            success: function (mns){
-           //     jAlert(mns);
-                if(mns === "1"){
-                    jAlert("ACIDO ENVIADO UN LINK");
-                    $.limpiartexto();
-                } else if (mns === 0){
-                    jAlert("ERROR");
+
+        // alert("hola"+txtemaill);
+        /* var checkrobot = $("#norobot").val(); */
+        if (txtemaill === "") {
+            $('#txtemaill').css({"border": "2px solid red"});
+        } else {
+            $('#txtemaill').css({"border": "2px solid Gainsboro"});
+
+            if (correo.test(txtemaill)) {
+                $('#txtemaill').css({"border": "2px solid Gainsboro"});
+            } else {
+                $('#txtemaill').css({"border": "2px solid red"});
+                bandera2 = false;
+            }
+            if (correo.test(txtemaill)) {
+                bandera2 = true;
+                if (bandera2 === true) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../../bin/ingresar.php?categoria=olvidecontrasena",
+                        data: {"emaill": txtemaill},
+                        success: function (mns) {
+                            //     jAlert(mns);
+                            if (mns === "1") {
+                                jAlert("ACIDO ENVIADO UN LINK");
+                                $.limpiartexto();
+                            } else if (mns === 0) {
+                                jAlert("ERROR");
+                            }
+                        }
+                    });
                 }
             }
-        });
+        }
     });
     $('.loader').fadeOut("slow");
 });

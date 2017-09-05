@@ -9,7 +9,6 @@
 
     </head>
     <body>
-
         <div class="top-content">
             <div class="container">
                 <div class="row">
@@ -136,9 +135,9 @@
                                                     <label>Datos Adicionales :<input type="checkbox" name="checkbox" class="form-control" id="RAcheckbox"></label>              
                                                 </div>
                                                 <br><br><br><br><br><br><br>
-                                               <div class="modal-footer">
+                                                <div class="modal-footer">
                                                     <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                 <button type="button" class="btn btn-primary" id="btn-direccion" data-dismiss="modal">Guardar</button>
+                                                <button type="button" class="btn btn-primary" id="btn-direccion" data-dismiss="modal">Guardar</button>
                                                </div>
                                               </div>
                                              </div>

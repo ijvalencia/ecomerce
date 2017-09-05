@@ -157,6 +157,12 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
+    case "confirmacion":
+      $confirmacionclave = $_POST["clave"]; 
+      $confirmacioncorreo = $_POST["correosc"];  
+      $conexion->confirmacion($confirmacionclave,$confirmacioncorreo);
+    break;
+    
     case "estados":
         $conexion->estado();
     break;
@@ -173,18 +179,19 @@ switch ($Menu) {
         $txtcodigopostaldire = $_POST['codigopostal'];
         $txtselectestado = $_POST['selectestado'];
         $txtciudad = $_POST['ciudad'];
-        $colonia =$_POST["colonia"];
+        $colonia = $_POST["colonia"];
         $txtcruseros = $_POST['cruseros'];
         $txtcrusero2 = $_POST['crusero2'];
-        $txtreferencia = $_POST['referencia'];
-       
+        $txtreferencia = $_POST['referencia'];   
         $conexion->agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
     break;
 
     case "cambiarContraseña":
-        $txtantiguoscontra = $_POST['antiguacontrasena'];
+        $txtcorreosUpdate = $_POST['cuenta'];
+       // $txtantiguoscontra = $_POST['antiguacontrasena'];
         $txtnuevocontra = $_POST['nuevacontrasena'];
-        $conexion->cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra);
+        $conexion->cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra);
+        
         break;
 
     case "olvidecontrasena":
@@ -292,7 +299,7 @@ switch ($Menu) {
         $captcha = $_POST['robot'];
 
         if (!$captcha) {
-            echo '<h2>Please check the the captcha form.</h2>';
+           // echo '<h2>Please check the the captcha form.</h2>';
             exit;
         }
 	   	$secretKey = "";
@@ -300,9 +307,9 @@ switch ($Menu) {
         $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX".$captcha."&remoteip=".$ip);
 	   	$responseKeys = json_decode($response,true);
         if(intval($responseKeys["success"]) !== 1) {
-          echo '<h2>You are spammer ! Get the @$%K out</h2>';
+            //echo '<h2>You are spammer ! Get the @$%K out</h2>';
         } else {
-            echo '<h2>Thanks for posting comment.</h2>';
+            //echo '<h2>Thanks for posting comment.</h2>';
         }
         break;
 

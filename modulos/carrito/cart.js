@@ -64,22 +64,7 @@ $(document).ready(function (){
         nombre = field[0];
         apellido = field[1];
         number = field[2];
-/*<<<<<<< HEAD
-        
-=======
 
-        $.ajax({
-            type: "POST",
-            url: "../../bin/ingresar.php?categoria=direccioness",
-            data: {"idusuarios": number},
-            success: function (mnsdireccion) {
-                // console.log(mnsdireccion);
-                // Esta madre da indefinido, corregir
-                mnsdireccion = JSON.parse(mnsdireccion);
-                direcion = String(mnsdireccion[0]["id_direccion"]);
-            }
-        });
->>>>>>> 8a52799419268e4d739845d4780a387cc0b264a3*/
         $('.loader').fadeOut("slow");
     });
 
@@ -265,8 +250,140 @@ $(document).ready(function (){
                   $("#formularios").css("display", "block");        
                   $("#formularios").html(boton); 
                   $("#txtnombred").val(nombre);              
-                  $("#txtapellidod").val(apellido);              
-          
+                  $("#txtapellidod").val(apellido); 
+                  $('#btn-direccion').on("click",function(){
+           var txtnombredire = $("input:text[id='txtnombred']").val();
+           var txtapellidodire = $("input:text[id='txtapellidod']").val();
+           var txttelefono = $("input:text[id='txttelefonod']").val();
+           var txttelefono2d = $("input:text[id='txttelefono2d']").val();   
+           var txtcalled = $("input:text[id='txtcalled']").val();
+           var txtexteriord = $("input:text[id='txtexteriord']").val(); 
+           var txtinteriord = $("input:text[id='txtinteriord']").val(); 
+           var txtcpd = $("input:text[id='txtcpd']").val();
+           var txtselectestadosd = $("#selectestadosd").val();
+           var txtciudadd = $("input:text[id='txtciudadd']").val();
+           var txtcolonia = $("input:text[id='txtcolonia']").val();
+           var txtcruserod = $("input:text[id='txtcruserod']").val();
+           var txtcrusero2 = $("input:text[id='txtcruserod2']").val();
+           var txtreferncia = $("input:text[id='txtreferncia']").val();
+     
+        if ((txttelefono2d==="") || (txtinteriord==="")||(txtreferncia==="")){
+            $('#txttelefono2d').css({"border": "2px solid red"});
+            $('#txtinteriord').css({"border": "2px solid red"});
+            $('#txtreferncia').css({"border": "2px solid red"});
+            jAlert("DATOS OBLIGATORIOS CUANDO ESCOJISTES EL DATOS ADICIONALES");
+        }else{
+            $('#txttelefono2d').css({"border": "2px solid Gainsboro"});
+            $('#txtinteriord').css({"border": "2px solid Gainsboro"});
+            $('#txtreferncia').css({"border": "2px solid Gainsboro"});   
+        }
+       if ((txttelefono === "") || (txtcalled === "") || (txtexteriord === "") || (txtcpd === "") || (txtselectestadosd === "") || (txtciudadd === "") || (txtcolonia==="") || (txtcruserod === "") || (txtcrusero2 === "")){
+            $('#txttelefonod').css({"border": "2px solid red"});
+            $('#txtcalled').css({"border": "2px solid red"});
+            $('#txtexteriord').css({"border": "2px solid red"});
+            $('#txtcpd').css({"border": "2px solid red"});
+            $('#selectestadosd').css({"border": "2px solid red"});
+            $('#txtciudadd').css({"border": "2px solid red"});
+            $('#txtcolonia').css({"border": "2px solid red"});
+            $('#txtcruserod').css({"border": "2px solid red"});
+            $('#txtcruserod2').css({"border": "2px solid red"});
+        }
+        else {
+            $('#txttelefonod').css({"border": "2px solid Gainsboro"});
+            $('#txtcalled').css({"border": "2px solid Gainsboro"});
+            $('#txtexteriord').css({"border": "2px solid Gainsboro"});
+            $('#txtcpd').css({"border": "2px solid Gainsboro"});
+            $('#selectestadosd').css({"border": "2px solid Gainsboro"});
+            $('#txtciudadd').css({"border": "2px solid Gainsboro"});
+            $('#txtcolonia').css({"border": "2px solid Gainsboro"});
+            $('#txtcruserod').css({"border": "2px solid Gainsboro"});
+            $('#txtcruserod2').css({"border": "2px solid Gainsboro"});
+        
+            if(bandera31===false){
+                if (numerico1.test(txttelefono)) {
+                    $('#txttelefonod').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txttelefonod').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                
+                if (Cadena1.test(txtcalled)) {
+                    $('#txtcalled').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txtcalled').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }  
+                if (numerico1.test(txtexteriord)) {
+                    $('#txtexteriord').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txtexteriord').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                if (numerico1.test(txtcpd)) {
+                    $('#txtcpd').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txtcpd').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                
+                if (numerico1.test(txtselectestadosd)) {
+                    $('#selectestadosd').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#selectestadosd').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                if (Cadena1.test(txtciudadd)) {
+                    $('#txtciudadd').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txtciudadd').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                if (Cadena1.test(txtcolonia)) {
+                    $('#txtcruserod2').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txtcruserod2').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                if (Cadena1.test(txtcruserod)) {
+                    $('#txtcruserod').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txtcruserod').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                if (Cadena1.test(txtcrusero2)) {
+                    $('#txtcruserod2').css({"border": "2px solid Gainsboro"});
+                } else {
+                    $('#txtcruserod2').css({"border": "2px solid red"});
+                    bandera31 = false;
+                }
+                
+            if ((numerico1.test(txttelefono)) || (Cadena1.test(txtcalled)) || (numerico1.text(txtexteriord)) || (numerico1.text(txtcpd)) || (numerico1.text(txtselectestadosd)) || (Cadena1.test(txtciudadd)) || (Cadena1.test(txtcolonia)) || (Cadena1.test(txtcruserod)) || (Cadena1.test(txtcrusero2))){    
+                    bandera31 = true;
+                     if (bandera31 === true){
+                         
+                   $.ajax({
+                    type: "POST",
+                    url: "../../bin/ingresar.php?categoria=registrodirecion",
+                    data: {"usuario":number,"nombredire":txtnombredire ,"apellidodire":txtapellidodire, "telefono":txttelefono, "telefono2":txttelefono2d, "calle":txtcalled , "exterior":txtexteriord, "interior":txtinteriord, "codigopostal":txtcpd, "selectestado":txtselectestadosd ,"ciudad":txtciudadd,"colonia":txtcolonia, "cruseros":txtcruserod, "crusero2":txtcrusero2, "referencia":txtreferncia},
+                    success: function (mns) {
+                            if (mns === "1"){
+                           jAlert("LOS DATO REGISTRADO CON EXITO");
+                           $("#btn_confirmar_compra").attr("disabled",false);
+                           $("#txtclavescompra").attr("disabled",false);
+                           
+                           $("#btn_continuar_tu_registro").css("display", "none");              
+                            $.limpiardirecion();
+                             $.activar();
+                        } else if (mns === 0) {
+                           jAlert("ERROR");
+                        } 
+                    }
+                });
+             }
+           }
+         }
+       }         
+    });  
            } else {
                     $("#formularios").css("display", "none");
         }
