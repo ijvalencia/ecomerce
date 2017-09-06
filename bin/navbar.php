@@ -38,8 +38,11 @@
 <nav class="navbar navbar-static-top line-navbar-two">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="line-navbar-collapse-2">
-            <ul class="nav navbar-nav lnt-nav-mega">
-                <li class="dropdown">
+            <div class="col-md-3">
+                <a class="logo" href="../../index.php"><i class="img-logo"></i></a>
+                <div class="container-nav">
+                    <ul class="nav navbar-nav lnt-nav-mega">
+                        <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <span class="fa fa-dot-circle-o"></span>
                         Categorias
@@ -75,10 +78,13 @@
                         </div>
                     </div> 
                 </li> 
-            </ul>
-            <form id="form_busqueda" class="navbar-form navbar-left lnt-search-form" role="search" action="../../modulos/productos/detalles.php">
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <form id="form_busqueda" class="navbar-form navbar-left lnt-search-form" role="search" action="../../modulos/productos/detalles.php">
                 <input name="extra" value="1" class="hidden">
-                <div class="form-group">
+                <div class="form-group search-bar">
                     <div class="input-group">
                         <div class="input-group-btn lnt-search-category">
                             <!-- Selector de categoria busqueda -->
@@ -100,7 +106,9 @@
                 <!-- boton de busqueda-->
                 <button type="submit" class="btn btn-search" id="btn_enviar"><span class="fa fa-search"></span></button>
             </form>
-            <ul class="nav navbar-nav navbar-right lnt-shopping-cart">
+            </div>
+            <div class="col-md-3">
+                <ul class="nav navbar-nav navbar-right lnt-shopping-cart">
                 <li class="dropdown">
                     <span id="nombre_usuario_nav"></span>
                     <div class="btn-group" role="group" aria-label="...">
@@ -132,6 +140,7 @@
                     </div>
                 </li>
             </ul>
+            </div>
         </div> 
     </div>
 </nav>

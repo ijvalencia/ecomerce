@@ -11,7 +11,7 @@
         echo '<span class="hidden" id="categoria" value="' . $_GET['categoria'] . '"></span>';
         ?>
         <?php include '../../bin/navbar.php' ?>
-
+        <producto>
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="../../modulos/inicio/index.php">Inicio</a></li>
@@ -117,7 +117,7 @@
 
                     <!---acabo--->
                     <br>
-                    <a id="numero_comprar" href="link_contacto">Compra telefónica: </a>
+                    <a id="numero_comprar" class="hidden" href="link_contacto">Compra telefónica: </a>
                 </div>
             </div>
         </div>
@@ -150,7 +150,7 @@
             <link href="calificacion.css" rel="stylesheet" type="text/css"/>
             <br/>
         </div>
-        
+        </producto>
         <script>
   $('.estrellas').on("click", function () {
     $('#form_busqueda').hide();     

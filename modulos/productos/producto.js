@@ -397,7 +397,7 @@ function cargarColores(productos_busqueda) {
     else if(colores[0] == null)
         colores = [];
     for (var i = 0; i < colores.length; i++) {
-        if (colores[i] != null)
+        if (colores[i] != null || colores[i] != "")
             $('#coloreamela').append('<li class="checkbox"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
     }
     if(colores.length != 0)

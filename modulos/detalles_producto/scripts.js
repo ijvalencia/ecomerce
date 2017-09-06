@@ -7,13 +7,13 @@ var nombre;
 var apellido;
 var number;
 
-
 var articulo;
 var iva;
 var parametros;
 var tipo_cambio;
 var like;
 var fav;
+
 $(document).ready(function () {
     /* Mostrar producto */
     $.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
@@ -55,21 +55,18 @@ $(document).ready(function () {
         nombre = field[0];
         apellido = field[1];
         number = field[2];
-        $.get("../../bin/ingresar.php?categoria=verlike&usuario=" + number + "&producto=" + producto,
-                function (respuesta) {
-
-                    like = respuesta;
-                    mostrarlike('#icono_like');
-                });
-        $.get("../../bin/ingresar.php?categoria=verfavorito&usuario=" + number + "&producto=" + producto,
-                function (respuesta) {
-                    fav = respuesta;
-                    //alert(fav);
-                    mostrarfavorito("#icono_fav");
-                });
+        $.get("../../bin/ingresar.php?categoria=verlike&usuario=" + number + "&producto=" + producto, function (respuesta) {
+            like = respuesta;
+            mostrarlike('#icono_like');
+        });
+        $.get("../../bin/ingresar.php?categoria=verfavorito&usuario=" + number + "&producto=" + producto, function (respuesta) {
+            fav = respuesta;
+            //alert(fav);
+            mostrarfavorito("#icono_fav");
+        });
     });
-
 });
+
 $('#like').click(function () {
 
     $.get("../../bin/ingresar.php?categoria=vermeterlike&usuario=" + number + "&producto=" + producto,
@@ -90,6 +87,7 @@ $('#fav').click(function () {
 
 });
 //fin Anton
+
 function cargarProducto(codigo) {
     if (codigo.length > 3) {
         $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function(datos) {1
@@ -104,9 +102,13 @@ function cargarProducto(codigo) {
             var dispCD = parseInt(articulo["disponibleCD"]);
             dispCD = dispCD <= 0 ? 0 : dispCD;
             var total_disp = disp + dispCD;
-            if (total_disp <= 0) {
-                $('#btn_comprar').hide();
-                $('#numero_comprar').hide();
+            if (total_disp < 0) {
+//            if (total_disp >= 0) {
+//                $('#btn_comprar').hide();
+//                $('#numero_comprar').hide();
+                $('producto').empty();
+                cargarPaginaContacto();
+                return false;
             }
             $('#nombre_categoria').append(articulo["grupo"]);
             $('#nombre_categoria').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=" + articulo["grupo"]);
@@ -162,6 +164,15 @@ function formatoMoneda(numero) {
     return numero;
 }
 
+function cargarPaginaContacto() {
+    $.ajax({
+        url: "../error/sin_disponibilidad.php",
+        dataType: "HTML",
+        success: function(resp) {
+            $('producto').append(resp);
+        }
+    });
+}
 
 ///    ANTON
 // cargar comentarios
@@ -179,7 +190,6 @@ var producto = $('#producto').attr("value");
 $.get("../../bin/ingresar.php?categoria=verNumeroComentarios&producto=" + producto, function (respuesta) {
     $('#comentarios').append("<a  href='#' title='Ver comentarios de los usuarios' onclick='vercomentario()'>" + respuesta + "</a>");
 });
-
 
 //  funciones
 
