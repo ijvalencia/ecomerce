@@ -3,29 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/usuario/usuarios.js</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/usuario/index.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/connectBD.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/carrito/cart.js</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/index.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/Login.js</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/orden/orden.js</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/ingresar.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/cambiarcontrasena.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/cambiocontrasena.js</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/navbar.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/carrito/index.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/css/style.css</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/bin/PHPMailer/PHPMailerAutoload.php</file>
-=======
-            <file>file:/C:/wamp/www/Ecommerce/modulos/productos/detalles.php</file>
             <file>file:/C:/wamp/www/Ecommerce/modulos/detalles_producto/index.php</file>
             <file>file:/C:/wamp/www/Ecommerce/modulos/detalles_producto/scripts.js</file>
             <file>file:/C:/wamp/www/Ecommerce/bin/ingresar.php</file>
             <file>file:/C:/wamp/www/Ecommerce/bin/connectBD.php</file>
-            <file>file:/C:/wamp/www/Ecommerce/modulos/productos/producto.js</file>
->>>>>>> 8a52799419268e4d739845d4780a387cc0b264a3
+            <file>file:/C:/wamp/www/Ecommerce/modulos/favoritos/favoritos.php</file>
+            <file>file:/C:/wamp/www/Ecommerce/modulos/favoritos/favoritos.js</file>
+            <file>file:/C:/wamp/www/Ecommerce/modulos/carrito/index.php</file>
         </group>
     </open-files>
 </project-private>

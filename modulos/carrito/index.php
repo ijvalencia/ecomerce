@@ -151,7 +151,7 @@
                                         <input type="hidden" name="amount" value="0.00">
                                         <input type="image" src="http://www.paypal.com/es_ES/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
                                     </form>
-                                </form>
+								</form>
                             </div>
                         </div>
                     </div>

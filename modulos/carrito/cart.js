@@ -44,6 +44,9 @@ $(document).ready(function (){
     /*Muestra los articulos */
     mostrarArticulos();
     
+    /* Todo esto se puede hacer diferente
+     * esta hecho de la manera mas ineficiente posible
+     */
     /*Carga los envios */
     $.getJSON("../../bin/ingresar.php?categoria=envios", function (dato) {
         /*Inserta los datos si es Modal
@@ -131,6 +134,7 @@ $(document).ready(function (){
             $('#txtinteriord').css({"border": "2px solid red"});
             $('#txtreferncia').css({"border": "2px solid red"});
             jAlert("DATOS OBLIGATORIOS CUANDO ESCOJISTES EL DATOS ADICIONALES");
+            /* NO SE ENTIENDE */
         }else{
             $('#txttelefono2d').css({"border": "2px solid Gainsboro"});
             $('#txtinteriord').css({"border": "2px solid Gainsboro"});
@@ -564,7 +568,7 @@ $.desactivar = function () {
    };
 });
 
-function mostrarArticulos(){//esta ba en el input id="cantidad"
+function mostrarArticulos(){
     var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4"><img src="link_imagen" class="img-responsive" onerror="this.src=\'../../IMG/error.jpg\'"></div><div class="col-sm-8"><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price">$<span class="precios">precio_producto</span><br><b>IVA: </b>$<span class="ivas">precio_iva</span></td><td data-th="Quantity"><input class="numero_cantidad" value="1" type="number" min="1" max="maximo" style="width:60px" onchange="actualizarTotal()" onkeydown="return false"></td><td class="actions" data-th=""><a onclick="borrarArticulo(#n)"><i class="fa fa-trash-o"></i></a></td></tr>';
         $.getJSON("../../bin/ingresar.php?categoria=getCarrito", function (dato) {
         // console.log(dato);

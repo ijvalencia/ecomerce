@@ -15,33 +15,17 @@ if ((isset($_GET['capacidadg'])) || (isset($_GET['capacidadt']))) {
 
 switch ($Menu) {
 // registro de para login
-    case "registro":
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $correo = $_POST['correos'];
-        $contrasena = $_POST['contrasena'];
-        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
-        break;
-
-//inicio de sesionen
-    case "email":
-        $correo = $_POST['correo'];
-        $contra = $_POST['contra'];
-        $conexion->login($correo, $contra);
-        break;
+//    case "registro":
+//        $nombre = $_POST['nombre'];
+//        $apellido = $_POST['apellido'];
+//        $correo = $_POST['correos'];
+//        $contrasena = $_POST['contrasena'];
+//        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
+//        break;
 
     /* SATANAS */
     case "envios":
         $conexion->getEnvios();
-        break;
-
-    case "agregarOrden":
-        $usuario = $_POST['usuario'];
-        $direccion = $_POST['direccion'];
-        $envio = $_POST['envio'];
-        $total = $_POST['total'];
-        $metodo_pago = $_POST['metodo_pago'];
-        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, 1);
         break;
 
     case "sesion":
@@ -89,10 +73,10 @@ switch ($Menu) {
     case "getArticulo":
         if (isset($_GET['codigo'])) {
             $resp = $conexion->getExcepciones($_GET['codigo']);
-            if($resp === "1") {
-                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            if ($resp === "1") {
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
             } else {
-                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
             }
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
@@ -123,7 +107,7 @@ switch ($Menu) {
         $articulo = simplexml_load_file($filename);
         echo json_encode($articulo);
         break;
-    
+
     case "cerrar":
         session_destroy();
         header('Location: ../index.php');
@@ -138,7 +122,6 @@ switch ($Menu) {
         $conexion->getEstadoCategoria($_GET["subcategoria"]);
         break;
     case "parametros":
-        $conexion->setTipoCambio();
         $conexion->getParametros();
         break;
     case "buscar":
@@ -167,7 +150,7 @@ switch ($Menu) {
     
     case "estados":
         $conexion->estado();
-    break;
+        break;
 
     case "registrodirecion":
         $number = $_POST['usuario'];
@@ -279,7 +262,7 @@ switch ($Menu) {
         $pass = $_POST["passwor"];
         $conexion->actualizarDatosUsuario($id, $nombre, $apellido, $fechadia, $fechames, $fechaanio, $email, $pass);
         break;
-    
+
     case "MostrarUsuarioId":
         $id = $_POST["id"];
         echo $id;
@@ -299,13 +282,9 @@ switch ($Menu) {
         $contrasena = $_POST['contrasena'];
         $captcha = $_POST['robot'];
         if (!$captcha) {
-
-          
         //  exit;
-
             echo 'c';
             break;
-
         }
 	   	$secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
 	   	$ip = $_SERVER['REMOTE_ADDR'];
@@ -493,21 +472,32 @@ switch ($Menu) {
     case "vermeterlike":
         $producto = $_GET['producto'];
         $usuario = $_GET['usuario'];
-        $conexion->vermeterlike($producto, $usuario);        
+        $conexion->vermeterlike($producto, $usuario);
         break;
     case "vernumerolike":
-        $producto=$_GET['producto'];
+        $producto = $_GET['producto'];
         $conexion->vernumerolike($producto);
         break;
     case "vermeterfavorito":
         $producto = $_GET['producto'];
-        $usuario = $_GET['usuario'];
-        $conexion->vermeterfavorito($producto, $usuario);      
+        if (isset($_GET['usuario']))
+            $usuario = $_GET['usuario'];
+        else
+            $usuario = $_SESSION['id'];
+        $conexion->vermeterfavorito($producto, $usuario);
         break;
     case "verfavorito":
         $producto = $_GET['producto'];
-        $usuario = $_GET['usuario'];
-        $conexion->verfavorito($producto, $usuario);      
+        if (isset($_GET['usuario']))
+            $usuario = $_GET['usuario'];
+        else
+            $usuario = $_SESSION['id'];
+        $conexion->verfavorito($producto, $usuario);
+        break;
+    case "verfavoritos":
+        if (!(isset($_SESSION['id'])))
+            $_SESSION['id'] = "0";
+        $conexion->verfavoritos($_SESSION['id']);
         break;
 }
 $conexion->cerrar();

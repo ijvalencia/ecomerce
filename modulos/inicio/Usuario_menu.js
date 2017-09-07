@@ -4,7 +4,8 @@ var number,apellido;
 num=1;
 $(document).ready(function(){
     if(nombre === "invitado"){
-        $(".ocultar").css("display","none");;
+        //$(".ocultar").css("display","none");
+        $(".ocultar").hide();
         $.getJSON("../../bin/ingresar.php?categoria=sesion", function(datos) {
             sesion = datos;
             var stringB = new String(sesion);
@@ -14,10 +15,9 @@ $(document).ready(function(){
             nombre = field[0];
             apellido = field[1];
             number = field[2];
-
-    if(nombre!=="invitado"){
-      $(".ocultar").css("display","block");  
+            if(nombre !== "invitado") {
+                $(".ocultar").show();
+            }
+        });
     }
-  });
- }
 });

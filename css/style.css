@@ -249,12 +249,17 @@ body{padding-top:20px;}
 /* The controlsy */
 .carousel-control {
     left: -12px;
-    height: 40px;
-    width: 40px;
+    height: 57px;
+    width: 57px;
     background: none repeat scroll 0 0 #222222;
-    border: 4px solid #FFFFFF;
+    border: 3px solid #FFFFFF;
     border-radius: 23px 23px 23px 23px;
     margin-top: 90px;
+    font-size: 75px;
+    font-weight: bold;
+}
+.carousel-control:hover {
+    color: darkorange;
 }
 .carousel-control.right {
     right: -12px;
@@ -1285,4 +1290,25 @@ margin-top: -6px;
 }
 #pswd_info {
   display: none;
+}
+#formulario_contacto {
+    position: absolute;
+    width: 40%;
+    margin: 0px 100px;
+}
+.txt-top {
+    width: 160%;
+    margin-bottom: 40px;
+}
+#formulario_contacto .form-control {
+    margin: -15px 90px;
+}
+#formulario_contacto .btn {
+    margin: -10px 180px;
+    margin-bottom: 10px;
+    width: 40%;
+}
+#formulario_contacto center {
+    margin-left: 90px;
+    width: 100%
 }

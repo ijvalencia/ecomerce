@@ -1,43 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php
-        include '../../bin/head.php';
-        error_reporting(0);
-        ?> 
+        <title>Favoritos</title>
+
+        <?php include '../../bin/head.php'; ?>
+        <?php include '../../bin/navbar.php'; ?>
+
     </head>
     <body>
-        <?php include '../../bin/navbar.php'; ?>
-        <div class="container-fluid">
+
+        <div class="top-content">
             <div class="container">
-                <ol class="breadcrumb">
-                    <li><a href="../../modulos/inicio/index.php">Inicio</a></li>
-                    <li>Favoritos</li>
-                </ol>
-            </div>
-            <div class="col-sm-2 sidenav">
-                
-            </div>
-            <div class="col-md-8">
-                <ttbody>
-                    <!--<aqui carga esta wea>-->
-                </ttbody>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="breadcrumb">
+                            <li><a href="../../modulos/inicio/index.php">Inicio</a></li>
+                            <li>Favoritos</li>
+                        </ol>
+                        <!-- Agregar bara de navegacion -->      
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="cart" class="table table-hover table-condensed">
+                                    <thead border="2">
+                                        <tr>
+                                            <th style="width:60%" class="text-center">Tus Productos Favoritos.</th>
+                                            <th style="width:20%" class="text-center"></th>
+                                            <th style="width:8%"></th>
+                                            <th style="width:12%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> <!-- AQUI CARGAN LOS PRODUCTOS-->
+                                    </tbody> <!-- AQUI TERMINAN DE CARGAR-->
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
-        <a id="catidad"></a>
-        <a id="AquiGrupo"></a>
-        <footer style="background: #f2f2f2">
-            <div class="row">			
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div class="footer-border"></div>
-                    <p>© 2017 México.   Todos los derechos reservados.
-                        <br/>Precios son expresados en moneda nacional (MXN).
-                        <br/>Los precios mostrados son unicamente referencias y pueden cambiar sin previo aviso.</p>
-                </div>			
-            </div>
-        </footer>
-        <script type="text/javascript" src="favoritos.js"></script>
-<!--        <script type="text/javascript" src="sidebar.js"></script>-->
+        <?php include '../../bin/footer.php'; ?>
+
+        <!-- Scripts -->
+        <script src="favoritos.js"></script>
     </body>
 </html>
