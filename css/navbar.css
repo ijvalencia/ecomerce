@@ -280,7 +280,9 @@ Line navbar one (lno)
 background-color: #f2f2f2;
 padding-top: 15px;
 padding-bottom: 51px;
-	position: static;
+/*position: static;*/
+position: fixed;
+width: 100%;
 }
 @media (max-width: 767px) {
   .line-navbar-two {

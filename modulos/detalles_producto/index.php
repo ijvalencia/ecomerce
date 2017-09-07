@@ -46,12 +46,12 @@
                             Disponibles: <a id="cant_disponibles"></a>
                             <br>
                         </div>
-                        <a id="btn_comprar" class="btn btn-lg">Comprar Ahora</a>
+                        <a id="btn_comprar" class="btn btn-lg" data-backdrop="static" data-keyboard="false">Comprar Ahora</a>
                     </div>
                     
                     <!---Anton-->
                     
-                    <div class="ec-stars-wrapper" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">
+                    <div class="ec-stars-wrapper" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false" id="esconder">
                         <a href="#" data-value="1" title="Votar con 1 estrellas" class="estrellas">&#9733;</a>
                         <a href="#" data-value="2" title="Votar con 2 estrellas" class="estrellas">&#9733;</a>
                         <a href="#" data-value="3" title="Votar con 3 estrellas" class="estrellas">&#9733;</a>

@@ -116,7 +116,8 @@
                                     <h6>Contraseña:</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-contra">Contraseña</label>
-                                        <input type="password" name="contra" class="form-contra form-control" id="form-contra" maxlength="30">
+                                        <span><input type="password" name="contra" class="form-contra form-control" id="form-contra" maxlength="30"></span>
+                                      
                                     </div>
                                     <h6>Confirmar la contraseña</h6>
                                     <div class="form-group">
@@ -132,51 +133,17 @@
                                             </label>
                                         </div>
                                     </div>
-                                    
+
                                     <button type="button" class="btn" id="btn-enviar" >Guardar</button>
-<!--
-                                    <button type="button" class="btn" id="btn-enviar" data-toggle="modal" data-target="#largeModal" data-backdrop="static" data-keyboard="false">Guardar</button>
-                                    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4 class="modal-title" id="myModalLabel">Continuar con el registro</h4>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    
-                                                    <label>Nombre :<input type="text" name="txtnombre" class="form-control" id="txtnombred"></label>
-                                                    <label>Apellido :<input type="text" name="txtapellido" class="form-control" id="txtapellidod"></label>
-                                                    <label>Telefono :<input type="text" name="txttelefono" class="form-control" id="txttelefonod"></label><br>
-                                                    <label>Telefono 2 :<input type="text" name="txttelefono2" class="form-control" id="txttelefono2d" value="0"></label><br>
-                                                    <label>Calle :<input type="text" name="txtcalle" class="form-control" id="txtcalled"></label><br>
-                                                    <label>Exterior :<input type="text" name="txtexterior" class="form-control" id="txtexteriord"></label><br>
-                                                    <label>Interior :<input type="text" name="txtinterior" class="form-control" id="txtinteriord" value="0"></label><br>
-                                                    <label>CP :<input type="text" name="txtcp" class="form-control" id="txtcpd"></label><br><br><br><br>
-                                                   
-                                                    <label>Estados :<select class="form-control" id="selectestadosd"  accept-charset="utf-8">
-
-                                                    </select></label>
-                                                    <label>Ciudad :<input type="text" name="txtciudad" class="form-control" id="txtciudadd"></label>
-                                                    <label>Colonia :<input type="text" name="txtcolonia" class="form-control" id="txtcolonia"></label>
-                                                    <label>Cruseros :<input type="text" name="txtcrusero" class="form-control" id="txtcruserod"></label>
-                                                    <label>Cruseros 2 :<input type="text" name="txtcrusero2" class="form-control" id="txtcruserod2"></label><br>
-                                                    <label>Referencia :<input type="text" name="txtreferencia" class="form-control" id="txtreferncia" value="0"></label><br>
-                                                    <label>Datos Adicionales :<input type="checkbox" name="checkbox" class="form-control" id="RAcheckbox"></label>
-                                                    
-                                                </div>
-
-                                                <br><br><br><br><br><br><br>
-                                                  <div class="modal-footer">
-                                                  
-                                                    <button type="button" class="btn btn-primary" id="btn-direccion" data-dismiss="modal">Guardar</button>
-                                                  </div>
-                                                <br>
-                                            </div>
-                                        </div>
-                                    </div>
->>>>>>> 8a52799419268e4d739845d4780a387cc0b264a3-->
+                                      <div id="pswd_info">
+                                            <h4>La contraseña debería cumplir con los siguientes requerimientos:</h4>
+                                            <ul>
+                                                <li id="letter">Al menos debería tener<strong>una letra</strong></li>
+                                                <li id="capital">Al menos debería tener<strong>una letra en mayúsculas</strong></li>
+                                                <li id="number">Al menos debería tener<strong>un número</strong></li>
+                                                <li id="length">Debería tener <strong>8 carácteres</strong> como mínimo</li>
+                                            </ul>
+                                      </div>
                                 </form>
                             </div>
                         </div>          	

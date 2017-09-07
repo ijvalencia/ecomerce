@@ -25,11 +25,18 @@
                                         <input type="text" name="correo" placeholder="Ejemplo@correo.com " class="form-correo form-control" id="id_emailssss">
                                     </div>
                                
+                              <!--      <div class="form-group">
+                                         <h6></h6>
+                                        <label class="sr-only" for="form-password">Nueva Contraseña:</label>
+                                        <input type="password" name="contra" class="form-password form-control" placeholder="Nueva : c0l3r@" id="id_nuevapass">
+                                    </div>
+                                 -->
                                     <div class="form-group">
                                          <h6>Contraseña Nueva Contraseña</h6>
                                         <label class="sr-only" for="form-password">Nueva Contraseña:</label>
                                         <input type="password" name="contra" class="form-password form-control" placeholder="Nueva : c0l3r@" id="id_nuevapass">
                                     </div>
+                                 
                                   <button type="button" class="btn" id="btncambiar">Guardar</button>
                                 <br>
                              </form>

@@ -431,20 +431,37 @@ class BD {
         }
         return "0";
     }
-
-    /*     * ******** */
+    
+    /** ******** */
     /* parte del chuy */
     /* Agregar datos */
     
     public function confirmacion($confirmacionclave,$confirmacioncorreo) {
-      $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
+    $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
        echo $this->conexion->query($sql) ? "1" : "0";    
     } 
     
-    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
-        $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-        echo $this->conexion->query($sql) ? "1" : "0";
-            require 'PHPMailer/PHPMailerAutoload.php';
+    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {       
+        $bandera=true;
+    $SQL = "select correo , contra from usuario";
+    $datoss = $this->conexion->query($SQL);
+      foreach($datoss as $row){
+            $row['correo'];
+            $row['contra'];
+        $bandera=true;     
+        if(($correo === $row['correo']) || ($contra === $row['contra'])){
+            if ($bandera==true){
+             echo "SI"; 
+             $bandera=false;
+             break;
+           }
+         } else {
+            //  echo 'NO'; 
+             
+       $tipo=0;
+       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
+       echo $this->conexion->query($sql) ? "1" : "0";
+        require 'PHPMailer/PHPMailerAutoload.php';
         $titulo = "Confirmacion Correo electronico";
         $add=rand(10,3000);
         $message = "tu Clave de confirmacion".$add;
@@ -462,7 +479,7 @@ class BD {
     </head>
     <body>
         <div id="cuerpo">
-            <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta</a>          
+            <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta : </a>          
              '.$message.'
         </div>
     <div id="pie">
@@ -478,10 +495,11 @@ class BD {
             //echo $body;
             //echo '1';
         }
-        //echo $add;    
-    }
-         
-    
+         break;
+     }  
+           
+    }   
+  }
     
     public function agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
         $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$number.",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
@@ -509,7 +527,7 @@ class BD {
         $message = "Mensaje de recuperar la contraseña";
         
         $mail = new PHPMailer();
-        $mail->setFrom('crm@coeficiente.mx', 'Reuperar tu Contraseña de tu tienda');// jesusvalenciatrejo7@gmail.com
+        $mail->setFrom('crm@coeficiente.mx', 'Reuperar tu Contraseña');// jesusvalenciatrejo7@gmail.com
         $mail->addAddress($correos_Email, $message);
         $mail->Subject = $titulo;
         $mail->isHTML(true);
@@ -604,7 +622,7 @@ class BD {
         $datos = $this->conexion->query($sql);
         if ($datos != false) {//Si la consulta funciona imprime los datos
             foreach ($datos as $row) {
-                if ($correo === $row['correo'] && $contra === $row['contra']  && ($row["confirmacion"]!= null) ) {
+                if ($correo === $row['correo'] && $contra === $row['contra']  && $row["confirmacion"]!= null) {
                     echo $row['id_usuario'] . "||";
                     echo $row['nombre'] . "||";
                     

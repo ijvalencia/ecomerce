@@ -35,7 +35,14 @@ $(document).ready(function () {
     $('.close').click(function () {
         $('#modalZoom').hide();
         $('#form_busqueda').show();
+        $(".line-navbar-two").css("display", "block");
+        
     });
+    $("#esconder").on("click", function(){
+        $('#form_busqueda').hide();
+      $(".line-navbar-two").css("display", "none");
+    });
+    
 
     $(document).keypress(function (e) {
         var code = e.keyCode || e.which;

@@ -70,6 +70,7 @@ $(document).ready(function (){
 
     $('#abrir_tarjetas').on("click", function () {
         $('#form_busqueda').hide();
+        $(".line-navbar-two").css("display", "none");
 	//     alert("dato en blanco :"+number);
         alert(number+nombre);
         if((number === "") || (nombre === "invitado") || (number === undefined) || (number === "0")) {
@@ -403,6 +404,7 @@ $(document).ready(function (){
     $('#btn_confirmar_compra').on("click", function (){
         //alert(sesion);
         //if(sesion === "invitado,,0"){
+              $(".line-navbar-two").css("display", "block");
         $.ajax({
             type: "POST",
             url: "../../bin/ingresar.php?categoria=direccioness",
@@ -497,12 +499,11 @@ $(document).ready(function (){
               });
               
 $("#RAcheckbox").click(function () {
-        if ($("#RAcheckbox").is(':checked')) {
-      
+        if ($("#RAcheckbox").is(':checked')) {     
             $("#txtinteriord").attr("disabled", false);
             $("#txtreferncia").attr("disabled", false);
             $("#txttelefono2d").attr("disabled", false);
-            
+ 
            } else {
             $("#txtinteriord").attr("disabled", true);
             $("#txtreferncia").attr("disabled", true);

@@ -6,14 +6,14 @@ var bandera = false;
 var bandera2 = false;
 var bandera3 = false;
 var numerico = /[0-9]+/;
-var Confirmacion = 1;
+var txtcontra,txtconfir;
 
 $(document).ready(function () {
-
 
     $('#link').on("click", function () {
         $('#form_busqueda').hide();
     });
+
     $('#enviar').on("click", function () {
         $('#form_busqueda').show();
     });
@@ -21,7 +21,7 @@ $(document).ready(function () {
     $("#btn-enviar").attr("disabled", true);
 
     $("#botonsesion").on('click', function () {
-        var txtusuario = $("input:text[id='form-mail']").val();
+        var txtusuario = $("input:text[id='form-mail']").val().toLowerCase();
         var txtcontra = $("input:password[id='form-pass']").val();
 
         if ((txtusuario === "") || (txtcontra === "")) {
@@ -30,45 +30,44 @@ $(document).ready(function () {
         } else {
             $('#form-mail').css({"border": "2px solid Gainsboro"});
             $('#form-pass').css({"border": "2px solid Gainsboro"});
+        }
+        // if (bandera === false) {
+        if (correo.test(txtusuario)) {
+            $('#form-mail').css({"border": "2px solid Gainsboro"});
+        } else {
+            $('#form-mail').css({"border": "2px solid red"});
+            //alert("no");
+            bandera = false;
+        }
+        if (txtcontra !== "") {
+            $('#form-pass').css({"border": "2px solid Gainsboro"});
+        } else {
+            $('#form-pass').css({"border": "2px solid red"});
+            bandera = false;
+        }
+        //}
 
-            if (bandera === false) {
-                if (correo.test(txtusuario)) {
-                    $('#form-mail').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#form-mail').css({"border": "2px solid red"});
-                    //alert("no");
-                    bandera = false;
-                }
-                if (txtcontra !== null) {
-                    $('#form-pass').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#form-pass').css({"border": "2px solid red"});
-                    bandera = false;
-                }
-            }
-
-            if ((correo.test(txtusuario)) && (txtcontra !== null)) {
-                bandera = true;
-                if (bandera === true) {
-                    $.ajax({type: "POST",
-                        url: "../../bin/ingresar.php?categoria=email",
-                        data: {
-                            "correo": txtusuario,
-                            "contra": txtcontra},
-                        success: function (sessionmsj) {
-                            if (sessionmsj === ""){
-                                jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");
-                            }else if (sessionmsj === "1"){
-                                jAlert("Falta Su Clave de Confirmacion");                            
-                            } 
-                            else {
-                              window.location.href = "http://10.1.0.49/Ecommerce/modulos/inicio/index.php";
-                              //window.close();
-                              history.back();
-                            } 
+        if ((correo.test(txtusuario)) && (txtcontra !== null)) {
+            bandera = true;
+            if (bandera === true) {
+                $.ajax({type: "POST",
+                    url: "../../bin/ingresar.php?categoria=email",
+                    data: {
+                        "correo": txtusuario,
+                        "contra": txtcontra},
+                    success: function (sessionmsj) {
+                        if (sessionmsj === "") {
+                            jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");
+                        } else if (sessionmsj === "1") {
+                            jAlert("Falta Su Clave de Confirmacion");
                         }
-                    });
-                }
+                        else {
+                            //window.location.href = "http://10.1.0.49/Ecommerce/modulos/inicio/index.php";
+                            //window.close(); ojo no borrar
+                            history.back();
+                        }
+                    }
+                });
             }
         }
     });
@@ -83,13 +82,23 @@ $(document).ready(function () {
     });
     //funcion de insertar 
     $("#btn-enviar").on('click', function () {
-        var txtnombre = $("input:text[id='form-nombre']").val();
-        var txtapellido = $("input:text[id='form-apellidos']").val();
-        var txtcorreo = $("input:text[id='form-correo']").val();
-        var txtcontra = $("input:password[id='form-contra']").val();
-        var txtconfir = $("input:password[id='form-confirmacion']").val();
+        var txtnombre = $("input:text[id='form-nombre']").val().toLowerCase();
+        var txtapellido = $("input:text[id='form-apellidos']").val().toLowerCase();
+        var txtcorreo = $("input:text[id='form-correo']").val().toLowerCase();
+        txtcontra = $("input:password[id='form-contra']").val();
+        txtconfir = $("input:password[id='form-confirmacion']").val();
         //     var ckbterminos = $("input:checkbox[id='check-terminos']").val();
         var norobot = $("#norobot").val();
+        if($("#form-contra").val().length < 8) {  
+        jAlert("la contraseña debe tener como mínimo 8 caracteres");  
+        return false;
+        }  
+        
+        if($("#form-confirmacion").val().length < 8) {  
+        jAlert("la contraseña debe tener como mínimo 8 caracteres");  
+        return false;
+        }  
+        
         if ((txtnombre === "") || (txtapellido === "") || (txtcorreo === "") || (txtcontra === "") || (txtconfir === "") || (norobot === " ")) {
             $('#form-nombre').css({"border": "2px solid red"});
             $('#form-apellidos').css({"border": "2px solid red"});
@@ -104,79 +113,78 @@ $(document).ready(function () {
             $('#form-contra').css({"border": "2px solid Gainsboro"});
             $('#form-confirmacion').css({"border": "2px solid Gainsboro"});
             $("#norobot").css({"border": "2px solid Gainsboro"});
-
-            if (bandera2 === false) {
-                if (Cadena.test(txtnombre)) {
-                    $('#form-nombre').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#form-nombre').css({"border": "2px solid red"});
-                    bandera2 = false;
-                }
-                if (Cadena.test(txtapellido)) {
-                    $('#form-apellidos').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#form-apellidos').css({"border": "2px solid red"});
-                    bandera2 = false;
-                }
-                if (correo.test(txtcorreo)) {
-                    $('#form-correo').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#form-correo').css({"border": "2px solid red"});
-                    bandera2 = false;
-                }
-                if (txtcontra !== null) {
-                    $('#form-contra').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#form-contra').css({"border": "2px solid red"});
-                    bandera2 = false;
-                }
-                if (txtconfir !== null) {
-                    $('#form-confirmacion').css({"border": "2px solid Gainsboro"});
-                } else {
-                    $('#form-confirmacion').css({"border": "2px solid red"});
-                    bandera2 = false;
-                }
-                if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== null && (txtconfir !== null))) {
-                    bandera2 = true;
-                    if (bandera2 === true) {
-                        $.ajax({type: "POST",
-                            url: "../../bin/ingresar.php?categoria=registro",
-                            data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
-                            success: function (mns) {
-
-    
-                                switch(mns) {
-                                    case "e":
-                                    case "0":
-                                        jAlert("Ocurrio un error en el registro");
-                                        break;
-                                    case "1":
-                                        jAlert("Se mando un correo de confirmacion a la direccion que proporcionaste, por favor verificalo");
-										 $.limpiartexto();
-                                        break;
-                                    case "c":
-                                        jAlert("Por favor verifica que no eres un robot");
-                                        break;
-                                    default:
-                                        jAlert("Algo salio mal, intentalo de nuevo");
-                                        break;
-                                }
-//                                if (mns === "1") {
-//                                    jAlert("SE HA REGISTRADO CON EXITO");
-//
-//                                } else if (mns === 0) {
-//                                    jAlert("ERROR");
-//                                } else if (mns==="00"){
-//                                    jAlert("EL CORREO YA ESTA REGISTRADO");
-//                                }
-
-                            }
-                        });
+        }
+        if (bandera2 === false) {
+            if (Cadena.test(txtnombre)) {
+                $('#form-nombre').css({"border": "2px solid Gainsboro"});
+            } else {
+                $('#form-nombre').css({"border": "2px solid red"});
+                bandera2 = false;
+            }
+            if (Cadena.test(txtapellido)) {
+                $('#form-apellidos').css({"border": "2px solid Gainsboro"});
+            } else {
+                $('#form-apellidos').css({"border": "2px solid red"});
+                bandera2 = false;
+            }
+            if (correo.test(txtcorreo)) {
+                $('#form-correo').css({"border": "2px solid Gainsboro"});
+            } else {
+                $('#form-correo').css({"border": "2px solid red"});
+                bandera2 = false;
+            }
+            
+            if (txtcontra !== "") {
+                $('#form-contra').css({"border": "2px solid Gainsboro"});
+            } else {
+                $('#form-contra').css({"border": "2px solid red"});
+                bandera2 = false;
+            }  
+            if (txtconfir !== "") {
+                $('#form-confirmacion').css({"border": "2px solid Gainsboro"});
+            } else {
+                $('#form-confirmacion').css({"border": "2px solid red"});
+                bandera2 = false;
+            }
+            if (("" !== txtcontra) && (txtcontra === txtconfir)) {
+                $('#form-confirmacion').css({"border": "2px solid Gainsboro"});
+                 
+            } else {
+                $('#form-confirmacion').css({"border": "2px solid red"});
+                jAlert("Invalida la comparacion");
+                bandera2 = false;
+            }
+        }
+        if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== "") && (txtconfir !== "") && ("" !== txtcontra) && (txtcontra === txtconfir)) {
+            bandera2 = true;
+            if (bandera2 === true) {
+                $.ajax({type: "POST",
+                    url: "../../bin/ingresar.php?categoria=registro",
+                    data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
+                    success: function (mns) {
+                      //  alert(mns);
+                        switch (mns) {
+                            case "SI":
+                                jAlert("El correo y contraseña ya esta registrada");
+                                break;
+                            case "1":
+                                jAlert("Se mando un correo de confirmacion a la direccion que proporcionaste, por favor verificalo");
+                                $.limpiartexto();
+                                break;
+                            case "c":
+                                jAlert("Por favor verifica que no eres un robot");
+                                break;
+             
+                            default:
+                                jAlert("Algo salio mal, intentalo de nuevo");
+                                break;
+                        }
                     }
-                }
+                });
             }
         }
     });
+    
     $.limpiartexto = function () {
         $("input:text[id='form-nombre']").val("");
         $("input:text[id='form-apellidos']").val("");
@@ -186,7 +194,7 @@ $(document).ready(function () {
     };
 
     $("#enviar").on('click', function () {
-        var txtemaill = $("input:text[id='txtemaill']").val();
+        var txtemaill = $("input:text[id='txtemaill']").val().toLowerCase();
         // alert("hola"+txtemaill);
         /* var checkrobot = $("#norobot").val(); */
         if (txtemaill === "") {
@@ -194,7 +202,7 @@ $(document).ready(function () {
         } else {
             $('#txtemaill').css({"border": "2px solid Gainsboro"});
 
-            if (correo.test(txtemaill)) {
+        if (correo.test(txtemaill)) {
                 $('#txtemaill').css({"border": "2px solid Gainsboro"});
             } else {
                 $('#txtemaill').css({"border": "2px solid red"});
@@ -222,5 +230,83 @@ $(document).ready(function () {
             }
         }
     });
-    $('.loader').fadeOut("slow");
+   $('.loader').fadeOut("slow");
+});
+
+$(document).ready(function () {
+    $('input:password[id="form-contra"]').keyup(function () {
+        // set password variable
+        txtcontra = $(this).val();
+        //validate the length
+        if (txtcontra.length < 8) {
+            $('#length').removeClass('valid').addClass('invalid');
+        } else {
+            $('#length').removeClass('invalid').addClass('valid');
+        }
+
+        //validate letter
+        if (txtcontra.match(/[A-z]/)) {
+            $('#letter').removeClass('invalid').addClass('valid');
+        } else {
+            $('#letter').removeClass('valid').addClass('invalid');
+        }
+
+        //validate capital letter
+        if (txtcontra.match(/[A-Z]/)) {
+            $('#capital').removeClass('invalid').addClass('valid');
+        } else {
+            $('#capital').removeClass('valid').addClass('invalid');
+        }
+
+        //validate number
+        if (txtcontra.match(/\d/)) {
+            $('#number').removeClass('invalid').addClass('valid');
+        } else {
+            $('#number').removeClass('valid').addClass('invalid');
+        }
+
+    }).focus(function () {
+        $('#pswd_info').show();
+    }).blur(function () {
+        $('#pswd_info').hide();
+    });
+
+    $('input:password[id="form-confirmacion"]').keyup(function () {
+        // set password variable
+        txtconfir = $(this).val();
+        //validate the length
+        if (txtconfir.length < 8) {
+            $('#length').removeClass('valid').addClass('invalid');
+        } else {
+            $('#length').removeClass('invalid').addClass('valid');
+        }
+        //validate letter
+        if (txtconfir.match(/[A-z]/)) {
+            $('#letter').removeClass('invalid').addClass('valid');
+        } else {
+           
+            $('#letter').removeClass('valid').addClass('invalid');
+        }
+
+        //validate capital letter
+        if (txtconfir.match(/[A-Z]/)) {
+            $('#capital').removeClass('invalid').addClass('valid');
+        } else {
+            $('#capital').removeClass('valid').addClass('invalid');
+        }
+
+        //validate number
+        if (txtconfir.match(/\d/)) {
+            $('#number').removeClass('invalid').addClass('valid');
+        } else {
+            $('#number').removeClass('valid').addClass('invalid');
+        }
+
+    }).focus(function () {
+        $('#pswd_info').show();
+        $('#pswd_info').clearQueue();
+    }).blur(function () {
+        $('#pswd_info').clearQueue();
+        $('#pswd_info').hide();
+    });
 });
