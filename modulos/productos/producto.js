@@ -74,7 +74,7 @@ $(document).ready(function () {
     $('#categoria_elegida').text(supercategoria);
     $('#entrada_categoria').attr("value", supercategoria);
     var busqueda = $('#busqueda').attr("value").trim();
-    console.log(busqueda);
+//    console.log(busqueda);
     if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda) && busqueda.length != 0) {
         $('#AquiGrupo').append(busqueda);
         $('.breadcrumb').empty().append('<li><a href="../../modulos/inicio/index.php">Inicio</a></li><li>Productos</li><li><a></a>Busqueda</li>');
@@ -89,7 +89,7 @@ $(document).ready(function () {
                 url: "../../bin/ingresar.php?categoria=buscar",
                 data: {"categoria": supercategoria, "palabras": busqueda},
                 success: function(respuesta) {
-                    console.log(respuesta);
+//                    console.log(respuesta);
                     respuesta = JSON.parse(respuesta);
                     if(respuesta.length > 0) {
                         $.each(respuesta, function (j, producto) {
@@ -389,15 +389,15 @@ function cargarColores(productos_busqueda) {
     colores.sort();
     if(colores.length != 1)
         for (var i = 0; i < colores.length - 1; i++) {
-            if (colores[i] == colores[i+1]) {
+            if (colores[i] == colores[i+1] || colores[i] == null) {
                 colores.splice(i+1, 1);
                 i--;
             }
         }
-    else if(colores[0] == null)
+    if(colores[0] == null)
         colores = [];
     for (var i = 0; i < colores.length; i++) {
-        if (colores[i] != null || colores[i] != "")
+        if (colores[i] != "null" || colores[i] != "")
             $('#coloreamela').append('<li class="checkbox"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
     }
     if(colores.length != 0)

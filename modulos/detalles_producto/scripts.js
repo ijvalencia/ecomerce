@@ -102,19 +102,19 @@ function cargarProducto(codigo) {
             var dispCD = parseInt(articulo["disponibleCD"]);
             dispCD = dispCD <= 0 ? 0 : dispCD;
             var total_disp = disp + dispCD;
-            if (total_disp < 0) {
+            if (total_disp <= 0) {
 //            if (total_disp >= 0) {
 //                $('#btn_comprar').hide();
 //                $('#numero_comprar').hide();
                 $('producto').empty();
-                cargarPaginaContacto();
+                cargarPaginaContacto(articulo);
                 return false;
             }
             $('#nombre_categoria').append(articulo["grupo"]);
             $('#nombre_categoria').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=" + articulo["grupo"]);
             $('#nombre_marca').append(articulo["marca"]);
             $('#nombre_marca').attr("href", "../../modulos/productos/detalles.php?extra=1&supercategoria=Todo&busqueda=" + articulo["marca"]);
-            $('#nombre_producto').append(articulo["clave"]);
+            $('#nombre_producto').append(articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
             $('#img_producto').attr("src", articulo["imagen"]);
             $('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
             $('#descripcion_producto').append(articulo["descripcion"]);
@@ -164,12 +164,22 @@ function formatoMoneda(numero) {
     return numero;
 }
 
-function cargarPaginaContacto() {
+function cargarPaginaContacto(articulo) {
+//    console.log(articulo);
     $.ajax({
         url: "../error/sin_disponibilidad.php",
         dataType: "HTML",
         success: function(resp) {
+            resp = resp.replace("#imagen", articulo.imagen);
+            resp = resp.replace("#producto", articulo.descripcion.substr(0,45) + "...");
+            resp = resp.replace("#codigo", articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
+            resp = resp.replace("#costo", "$ " + formatoMoneda(parseFloat(articulo.precio)));
             $('producto').append(resp);
+            $('#nombre_categoria').append(articulo.grupo);
+            $('#nombre_categoria').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=" + articulo.grupo);
+            $('#nombre_marca').append(articulo.marca);
+            $('#nombre_marca').attr("href", "../../modulos/productos/detalles.php?extra=1&supercategoria=Todo&busqueda=" + articulo.marca);
+            $('#nombre_producto').append(articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
         }
     });
 }

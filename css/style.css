@@ -1229,3 +1229,24 @@ label {
     margin-left: 149px;
     width: 329px; 
 }
+#formulario_contacto {
+    position: absolute;
+    width: 40%;
+    margin: 0px 100px;
+}
+.txt-top {
+    width: 160%;
+    margin-bottom: 40px;
+}
+#formulario_contacto .form-control {
+    margin: -15px 90px;
+}
+#formulario_contacto .btn {
+    margin: -10px 180px;
+    margin-bottom: 10px;
+    width: 40%;
+}
+#formulario_contacto center {
+    margin-left: 90px;
+    width: 100%
+}

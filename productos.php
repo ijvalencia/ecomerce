@@ -6,9 +6,9 @@ $username = "desarrollo";
 $password = "Pa55w0rd!crm";
 
 /* BD LOCAL */
-$con = mysqli_connect("127.0.0.1", "root", "", "ecommerce");
+//$con = mysqli_connect("127.0.0.1", "root", "", "ecommerce");
 
-//$con = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
+$con = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
 if (mysqli_connect_errno($con)) {
     echo "Error al conectar con MySQL: " . mysqli_connect_error();
     exit();
