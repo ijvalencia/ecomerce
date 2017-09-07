@@ -14,23 +14,23 @@
                         <!-- Form de login -->
                         <div class="form-box">
                             <div class="form-top">
-                                <h5>CAMBIAR CONTRASEÑA</h5>
+                                <h5>Tu cuenta de confirmacion</h5>
                                 <h6></h6>
                             </div>
                             <div class="form-bottom">
                              <form role="form" class="login-form" id="commentForm">
+                                 
                                   <div class="form-group">
-                                        <h6>Introduce tu cuenta:</h6>
+                                        <h6>Introduce tu Clave de Confirmacion :</h6>
                                         <label class="sr-only" for="form-correo">Introdusca tu correo:</label>
-                                        <input type="text" name="correo" placeholder="Ejemplo@correo.com " class="form-correo form-control" id="id_emailssss">
-                                    </div>
-                               
-                                    <div class="form-group">
-                                         <h6>Contraseña Nueva Contraseña</h6>
-                                        <label class="sr-only" for="form-password">Nueva Contraseña:</label>
-                                        <input type="password" name="contra" class="form-password form-control" placeholder="Nueva : c0l3r@" id="id_nuevapass">
-                                    </div>
-                                  <button type="button" class="btn" id="btncambiar">Guardar</button>
+                                        <input type="text" name="correo" placeholder="Ejemplo 1234" class="form-correo form-control" id="id_clave" maxlength="10">
+                                    </div>   
+                                <div class="form-group">
+                                        <h6>Introduce tu cuneta :</h6>
+                                        <label class="sr-only" for="form-correo">Introdusca tu correo:</label>
+                                        <input type="text" name="correo" placeholder="Ejemplo@correo.com " class="form-correo form-control" id="id_correoss" maxlength="30">
+                                </div> 
+                                  <button type="button" class="btn" id="btnconfirmar">Guardar</button>
                                 <br>
                              </form>
                            </div>
@@ -38,8 +38,7 @@
                     </div>
                 </div>
             </div>        
-        </div>
-         
-         <script src="cambiocontrasena.js"></script>
+        </div>  
+      <script src="Confirmacion.js"></script>
     </body>
 </html>

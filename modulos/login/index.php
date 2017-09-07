@@ -29,15 +29,15 @@
                                     <div class="form-group">
                                         <h6>Correo:</h6>
                                         <label class="sr-only" for="form-correo">Correo:</label>
-                                        <input type="text" name="correo" placeholder="Ejemplo: mi_correo@gmail.com" class="form-correo form-control" id="form-mail">
+                                        <input type="text" name="correo" placeholder="Ejemplo: mi_correo@gmail.com" class="form-correo form-control" id="form-mail" maxlength="30">
                                     </div>
                                     <div class="form-group">
                                         <h6>Contraseña:</h6>
                                         <label class="sr-only" for="form-password">Contraseña:</label>
-                                        <input type="password" name="contra" class="form-password form-control" id="form-pass">
+                                        <input type="password" name="contra" class="form-password form-control" id="form-pass" maxlength="30">
                                     </div>
                                     <div class="col-sm-12">
-                                        <input style="width: 26px" type="checkbox" name="check-terminos" class="col-sm-12" id="check-login"/>
+                                        <input style="width: 26px" type="checkbox" name="check-terminos" class="col-sm-12" id="check-login" maxlength="30"/>
                                         <div class="form-group">
                                             <label for="check-terminos" class="form-label">
                                                 Recordarme
@@ -60,7 +60,7 @@
                                                         <h4 class="modal-title">Restableser Contraseña</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <label>correo :<input type="text" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" class="form-control" style="margin-left: 73px; margin-top: -31px;"></label>
+                                                        <label>correo :<input type="text" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" class="form-control"  maxlength="50"style="margin-left: 73px; margin-top: -31px;"></label>
                                                         <a href="RecuperarContrasena.php"></a>
                                                         <br>                                       
                                                     </div>
@@ -101,27 +101,27 @@
                                     <h6>Nombre:</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-nombre">Nombre</label>
-                                        <input type="text" name="nombre" placeholder="Ejemplo: Armando" class="form-nombre form-control" id="form-nombre">
+                                        <input type="text" name="nombre" placeholder="Ejemplo: Armando" class="form-nombre form-control" id="form-nombre" maxlength="30">
                                     </div>
                                     <h6>Apellidos:</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-apellidos">Apellidos</label>
-                                        <input type="text" name="apellidos" placeholder="Ejemplo: López González" class="form-apellidos form-control" id="form-apellidos">
+                                        <input type="text" name="apellidos" placeholder="Ejemplo: López González" class="form-apellidos form-control" id="form-apellidos" maxlength="30">
                                     </div>
-                                    <h6>Correo:</h6>
+                                    <h6>Correo Actual:</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-correo">Correo</label>
-                                        <input type="text" name="correo" placeholder="Ej: mi_correo@gmail.com" class="form-correo form-control" id="form-correo">
+                                        <input type="text" name="correo" placeholder="Ej: mi_correo@gmail.com" class="form-correo form-control" id="form-correo" maxlength="30">
                                     </div>
                                     <h6>Contraseña:</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-contra">Contraseña</label>
-                                        <input type="password" name="contra" class="form-contra form-control" id="form-contra">
+                                        <input type="password" name="contra" class="form-contra form-control" id="form-contra" maxlength="30">
                                     </div>
                                     <h6>Confirmar la contraseña</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="confirmacion">Confirma tu contraseña:</label>
-                                        <input type="password" name="confirmacion" class="form-confirmacion form-control" id="form-confirmacion"><br>
+                                        <input type="password" name="confirmacion" class="form-confirmacion form-control" id="form-confirmacion" maxlength="30"><br>
                                         <div class="g-recaptcha" data-sitekey="6Ld_1i0UAAAAAICeMTzxRahb9jFR8HA5IHAE5wmc" id="norobot"></div>
                                     </div>
                                     <div class="col-sm-12">
@@ -132,6 +132,9 @@
                                             </label>
                                         </div>
                                     </div>
+                                    
+                                    <button type="button" class="btn" id="btn-enviar" >Guardar</button>
+<!--
                                     <button type="button" class="btn" id="btn-enviar" data-toggle="modal" data-target="#largeModal" data-backdrop="static" data-keyboard="false">Guardar</button>
                                     <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
@@ -142,8 +145,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <!--<h3>Continuar con el registro</h3>-->
-
+                                                    
                                                     <label>Nombre :<input type="text" name="txtnombre" class="form-control" id="txtnombred"></label>
                                                     <label>Apellido :<input type="text" name="txtapellido" class="form-control" id="txtapellidod"></label>
                                                     <label>Telefono :<input type="text" name="txttelefono" class="form-control" id="txttelefonod"></label><br>
@@ -167,13 +169,14 @@
 
                                                 <br><br><br><br><br><br><br>
                                                   <div class="modal-footer">
-                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                  
                                                     <button type="button" class="btn btn-primary" id="btn-direccion" data-dismiss="modal">Guardar</button>
                                                   </div>
                                                 <br>
                                             </div>
                                         </div>
                                     </div>
+>>>>>>> 8a52799419268e4d739845d4780a387cc0b264a3-->
                                 </form>
                             </div>
                         </div>          	

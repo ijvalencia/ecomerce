@@ -15,33 +15,17 @@ if ((isset($_GET['capacidadg'])) || (isset($_GET['capacidadt']))) {
 
 switch ($Menu) {
 // registro de para login
-    case "registro":
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $correo = $_POST['correos'];
-        $contrasena = $_POST['contrasena'];
-        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
-        break;
-
-//inicio de sesionen
-    case "email":
-        $correo = $_POST['correo'];
-        $contra = $_POST['contra'];
-        $conexion->login($correo, $contra);
-        break;
+//    case "registro":
+//        $nombre = $_POST['nombre'];
+//        $apellido = $_POST['apellido'];
+//        $correo = $_POST['correos'];
+//        $contrasena = $_POST['contrasena'];
+//        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
+//        break;
 
     /* SATANAS */
     case "envios":
         $conexion->getEnvios();
-        break;
-
-    case "agregarOrden":
-        $usuario = $_POST['usuario'];
-        $direccion = $_POST['direccion'];
-        $envio = $_POST['envio'];
-        $total = $_POST['total'];
-        $metodo_pago = $_POST['metodo_pago'];
-        $conexion->agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, 1);
         break;
 
     case "sesion":
@@ -96,21 +80,23 @@ switch ($Menu) {
             }
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
-            if (!$data) {
-                echo "{}";
-            } else {
+            if ($data) {
                 $articulo = simplexml_load_string($data);
                 if (sizeof($articulo) > 1) {
-                    foreach ($articulo->item as $objeto) {
-                        if (strcmp($objeto->codigo_fabricante, $_GET['codigo']) == 0) {
-                            echo '{"item":' . json_encode($objeto) . '}';
-                            break;
-                        }
-                    }
-                } else {
+                    echo "{}";
+                } else if (sizeof($articulo) < 1) {
+                    $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+                    $context = stream_context_create(array('http' => array('timeout' => 3)));
+                    $data = file_get_contents($filename, false, $context);
+                    $articulo = simplexml_load_string($data);
+                    if (sizeof($articulo) < 1)
+                        echo "{}";
+                    else
+                        echo json_encode($articulo);
+                } else
                     echo json_encode($articulo);
-                }
-            }
+            } else
+                echo "{}";
         }
         break;
 
@@ -136,7 +122,6 @@ switch ($Menu) {
         $conexion->getEstadoCategoria($_GET["subcategoria"]);
         break;
     case "parametros":
-        $conexion->setTipoCambio();
         $conexion->getParametros();
         break;
     case "buscar":
@@ -157,11 +142,18 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
+    case "confirmacion":
+      $confirmacionclave = $_POST["clave"]; 
+      $confirmacioncorreo = $_POST["correosc"];  
+      $conexion->confirmacion($confirmacionclave,$confirmacioncorreo);
+    break;
+    
     case "estados":
         $conexion->estado();
         break;
 
     case "registrodirecion":
+        $number = $_POST['usuario'];
         $txtnombredire = $_POST['nombredire'];
         $txtapellidodire = $_POST['apellidodire'];
         $txttelefonodire = $_POST['telefono'];
@@ -175,15 +167,16 @@ switch ($Menu) {
         $colonia = $_POST["colonia"];
         $txtcruseros = $_POST['cruseros'];
         $txtcrusero2 = $_POST['crusero2'];
-        $txtreferencia = $_POST['referencia'];
-
-        $conexion->agregardirecciones($txtnombredire, $txtapellidodire, $txttelefonodire, $txttelefono2dire, $txtcalledire, $txtexteriordire, $txtinteriordire, $txtcodigopostaldire, $txtselectestado, $txtciudad, $colonia, $txtcruseros, $txtcrusero2, $txtreferencia);
-        break;
+        $txtreferencia = $_POST['referencia'];   
+        $conexion->agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
+    break;
 
     case "cambiarContraseña":
-        $txtantiguoscontra = $_POST['antiguacontrasena'];
+        $txtcorreosUpdate = $_POST['cuenta'];
+       // $txtantiguoscontra = $_POST['antiguacontrasena'];
         $txtnuevocontra = $_POST['nuevacontrasena'];
-        $conexion->cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra);
+        $conexion->cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra);
+        
         break;
 
     case "olvidecontrasena":
@@ -287,22 +280,21 @@ switch ($Menu) {
         $apellido = $_POST['apellido'];
         $correo = $_POST['correos'];
         $contrasena = $_POST['contrasena'];
-        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         $captcha = $_POST['robot'];
-
         if (!$captcha) {
-            echo '<h2>Please check the the captcha form.</h2>';
-            exit;
+        //  exit;
+            echo 'c';
+            break;
         }
-        $secretKey = "";
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX" . $captcha . "&remoteip=" . $ip);
-        $responseKeys = json_decode($response, true);
-        if (intval($responseKeys["success"]) !== 1) {
-            echo '<h2>You are spammer ! Get the @$%K out</h2>';
-        } else {
-            echo '<h2>Thanks for posting comment.</h2>';
-        }
+	   	$secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
+	   	$ip = $_SERVER['REMOTE_ADDR'];
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey.$captcha."&remoteip=".$ip);
+	   	$responseKeys = json_decode($response,true);
+
+        if(intval($responseKeys["success"]) !== 1)
+            echo 'e';
+        else
+            $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
         break;
 
     /*     * ******* */

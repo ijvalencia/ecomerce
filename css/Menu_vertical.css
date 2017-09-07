@@ -117,13 +117,13 @@ nav.sidebar, .main{
   }
 
 /* SATANAS */
-    nav.sidebar {
-      position: sticky;
-      width: 200px;
-      height: 100%;
-      margin-left: 0px;
-      float: left;
-      margin-bottom: 0px;
-      margin-top: 10px;
-    }
+nav.sidebar {
+    position: sticky;
+    width: 200px;
+    height: 100%;
+    margin-left: 0px;
+    float: left;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
 /***********/

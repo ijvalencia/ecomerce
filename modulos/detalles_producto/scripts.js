@@ -7,13 +7,13 @@ var nombre;
 var apellido;
 var number;
 
-
 var articulo;
 var iva;
 var parametros;
 var tipo_cambio;
 var like;
 var fav;
+
 $(document).ready(function () {
     /* Mostrar producto */
     $.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
@@ -49,27 +49,24 @@ $(document).ready(function () {
 
     $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
         sesion = datos;
-        console.log(sesion);
+//        console.log(sesion);
         var stringB = new String(sesion);
         var field = stringB.split(",");
         nombre = field[0];
         apellido = field[1];
         number = field[2];
-        $.get("../../bin/ingresar.php?categoria=verlike&usuario=" + number + "&producto=" + producto,
-                function (respuesta) {
-
-                    like = respuesta;
-                    mostrarlike('#icono_like');
-                });
-        $.get("../../bin/ingresar.php?categoria=verfavorito&usuario=" + number + "&producto=" + producto,
-                function (respuesta) {
-                    fav = respuesta;
-                    //alert(fav);
-                    mostrarfavorito("#icono_fav");
-                });
+        $.get("../../bin/ingresar.php?categoria=verlike&usuario=" + number + "&producto=" + producto, function (respuesta) {
+            like = respuesta;
+            mostrarlike('#icono_like');
+        });
+        $.get("../../bin/ingresar.php?categoria=verfavorito&usuario=" + number + "&producto=" + producto, function (respuesta) {
+            fav = respuesta;
+            //alert(fav);
+            mostrarfavorito("#icono_fav");
+        });
     });
-
 });
+
 $('#like').click(function () {
 
     $.get("../../bin/ingresar.php?categoria=vermeterlike&usuario=" + number + "&producto=" + producto,
@@ -90,11 +87,11 @@ $('#fav').click(function () {
 
 });
 //fin Anton
+
 function cargarProducto(codigo) {
     if (codigo.length > 3) {
-        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function (datos) {
-            // console.log(datos);
-            if (datos['item'] == undefined || datos['item'][1] != undefined) {
+        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function(datos) {1
+            if (datos['item'] == undefined || datos['item'][1] != undefined || datos.length <= 0) {
                 window.location.replace("../../modulos/error/index.php");
                 $('.loader').fadeOut("slow");
                 return;
@@ -108,14 +105,18 @@ function cargarProducto(codigo) {
             dispCD = dispCD <= 0 ? 0 : dispCD;
             var total_disp = disp + dispCD;
             if (total_disp <= 0) {
-                $('#btn_comprar').hide();
-                $('#numero_comprar').hide();
+//            if (total_disp >= 0) {
+//                $('#btn_comprar').hide();
+//                $('#numero_comprar').hide();
+                $('producto').empty();
+                cargarPaginaContacto(articulo);
+                return false;
             }
             $('#nombre_categoria').append(articulo["grupo"]);
             $('#nombre_categoria').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=" + articulo["grupo"]);
             $('#nombre_marca').append(articulo["marca"]);
             $('#nombre_marca').attr("href", "../../modulos/productos/detalles.php?extra=1&supercategoria=Todo&busqueda=" + articulo["marca"]);
-            $('#nombre_producto').append(articulo["clave"]);
+            $('#nombre_producto').append(articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
             $('#img_producto').attr("src", articulo["imagen"]);
             $('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
             $('#descripcion_producto').append(articulo["descripcion"]);
@@ -125,11 +126,6 @@ function cargarProducto(codigo) {
             ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"] : "NO EXISTE INFORMACION ADICIONAL";
             $('#descripcion_producto2').append(articulo.ficha_tecnica);
             $('#descripcion_producto2').append("<br>");
-            /*var fcomercial = articulo["ficha_comercial"];
-             if (!jQuery.isEmptyObject(fcomercial)) {
-             fcomercial = fcomercial.replace("/13", "<br>");
-             $('#descripcion_producto2').append(fcomercial);
-             }*/
             $('#codigo_fabricante').append(articulo["codigo_fabricante"]);
             $('#tiempo_garantia').append(articulo["garantia"].replace("NI", "Ñ"));
             for (var i = 0; i < categorias_sin_cantidad.length; i++) {
@@ -151,7 +147,7 @@ $('#btn_comprar').click(function () {
         url: "../../bin/ingresar.php?categoria=setCarrito",
         data: {"articulo": articulo},
         success: function (resp) {
-            console.log(resp);
+//            console.log(resp);
             if (resp !== "0") {
                 jAlert("Agregado al carrito");
                 window.location.href = "../../modulos/carrito/index.php";
@@ -170,6 +166,25 @@ function formatoMoneda(numero) {
     return numero;
 }
 
+function cargarPaginaContacto(articulo) {
+//    console.log(articulo);
+    $.ajax({
+        url: "../error/sin_disponibilidad.php",
+        dataType: "HTML",
+        success: function(resp) {
+            resp = resp.replace("#imagen", articulo.imagen);
+            resp = resp.replace("#producto", articulo.descripcion.substr(0,45) + "...");
+            resp = resp.replace("#codigo", articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
+            resp = resp.replace("#costo", "$ " + formatoMoneda(parseFloat(articulo.precio)));
+            $('producto').append(resp);
+            $('#nombre_categoria').append(articulo.grupo);
+            $('#nombre_categoria').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=" + articulo.grupo);
+            $('#nombre_marca').append(articulo.marca);
+            $('#nombre_marca').attr("href", "../../modulos/productos/detalles.php?extra=1&supercategoria=Todo&busqueda=" + articulo.marca);
+            $('#nombre_producto').append(articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
+        }
+    });
+}
 
 ///    ANTON
 // cargar comentarios
@@ -177,7 +192,7 @@ var cargado = false;
 var number = 0;
 $.getJSON("../../bin/ingresar.php?categoria=sesion", function (datos) {
     sesion = datos;
-    console.log(sesion);
+//    console.log(sesion);
     var stringB = new String(sesion);
     var field = stringB.split(",");
     number = field[2];
@@ -187,7 +202,6 @@ var producto = $('#producto').attr("value");
 $.get("../../bin/ingresar.php?categoria=verNumeroComentarios&producto=" + producto, function (respuesta) {
     $('#comentarios').append("<a  href='#' title='Ver comentarios de los usuarios' onclick='vercomentario()'>" + respuesta + "</a>");
 });
-
 
 //  funciones
 

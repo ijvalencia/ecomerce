@@ -3,16 +3,6 @@
 class BD {
 
     protected $conexion;
-    public $url_cva;
-    public $str_codigo;
-    public $str_marca;
-    public $str_grupo;
-    public $str_clave;
-    public $str_tc; // tipo de cambio 1 USD
-    public $str_promos;
-    public $str_porcentaje;
-    public $str_dc;
-    public $str_dt;
 
     // Procedimiento para conectar 
     public function conectar() {
@@ -30,92 +20,18 @@ class BD {
 
     // Procedimiento para cerrar conexion
     public function cerrar() {
+        //mysqli_close($this->conexion);
         $this->conexion = NULL;
     }
 
     // Constructor Conecta a la BD
     function __construct() {
         $this->conectar();
-        $this->url_cva = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813";
-        $this->str_codigo = "&codigo=%";
-        $this->str_marca = "&marca=%";
-        $this->str_grupo = "&grupo=%";
-        $this->str_clave = "&clave=%";
-        $this->str_tc = "&tc=1"; // tipo de cambio 1 USD
-        $this->str_promos = "&promos=";
-        $this->str_porcentaje = "&porcentaje=";
-        $this->str_dc = "&dc=";
-        $this->str_dt = "&dt=";
     }
 
     // Destructor
     function __destruct() {
         $this->cerrar();
-    }
-
-    //	Procedimiento Login
-    // Agregar encriptacion, buscar manual passwords php
-    public function validarContra($usuario, $contra) {
-        $sql = "SELECT contra FROM usuario WHERE id_usuario=" . $usuario;
-        $pass = $this->conexion->query($sql);
-        echo strcmp($pass['contra'], $contra); // 0 si son iguales
-    }
-
-    /* Agregar datos */
-
-    // telefono, inerior, colonia, cruce 1 y 2, referencia pueden ser NULL
-    public function agregarDireccion($direccion, $usuario, $nombre, $apellidos, $celular, $telefono, $calle, $exterior, $interior, $cp, $ciudad, $colonia, $cruce1, $cruce2) {
-        $sql = "INSERT INTO direccion (id_usuario, nombre, apellidos, celular, telefono,
-        calle, exterior, interior, cp, ciudad, colonia, cruce1, cruce2, referencia) 
-        VALUES ('" . $usuario . "','"
-                . $nombre . "','"
-                . $apellidos . "','"
-                . $celular . "',"
-                . !is_null($telefono) ? "'" . $telefono . "','" : "NULL,'"
-                . $calle . "','"
-                . $exterior . "',"
-                . !is_null($interior) ? "'" . $interior . "','" : "NULL,'"
-                . $cp . "','"
-                . $ciudad . "',"
-                . !is_null($colonia) ? "'" . $colonia . "'," : "NULL,"
-                . !is_null($cruce1) ? "'" . $cruce1 . "'," : "NULL,"
-                . !is_null($cruce2) ? "'" . $cruce2 . "'," : "NULL,"
-                . !is_null($referencia) ? "'" . $referencia . "'" : "NULL"
-                . ")";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    public function agregarProducto($nombre, $imagen, $precio, $categoria, $descripcion, $fabricante, $existencias) {
-        $sql = "INSERT INTO producto (nombre, imagen, precio, categoria, descripcion, fabricante, existencias)
-        VALUES ('" . $nombre . "','" . $imagen . "','" . $precio . "','" . $categoria . "','" . $descripcion . "','" . $fabricante . "','" . $existencias . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    public function agregarComentario($usuario, $producto, $comentario, $calificacion) {
-        $sql = "INSERT INTO comentario (id_usuario, id_producto, comentario, calificacion)
-        VALUES ('" . $usuario . "','" . $producto . "','" . $comentariio . "','" . $calificacion . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    public function agregarEnvio($metodo, $descripcion, $empresa) {
-        $sql = "INSERT INTO envios (metodo, descripcion, empresa)
-        VALUES ('" . $metodo . "','" . $descripcion . "','" . $empresa . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    public function agregarFavorito($usuario, $producto) {
-        $sql = "INSERT INTO favoritos (id_usuario, id_producto)
-        VALUES ('" . $usuario . "','" . $producto . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    // Comentario puede ser NULL
-    public function agregarLike($usuario, $producto, $megusta, $comentario) {
-        $sql = "INSERT INTO gustar (id_nombre, id_producto, comentario, megusta)
-        VALUES ('" . $usuario . "','" . $producto . "',"
-                . !is_null($comentario) ? "'" . $comentario . "'" : "NULL"
-                . ",'" . $megusta . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
 
     // Agrega numero de guia
@@ -124,69 +40,6 @@ class BD {
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
 
-    // Comentario puede ser NULL
-    public function agregarValoracion($usuario, $ordenes, $envio, $concordancia, $experiencia, $promedio, $comentario) {
-        $sql = "INSERT INTO valoraciones (id_usuario, id_orden, envio, concordancia, experiencia, promedio, comentario)
-		VALUES ('" . $usuario . "','" . $ordenes . "','" . $envio . "','" . $concordancia . "','" . $experiencia . "','" . $promedio . "'," .
-                (!is_null($comentario) ? "'" . $comentario . "'" : "NULL") . ")";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    /* Obtner datos */
-
-    public function getDireccion($usuario) {
-        $sql = "SELECT * FROM direccion WHERE id_usuario = " . $id;
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['id_direccion'] . "||";
-            echo $row['nombre'] . "||";
-            echo $row['apellidos'] . "||";
-            echo $row['celular'] . "||";
-            echo $row['telefono'] . "||";
-            echo $row['calle'] . "||";
-            echo $row['exterior'] . "||";
-            echo $row['interior'] . "||";
-            echo $row['cp'] . "||";
-            echo $row['estado'] . "||";
-            echo $row['ciudad'] . "||";
-            echo $row['colonia'] . "||";
-            echo $row['cruce1'] . "||";
-            echo $row['cruce2'] . "||";
-            echo $row['refrencia'] . "||";
-        }
-    }
-
-    // Solo necesita un parametro, los demas a NULL
-    public function getProducto($id, $nombre, $categoria) {
-        if (!is_null($id)) {
-            $sql = "SELECT * FROM producto WHERE id_producto = " . $id;
-        } else if (!is_null($nombre)) {
-            $sql = "SELECT * FROM producto WHERE nombre = '" . $nombre . "'";
-        } else if (!is_null($categoria)) {
-            $sql = "SELECT * FROM producto WHERE categoria = '" . $categoria . "'";
-        } else {
-            echo "NOPE";
-        }
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['id_producto'] . "||";
-            echo $row['nombre'] . "||";
-            echo $row['imagen'] . "||";
-            echo $row['precio'] . "||";
-            echo $row['categoria'] . "||";
-            echo $row['descripcion'] . "||";
-            echo $row['fabricante'] . "||";
-            echo $row['existencias'] . "||";
-        }
-    }
-
-    public function getComentario($usuario, $producto) {
-        $sql = "SELECT comentario, calificacion FROM comentario WHERE id_usuario=" . $usuario . " AND id_producto=" . $producto;
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['comentario'] . "||";
-            echo $row['calificacion'] . "||";
-        }
-    }
-
-    // regresa todos los tipos de envios
     public function getEnvios() {
         $sql = "SELECT * FROM envios";
         $datos = array();
@@ -196,111 +49,16 @@ class BD {
         echo json_encode($datos);
     }
 
-    public function getDatosEnvio($envio) {
-        $sql = "SELECT metodo, empresa FROM envios WHERE id_envios=" . $envio;
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['metodo'] . "||";
-            echo $row['empresa'] . "||";
-        }
-    }
-
-    public function getFavoritos($usuario) {
-        $sql = "SELECT id_producto FROM favoritos WHERE id_usuario=" . $usuario;
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['id_producto'] . "||";
-        }
-    }
-
-    // Muestra la cantidad y luego todos los comentarios
-    public function getLikesProducto($producto) {
-        $aux = true;
-        $sql = "SELECT COUNT(megusta) AS cantidad, comentario FROM gustar WHERE id_producto=" . $producto;
-        foreach ($this->conexion->query($sql) as $row) {
-            if ($aux) {
-                echo $row['cantidad'] . "||";
-                $aux = false;
-            }
-            echo $row['comentario'] . "||";
-        }
-    }
-
-    public function getLikesUsuario($usuario, $producto) {
-        $sql = "SELECT megusta FROM gustar WHERE id_usuario=" . $usuario . " AND id_producto=" . $producto;
-        $valor = $this->conexion->query($sql);
-        echo $valor['megusta'];
-    }
-
-    public function getOrdenes($usuario) {
-        $sql = "SELECT id_ordenes, id_direccion, id_envio, fecha, total, metodo_pago, estado, guia FROM ordenes WHERE id_usuario=" . $usuario;
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['id_ordenes'] . "||";
-            echo $row['id_direccion'] . "||";
-            echo $row['id_envio'] . "||";
-            echo $row['fecha'] . "||";
-            echo $row['total'] . "||";
-            echo $row['metodo_pago'] . "||";
-            echo $row['estado'] . "||";
-            echo $row['guia'] . "||";
-        }
-    }
-
-    public function getProductosOrden($orden) {
-        $sql = "SELECT id_producto, cantidad, subtotal FROM productos_orden WHERE id_orden=" . $orden;
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['id_producto'] . "||";
-            echo $row['cantidad'] . "||";
-            echo $row['subtotal'] . "||";
-        }
-    }
-
-    public function getValoraciones($usuario, $orden) {
-        $sql = "SELECT envio, concordancia, experiencia, promedio, comentario
-		FROM valoraciones WHERE id_usuario=" . $usuario . " AND id_orden=" . $orden;
-        foreach ($this->conexion->query($sql) as $row) {
-            echo $row['envio'] . "||";
-            echo $row['concordancia'] . "||";
-            echo $row['experiencia'] . "||";
-            echo $row['promedio'] . "||";
-            echo $row['comentario'] . "||";
-        }
-    }
-
-    /* Actualizar datos */
-
     public function cambiarEstadoOrden($orden, $estado) {
         $sql = "UPDATE ordenes SET estado = " . estado . " WHERE id_ordenes=" . $orden;
         // 1 se realizo consulta con exito, 0 no se realizo
         echo $this->conexion->query($sql) ? "1" : "0";
     }
 
-    /* Eliminar datos */
-
     public function borrarDireccion($direccion) {
         $sql = "DELETE FROM direccion WHERE id_direccion=" . $direccion;
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
-
-    public function borrarFavoritos($usuario, $producto) {
-        $sql = "DELETE FROM favoritos WHERE id_usuario=" . $usuario . " AND id_producto=" . $producto;
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    public function borrarLike($usuario, $producto) {
-        $sql = "DELETE FROM gustar WHERE id_usuario=" . $usuario . " AND id_producto=" . $producto;
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
-
-    /*     * ***************** NO USAR PELIGRUS!!! ****************** */
-
-    function verTodosProductos() {
-        $filename = $url_cva . "&marca=%&grupo=%&clave=%&codigo=%";
-        set_time_limit(5000);
-        $articulos = simplexml_load_file($filename);
-        echo json_encode($articulo);
-    }
-
-    /*     * ****************** FIN DEL PELIGRUS ******************** */
-
 
     /* SATANAS */
 
@@ -314,7 +72,7 @@ class BD {
     }
 
     public function getSubcategorias($categoria) {
-        $sql = 'SELECT * FROM relacion_categorias WHERE id_supercategoria = "' . $categoria . '"';
+        $sql = 'SELECT * FROM relacion_categorias WHERE id_supercategoria = "' . $categoria . '" AND id_categoria IN (SELECT nombre FROM categoria WHERE estado <> 0)';
         if ($categoria === "666")
             $sql = 'SELECT * FROM relacion_categorias WHERE 1';
         $datos = [];
@@ -346,16 +104,6 @@ class BD {
             echo json_encode($row);
     }
 
-    public function setTipoCambio() {
-        $sql = "SELECT * FROM producto ORDER BY RAND() LIMIT 1";
-        foreach ($this->conexion->query($sql) as $res)
-            $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $res["codigo_fabricante"] . "&tc=1";
-        $articulo = simplexml_load_file($filename);
-        $valor = $articulo->item->tipocambio;
-        $sql = "UPDATE parametros SET tipo_cambio=" . $valor . " WHERE 1";
-        $this->conexion->query($sql);
-    }
-
     public function setCompraMaxima($valor) {
         $sql = "UPDATE parametros SET compra_maxima=" . $valor . " WHERE 1";
         $this->conexion->query($sql);
@@ -367,29 +115,38 @@ class BD {
     }
 
     public function busqueda($categoria, $palabras) {
-        $sql = [];
-        if ($categoria === "Todo")
-            foreach ($palabras as $busqueda) {
-                if (substr($busqueda, -1) == 'S')
-                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
-                array_push($sql, "SELECT * FROM producto WHERE descripcion LIKE '%" . $busqueda . "%' OR grupo LIKE '%" . $busqueda . "%' GROUP BY codigo_fabricante ORDER BY departamento");
-            } else
-            foreach ($palabras as $busqueda) {
-                if (substr($busqueda, -1) == 'S')
-                    $busqueda = substr($busqueda, strlen($busqueda) - 1);
-                array_push($sql, "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE descripcion LIKE '%" . $busqueda . "%' OR grupo LIKE '%" . $busqueda . "%' ORDER BY departamento");
+        if ($categoria === "Todo") {
+            if (sizeof($palabras) == 1)
+                $sql_inicio = "SELECT * FROM producto WHERE descripcion LIKE '%".$palabras[0]."%' OR grupo LIKE '%".$palabras[0]."%' OR marca LIKE '%".$palabras[0]."%' GROUP BY codigo_fabricante ORDER BY departamento";
+            else {
+                $sql_inicio = "SELECT * FROM producto WHERE codigo_fabricante <> NULL ";
+                $sql_fin = " GROUP BY codigo_fabricante ORDER BY departamento";
+                foreach ($palabras as $busqueda) {
+                    if (substr($busqueda, -1) == 'S' || substr($busqueda, -1) == 's')
+                        $busqueda = substr($busqueda, 0, sizeof($busqueda) -2);
+                    $sql_inicio = $sql_inicio."AND descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' OR marca LIKE '%".$busqueda."%'";
+                }
+                $sql_inicio = $sql_inicio.$sql_fin;
             }
-        $arr = [];
-        foreach ($sql as $consulta) {
-            $datos = [];
-            foreach ($this->conexion->query($consulta) as $row) {
-                // if(sizeof($datos) >= 100)
-                //     break;
-                array_push($datos, $row);
+        } else {
+            if (sizeof($palabras) == 1)
+                $sql_inicio = "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE descripcion LIKE '%".$palabras[0]."%' OR grupo LIKE '%".$palabras[0]."%' OR marca LIKE '%".$palabras[0]."%' GROUP BY codigo_fabricante ORDER BY departamento";
+            else {
+                $sql_inicio = "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE codigo_fabricante <> NULL ";
+                $sql_fin = " GROUP BY codigo_fabricante ORDER BY departamento";
+                foreach ($palabras as $busqueda) {
+                    if (substr($busqueda, -1) == 'S')
+                        $busqueda = substr($busqueda, 0, sizeof($busqueda) -2);
+                    $sql_inicio = $sql_inicio."AND descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' OR marca LIKE '%".$busqueda."%'";
+                }
+                $sql_inicio = $sql_inicio.$sql_fin;
             }
-            array_push($arr, $datos);
         }
-        echo json_encode($arr);
+        $datos = [];
+        foreach ($this->conexion->query($sql_inicio) as $row) {
+            array_push($datos, $row);
+        }
+        echo json_encode($datos);
     }
 
     public function productosInicio() {
@@ -416,40 +173,68 @@ class BD {
     public function getExcepciones($codigo) {
         $sql = "SELECT marca FROM producto WHERE codigo_fabricante = '" . $codigo . "'";
         $sql_excepcion = "SELECT marca FROM excepciones_marcas WHERE 1";
-        foreach ($this->conexion->query($sql) as $res)
+        foreach ($this->conexion->query($sql) as $res) {
             $aux = $res['marca'];
-        foreach ($this->conexion->query($sql_excepcion) as $res)
-            if ($res['marca'] == $aux)
-                return "1";
+            foreach ($this->conexion->query($sql_excepcion) as $res)
+                if ($res['marca'] == $aux)
+                    return "1";
+        }
         return "0";
     }
 
-    /*     * ******** */
-    /* parte del chuy */
-    /* Agregar datos */
+    /******************/
 
+    /* parte del chuy */
+    
+    public function confirmacion($confirmacionclave,$confirmacioncorreo) {
+      $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
+       echo $this->conexion->query($sql) ? "1" : "0";    
+    } 
+    
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
-        // $add=rand(10,3000);
-        $tipo = 0;  // 0 para usuarios 1 para admin
         $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
         echo $this->conexion->query($sql) ? "1" : "0";
+            require 'PHPMailer/PHPMailerAutoload.php';
+        $titulo = "Confirmacion Correo electronico";
+        $add=rand(10,3000);
+        $message = "tu Clave de confirmacion".$add;
+        $mail = new PHPMailer();
+        $mail->setFrom('crm@coeficiente.mx', 'Confirmar tu Correo Electronico');// jesusvalenciatrejo7@gmail.com
+        $mail->addAddress($correo,$message);
+        $mail->Subject = $titulo;
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $body = '
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Soporte Softernium</title>       
+    </head>
+    <body>
+        <div id="cuerpo">
+            <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta</a>          
+             '.$message.'
+        </div>
+    <div id="pie">
+        Este mensaje fue dirigido a &lt;
+        '.$correo.'&gt; Este correo es enviado de forma automÃ¡tica para validar su cuenta.
+    </div>
+    </body>
+    </html>';
+        $mail->Body = $body;
+        if (!$mail->send()) {
+            echo "<p class='text-danger'>.Mensaje no enviado.</p>";
+        } else {
+            //echo $body;
+            //echo '1';
+        }
         //echo $add;    
     }
 
-    public function agregardirecciones($txtnombredire, $txtapellidodire, $txttelefonodire, $txttelefono2dire, $txtcalledire, $txtexteriordire, $txtinteriordire, $txtcodigopostaldire, $txtselectestado, $txtciudad, $colonia, $txtcruseros, $txtcrusero2, $txtreferencia) {
-        $sql = "SELECT id_usuario FROM usuario";
-        foreach ($this->conexion->query($sql) as $row) {
-            $row['id_usuario'];
-        }
-        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (" . $row['id_usuario'] . ",'" . $txtnombredire . "','" . $txtapellidodire . "'," . $txttelefonodire . "," . $txttelefono2dire . ",'" . $txtcalledire . "'," . $txtexteriordire . "," . $txtinteriordire . "," . $txtcodigopostaldire . "," . $txtselectestado . ",'" . $txtciudad . "','" . $colonia . "','" . $txtcruseros . "','" . $txtcrusero2 . "','" . $txtreferencia . "')";
-        // echo $sqlInser;
-        echo $this->conexion->query($sqlInser) ? "1" : "0";
-    }
-
-    /*
-      public function confirmacion() {
-
-      } */
+    public function agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
+        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$number.",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
+	echo $this->conexion->query($sqlInser) ? "1" : "0";      
+	}
 
     public function estado() {
         $sql = "SELECT estado_id, estado from estados";
@@ -459,19 +244,19 @@ class BD {
         }
     }
 
-    public function cambio_de_contrasena($txtantiguoscontra, $txtnuevocontra) {
-        $sql = "UPDATE usuario SET contra='" . $txtnuevocontra . "' WHERE contra='" . $txtantiguoscontra . "'";
+    public function cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra) {
+        $sql = "UPDATE usuario SET  contra='". $txtnuevocontra . "' WHERE  correo='".$txtcorreosUpdate."'";
         echo $this->conexion->query($sql) ? "1" : "0";
     }
-
+    
     public function revicioncorreos($correos_Email) {
         require 'PHPMailer/PHPMailerAutoload.php';
         $titulo = "Recordar contraseña";
-        $d = rand(10, 3000);
-        $message = "Tu password es :" . $d;
-
+      //  $d = rand(10, 3000);
+        $message = "Mensaje de recuperar la contraseña";
+        
         $mail = new PHPMailer();
-        $mail->setFrom('jesusvalenciatrejo7@gmail.com', 'Mensaje de prueba');
+        $mail->setFrom('crm@coeficiente.mx', 'Reuperar tu Contraseña de tu tienda');// jesusvalenciatrejo7@gmail.com
         $mail->addAddress($correos_Email, $message);
         $mail->Subject = $titulo;
         $mail->isHTML(true);
@@ -484,8 +269,8 @@ class BD {
     </head>
     <body>
         <div id="cuerpo">
-            <a href="http://127.0.0.1/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>                                          
-             ' . $message . '
+            <a href="http://10.1.0.49/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>                                          
+            ' . $message . '
         </div>
     <div id="pie">
         Este mensaje fue dirigido a &lt;
@@ -499,7 +284,7 @@ class BD {
         } else {
             //echo $body;
 
-            echo '1';
+            //echo '1';
         }
     }
 
@@ -561,19 +346,21 @@ class BD {
         echo json_encode($arrnewfooter);
     }
 
-    public function login($correo, $contra) {
-
-        $sql = "SELECT id_usuario, nombre, apellidos, correo, contra FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
+    public function login($correo, $contra) {     
+        $sql = "SELECT id_usuario, nombre, apellidos, correo, contra, confirmacion FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
         $datos = $this->conexion->query($sql);
         if ($datos != false) {//Si la consulta funciona imprime los datos
             foreach ($datos as $row) {
-                if ($correo === $row['correo'] || $contra === $row['contra']) {
+                if ($correo === $row['correo'] && $contra === $row['contra']  && ($row["confirmacion"]!= null) ) {
                     echo $row['id_usuario'] . "||";
                     echo $row['nombre'] . "||";
+                    
                     echo $_SESSION['nombre'] = $row['nombre'];
                     echo $_SESSION['apellidos'] = $row['apellidos'];
                     //echo $_SESSION['Bienvenido'] = "Bienvenido :";
                     echo $_SESSION['id'] = $row['id_usuario'];
+                }else{
+                    echo '1';
                 }
             }
         }
