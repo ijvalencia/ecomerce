@@ -1,45 +1,35 @@
 <?php
-
 class BD {
-
     protected $conexion;
-
-    // Procedimiento para conectar 
+    // Procedimiento para conectar
     public function conectar() {
         $username = "desarrollo";
         $password = "Pa55w0rd!crm";
-
         $this->conexion = mysqli_connect("10.1.0.49", $username, $password, "ecommerce");
         /* Conectar a BD Local */
         // $this->conexion = mysqli_connect("localhost", "root", "", "ecommerce");
-
         if (mysqli_connect_errno($this->conexion)) {
             echo "Error al conectar con MySQL: " . mysqli_connect_error();
         }
     }
-
     // Procedimiento para cerrar conexion
     public function cerrar() {
         //mysqli_close($this->conexion);
         $this->conexion = NULL;
     }
-
     // Constructor Conecta a la BD
     function __construct() {
         $this->conectar();
     }
-
     // Destructor
     function __destruct() {
         $this->cerrar();
     }
-
     // Agrega numero de guia
     public function agregarGuiaOrden($orden, $guia) {
         $sql = "UPDATE ordenes SET guia='" . $guia . "' WHERE id_ordenes='" . $orden . "'";
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
-
     public function getEnvios() {
         $sql = "SELECT * FROM envios";
         $datos = array();
@@ -48,20 +38,16 @@ class BD {
         }
         echo json_encode($datos);
     }
-
     public function cambiarEstadoOrden($orden, $estado) {
         $sql = "UPDATE ordenes SET estado = " . estado . " WHERE id_ordenes=" . $orden;
         // 1 se realizo consulta con exito, 0 no se realizo
         echo $this->conexion->query($sql) ? "1" : "0";
     }
-
     public function borrarDireccion($direccion) {
         $sql = "DELETE FROM direccion WHERE id_direccion=" . $direccion;
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
-
     /* SATANAS */
-
     public function getCategorias() {
         $sql = "SELECT * FROM super_categorias";
         $datos = [];
@@ -70,7 +56,6 @@ class BD {
         }
         echo json_encode($datos);
     }
-
     public function getSubcategorias($categoria) {
         $sql = 'SELECT * FROM relacion_categorias WHERE id_supercategoria = "' . $categoria . '" AND id_categoria IN (SELECT nombre FROM categoria WHERE estado <> 0)';
         if ($categoria === "666")
@@ -81,7 +66,6 @@ class BD {
         }
         echo json_encode($datos);
     }
-
     public function getEstadoCategoria($categoria) {
         $sql = 'SELECT * FROM categoria WHERE nombre = "' . $categoria . '"';
         if ($categoria === "666")
@@ -92,28 +76,23 @@ class BD {
         }
         echo json_encode($datos);
     }
-
     public function eliminarCategoriasRepetidas() {
         $sql = 'DELETE FROM categoria WHERE id_categoria IN (SELECT id_categoria FROM (SELECT * FROM categoria LEFT JOIN (SELECT MIN(id_categoria) AS id FROM categoria GROUP BY nombre) AS mantener ON mantener.id = categoria.id_categoria) AS res WHERE id IS NULL)';
         echo $con->query($sql) ? "Borradas categorias duplicadas" : "Imposible borrar";
     }
-
     public function getParametros() {
         $sql = "SELECT * FROM parametros WHERE 1";
         foreach ($this->conexion->query($sql) as $row)
             echo json_encode($row);
     }
-
     public function setCompraMaxima($valor) {
         $sql = "UPDATE parametros SET compra_maxima=" . $valor . " WHERE 1";
         $this->conexion->query($sql);
     }
-
     public function setValorAgregado($valor) {
         $sql = "UPDATE parametros SET agregado=" . $valor . " WHERE 1";
         $this->conexion->query($sql);
     }
-
     public function busqueda($categoria, $palabras) {
         if ($categoria === "Todo") {
             if (sizeof($palabras) == 1)
@@ -141,19 +120,6 @@ class BD {
                 }
                 $sql_inicio = $sql_inicio.$sql_fin;
             }
-        } else {
-            if (sizeof($palabras) == 1)
-                $sql_inicio = "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE descripcion LIKE '%".$palabras[0]."%' OR grupo LIKE '%".$palabras[0]."%' OR marca LIKE '%".$palabras[0]."%' GROUP BY codigo_fabricante ORDER BY departamento";
-            else {
-                $sql_inicio = "SELECT * FROM (SELECT * FROM producto WHERE producto.grupo IN (SELECT id_categoria FROM relacion_categorias WHERE id_supercategoria='" . $categoria . "')) AS res WHERE codigo_fabricante <> NULL ";
-                $sql_fin = " GROUP BY codigo_fabricante ORDER BY departamento";
-                foreach ($palabras as $busqueda) {
-                    if (substr($busqueda, -1) == 'S')
-                        $busqueda = substr($busqueda, 0, sizeof($busqueda) -2);
-                    $sql_inicio = $sql_inicio."AND descripcion LIKE '%".$busqueda."%' OR grupo LIKE '%".$busqueda."%' OR marca LIKE '%".$busqueda."%'";
-                }
-                $sql_inicio = $sql_inicio.$sql_fin;
-            }
         }
         $datos = [];
         foreach ($this->conexion->query($sql_inicio) as $row) {
@@ -161,7 +127,6 @@ class BD {
         }
         echo json_encode($datos);
     }
-
     public function productosInicio() {
         $sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";
         $datos = [];
@@ -170,7 +135,6 @@ class BD {
         }
         echo json_encode($datos);
     }
-
     public function getCarousel($busqueda) {
         if ($busqueda == "Todo")
             $sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";
@@ -182,7 +146,6 @@ class BD {
         }
         echo json_encode($datos);
     }
-
     public function getExcepciones($codigo) {
         $sql = "SELECT marca FROM producto WHERE codigo_fabricante = '" . $codigo . "'";
         $sql_excepcion = "SELECT marca FROM excepciones_marcas WHERE 1";
@@ -194,33 +157,31 @@ class BD {
         }
         return "0";
     }
-
     /******************/
-
     /* parte del chuy */
-    
+
     public function confirmacion($confirmacionclave,$confirmacioncorreo) {
     $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
-       echo $this->conexion->query($sql) ? "1" : "0";    
-    } 
-    
-    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {       
+       echo $this->conexion->query($sql) ? "1" : "0";
+    }
+
+    public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
         $bandera=true;
     $SQL = "select correo , contra from usuario";
     $datoss = $this->conexion->query($SQL);
       foreach($datoss as $row){
             $row['correo'];
             $row['contra'];
-        $bandera=true;     
+        $bandera=true;
         if(($correo === $row['correo']) || ($contra === $row['contra'])){
             if ($bandera==true){
-             echo "SI"; 
+             echo "SI";
              $bandera=false;
              break;
            }
          } else {
-            //  echo 'NO'; 
-             
+            //  echo 'NO';
+
        $tipo=0;
        $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
        echo $this->conexion->query($sql) ? "1" : "0";
@@ -238,16 +199,16 @@ class BD {
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <title>Soporte Softernium</title>       
+        <title>Soporte Softernium</title>
     </head>
     <body>
         <div id="cuerpo">
-            <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta : </a>          
+            <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta : </a>
              '.$message.'
         </div>
     <div id="pie">
         Este mensaje fue dirigido a &lt;
-        '.$correo.'&gt; Este correo es enviado de forma automÃ¡tica para validar su cuenta.
+        '.$correo.'&gt;Este correo es enviado de forma automÃ¡ticamente para validar su cuneta de confirmacion de su cuenta.
     </div>
     </body>
     </html>';
@@ -258,12 +219,15 @@ class BD {
             //echo $body;
             //echo '1';
         }
-        //echo $add;    
+         break;
+     }
+
     }
+  }
 
     public function agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
-        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$number.",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";                    
-	echo $this->conexion->query($sqlInser) ? "1" : "0";      
+        $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$number.",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";
+	echo $this->conexion->query($sqlInser) ? "1" : "0";
 	}
 
     public function estado() {
@@ -278,13 +242,13 @@ class BD {
         $sql = "UPDATE usuario SET  contra='". $txtnuevocontra . "' WHERE  correo='".$txtcorreosUpdate."'";
         echo $this->conexion->query($sql) ? "1" : "0";
     }
-    
+
     public function revicioncorreos($correos_Email) {
         require 'PHPMailer/PHPMailerAutoload.php';
         $titulo = "Recordar contraseña";
       //  $d = rand(10, 3000);
         $message = "Mensaje de recuperar la contraseña";
-        
+
         $mail = new PHPMailer();
         $mail->setFrom('crm@coeficiente.mx', 'Reuperar tu Contraseña');// jesusvalenciatrejo7@gmail.com
         $mail->addAddress($correos_Email, $message);
@@ -295,11 +259,11 @@ class BD {
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <title>Soporte Softernium</title>       
+        <title>Soporte Softernium</title>
     </head>
     <body>
         <div id="cuerpo">
-            <a href="http://10.1.0.49/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>                                          
+            <a href="http://10.1.0.49/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>
             ' . $message . '
         </div>
     <div id="pie">
@@ -313,7 +277,6 @@ class BD {
             echo "<p class='text-danger'>.Mensaje no enviado.</p>";
         } else {
             //echo $body;
-
             //echo '1';
         }
     }
@@ -354,14 +317,13 @@ class BD {
 
     public function producto_orden($id_codigo, $codigoF, $cantidad) {
         $sql = "INSERT INTO productos_orden (id_orden, id_producto, cantidad)VALUES('" . $id_codigo . "','" . $codigoF . "','" . $cantidad . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito           
+        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
     }
 
     public function getdireccionesusuario($idusuario) {
         $sql = "select id_usuario, id_direccion from direccion  where id_usuario='" . $idusuario . "'";
         $usuarioDireciones = [];
         foreach ($this->conexion->query($sql) as $rowusuario) {
-
             array_push($usuarioDireciones, $rowusuario);
         }
         echo json_encode($usuarioDireciones);
@@ -376,7 +338,7 @@ class BD {
         echo json_encode($arrnewfooter);
     }
 
-    public function login($correo, $contra) {     
+    public function login($correo, $contra) {
         $sql = "SELECT id_usuario, nombre, apellidos, correo, contra, confirmacion FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
         $datos = $this->conexion->query($sql);
         if ($datos != false) {//Si la consulta funciona imprime los datos
@@ -384,7 +346,7 @@ class BD {
                 if ($correo === $row['correo'] && $contra === $row['contra']  && $row["confirmacion"]!= null) {
                     echo $row['id_usuario'] . "||";
                     echo $row['nombre'] . "||";
-                    
+
                     echo $_SESSION['nombre'] = $row['nombre'];
                     echo $_SESSION['apellidos'] = $row['apellidos'];
                     //echo $_SESSION['Bienvenido'] = "Bienvenido :";
@@ -418,7 +380,6 @@ class BD {
         $sql = "UPDATE usuario SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "',dia='" . $dia . "', mes='" . $mes . "',anio='" . $anio . "' ,correo='" . $correos . "',contra='" . $contra . "' WHERE id_usuario='" . $id . "'";
         $sqld = "UPDATE direccion SET id_usuario='" . $id . "', nombre='" . $nombre . "', apellidos='" . $apellidos . "' WHERE id_usuario='" . $id . "'";
         //echo $sql;
-
         echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
         echo $this->conexion->query($sqld) ? "1" : "0";
     }
@@ -445,7 +406,6 @@ class BD {
     }
 
     /* Anton */
-
     public function VerSelectivo($subcat, $lugar, $marca, $envio, $Pmin, $Pmax, $orden, $color) {
         $min = ($lugar - 1) * 20;
         $max = $min + 20;
@@ -462,46 +422,35 @@ class BD {
             }
             $color = " and (" . $color . ") ";
         }
-
         switch ($orden) {
             case "normal":
                 $ordenamiento = "";
                 break;
-
             case "mayor":
                 $ordenamiento = "order by precio desc";
                 break;
-
             case "menor":
                 $ordenamiento = "order by precio asc";
                 break;
-
             case "alfa":
                 $ordenamiento = "order by descripcion asc";
                 break;
-
             case "invalfa":
                 $ordenamiento = "order by descripcion desc";
                 break;
         }
-
         $ordenamiento = $color . $ordenamiento;
-
         $filtros = ' AND precio >' . $Pmin . ' AND precio <' . $Pmax . '  ';
-
         switch ($envio) {
             case "Local":
                 $filtros .= " AND GDL >0 ";
                 break;
-
             case "Foraneo":
                 $filtros .= " AND CDMX >0 ";
                 break;
         }
-
         if ($marca == "undefined")
             $marca = "";
-
         if ($marca !== "" || $marca == "totaliti") {
             $marca_unica = explode("$", $marca);
             $marca = "";
@@ -516,13 +465,8 @@ class BD {
             $marca = " and (" . $marca . ") ";
         } else
             $marca = "";
-
-
         $filtros .= $marca . $ordenamiento;
-
-
         $sql = "select * from producto where grupo='" . $subcat . "' " . $filtros . " limit " . $min . "," . $max;
-
         $buscado = $this->conexion->query($sql);
         error_reporting(0);
         for ($x = 0; $x < 20; $x++) {
@@ -536,7 +480,6 @@ class BD {
         }
         echo json_encode($articulos);
     }
-
     public function verCantidad($grupo, $cantidad, $marca, $envio, $Pmin, $Pmax, $orden, $color) {
         error_reporting(0);
         $aux = $color;
@@ -553,24 +496,17 @@ class BD {
             }
             $color = " and (" . $color . ") ";
         }
-
-
-
         $filtros = ' AND precio >' . $Pmin . ' AND precio <' . $Pmax . '  ';
-
         switch ($envio) {
             case "Local":
                 $filtros .= " AND GDL >0 ";
                 break;
-
             case "Foraneo":
                 $filtros .= " AND CDMX >0 ";
                 break;
         }
-
         if ($marca == "undefined")
             $marca = "";
-
         if ($marca !== "" || $marca == "totaliti") {
             $marca_unica = explode("$", $marca);
             $marca = "";
@@ -585,22 +521,16 @@ class BD {
             $marca = " and (" . $marca . ") ";
         } else
             $marca = "";
-
-
         $filtros .= $marca . $ordenamiento;
-
         $sql = "select count(*) from producto where grupo='" . $grupo . "'" . $color . $filtros;
-
         if ($aux !== "" || $aux !== null)
             $color = "&color=" . $aux;
         else
             $color = "";
-
         $cantidad_productos = $this->conexion->query($sql);
         $cantidad_grupo = mysqli_fetch_array($cantidad_productos);
         echo $cantidad_grupo['count(*)'];
     }
-
     public function verMarcas($grupo) {
         error_reporting(0);
         $sql = 'SELECT DISTINCT(marca) FROM producto WHERE grupo = "' . $grupo . '"';
@@ -622,7 +552,6 @@ class BD {
             echo $verMarca . ";";
         }
     }
-
     public function verCapacidad($capacidad, $categoria, $posicion, $marca, $envio, $min, $max, $orden, $color) {
         if ($color !== "") {
             $colores = explode("/", $color);
@@ -637,11 +566,9 @@ class BD {
             }
             $color = " and (" . $color . ") ";
         }
-
         $sql_extra = "";
         if ($marca == "undefined")
             $marca = "";
-
         if ($marca !== "" || $marca == "totaliti") {
             $marca_unica = explode("$", $marca);
             $marca = "";
@@ -656,15 +583,11 @@ class BD {
             $marca = " and (" . $marca . ") ";
         } else
             $marca = "";
-
         $sql_extra = $marca;
-
-
         switch ($envio) {
             case "Foraneo":
                 $sql_extra += " and CDMX>0 ";
                 break;
-
             case "Local":
                 $sql_extra += " and GDL>0 ";
                 break;
@@ -673,27 +596,21 @@ class BD {
             case "normal":
                 $ordenamiento = "";
                 break;
-
             case "mayor":
                 $ordenamiento = "order by precio desc";
                 break;
-
             case "menor":
                 $ordenamiento = "order by precio asc";
                 break;
-
             case "alfa":
                 $ordenamiento = "order by descripcion asc";
                 break;
-
             case "invalfa":
                 $ordenamiento = "order by descripcion desc";
                 break;
         }
         $sql_extra = $sql_extra . $color . " " . $ordenamiento;
         error_reporting(0);
-
-
         $capacidades = explode("$", $capacidad[0]);
         $x = 0;
         foreach ($capacidades as $busqueda) {
@@ -707,12 +624,9 @@ class BD {
                 $x++;
             }
         }
-
-
         $y = 0;
         $capacidades = explode("$", $capacidad[1]);
         foreach ($capacidades as $busqueda) {
-
             $sql = "select * from producto where grupo='" . $categoria . "' and TB=" . $busqueda . $sql_extra;
             $resultado = $this->conexion->query($sql);
             while ($recorrido = mysqli_fetch_array($resultado)) {
@@ -730,7 +644,6 @@ class BD {
         //$articulos= array_unique($articulos->item);
         echo json_encode($articulos);
     }
-
     public function verMemorias($categoria, $grupo) {
         error_reporting(0);
         $sql = "select distinct(TB) from producto where not tb='' and grupo='" . $grupo . "' order by TB asc";
@@ -745,30 +658,25 @@ class BD {
             echo $corrida['GB'] . "$";
         }
     }
-
     public function verNumeroMemoria($tipo, $busqueda, $grupo) {
         error_reporting(0);
-
         $sql = "select count(" . $tipo . ") from producto where " . $tipo . "=" . $busqueda . " and grupo='" . $grupo . "'";
         $resultado = $this->conexion->query($sql);
         $corrida = mysqli_fetch_array($resultado);
         echo $corrida[0];
     }
-
     public function verCantidadColor($grupo, $color) {
         $sql = "SELECT count( * )FROM `producto` WHERE grupo='" . $grupo . "' and color LIKE '%" . $color . "%'";
         $resultado = $this->conexion->query($sql);
         $corrida = mysqli_fetch_array($resultado);
         echo $corrida[0];
     }
-
     public function verCantidadMarca($grupo, $marca) {
         $sql = "select count(*) from `producto` where grupo='" . $grupo . "' and marca='" . $marca . "'";
         $resultado = $this->conexion->query($sql);
         $corrida = mysqli_fetch_array($resultado);
         echo $corrida[0];
     }
-
     public function verMeterComentario($usuario, $calificacion, $comentario, $producto) {
         header("Content-Type: text/html;charset=utf-8");
         $sql = "select * from `usuario` where id_usuario='" . $usuario . "'";
@@ -801,7 +709,6 @@ class BD {
             echo "Inicia sesion para poder comentar";
         }
     }
-
     function verNumeroComentarios($producto) {
         $sql = "SELECT count(*) FROM `comentarios` WHERE codigo_fabricante ='" . $producto . "'";
         $resultado = $this->conexion->query($sql);
@@ -812,14 +719,12 @@ class BD {
             echo "";
         }
     }
-
     function verSoloCalificacionC($producto) {
         $sql = "SELECT AVG(calificacion) FROM `comentarios` WHERE codigo_fabricante ='" . $producto . "'";
         $resultado = $this->conexion->query($sql);
         $corrida = mysqli_fetch_array($resultado);
         echo ceil($corrida[0]);
     }
-
     function verComentarios($producto) {
         header("Content-Type: text/html;charset=utf-8");
         $sql = "SELECT * FROM `comentarios` WHERE codigo_fabricante ='" . $producto . "'";
@@ -841,7 +746,6 @@ class BD {
             echo "////";
         }
     }
-
     function verlike($producto, $usuario) {
         if ($usuario !== "0") {
             $sql = "SELECT count(*) FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and id_usuario='" . $usuario . "'";
@@ -856,7 +760,6 @@ class BD {
         else
             echo "nolike";
     }
-
     function vermeterlike($producto, $usuario) {
         if ($usuario !== "0") {
             $sql = "SELECT count(*) FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and id_usuario='" . $usuario . "'";
@@ -864,7 +767,6 @@ class BD {
             $direccion = verdireccion_ip();
             $sql = "SELECT count(*) FROM `like_usuario_producto` WHERE codigo_fabricante ='" . $producto . "' and direccion_ip='" . $direccion . "'";
         }
-
         $consulta = $this->conexion->query($sql);
         $corrida = mysqli_fetch_array($consulta);
         if ($corrida[0] > 0) {
@@ -885,7 +787,6 @@ class BD {
             echo $consulta = $this->conexion->query($sql) ? "like" : "nolike";
         }
     }
-
     function vernumerolike($producto) {
         $sql = "select count(*) from `like_usuario_producto` where codigo_fabricante='" . $producto . "'";
         $consulta = $this->conexion->query($sql);
@@ -895,7 +796,6 @@ class BD {
         } else
             echo "";
     }
-
     function vermeterfavorito($producto, $usuario) {
         $sql = "select * from `usuario` where id_usuario='" . $usuario . "'";
         $resultado = $this->conexion->query($sql);
@@ -914,7 +814,6 @@ class BD {
             echo "Inicia sesion para agregar el producto a favoritos";
         }
     }
-
     function verfavorito($producto, $usuario) {
         if ($usuario !== "0") {
             $sql = "select * from `usuario` where id_usuario='" . $usuario . "'";
@@ -934,7 +833,6 @@ class BD {
         } else
             echo "";
     }
-
     function verfavoritos($usuario) {
         $sql = "select * from `favoritos` where id_usuario='" . $usuario . "'";
         $resultado = $this->conexion->query($sql);
@@ -951,9 +849,7 @@ class BD {
         }
         echo json_encode($salida);
     }
-
 }
-
 function verdireccion_ip() {
     if (isset($_SERVER["HTTP_CLIENT_IP"])) {
         return $_SERVER["HTTP_CLIENT_IP"];
