@@ -100,6 +100,8 @@ function cargarProducto(codigo) {
                 return;
             }
             articulo = datos["item"];
+            console.log(datos['item']);
+
             var disp = parseInt(articulo["disponible"]);
             disp = disp <= 0 ? 0 : disp;
             var dispCD = parseInt(articulo["disponibleCD"]);

@@ -14,6 +14,7 @@
 
         <div class="container">
             <ol class="breadcrumb">
+                <li><a href="javascript:window.history.back();">&laquo; Volver atrás</a></li>
                 <li><a href="../../modulos/inicio/index.php">Inicio</a></li>
                 <li><a href="link_categoria" id="nombre_categoria"></a></li>
                 <li><a href="link_marcas" id="nombre_marca"></a></li>
@@ -109,15 +110,12 @@
                                         </form>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
                     <!---acabo--->
                     <br>
-                    <a id="numero_comprar" href="link_contacto">Compra telefónica: </a>
+                    <!a id="numero_comprar" href="link_contacto"><!Compra telefónica: </a>
                 </div>
             </div>
         </div>

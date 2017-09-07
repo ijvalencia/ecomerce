@@ -16,15 +16,15 @@
                 <span class="fa fa-bars"></span>
             </button>
             <a class="navbar-brand" href="#"></a>
-                <li><a href="#"></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"></a></li>
-                        <li><a href="#"></a></li>
-                    </ul>
-                </li>
-                <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </li>
+            <li><a href="#"></a></li>
             </ul>
             <form class="navbar-form navbar-left lno-search-form visible-xs" role="search">
                 <div class="form-group">
@@ -120,7 +120,8 @@
                                 <li><a href="../login/index.php"><img src="../../imgweb/login.png" width="25px" height="25px" >Iniciar sesion</a></li>
                                 <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><img src="../../imgweb/lapis.png" width="20px" height="20px" >Mis Datos Personales</a></li>
                                 <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/envio.png" width="25px" height="25px" >Mis Pedidos</a></li>
-                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ofertas</a></li>				
+                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ofertas</a></li>	
+                                <li class="ocultar"><a id="info" href="../favoritos/favoritos.php"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Favoritos</a></li>	
                                 <li class="ocultar"><a id="info" href="../orden/Orden.php"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ordenes</a></li>
                                 <li><a href="../../bin/ingresar.php?categoria=cerrar"><img src="../../imgweb/login.png" width="25px" height="25px">Cerrar sesion</a></li>
                             </ul>

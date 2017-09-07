@@ -1118,6 +1118,23 @@ class BD {
             echo "";
     }
 
+    function verfavoritos($usuario) {
+        $sql = "select * from `favoritos` where id_usuario='" . $usuario . "'";
+        $resultado = $this->conexion->query($sql);
+        $salida = array();
+        $x = 0;
+        while ($corrida = mysqli_fetch_array($resultado)) {
+            $sql = "SELECT * FROM `producto` WHERE codigo_fabricante='" . $corrida[2] . "'";
+            $producto = $this->conexion->query($sql);
+            $producto = mysqli_fetch_array($producto);
+            if($producto!==null) {
+                $salida[$x] = $producto; //codigo
+                $x++;
+            }
+        }
+        echo json_encode($salida);
+    }
+
 }
 
 function verdireccion_ip() {

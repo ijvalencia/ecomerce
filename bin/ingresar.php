@@ -89,10 +89,10 @@ switch ($Menu) {
     case "getArticulo":
         if (isset($_GET['codigo'])) {
             $resp = $conexion->getExcepciones($_GET['codigo']);
-            if($resp === "1") {
-                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+            if ($resp === "1") {
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
             } else {
-                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+                $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&codigo=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
             }
             $context = stream_context_create(array('http' => array('timeout' => 3)));
             $data = file_get_contents($filename, false, $context);
@@ -121,7 +121,7 @@ switch ($Menu) {
         $articulo = simplexml_load_file($filename);
         echo json_encode($articulo);
         break;
-    
+
     case "cerrar":
         session_destroy();
         header('Location: ../index.php');
@@ -159,7 +159,7 @@ switch ($Menu) {
     //parte del chuy
     case "estados":
         $conexion->estado();
-    break;
+        break;
 
     case "registrodirecion":
         $txtnombredire = $_POST['nombredire'];
@@ -172,13 +172,13 @@ switch ($Menu) {
         $txtcodigopostaldire = $_POST['codigopostal'];
         $txtselectestado = $_POST['selectestado'];
         $txtciudad = $_POST['ciudad'];
-        $colonia =$_POST["colonia"];
+        $colonia = $_POST["colonia"];
         $txtcruseros = $_POST['cruseros'];
         $txtcrusero2 = $_POST['crusero2'];
         $txtreferencia = $_POST['referencia'];
-       
-        $conexion->agregardirecciones($txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
-    break;
+
+        $conexion->agregardirecciones($txtnombredire, $txtapellidodire, $txttelefonodire, $txttelefono2dire, $txtcalledire, $txtexteriordire, $txtinteriordire, $txtcodigopostaldire, $txtselectestado, $txtciudad, $colonia, $txtcruseros, $txtcrusero2, $txtreferencia);
+        break;
 
     case "cambiarContraseña":
         $txtantiguoscontra = $_POST['antiguacontrasena'];
@@ -269,7 +269,7 @@ switch ($Menu) {
         $pass = $_POST["passwor"];
         $conexion->actualizarDatosUsuario($id, $nombre, $apellido, $fechadia, $fechames, $fechaanio, $email, $pass);
         break;
-    
+
     case "MostrarUsuarioId":
         $id = $_POST["id"];
         echo $id;
@@ -294,12 +294,12 @@ switch ($Menu) {
             echo '<h2>Please check the the captcha form.</h2>';
             exit;
         }
-	   	$secretKey = "";
-	   	$ip = $_SERVER['REMOTE_ADDR'];
-        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX".$captcha."&remoteip=".$ip);
-	   	$responseKeys = json_decode($response,true);
-        if(intval($responseKeys["success"]) !== 1) {
-          echo '<h2>You are spammer ! Get the @$%K out</h2>';
+        $secretKey = "";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX" . $captcha . "&remoteip=" . $ip);
+        $responseKeys = json_decode($response, true);
+        if (intval($responseKeys["success"]) !== 1) {
+            echo '<h2>You are spammer ! Get the @$%K out</h2>';
         } else {
             echo '<h2>Thanks for posting comment.</h2>';
         }
@@ -480,21 +480,32 @@ switch ($Menu) {
     case "vermeterlike":
         $producto = $_GET['producto'];
         $usuario = $_GET['usuario'];
-        $conexion->vermeterlike($producto, $usuario);        
+        $conexion->vermeterlike($producto, $usuario);
         break;
     case "vernumerolike":
-        $producto=$_GET['producto'];
+        $producto = $_GET['producto'];
         $conexion->vernumerolike($producto);
         break;
     case "vermeterfavorito":
         $producto = $_GET['producto'];
-        $usuario = $_GET['usuario'];
-        $conexion->vermeterfavorito($producto, $usuario);      
+        if (isset($_GET['usuario']))
+            $usuario = $_GET['usuario'];
+        else
+            $usuario = $_SESSION['id'];
+        $conexion->vermeterfavorito($producto, $usuario);
         break;
     case "verfavorito":
         $producto = $_GET['producto'];
-        $usuario = $_GET['usuario'];
-        $conexion->verfavorito($producto, $usuario);      
+        if (isset($_GET['usuario']))
+            $usuario = $_GET['usuario'];
+        else
+            $usuario = $_SESSION['id'];
+        $conexion->verfavorito($producto, $usuario);
+        break;
+    case "verfavoritos":
+        if (!(isset($_SESSION['id'])))
+            $_SESSION['id'] = "0";
+        $conexion->verfavoritos($_SESSION['id']);
         break;
 }
 $conexion->cerrar();
