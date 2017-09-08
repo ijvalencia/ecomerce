@@ -97,15 +97,25 @@ $('#fav').click(function () {
 
 function cargarProducto(codigo) {
     if (codigo.length > 3) {
-        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function(datos) {1
+        $.getJSON("../../bin/ingresar.php?categoria=getArticulo&codigo=" + codigo, function(datos) {
             if (datos['item'] == undefined || datos['item'][1] != undefined || datos.length <= 0) {
                 window.location.replace("../../modulos/error/index.php");
                 $('.loader').fadeOut("slow");
                 return;
             }
             articulo = datos["item"];
-            console.log(datos['item']);
-
+//            console.log(datos['item']);
+            $.ajax({
+                url: "../../bin/footer.php",
+                dataType: "html",
+                success: function(footer) {
+                    footer = footer.replace("Todo", articulo.marca);
+                    footer = footer.replace("0", "1");
+                    footer = footer.replace("Portatiles", articulo.grupo);
+                    $('body').append(footer);
+//                    $('#carrousel_inferior').attr("value", articulo.grupo);
+                }
+            });
             var disp = parseInt(articulo["disponible"]);
             disp = disp <= 0 ? 0 : disp;
             var dispCD = parseInt(articulo["disponibleCD"]);
@@ -132,7 +142,6 @@ function cargarProducto(codigo) {
             var ftecnica;
             ftecnica = !jQuery.isEmptyObject(articulo["ficha_tecnica"]) ? articulo["ficha_tecnica"] : "NO EXISTE INFORMACION ADICIONAL";
             $('#descripcion_producto2').append(articulo.ficha_tecnica);
-            $('#descripcion_producto2').append("<br>");
             $('#codigo_fabricante').append(articulo["codigo_fabricante"]);
             $('#tiempo_garantia').append(articulo["garantia"].replace("NI", "Ñ"));
             for (var i = 0; i < categorias_sin_cantidad.length; i++) {
@@ -244,11 +253,11 @@ function mostrarlike(icono) {
         success: function (respuesta) {
             if (like == "like") {
                 $(icono).attr("class", "fa fa-thumbs-up");
-                $(icono).text("Te gusto" + respuesta);
+                $(icono).text(" Te gusto " + respuesta);
                 //alert(like + " negro es existe el like");
             } else {
                 $(icono).attr("class", "fa fa-thumbs-o-up");
-                $(icono).text("Me gusta" + respuesta);
+                $(icono).text(" Me gusta " + respuesta);
                 //alert(like + " blanco es no existe el like");
             }
             $('.loader').fadeOut("slow");
@@ -260,11 +269,11 @@ function mostrarfavorito(icono) {
     if (fav == "presente") {
         $(icono).attr("class", "fa fa-star");
         //alert(fav + " estrella llena");
-        $(icono).text("Favoritos");
+        $(icono).text(" Favoritos");
     } else {
         $(icono).attr("class", "fa fa-star-o");
         //alert(fav + " estrella vacia");
-        $(icono).text("Agregar a favoritos");
+        $(icono).text(" Agregar a favoritos");
     }
     $('.loader').fadeOut("slow");
 

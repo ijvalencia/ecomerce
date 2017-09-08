@@ -11,11 +11,11 @@ var txtcontra,txtconfir;
 $(document).ready(function () {
 
     $('#link').on("click", function () {
-        $('#form_busqueda').hide();
+//        $('#form_busqueda').hide();
     });
 
     $('#enviar').on("click", function () {
-        $('#form_busqueda').show();
+//        $('#form_busqueda').show();
     });
 
     $("#btn-enviar").attr("disabled", true);

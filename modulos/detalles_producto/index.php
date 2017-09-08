@@ -41,7 +41,7 @@
                         <div class="product-price-container option-container">
                             <span id="descripcion_producto"></span>
                             <br>
-                            <a id="fav" href="#" title="Favoritos"><i id="icono_fav" class="fa fa-star-o">Agregar a favoritos</i></a>
+                            <h4><a id="fav" href="#" title="Favoritos"><i id="icono_fav" class="fa fa-star-o"> Agregar a favoritos</i></a></h4>
                             <h4><a>$<span id="precio_producto"></span></a></h4>
                             <br>
                             Disponibles: <a id="cant_disponibles"></a>
@@ -61,7 +61,7 @@
                     </div>
                     <div id="comentarios" class="ec-stars-wrapper" data-toggle="modal" data-target="#vercomentarios">
                     </div><br>
-                    <a id="like" href="#" title="Me gusta ;)"><i id="icono_like" class="fa fa-thumbs-o-up">Me gusta</i></a>
+                    <h4><a id="like" href="#" title="Me gusta ;)"><i id="icono_like" class="fa fa-thumbs-o-up"> Me gusta</i></a></h4>
                     <br>
                     <div class="container">
                         <div class="modal fade" id="vercomentarios" role="dialog">
@@ -114,7 +114,6 @@
                         </div>
                     </div>
                     <!---acabo--->
-                    <br>
                     <a id="numero_comprar" class="hidden" href="link_contacto">Compra telefónica: </a>
                 </div>
             </div>
@@ -158,6 +157,5 @@
     $('#form_busqueda').show();
   });
         </script>
-        <?php include '../../bin/footer.php' ?>
     </body>
 </html>

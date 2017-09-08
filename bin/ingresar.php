@@ -138,7 +138,7 @@ switch ($Menu) {
         break;
 
     case "getCarousel":
-        $conexion->getCarousel($_GET['clave']);
+        $conexion->getCarousel($_GET['clave'], $_GET['opc']);
         break;
     /*     * ******** */
     //parte del chuy

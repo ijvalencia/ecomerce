@@ -1326,3 +1326,10 @@ hr {
     font-weight: 400;
     font-size: x-large;
 }
+f {
+    font-family: sans-serif;
+    font-weight: 300;
+}
+.modal {
+    z-index: 999999999;
+}

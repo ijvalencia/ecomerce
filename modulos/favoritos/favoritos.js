@@ -1,4 +1,4 @@
-var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4">AaA<img src="link_imagen" class="img-responsive" onerror="this.src=\'../../IMG/error.jpg\'">A/A</div><div class="col-sm-8"><p class="txt-top2">Codigo: </p><center><h4>codigo_fabricante</h4><hr></center><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price"><h4>$<span class="precios">precio_producto</span></h4></td><td>brincalatablita</td></tr>';
+var tabla_producto = '<tr id="tabla#n"><td data-th="Product"><div class="col-sm-4">AaA<img src="link_imagen" class="img-responsive" onerror="this.src=\'../../IMG/error.jpg\'">A/A</div><div class="col-sm-8"><center><h4>codigo_fabricante</h4><hr></center><h5 class="nomargin">nombre_producto</h5></div></td><td data-th="Price"><h4>$<span class="precios">precio_producto</span></h4></td><td>brincalatablita</td></tr>';
 var almacen = [];
 
 $.ajax({
@@ -22,7 +22,7 @@ $.getJSON("../../bin/ingresar.php?categoria=verfavoritos", function (dato) {
         almacen[j] = valor;
 //        console.log(almacen[j]);
         salida = salida.replace(/#n/g, j);
-        salida = salida.replace("brincalatablita", "<button class='btn btn-default' onclick='metercarrito(\"" + j + "\")'>Agregar al carrito.</button><br><br><a href='#'><i onclick='borrarfavorito(\"" + valor['codigo_fabricante'] + "\",\"" + j + "\")' id='icono_fav' class='fa fa-star-o'> Eliminar de favoritos.</i></a> ");
+        salida = salida.replace("brincalatablita", "<button class='btn btn-default' onclick='metercarrito(\"" + j + "\")'>Agregar al carrito.</button><br><br><a href='#'><i onclick='borrarfavorito(\"" + valor['codigo_fabricante'] + "\",\"" + j + "\")' id='icono_fav' class='fa fa-star-o'><f> Eliminar de favoritos<f></i></a> ");
         salida = salida.replace("link_imagen", valor['imagen']);
         salida = salida.replace("AaA", "<a target='_blank' href='../../modulos/detalles_producto/index.php?categoria=&producto=" + valor['codigo_fabricante'] + "'>");
         salida = salida.replace("A/A", "</a>");

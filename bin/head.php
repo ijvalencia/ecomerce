@@ -7,7 +7,7 @@
     <!---------------------------------------->    
 <!--Scripts -->
     <script src="../../bin/bootstrap.min.js"></script>
-    <script src="../../bin/footer.js"></script>
+<!--    <script src="../../bin/footer.js"></script>-->
     <script src="../../bin/categorias.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- CSS -->

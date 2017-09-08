@@ -41,17 +41,17 @@ $(document).ready(function() {
         });
         $('.loader').fadeOut("slow");
     });    
-    cargarCarousel('#galeria_destacados', "Todo");
-    cargarCarousel('#galeria_audio', "AUDIFONOS Y MICRO");
-    cargarCarousel('#galeria_computadoras', "portatiles");
+    cargarCarousel('#galeria_destacados', "Todo", "0");
+    cargarCarousel('#galeria_audio', "AUDIFONOS Y MICRO", "0");
+    cargarCarousel('#galeria_computadoras', "portatiles", "0");
 });
 
-function cargarCarousel(id_contenedor, busqueda) {
+function cargarCarousel(id_contenedor, busqueda, opc) {
 	var contenedor = '<div class="item"><div class="row"><div class="imgcarrusel">#imagenes</div></div></div>';
 	var img_carrusel = '<div class="col-md-3"><a href="#link" class="thumbnail" id=sombreado><img src="#imagen_carrusel" onerror="this.src=\'../../IMG/error.jpg\'"><p><hr><small>#descripcion</small><h4>$#precio</h4></p></a></div>';
 	var contenedor_aux;
 	var img_aux = "";
-	$.getJSON("../../bin/ingresar.php?categoria=getCarousel&clave=" + busqueda, function(resp) {
+	$.getJSON("../../bin/ingresar.php?categoria=getCarousel&clave="+busqueda+"&opc="+opc, function(resp) {
 		$.each(resp, function(i, producto) {
 			img_aux += img_carrusel;
 			img_aux = img_aux.replace("#imagen_carrusel", producto['imagen']);
