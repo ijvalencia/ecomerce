@@ -88,16 +88,8 @@ $(document).ready(function () {
         txtcontra = $("input:password[id='form-contra']").val();
         txtconfir = $("input:password[id='form-confirmacion']").val();
         //     var ckbterminos = $("input:checkbox[id='check-terminos']").val();
-        var norobot = $("#norobot").val();
-        if($("#form-contra").val().length < 8) {  
-        jAlert("la contraseña debe tener como mínimo 8 caracteres");  
-        return false;
-        }  
-        
-        if($("#form-confirmacion").val().length < 8) {  
-        jAlert("la contraseña debe tener como mínimo 8 caracteres");  
-        return false;
-        }  
+        var norobot = $("#g-recaptcha-response").val();
+        //alert(norobot);
         
         if ((txtnombre === "") || (txtapellido === "") || (txtcorreo === "") || (txtcontra === "") || (txtconfir === "") || (norobot === " ")) {
             $('#form-nombre').css({"border": "2px solid red"});
@@ -114,7 +106,7 @@ $(document).ready(function () {
             $('#form-confirmacion').css({"border": "2px solid Gainsboro"});
             $("#norobot").css({"border": "2px solid Gainsboro"});
         }
-        if (bandera2 === false) {
+        //if (bandera2 === false) {
             if (Cadena.test(txtnombre)) {
                 $('#form-nombre').css({"border": "2px solid Gainsboro"});
             } else {
@@ -133,7 +125,6 @@ $(document).ready(function () {
                 $('#form-correo').css({"border": "2px solid red"});
                 bandera2 = false;
             }
-            
             if (txtcontra !== "") {
                 $('#form-contra').css({"border": "2px solid Gainsboro"});
             } else {
@@ -142,7 +133,7 @@ $(document).ready(function () {
             }  
             if (txtconfir !== "") {
                 $('#form-confirmacion').css({"border": "2px solid Gainsboro"});
-            } else {
+            } else {  
                 $('#form-confirmacion').css({"border": "2px solid red"});
                 bandera2 = false;
             }
@@ -151,11 +142,21 @@ $(document).ready(function () {
                  
             } else {
                 $('#form-confirmacion').css({"border": "2px solid red"});
-                jAlert("Invalida la comparacion");
+                  jAlert("Invalida la comparacion");
                 bandera2 = false;
             }
-        }
-        if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== "") && (txtconfir !== "") && ("" !== txtcontra) && (txtcontra === txtconfir)) {
+             if($("#form-contra").val().length < 8) {  
+                    $('#form-contra').css({"border": "2px solid red"});
+                    jAlert("la contraseña debe tener como mínimo 8 caracteres");  
+                    return false;
+            }  
+             if($("#form-confirmacion").val().length < 8) {  
+                $('#form-confirmacion').css({"border": "2px solid red"});
+                jAlert("la confirmaciones invalida como mínimo 8 caracteres");  
+                return false;
+            }
+        //}
+        if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== "") && (txtconfir !== "") && (txtcontra === txtconfir)) {
             bandera2 = true;
             if (bandera2 === true) {
                 $.ajax({type: "POST",
@@ -174,7 +175,7 @@ $(document).ready(function () {
                             case "c":
                                 jAlert("Por favor verifica que no eres un robot");
                                 break;
-             
+                            
                             default:
                                 jAlert("Algo salio mal, intentalo de nuevo");
                                 break;
@@ -269,6 +270,19 @@ $(document).ready(function () {
         $('#pswd_info').show();
     }).blur(function () {
         $('#pswd_info').hide();
+    });
+    
+    $('.close').on("click", function () {
+        $('#form_busqueda').show();        
+        $(".line-navbar-two").css("display", "block");
+     
+    });
+    
+    $('#link').on("click", function () {
+       $('#form_busqueda').hide();   
+       $(".line-navbar-two").css("display", "none");
+       
+       $("input:text[id='txtemaill']").val("");
     });
 
     $('input:password[id="form-confirmacion"]').keyup(function () {

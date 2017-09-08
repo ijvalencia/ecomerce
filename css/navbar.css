@@ -855,7 +855,7 @@ nav .dropdown .menu li input span {
     z-index: 999px;
 }
 .img-logo {
-    background-image: url("../IMG/logo.png");
+    background-image:url("../IMG/logo.jpg");
     background-repeat: no-repeat;
     background-size: 50px;
     position: absolute;

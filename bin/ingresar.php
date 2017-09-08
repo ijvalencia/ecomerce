@@ -173,9 +173,9 @@ switch ($Menu) {
 
     case "cambiarContraseña":
         $txtcorreosUpdate = $_POST['cuenta'];
-       // $txtantiguoscontra = $_POST['antiguacontrasena'];
         $txtnuevocontra = $_POST['nuevacontrasena'];
-        $conexion->cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra);
+        $claveconfiracion = $_POST['claves'];
+        $conexion->cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra ,$claveconfiracion);
         
         break;
 
@@ -281,20 +281,21 @@ switch ($Menu) {
         $correo = $_POST['correos'];
         $contrasena = $_POST['contrasena'];
         $captcha = $_POST['robot'];
-        if (!$captcha) {
-        //  exit;
-            echo 'c';
+        if (!$captcha){  
+           echo 'c';
+            //exit;
             break;
         }
-	   	$secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
-	   	$ip = $_SERVER['REMOTE_ADDR'];
+        $secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
+	$ip = $_SERVER['REMOTE_ADDR'];
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey.$captcha."&remoteip=".$ip);
 	   	$responseKeys = json_decode($response,true);
-
-        if(intval($responseKeys["success"]) !== 1)
-            echo 'e';
-        else
-            $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
+       
+        if(intval($responseKeys["success"])!== 1){
+              $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
+        }else{
+             echo 'e';
+        }
         break;
 
     /*     * ******* */

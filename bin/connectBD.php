@@ -1,6 +1,7 @@
 <?php
 class BD {
     protected $conexion;
+    protected $d;
     // Procedimiento para conectar
     public function conectar() {
         $username = "desarrollo";
@@ -182,9 +183,12 @@ class BD {
          } else {
             //  echo 'NO';
 
+          $salt = '$bgr$/'; 
+          $password = sha1(md5($salt . $contra));
+          
        $tipo=0;
-       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
-       echo $this->conexion->query($sql) ? "1" : "0";
+       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $password . "'," . $tipo . ")";
+        echo $this->conexion->query($sql) ? "1" : "0";
         require 'PHPMailer/PHPMailerAutoload.php';
         $titulo = "Confirmacion Correo electronico";
         $add=rand(10,3000);
@@ -238,17 +242,40 @@ class BD {
         }
     }
 
-    public function cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra) {
-        $sql = "UPDATE usuario SET  contra='". $txtnuevocontra . "' WHERE  correo='".$txtcorreosUpdate."'";
-        echo $this->conexion->query($sql) ? "1" : "0";
+    public function cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra, $claveconfiracion) {
+        $salt = '$bgr$/'; 
+        $Npassword = sha1(md5($salt . $txtnuevocontra));
+        $uno=1;
+            
+        $sql = "UPDATE usuario SET contra='".$Npassword."' ,confirmacion='".$claveconfiracion.$uno."'  WHERE  correo='".$txtcorreosUpdate."'";
+        $this->conexion->query($sql) ? "1" : "0";
+        
+        $sqlUpdate = "SELECT id_usuario, nombre, apellidos, correo, contra, confirmacion FROM usuario WHERE correo = '" .$txtcorreosUpdate ."' AND contra = '".$Npassword."'";
+        $datosU = $this->conexion->query($sqlUpdate);
+        if ($datosU != false) {//Si la consulta funciona imprime los datos
+            foreach ($datosU as $row) {
+                if ($txtcorreosUpdate === $row['correo'] && $Npassword === $row['contra']  && $row["confirmacion"]!= null) {
+                    $row['id_usuario'] . "||";
+                    $row['nombre'] . "||";
+
+                    $_SESSION['nombre'] = $row['nombre'];
+                    $_SESSION['apellidos'] = $row['apellidos'];
+                    //echo $_SESSION['Bienvenido'] = "Bienvenido :";
+                    $_SESSION['id'] = $row['id_usuario'];
+                    echo '1';
+                }else{
+                    echo '2';
+                }
+            }
+        }
     }
 
     public function revicioncorreos($correos_Email) {
         require 'PHPMailer/PHPMailerAutoload.php';
         $titulo = "Recordar contraseña";
-      //  $d = rand(10, 3000);
-        $message = "Mensaje de recuperar la contraseña";
-
+        $this->d = rand(10, 3000);
+        
+        $message = "Claven para cambiar la contraseña : ".$this->d;
         $mail = new PHPMailer();
         $mail->setFrom('crm@coeficiente.mx', 'Reuperar tu Contraseña');// jesusvalenciatrejo7@gmail.com
         $mail->addAddress($correos_Email, $message);
@@ -339,11 +366,14 @@ class BD {
     }
 
     public function login($correo, $contra) {
-        $sql = "SELECT id_usuario, nombre, apellidos, correo, contra, confirmacion FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $contra . "'";
+        $salt = '$bgr$/'; 
+        $loginpassword = sha1(md5($salt .$contra));
+        $sql = "SELECT id_usuario, nombre, apellidos, correo, contra, confirmacion FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $loginpassword . "'";
         $datos = $this->conexion->query($sql);
         if ($datos != false) {//Si la consulta funciona imprime los datos
             foreach ($datos as $row) {
-                if ($correo === $row['correo'] && $contra === $row['contra']  && $row["confirmacion"]!= null) {
+               //$row['contra']
+                if ($correo === $row['correo'] && $loginpassword === $row['contra'] && $row["confirmacion"]!= null){
                     echo $row['id_usuario'] . "||";
                     echo $row['nombre'] . "||";
 

@@ -74,12 +74,12 @@ img{
     background-image: -moz-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: linear-gradient(to bottom, #ffae4b, #ffae4b);
     color: #ffffff;
-   -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   -moz-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   -o-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   -ms-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   /* -webkit-mask-image:-webkit-linear-gradient(top, rgba(3, 0, 0,.4), rgba(3, 0, 0,.4));*/
+    -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -moz-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -o-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -ms-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    /* -webkit-mask-image:-webkit-linear-gradient(top, rgba(3, 0, 0,.4), rgba(3, 0, 0,.4));*/
 }
 
 .btn:hover { 
@@ -88,7 +88,7 @@ img{
     background-image: -moz-linear-gradient(top, #ff9317, #ffae4b);
     background-image: linear-gradient(to bottom, #ff9317, #ffae4b);
     color: #ffffff;
-  /*  background-image: url('../imgweb/loginred.png');*/
+    /*  background-image: url('../imgweb/loginred.png');*/
 }
 
 .ocultarr{
@@ -98,12 +98,12 @@ img{
     background-image: -moz-linear-gradient(top, #ffae4b, #ffae4b);
     background-image: linear-gradient(to bottom, #ffae4b, #ffae4b);
     color: #ffffff;
-   -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   -moz-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   -o-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   -ms-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
-   /* -webkit-mask-image:-webkit-linear-gradient(top, rgba(3, 0, 0,.4), rgba(3, 0, 0,.4));*/
+    -webkit-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -moz-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -o-transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    -ms-transition:background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    transition: background-color 0s ease-out, width 0s ease, box-shadow 0s linear;
+    /* -webkit-mask-image:-webkit-linear-gradient(top, rgba(3, 0, 0,.4), rgba(3, 0, 0,.4));*/
 }
 
 .ocultarr:hover{ 
@@ -118,7 +118,7 @@ img{
     background-image: -moz-linear-gradient(top, #ff9317, #ffae4b);
     background-image: linear-gradient(to bottom, #ff9317, #ffae4b);
     color: #ffffff;
-  /*  background-image: url('../imgweb/loginred.png');*/
+    /*  background-image: url('../imgweb/loginred.png');*/
 }
 
 .btn-link-1 {
@@ -598,8 +598,8 @@ form .row{
     font-size: 14px; 
 }
 .col-md-1{
-     margin-left: 69px;
-     width: 275px;
+    margin-left: 69px;
+    width: 275px;
     /*width: 16.6667%;
       margin-left:10px;
      margin-left: -47px;
@@ -811,7 +811,7 @@ hr {
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
     animation-duration: 0.6s;
-    
+
 }
 
 @-webkit-keyframes zoom {
@@ -833,7 +833,7 @@ hr {
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
-    
+
 }
 .close:hover,
 .close:focus {
@@ -891,9 +891,9 @@ hr {
 }
 
 .Preciosdetalle{
-   margin-top: 3px;
-   margin-left:-420px;
-   padding-left: 210px;
+    margin-top: 3px;
+    margin-left:-420px;
+    padding-left: 210px;
 }
 
 /*detalles descripcion  Detalles_orden.php*/
@@ -990,10 +990,10 @@ label {
 
 /* menu de imagenes */
 #img_producto {
-  max-width:500px;
-  max-height:500px;
-  width: auto;
-  height: auto;
+    max-width:500px;
+    max-height:500px;
+    width: auto;
+    height: auto;
 }
 
 /*recortar el texto*/
@@ -1032,24 +1032,24 @@ label {
     background:transparent;
 }
 .inner-container::-webkit-scrollbar {
-	width: 0;
-	background: rgba(255,255,255,1);
-	}
+    width: 0;
+    background: rgba(255,255,255,1);
+}
 
 .inner-container::-webkit-scrollbar-button {
-	height: 0;
-	width: 0;
-        
-	}
+    height: 0;
+    width: 0;
+
+}
 
 .inner-container::-webkit-scrollbar-thumb {
-	background:transparent;
-        background-color: rgba(255,255,255,1);
-	}
-        
+    background:transparent;
+    background-color: rgba(255,255,255,1);
+}
+
 .inner-container::-webkit-scrollbar-track {
-	background:transparent;
-	box-shadow: none;
+    background:transparent;
+    box-shadow: none;
 }
 /*play Store*/
 #cuatro{
@@ -1071,10 +1071,10 @@ label {
 
 @media only screen and (max-width: 1000px) and (min-width: 971px) {  
     #sombreado{                    /*980px      821px*/
-       width: 43%;
-       float: right;
-       display: inline-block;
-       margin-right: 18px;
+        width: 43%;
+        float: right;
+        display: inline-block;
+        margin-right: 18px;
     }
 }  
 
@@ -1086,10 +1086,10 @@ label {
         margin-left: 20px;
     }
 }  
-  
+
 /* Para 800px */  
 @media only screen and (max-width: 920px) and (min-width: 621px) {  /*820  621*/
-   #sombreado{
+    #sombreado{
         width: 42%;    
         float: right;
         display: inline-block;
@@ -1099,23 +1099,23 @@ label {
 
 /* Para 600px */  
 @media only screen and (max-width: 620px) and (min-width: 501px) {  
-   #sombreado{
-       width: 49%;
-       float: right;
-       display: inline-block;
-       margin-left: 10px;
+    #sombreado{
+        width: 49%;
+        float: right;
+        display: inline-block;
+        margin-left: 10px;
     }
 }    
 /* Para 480px */  
 @media only screen and (max-width: 500px) and (min-width: 341px) {  
-     #sombreado{
+    #sombreado{
         width: 20%;  
         float: right;
         display: inline-block;
         margin-left: 10px;
     }
 }  
-  
+
 /* Para 320px */  
 @media only screen and (max-width: 340px) and (min-width: 5px)  {  
     #sombreado{
@@ -1202,7 +1202,7 @@ label {
 }
 
 #coloreamela, #memorama, #btn_marca, #btn_memoria {
-   text-align:left;
+    text-align:left;
 }
 #mas_marcas, #mas_memorias {
     position: relative;
@@ -1216,81 +1216,119 @@ label {
     margin: 0px 0px 0px 3px;
 }
 #yorobot{
- margin-left: 80px;
+    margin-left: 80px;
 }
 
 #panels{
- margin-left: 31%;
+    margin-left: 31%;
 }
 
 #selectestadosd{
-  width: 443px;
-  margin-left: 0px;  
+    width: 443px;
+    margin-left: 0px;  
 }
 
 #letras{
-  margin-left: 149px;
-  width: 329px; 
+    margin-left: 149px;
+    width: 329px; 
 }
 /*contraseñas de login*/
 #pswd_info {
-position: absolute;
-bottom: 1px;
-bottom: -56px\9;
-right: 50px;
-width: 390px;
-padding: 15px;
-background: #fefefe;
-font-size: .875em;
-border-radius: 5px;
-box-shadow: 0 1px 3px #ccc;
-border: 1px solid #ddd;
-margin-top: -6px;
-    
-    /*
-  position: absolute;
-  bottom: -75px;
-  bottom: -115px\9;
-  right: 55px;
-  width: 250px;
-  padding: 15px;
-  background: #fefefe;
-  font-size: .875em;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px #ccc;
-  border: 1px solid #ddd;*/
+    position: absolute;
+    bottom: 1px;
+    bottom: -56px\9;
+    right: 50px;
+    width: 390px;
+    padding: 15px;
+    background: #fefefe;
+    font-size: .875em;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px #ccc;
+    border: 1px solid #ddd;
+    margin-top: -6px;
+
 }
 #pswd_info h4 {
-  margin: 0 0 10px 0;
-  padding: 0;
-  font-weight: normal;
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-weight: normal;
 }
 #pswd_info::before {
-  content: "\25B2";
-  position: absolute;
-  top: -12px;
-  left: 45%;
-  font-size: 14px;
-  line-height: 14px;
-  color: #ddd;
-  text-shadow: none;
-  display: block;
+    content: "\25B2";
+    position: absolute;
+    top: -12px;
+    left: 45%;
+    font-size: 14px;
+    line-height: 14px;
+    color: #ddd;
+    text-shadow: none;
+    display: block;
 }
 .invalid {
-  background: url(../images/invalid.png) no-repeat 0 50%;
-  padding-left: 22px;
-  line-height: 24px;
-  color: #ec3f41;
+    background: url(../images/invalid.png) no-repeat 0 50%;
+    padding-left: 22px;
+    line-height: 24px;
+    color: #ec3f41;
 }
 .valid {
-  background: url(../images/valid.png) no-repeat 0 50%;
-  padding-left: 22px;
-  line-height: 24px;
-  color: #3a7d34;
+    background: url(../images/valid.png) no-repeat 0 50%;
+    padding-left: 22px;
+    line-height: 24px;
+    color: #3a7d34;
 }
 #pswd_info {
-  display: none;
+    display: none;
 }
+/*contraseñas de login cambiar contraseñas*/
+#pswd_info1 {
+    
+    position: absolute;
+    bottom: -109px;
+    bottom: -56px\9;
+    right: 50px;
+    width: 390px;
+    padding: 15px;
+    background: #fefefe;
+    font-size: .875em;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px #ccc;
+    border: 1px solid #ddd;
+    margin-top: -6px;
+
+}
+#pswd_info1 h4 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-weight: normal;
+}
+#pswd_info1::before {
+    content: "\25B2";
+    position: absolute;
+    top: -12px;
+    left: 45%;
+    font-size: 14px;
+    line-height: 14px;
+    color: #ddd;
+    text-shadow: none;
+    display: block;
+}
+.invalid1 {
+    background: url(../images/invalid.png) no-repeat 0 50%;
+    padding-left: 22px;
+    line-height: 24px;
+    color: #ec3f41;
+}
+.valid1 {
+    background: url(../images/valid.png) no-repeat 0 50%;
+    padding-left: 22px;
+    line-height: 24px;
+    color: #3a7d34;
+}
+#pswd_info1 {
+    display: none;
+}
+/*fin del login recuperarcontraseñas*/
+
 #formulario_contacto {
     position: absolute;
     width: 40%;

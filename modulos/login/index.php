@@ -74,7 +74,7 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- Form login con facebook/google -->
+                        <!--Form login con facebook/google-->
                         <div class="social-login">
                             <div class="social-login-buttons">
                                 <a class="btn btn-link-1 btn-link-1-facebook" href="#">
@@ -108,7 +108,7 @@
                                         <label class="sr-only" for="form-apellidos">Apellidos</label>
                                         <input type="text" name="apellidos" placeholder="Ejemplo: López González" class="form-apellidos form-control" id="form-apellidos" maxlength="30">
                                     </div>
-                                    <h6>Correo Actual:</h6>
+                                    <h6>Correo electronico:</h6>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-correo">Correo</label>
                                         <input type="text" name="correo" placeholder="Ej: mi_correo@gmail.com" class="form-correo form-control" id="form-correo" maxlength="30">
