@@ -6,17 +6,20 @@ $(document).ready(function(){
     if(nombre === "invitado"){
         //$(".ocultar").css("display","none");
         $(".ocultar").hide();
+        $('#navbar-sesion-li').show();
         $.getJSON("../../bin/ingresar.php?categoria=sesion", function(datos) {
             sesion = datos;
-            var stringB = new String(sesion);
-            var fieldd = stringB.split(",",2);
-            $('#nombre_usuario_nav').append(fieldd[0] === "invitado" ? "" : fieldd);
-            var field = stringB.split(",");
-            nombre = field[0];
-            apellido = field[1];
-            number = field[2];
+            nombre = datos[0];
+            apellido = datos[1];
+            number = datos[2];
+//            var stringB = new String(sesion);
+//            console.log(datos);
+            var fieldd = nombre+" "+apellido+" ";
+            $('#nombre_usuario_nav').append(nombre === "invitado" ? "Invitado " : fieldd);
+//            var field = stringB.split(",");
             if(nombre !== "invitado") {
                 $(".ocultar").show();
+                $('#navbar-sesion-li').hide();
             }
         });
     }

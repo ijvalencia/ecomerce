@@ -12,7 +12,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">  
     <link rel="stylesheet" href="../../css/navbar.css" >
     <link rel="stylesheet" href="../../css/Menu_vertical.css">  

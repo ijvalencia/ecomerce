@@ -4,19 +4,6 @@ var imagenes = [];
 var extra = "marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined";
 
 $(document).ready(function() {
-    $('.lnt-cart').mouseenter(function() {
-        var link_img = $(this).find('img').attr("src");
-        link_img = link_img.indexOf("carrito.") ? link_img.replace("carrito.", "carritored.") : link_img ;
-        link_img = link_img.indexOf("login.") ? link_img.replace("login.", "loginred.") : link_img ;
-        link_img = link_img.indexOf("envio.") ? link_img.replace("envio.", "enviored.") : link_img ;
-        $(this).find('img').attr("src", link_img);
-    }).mouseleave(function() {
-        var link_img = $(this).find('img').attr("src");
-        link_img = link_img.indexOf("carritored.") ? link_img.replace("carritored.", "carrito.") : link_img ;
-        link_img = link_img.indexOf("loginred.") ? link_img.replace("loginred.", "login.") : link_img ;
-        link_img = link_img.indexOf("enviored.") ? link_img.replace("enviored.", "envio.") : link_img ;
-        $(this).find('img').attr("src", link_img);
-    });
 });
 
 $.getJSON("../../bin/ingresar.php?categoria=getCategorias", function(respuesta) {

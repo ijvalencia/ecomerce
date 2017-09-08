@@ -870,3 +870,23 @@ nav .dropdown .menu li input span {
     position: absolute;
     width: 550%;
 }
+.background_icon_navbar i {
+    margin-top: 4px;
+    margin-left: -4px;
+    width: inherit;
+    font-size: 35px;
+    color: #333;
+}
+#menuloginid i,
+.ocultar i {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#menuloginid h5 {
+    position: absolute;
+    margin: -25px 40px;
+}
+.lnt-cart :hover {
+    color: #fff;
+}

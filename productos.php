@@ -130,16 +130,19 @@ foreach($con->query($sql_borradas) as $b) {
     ";
 }
 
-$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE","NARANJA","DORADO","CYAN","MAGENTA"];
-foreach ($colores as $col) {
-	$sql_colores = "UPDATE producto SET color='".$col."' WHERE descripcion LIKE '%".$col."%' AND color=''";
-	$con->query($sql_colores);
-}
-
 $sql_repetidas = 'DELETE FROM categoria WHERE id_categoria IN (SELECT id_categoria FROM (SELECT * FROM categoria LEFT JOIN (SELECT MIN(id_categoria) AS id FROM categoria GROUP BY nombre) AS mantener ON mantener.id = categoria.id_categoria) AS res WHERE id IS NULL)';
 echo $con->query($sql_repetidas) ? "Borradas categorias duplicadas
     " : "Imposible borrar
 ";
+
+
+$colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE","NARANJA","DORADO","CYAN","MAGENTA"];
+foreach ($colores as $col) {
+	$sql_colores = "UPDATE producto SET color='".$col."' WHERE descripcion LIKE '%".$col."%' AND color IS NULL";
+	echo $con->query($sql_colores) ? $col." agregado" : "Error en ".$col;
+    echo "
+    ";
+}
 /***********/
 
 echo "
