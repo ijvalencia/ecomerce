@@ -46,7 +46,7 @@
                                     </div>
                                     <button type="button" class="btn" id="botonsesion">Iniciar Sesiòn</button>
                                     <br>
-                                    <div class="container" >
+                                    <div class="container-fluid" >
                                         <!-- Trigger the modal with a button -->
                                         <!--<button type="button" class="btn btn-info btn-lg" >Open Modal</button>-->
                                         <a href="#" class="contrasena" id="link" style="float:left;" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Olvidaste tu contraseña?</a>

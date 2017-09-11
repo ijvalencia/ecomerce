@@ -136,16 +136,23 @@ class BD {
         }
         echo json_encode($datos);
     }
-    public function getCarousel($busqueda) {
+    public function getCarousel($busqueda, $selector) {
         if ($busqueda == "Todo")
-            $sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";
-        else
-            $sql = "SELECT * FROM (SELECT * FROM producto WHERE INSTR(departamento, 'A') AND NOT departamento = 'POR SALIR' AND grupo = '" . $busqueda . "') AS resultados ORDER BY RAND() LIMIT 12";
+            $sql = "SELECT * FROM (SELECT * FROM producto WHERE departamento LIKE '%A%' AND NOT departamento = 'POR SALIR') AS resultados ORDER BY RAND() LIMIT 12";
+        else {
+            if ($selector == 0)
+                $sql = "SELECT * FROM (SELECT * FROM producto WHERE departamento LIKE '%A%' AND NOT departamento = 'POR SALIR' AND grupo = '" . $busqueda . "') AS resultados ORDER BY RAND() LIMIT 12";
+            else
+                $sql = "SELECT * FROM (SELECT * FROM producto WHERE departamento LIKE '%A%' AND NOT departamento = 'POR SALIR' AND marca LIKE '%".$busqueda."%') AS resultados ORDER BY RAND() LIMIT 12";
+        }
         $datos = [];
         foreach ($this->conexion->query($sql) as $row) {
             array_push($datos, $row);
         }
-        echo json_encode($datos);
+        if (sizeof($datos) == 12)
+            echo json_encode($datos);
+        else
+            $this->getCarousel("Todo", $selector);
     }
     public function getExcepciones($codigo) {
         $sql = "SELECT marca FROM producto WHERE codigo_fabricante = '" . $codigo . "'";

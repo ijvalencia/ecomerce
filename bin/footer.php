@@ -1,7 +1,9 @@
+<span class="hidden" id="carrousel_superior" value="Todo" opc="0"></span>
+<span class="hidden" id="carrousel_inferior" value="Portatiles" opc="0"></span>
 <div class="container">
     <div class="jumbotron" id="colorblanco">
         <div class="col-md-12">
-              <p class="titulo" >LO MAS VENDIDO</p>  
+              <p class="titulo">LO MAS VENDIDO</p>
             <div class="container text-center">
 		<div class="carousel slide" id="carousel_destacados1">
 		   <div class="carousel-inner" id="galeria_destacados2">
@@ -36,7 +38,6 @@
         </div>
    <!-- </div>-->
 </footer>
-<!--<script src="../bin/footerjs/footer.js"></script>-->
+<script src="../../bin/footer.js"></script>
 
 
-    
