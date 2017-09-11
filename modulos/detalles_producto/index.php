@@ -31,9 +31,8 @@
                     <span class="close">&times;</span>
                     <img class="modal-content" id="img_modal">
                 </div>
-
-
             </div>
+            
             <!-- Datos y compra -->
             <div class="col-md-4">
                 <div class="col-md-10">

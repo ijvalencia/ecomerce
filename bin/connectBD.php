@@ -366,8 +366,10 @@ class BD {
     }
 
     public function login($correo, $contra) {
+       
         $salt = '$bgr$/'; 
         $loginpassword = sha1(md5($salt .$contra));
+        
         $sql = "SELECT id_usuario, nombre, apellidos, correo, contra, confirmacion FROM usuario WHERE correo = '" . $correo . "' AND contra = '" . $loginpassword . "'";
         $datos = $this->conexion->query($sql);
         if ($datos != false) {//Si la consulta funciona imprime los datos
@@ -381,10 +383,12 @@ class BD {
                     echo $_SESSION['apellidos'] = $row['apellidos'];
                     //echo $_SESSION['Bienvenido'] = "Bienvenido :";
                     echo $_SESSION['id'] = $row['id_usuario'];
-                }else{
+                } else {
                     echo '1';
                 }
             }
+        } else {
+            echo '3';
         }
     }
 

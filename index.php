@@ -4,5 +4,6 @@ session_start();
 $_SESSION['nombre']="invitado";
 $_SESSION['apellidos']="invitado";
 $_SESSION['id'] = 0;
+
 header('Location: modulos/inicio/index.php');
 ?>

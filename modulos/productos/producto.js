@@ -394,10 +394,10 @@ function cargarColores(productos_busqueda) {
                 i--;
             }
         }
-    if(colores[0] == null)
+    if(colores.length == 1 && colores[0] == null)
         colores = [];
     for (var i = 0; i < colores.length; i++) {
-        if (colores[i] != "null" || colores[i] != "")
+        if (colores[i] != null)
             $('#coloreamela').append('<li class="checkbox"><input type="checkbox" value="'+ colores[i] +'">'+ colores[i] +'</li>');
     }
     if(colores.length != 0)
@@ -431,7 +431,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
     var vino = vino1 + vino2;
     if (!arcoiris)
         arcoiris = "";
-    $('#AquiGrupo').append(crayola);
+    $('#AquiGrupo').append(crayola.substr(0, 40));
     if (avionpapel == "undefined")
         $('#filtro_disponibilidad').val("Indiferente");
     else
@@ -571,14 +571,14 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                     var x = 1;
                     var aux = 1;
                     if (plastilina !== "1")
-                        $('#catidad').append(" <a href='" + T1 + "extra=" + (plastilina - 1) + T2 + "'>" + '<img src="../../IMG/izquierda.png" style="width:50px;heigth:auto;">' + "</a>");
+                        $('#catidad').append(" <a href='" + T1 + "extra=" + (plastilina - 1) + T2 + "'>" + '<i class="fa fa-arrow-left" aria-hidden="true"></i>' + "</a>");
                     while (paginacion !== 0) {
                         aux = x;
                         if (x == plastilina) {
                             var y = x;
                             x = "<u>" + x + "</u>";
                         }
-                        $('#catidad').append(" <a href='" + T1 + "extra=" + aux + T2 + "'>" + x + "</a> ");
+                        $('#catidad').append(" <a class='txt_pag' href='" + T1 + "extra=" + aux + T2 + "'>" + x + "</a> ");
                         if (y) {
                             x = y + 0;
                             y = null;
@@ -588,7 +588,7 @@ function mostrarArticulos(crayola, plastilina, marcador, avionpapel, miSalario, 
                     }
                     if (plastilina < Math.ceil(cantidad / 20) + "") {
                         plastilina++;
-                        $('#catidad').append(" <a href='" + T1 + "extra=" + plastilina + T2 + "'>" + '<img src="../../IMG/derecha.png" style="width:50px;heigth:auto;">' + "</a>");
+                        $('#catidad').append(" <a href='" + T1 + "extra=" + plastilina + T2 + "'>" + '<i class="fa fa-arrow-right" aria-hidden="true"></i>' + "</a>");
                         plastilina--;
                     }
                 }

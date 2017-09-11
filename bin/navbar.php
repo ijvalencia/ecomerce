@@ -114,28 +114,37 @@
                     <div class="btn-group" role="group" aria-label="...">
                         <a class="btn btn-default lnt-cart" href="../inicio/index.php" id="hover1">
                             <div class="background_icon_navbar">
-                                <img id="navbar_icon_envio" src="../../imgweb/envio.png" width="28px" height="28px">
+                                <i class="fa fa-truck"></i>
                             </div>
                         </a>
                         <div class="btn-group" role="group">
                             <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" id="hover2"> 
                                 <div class="background_icon_navbar">
-                                    <img id="navbar_icon_login" src="../../imgweb/login.png" width="28px" height="28px" style="-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,.4), rgba(0, 0, 0,.4))">
+                                    <i class="fa fa-user-o"></i>
                                 </div>
                             </a>
                             <ul class="dropdown-menu" role="menu" id="menuloginid">
-                                <li><a href="../login/index.php"><img src="../../imgweb/login.png" width="25px" height="25px" >Iniciar sesion</a></li>
-                                <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><img src="../../imgweb/lapis.png" width="20px" height="20px" >Mis Datos Personales</a></li>
-                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/envio.png" width="25px" height="25px" >Mis Pedidos</a></li>
-                                <li class="ocultar"><a id="info" href="#"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ofertas</a></li>	
-                                <li class="ocultar"><a id="info" href="../favoritos/favoritos.php"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Favoritos</a></li>	
-                                <li class="ocultar"><a id="info" href="../orden/Orden.php"><img src="../../imgweb/cupon.png" width="25px" height="25px" >Mis Ordenes</a></li>
-                                <li><a href="../../bin/ingresar.php?categoria=cerrar"><img src="../../imgweb/login.png" width="25px" height="25px">Cerrar sesion</a></li>
+                                <li id="navbar-sesion-li"><a href="../login/index.php"><i class="fa fa-user"></i><h5> Iniciar sesion</h5></a></li>
+                                <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><i class="fa fa-pencil"></i><h5> Mis Datos Personales</h5></a></li>
+                                <li class="ocultar"><a id="info" href="#"><i class="fa fa-truck"></i><h5> Mis Pedidos</h5></a></li>
+                                <li class="ocultar"><a id="info" href="#"><i class="fa fa-money"></i><h5> Mis Ofertas</h5></a></li>
+                                
+                                <li class="ocultar"><a id="info" href="../favoritos/favoritos.php"><i class="fa fa-heart"></i><h5> Mis Favoritos</h5></a></li>
+                                <a href="#" onclick="signOut();">Sign out</a>
+                                <script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+                                <li><a href="../../bin/ingresar.php?categoria=cerrar"><i class="fa fa-ban"></i><h5> Cerrar sesion</h5></a></li>
                             </ul>
                         </div>
                         <a id="navbar_icon_carrito" class="btn btn-default lnt-cart" href="../carrito/index.php">
                             <div class="background_icon_navbar">
-                                <img src="../../imgweb/carrito.png" width="28px" height="28px">
+                                <i class="fa fa-shopping-cart"></i>
                             </div>
                         </a>
                     </div>

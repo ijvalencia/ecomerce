@@ -29,14 +29,23 @@ switch ($Menu) {
         break;
 
     case "sesion":
-        if (!(isset($_SESSION['apellidos'])))
+        if (!(isset($_SESSION['apellidos']))){
             $_SESSION['apellidos'] = "invitado";
-        if (!(isset($_SESSION['nombre'])))
-            $_SESSION['nombre'] = "";
-        if (!(isset($_SESSION['id'])))
+    
+            }
+        if (!(isset($_SESSION['nombre']))){
+        $_SESSION['nombre'] = "";
+       
+        
+        }
+        
+        if (!(isset($_SESSION['id']))){
             $_SESSION['id'] = "0";
+            
         $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
         echo json_encode($usuario);
+        
+        }
         break;
 
     case "getCarrito":

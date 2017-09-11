@@ -59,7 +59,7 @@
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title">Restableser Contraseña</h4>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body" id="contador">
                                                         <label>correo :<input type="text" name="txtemail" id="txtemaill" pattern="Correo@gmail.com" class="form-control"  maxlength="50"style="margin-left: 73px; margin-top: -31px;"></label>
                                                         <a href="RecuperarContrasena.php"></a>
                                                         <br>                                       
@@ -81,7 +81,8 @@
                                     <i class="fa fa-facebook"></i> Facebook
                                 </a>
                                 <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
-                                    <i class="fa fa-google-plus"></i> Google
+                                   <!--Google-->
+                                  <!--<div class="g-signin2" data-onsuccess="onSignIn"><i class="fa fa-google-plus"></i>GOOGLE</div>-->
                                 </a>
                             </div>
                         </div>            
