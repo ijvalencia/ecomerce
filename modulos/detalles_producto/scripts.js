@@ -150,6 +150,7 @@ function cargarProducto(codigo) {
                     break;
                 }
             }
+            $('.loader').fadeOut("slow");
         });
     } else {
         window.location.replace("../../modulos/error/index.php");

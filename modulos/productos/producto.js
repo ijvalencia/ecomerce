@@ -73,8 +73,8 @@ $(document).ready(function () {
     var supercategoria = $('#supercategoria').attr("value");
     $('#categoria_elegida').text(supercategoria);
     $('#entrada_categoria').attr("value", supercategoria);
-    var busqueda = $('#busqueda').attr("value").trim();
-//    console.log(busqueda);
+    var busqueda = $('#busqueda').attr("value");
+    busqueda = busqueda.trim();
     if (!jQuery.isEmptyObject(supercategoria) && !jQuery.isEmptyObject(busqueda) && busqueda.length != 0) {
         $('#AquiGrupo').append(busqueda);
         $('.breadcrumb').empty().append('<li><a href="../../modulos/inicio/index.php">Inicio</a></li><li>Productos</li><li><a></a>Busqueda</li>');
