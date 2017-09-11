@@ -8,7 +8,6 @@ var numerico = /[0-9]+/;
 var txtcontra, txtconfir;
  var contador = 0;
 $(document).ready(function () {
-<<<<<<< HEAD
     /*
      $('#link').on("click", function () {
      $('#form_busqueda').hide();
@@ -16,16 +15,6 @@ $(document).ready(function () {
      $('#enviar').on("click", function () {
      $('#form_busqueda').show();
      });*/
-=======
-
-    $('#link').on("click", function () {
-//        $('#form_busqueda').hide();
-    });
-
-    $('#enviar').on("click", function () {
-//        $('#form_busqueda').show();
-    });
->>>>>>> 34061fb4c7519c79344e94ec13721b78e974c4b1
 
     $("#btn-enviar").attr("disabled", true);
 
@@ -357,7 +346,6 @@ $(document).ready(function () {
         $('#pswd_info').hide();
     });
 });
-<<<<<<< HEAD
 /*function onSignIn(googleUser){
   var profile = googleUser.getBasicProfile();
   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -365,5 +353,4 @@ $(document).ready(function () {
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }*/
-=======
->>>>>>> 34061fb4c7519c79344e94ec13721b78e974c4b1
+
