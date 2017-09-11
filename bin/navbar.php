@@ -132,13 +132,13 @@
                                 <li class="ocultar"><a id="info" href="../favoritos/favoritos.php"><i class="fa fa-heart"></i><h5> Mis Favoritos</h5></a></li>
                                 <a href="#" onclick="signOut();">Sign out</a>
                                 <script>
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-</script>
+                                    function signOut() {
+                                        var auth2 = gapi.auth2.getAuthInstance();
+                                        auth2.signOut().then(function () {
+                                            console.log('User signed out.');
+                                        });
+                                    }
+                                </script>
                                 <li><a href="../../bin/ingresar.php?categoria=cerrar"><i class="fa fa-ban"></i><h5> Cerrar sesion</h5></a></li>
                             </ul>
                         </div>
