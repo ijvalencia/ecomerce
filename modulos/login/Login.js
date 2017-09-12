@@ -7,7 +7,7 @@ var bandera3 = false;
 var numerico = /[0-9]+/;
 var txtcontra, txtconfir;
  var contador = 0;
-$(document).ready(function () {
+$(document).ready(function (){
 
     /*
      $('#link').on("click", function () {
@@ -285,6 +285,7 @@ $(document).ready(function () {
         } else {
             $('#letter').removeClass('valid').addClass('invalid');
         }
+
         //validate capital letter
         if (txtcontra.match(/[A-Z]/)) {
             $('#capital').removeClass('invalid').addClass('valid');
@@ -346,6 +347,7 @@ $(document).ready(function () {
         } else {
             $('#number').removeClass('valid').addClass('invalid');
         }
+
     }).focus(function () {
         $('#pswd_info').show();
         $('#pswd_info').clearQueue();
@@ -354,16 +356,10 @@ $(document).ready(function () {
         $('#pswd_info').hide();
     });
 });
-
-function onSignIn(googleUser){  
-   //  var profile = googleUser.getBasicProfile();
-     /*   console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());*/
-        // The ID token you need to pass to your backend:
-     //   var id_token = googleUser.getAuthResponse().id_token;
-       // console.log("ID Token: " + id_token);
-}
+/*function onSignIn(googleUser){
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}*/

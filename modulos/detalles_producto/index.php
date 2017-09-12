@@ -140,6 +140,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div>
+                        <a class="img-chat" href="#"><h5 class="txt-chat">Tienes dudas o algún problema?<br>Chatea con nosotros, estamos para atenderte.</h5></a>
+                    </div>
                 </div>
             </div>
             <script src="scripts.js"></script>

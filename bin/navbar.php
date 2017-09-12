@@ -148,6 +148,25 @@
                                     <i class="fa fa-shopping-cart"></i>
                                 </div>
                             </a>
+                            <ul class="dropdown-menu" role="menu" id="menuloginid">
+                                <li id="navbar-sesion-li"><a href="../login/index.php"><i class="fa fa-user"></i><h5> Iniciar sesion</h5></a></li>
+                                <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><i class="fa fa-pencil"></i><h5> Mis Datos Personales</h5></a></li>
+                                <li class="ocultar"><a id="info" href="#"><i class="fa fa-truck"></i><h5> Mis Pedidos</h5></a></li>
+                                <li class="ocultar"><a id="info" href="#"><i class="fa fa-money"></i><h5> Mis Ofertas</h5></a></li>
+                                
+                                <li class="ocultar"><a id="info" href="../favoritos/favoritos.php"><i class="fa fa-heart"></i><h5> Mis Favoritos</h5></a></li>
+<!--                                <a href="#" onclick="signOut();">Sign out</a>
+                                <script>
+                                    function signOut() {
+                                        var auth2 = gapi.auth2.getAuthInstance();
+                                        auth2.signOut().then(function () {
+                                            console.log('User signed out.');
+                                        });
+                                    }
+                                </script>-->
+                                <li><a href="../../bin/ingresar.php?categoria=cerrar"><i class="fa fa-ban"></i><h5> Cerrar sesion</h5></a></li>
+                            </ul>
+
                         </div>
                     </li>
                 </ul>
