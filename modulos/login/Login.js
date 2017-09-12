@@ -7,7 +7,8 @@ var bandera3 = false;
 var numerico = /[0-9]+/;
 var txtcontra, txtconfir;
  var contador = 0;
-$(document).ready(function () {
+$(document).ready(function (){
+
     /*
      $('#link').on("click", function () {
      $('#form_busqueda').hide();
@@ -15,6 +16,15 @@ $(document).ready(function () {
      $('#enviar').on("click", function () {
      $('#form_busqueda').show();
      });*/
+
+
+    $('#link').on("click", function () {
+//        $('#form_busqueda').hide();
+    });
+
+    $('#enviar').on("click", function () {
+//        $('#form_busqueda').show();
+    });
 
     $("#btn-enviar").attr("disabled", true);
 
@@ -353,4 +363,3 @@ $(document).ready(function () {
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }*/
-

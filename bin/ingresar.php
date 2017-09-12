@@ -3,6 +3,7 @@
 session_start();
 
 include 'connectBD.php';
+require_once '../../bin/google-api-php-client-master/src/Google/autoload.php';       
 $conexion = new BD();
 $Menu = $_GET['categoria'];
 
@@ -22,29 +23,24 @@ switch ($Menu) {
 //        $contrasena = $_POST['contrasena'];
 //        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
 //        break;
-
     /* SATANAS */
     case "envios":
         $conexion->getEnvios();
         break;
 
     case "sesion":
-        if (!(isset($_SESSION['apellidos']))){
+        if (!(isset($_SESSION['apellidos']))) {
             $_SESSION['apellidos'] = "invitado";
-    
-            }
-        if (!(isset($_SESSION['nombre']))){
-        $_SESSION['nombre'] = "";
-       
-        
         }
-        
-        if (!(isset($_SESSION['id']))){
+        if (!(isset($_SESSION['nombre']))) {
+            $_SESSION['nombre'] = "";
+        }
+
+        if (!(isset($_SESSION['id']))) {
             $_SESSION['id'] = "0";
-            
-        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
-        echo json_encode($usuario);
-        
+
+            $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
+            echo json_encode($usuario);
         }
         break;
 
@@ -94,7 +90,7 @@ switch ($Menu) {
                 if (sizeof($articulo) > 1) {
                     echo "{}";
                 } else if (sizeof($articulo) < 1) {
-                    $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
+                    $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=" . $_GET['codigo'] . "&tc=1&dc=1&dt=1";
                     $context = stream_context_create(array('http' => array('timeout' => 3)));
                     $data = file_get_contents($filename, false, $context);
                     $articulo = simplexml_load_string($data);
@@ -151,12 +147,24 @@ switch ($Menu) {
         break;
     /*     * ******** */
     //parte del chuy
+    case "Api_Google":
+        $client = new Google_Client();
+        $cliente->setAuthConfig('sPv4n9tpFFSUZvwifDKqqgvH');
+        $client->setAccessType("offline");
+        // acceso fuera de línea 
+        $client->setIncludeGrantedScopes(true);
+        // incremental auth 
+        $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+        $client->setRedirectUri('http://'.$_SERVER['HTTP_HOST'].'../../bin/oauth2callback.php');
+        
+        break;
+
     case "confirmacion":
-      $confirmacionclave = $_POST["clave"]; 
-      $confirmacioncorreo = $_POST["correosc"];  
-      $conexion->confirmacion($confirmacionclave,$confirmacioncorreo);
-    break;
-    
+        $confirmacionclave = $_POST["clave"];
+        $confirmacioncorreo = $_POST["correosc"];
+        $conexion->confirmacion($confirmacionclave, $confirmacioncorreo);
+        break;
+
     case "estados":
         $conexion->estado();
         break;
@@ -176,16 +184,16 @@ switch ($Menu) {
         $colonia = $_POST["colonia"];
         $txtcruseros = $_POST['cruseros'];
         $txtcrusero2 = $_POST['crusero2'];
-        $txtreferencia = $_POST['referencia'];   
-        $conexion->agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire,$txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2 ,$txtreferencia);
-    break;
+        $txtreferencia = $_POST['referencia'];
+        $conexion->agregardirecciones($number, $txtnombredire, $txtapellidodire, $txttelefonodire, $txttelefono2dire, $txtcalledire, $txtexteriordire, $txtinteriordire, $txtcodigopostaldire, $txtselectestado, $txtciudad, $colonia, $txtcruseros, $txtcrusero2, $txtreferencia);
+        break;
 
     case "cambiarContraseña":
         $txtcorreosUpdate = $_POST['cuenta'];
         $txtnuevocontra = $_POST['nuevacontrasena'];
         $claveconfiracion = $_POST['claves'];
-        $conexion->cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra ,$claveconfiracion);
-        
+        $conexion->cambio_de_contrasena($txtcorreosUpdate, $txtnuevocontra, $claveconfiracion);
+
         break;
 
     case "olvidecontrasena":
@@ -290,20 +298,20 @@ switch ($Menu) {
         $correo = $_POST['correos'];
         $contrasena = $_POST['contrasena'];
         $captcha = $_POST['robot'];
-        if (!$captcha){  
-           echo 'c';
+        if (!$captcha) {
+            echo 'c';
             //exit;
             break;
         }
         $secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
-	$ip = $_SERVER['REMOTE_ADDR'];
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey.$captcha."&remoteip=".$ip);
-	   	$responseKeys = json_decode($response,true);
-       
-        if(intval($responseKeys["success"])!== 1){
-              $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
-        }else{
-             echo 'e';
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKey . $captcha . "&remoteip=" . $ip);
+        $responseKeys = json_decode($response, true);
+
+        if (intval($responseKeys["success"]) !== 1) {
+            $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
+        } else {
+            echo 'e';
         }
         break;
 

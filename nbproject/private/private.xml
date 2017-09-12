@@ -4,9 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/Ecommerce/bin/ingresar.php</file>
-            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/cambiarcontrasena.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/bin/connectBD.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/index.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/bin/navbar.php</file>
             <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/Login.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/login/index.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/bin/head.php</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/modulos/inicio/Usuario_menu.js</file>
+            <file>file:/C:/xampp/htdocs/Ecommerce/bin/platform.js</file>
         </group>
     </open-files>
 </project-private>
