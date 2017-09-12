@@ -80,14 +80,13 @@
                                 <a class="btn btn-link-1 btn-link-1-facebook" href="#">
                                     <i class="fa fa-facebook"></i> Facebook
                                 </a>
-                                <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
-                                   <!--Google-->
-                                  <!--<div class="g-signin2" data-onsuccess="onSignIn"><i class="fa fa-google-plus"></i>GOOGLE</div>-->
-                                </a>
+                              <!--<a class="btn btn-link-1 btn-link-1-google-plus">
+                                   <!--Google btn-link-1-google-plus-->
+                                   <div class="g-signin2" onclick="onSignIn();" id="Gmail" data-onsuccess="onSignIn"><i class="fa fa-google-plus"></i>GOOGLE</div>
+                                <!--</a>-->
                             </div>
                         </div>            
                     </div>
-
                     <div class="col-sm-1 middle-border"></div>
                     <div class="col-sm-1"></div>
                     <!-- Form registro -->

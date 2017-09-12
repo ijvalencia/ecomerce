@@ -168,6 +168,22 @@ class BD {
     /******************/
     /* parte del chuy */
 
+    public function aunteticacion_de_google(){
+    
+   $client = new Google_Client (); 
+   $cliente->setAuthConfig( 'client_secrets.json' ); 
+   $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY); 
+   if(isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+       $client->setAccessToken($_SESSION[ 'access_token' ]); 
+   $drive = new Google_Service_Drive($cliente );
+   $files = $unidad->archivos->listFiles(array ())->getItems();   
+   echo json_encode( $files ); 
+   } else {  
+       $redirect_uri = 'http: //'.$_SERVER[ 'HTTP_HOST' ].'/oauth2callback.php'; 
+       cabecera('Localización:'.filter_var($redirect_uri ,FILTER_SANITIZE_URL));    
+       }        
+    }
+    
     public function confirmacion($confirmacionclave,$confirmacioncorreo) {
     $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
        echo $this->conexion->query($sql) ? "1" : "0";
