@@ -168,22 +168,21 @@ class BD {
     /******************/
     /* parte del chuy */
 
-    public function aunteticacion_de_google(){
-    
-   $client = new Google_Client (); 
-   $cliente->setAuthConfig( 'client_secrets.json' ); 
-   $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY); 
-   if(isset($_SESSION['access_token']) && $_SESSION['access_token']) {
-       $client->setAccessToken($_SESSION[ 'access_token' ]); 
-   $drive = new Google_Service_Drive($cliente );
-   $files = $unidad->archivos->listFiles(array ())->getItems();   
-   echo json_encode( $files ); 
-   } else {  
-       $redirect_uri = 'http: //'.$_SERVER[ 'HTTP_HOST' ].'/oauth2callback.php'; 
-       cabecera('Localización:'.filter_var($redirect_uri ,FILTER_SANITIZE_URL));    
-       }        
+    public function aunteticacion_de_google() {
+        $client = new Google_Client ();
+        $cliente->setAuthConfig( 'client_secrets.json' );
+        $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+        if(isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+            $client->setAccessToken($_SESSION[ 'access_token' ]);
+            $drive = new Google_Service_Drive($cliente );
+            $files = $unidad->archivos->listFiles(array ())->getItems();
+            echo json_encode( $files );
+        } else {
+            $redirect_uri = 'http: //'.$_SERVER[ 'HTTP_HOST' ].'/oauth2callback.php';
+            cabecera('Localización:'.filter_var($redirect_uri ,FILTER_SANITIZE_URL));
+        }
     }
-    
+
     public function confirmacion($confirmacionclave,$confirmacioncorreo) {
     $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
        echo $this->conexion->query($sql) ? "1" : "0";
@@ -191,66 +190,64 @@ class BD {
 
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
         $bandera=true;
-    $SQL = "select correo , contra from usuario";
-    $datoss = $this->conexion->query($SQL);
-      foreach($datoss as $row){
+        $SQL = "select correo , contra from usuario";
+        $datoss = $this->conexion->query($SQL);
+        foreach($datoss as $row){
             $row['correo'];
             $row['contra'];
-        $bandera=true;
-        if(($correo === $row['correo']) || ($contra === $row['contra'])){
-            if ($bandera==true){
-             echo "SI";
-             $bandera=false;
-             break;
-           }
-         } else {
-            //  echo 'NO';
+            $bandera=true;
+            if(($correo === $row['correo']) || ($contra === $row['contra'])){
+                if ($bandera==true){
+                    echo "SI";
+                    $bandera=false;
+                    break;
+                }
+            } else {
+                //  echo 'NO';
+                $salt = '$bgr$/';
+                $password = sha1(md5($salt . $contra));
 
-          $salt = '$bgr$/'; 
-          $password = sha1(md5($salt . $contra));
-          
-       $tipo=0;
-       $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $password . "'," . $tipo . ")";
-        echo $this->conexion->query($sql) ? "1" : "0";
-        require 'PHPMailer/PHPMailerAutoload.php';
-        $titulo = "Confirmacion Correo electronico";
-        $add=rand(10,3000);
-        $message = "tu Clave de confirmacion".$add;
-        $mail = new PHPMailer();
-        $mail->setFrom('crm@coeficiente.mx', 'Confirmar tu Correo Electronico');// jesusvalenciatrejo7@gmail.com
-        $mail->addAddress($correo,$message);
-        $mail->Subject = $titulo;
-        $mail->isHTML(true);
-        $mail->CharSet = 'UTF-8';
-        $body = '
-    <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <title>Soporte Softernium</title>
-    </head>
-    <body>
-        <div id="cuerpo">
-            <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta : </a>
-             '.$message.'
-        </div>
-    <div id="pie">
-        Este mensaje fue dirigido a &lt;
-        '.$correo.'&gt;Este correo es enviado de forma automÃ¡ticamente para validar su cuneta de confirmacion de su cuenta.
-    </div>
-    </body>
-    </html>';
-        $mail->Body = $body;
-        if (!$mail->send()) {
-            echo "<p class='text-danger'>.Mensaje no enviado.</p>";
-        } else {
-            //echo $body;
-            //echo '1';
+                $tipo=0;
+                $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
+                echo $this->conexion->query($sql) ? "1" : "0";
+                require 'PHPMailer/PHPMailerAutoload.php';
+                $titulo = "Confirmacion Correo electronico";
+                $add=rand(10,3000);
+                $message = "tu Clave de confirmacion".$add;
+                $mail = new PHPMailer();
+                $mail->setFrom('crm@coeficiente.mx', 'Confirmar tu Correo Electronico');// jesusvalenciatrejo7@gmail.com
+                $mail->addAddress($correo,$message);
+                $mail->Subject = $titulo;
+                $mail->isHTML(true);
+                $mail->CharSet = 'UTF-8';
+                $body = '
+                <html>
+                <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+                <title>Soporte Softernium</title>
+                </head>
+                <body>
+                <div id="cuerpo">
+                <a href="http://10.1.0.49/Ecommerce/modulos/login/Confirmacion.php">Confirmar tu Cuenta : </a>
+                '.$message.'
+                </div>
+                <div id="pie">
+                Este mensaje fue dirigido a &lt;
+                '.$correo.'&gt;Este correo es enviado de forma automÃ¡ticamente para validar su cuneta de confirmacion de su cuenta.
+                </div>
+                </body>
+                </html>';
+                $mail->Body = $body;
+                if (!$mail->send()) {
+                    echo "<p class='text-danger'>.Mensaje no enviado.</p>";
+                } else {
+                    //echo $body;
+                    //echo '1';
+                }
+                break;
+            }
         }
-         break;
-     }
-
     }
-  }
 
     public function agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
         $sqlInser = "INSERT INTO direccion(id_usuario, nombre, apellidos, celular, telefono, calle, exterior, interior, cp, estado, ciudad, colonia, cruce1, cruce2, refrencia) VALUES (".$number.",'".$txtnombredire."','".$txtapellidodire."',".$txttelefonodire.",".$txttelefono2dire.",'".$txtcalledire."',".$txtexteriordire.",".$txtinteriordire.",".$txtcodigopostaldire.",".$txtselectestado.",'".$txtciudad."','".$colonia."','".$txtcruseros."','".$txtcrusero2."','".$txtreferencia."')";
@@ -306,22 +303,22 @@ class BD {
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
         $body = '
-    <html>
-    <head>
+        <html>
+        <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <title>Soporte Softernium</title>
-    </head>
-    <body>
+        </head>
+        <body>
         <div id="cuerpo">
-            <a href="http://10.1.0.49/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>
-            ' . $message . '
+        <a href="http://10.1.0.49/Ecommerce/modulos/login/cambiarcontrasena.php">Recuperar Mi Contraseña</a>
+        ' . $message . '
         </div>
-    <div id="pie">
+        <div id="pie">
         Este mensaje fue dirigido a &lt;
         ' . $correos_Email . '&gt;Este correo es enviado de forma automáticamente para validar su cuneta de confirmacion o de cambio de contraseña.
-    </div>
-    </body>
-    </html>';
+        </div>
+        </body>
+        </html>';
         $mail->Body = $body;
         if (!$mail->send()) {
             echo "<p class='text-danger'>.Mensaje no enviado.</p>";
@@ -397,7 +394,6 @@ class BD {
         $datos = $this->conexion->query($sql);
         if ($datos != false) {//Si la consulta funciona imprime los datos
             foreach ($datos as $row) {
-               //$row['contra']
                 if ($correo === $row['correo'] && $loginpassword === $row['contra'] && $row["confirmacion"]!= null){
                     echo $row['id_usuario'] . "||";
                     echo $row['nombre'] . "||";
@@ -406,12 +402,10 @@ class BD {
                     echo $_SESSION['apellidos'] = $row['apellidos'];
                     //echo $_SESSION['Bienvenido'] = "Bienvenido :";
                     echo $_SESSION['id'] = $row['id_usuario'];
-                } else {
+                }else{
                     echo '1';
                 }
             }
-        } else {
-            echo '3';
         }
     }
 
