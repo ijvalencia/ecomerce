@@ -135,7 +135,6 @@ echo $con->query($sql_repetidas) ? "Borradas categorias duplicadas
     " : "Imposible borrar
 ";
 
-
 $colores = ["ROJO","ROSA","NEGRO","AMARILLO","AZUL","MORADO","PLATA","GRIS","VERDE","BLANCO","CAFE","NARANJA","DORADO","CYAN","MAGENTA"];
 foreach ($colores as $col) {
 	$sql_colores = "UPDATE producto SET color='".$col."' WHERE descripcion LIKE '%".$col."%' AND color IS NULL";
@@ -143,9 +142,30 @@ foreach ($colores as $col) {
     echo "
     ";
 }
+
+$sql_producto = "SELECT codigo_fabricante FROM producto WHERE codigo_fabricante IN (SELECT codigo_fabricante FROM img_producto WHERE 1)";
+$codigo_fabricante = [];
+foreach($con->query($sql_producto) as $prod)
+    array_push($codigo_fabricante, $prod['codigo_fabricante']);
+foreach($codigo_fabricante as $codigo) {
+    $imagenes = [];
+    $sql_imagen = "SELECT url FROM img_producto WHERE codigo_fabricante = '".$codigo."'";
+    foreach($con->query($sql_imagen) as $res)
+        array_push($imagenes, $res['url']);
+    if(sizeof($imagenes) > 0) {
+        $sql_update_img = "UPDATE producto SET imagen = '".$imagenes[0]."' WHERE codigo_fabricante = '".$codigo."'";
+        echo $con->query($sql_update_img) ? "Imagenes actualizadas de ".$codigo : "Error imagenes";
+    }
+    echo "
+    ";
+}
+echo "
+";
+
 /***********/
 
+echo "Acabo";
 echo "
-Acabo";
+";
 
 mysqli_close($con);

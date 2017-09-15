@@ -12,19 +12,12 @@ $Menu = $_GET['categoria'];
 if (isset($_GET['extra'])) {
     $Menu = "aux";
 }
+
 if ((isset($_GET['capacidadg'])) || (isset($_GET['capacidadt']))) {
     $Menu = "GB_TB";
 }
 
 switch ($Menu) {
-// registro de para login
-//    case "registro":
-//        $nombre = $_POST['nombre'];
-//        $apellido = $_POST['apellido'];
-//        $correo = $_POST['correos'];
-//        $contrasena = $_POST['contrasena'];
-//        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
-//        break;
 
     /* SATANAS */
     case "envios":
@@ -89,7 +82,9 @@ switch ($Menu) {
             if ($data) {
                 $articulo = simplexml_load_string($data);
                 if (sizeof($articulo) > 1) {
-                    echo "{}";
+                    $producto = ["item" => $articulo->item[0]];
+                    $producto = $conexion->agregarImagenes($producto, $_GET['codigo']);
+                    echo json_encode($producto);
                 } else if (sizeof($articulo) < 1) {
                     $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
                     $context = stream_context_create(array('http' => array('timeout' => 3)));
@@ -97,10 +92,14 @@ switch ($Menu) {
                     $articulo = simplexml_load_string($data);
                     if (sizeof($articulo) < 1)
                         echo "{}";
-                    else
+                    else {
+                        $articulo = $conexion->agregarImagenes($articulo, $_GET['codigo']);
                         echo json_encode($articulo);
-                } else
+                    }
+                } else {
+                    $articulo = $conexion->agregarImagenes($articulo, $_GET['codigo']);
                     echo json_encode($articulo);
+                }
             } else
                 echo "{}";
         }
@@ -152,9 +151,9 @@ switch ($Menu) {
         $client = new Google_Client();
         $client->setAuthConfig('sPv4n9tpFFSUZvwifDKqqgvH');
         $client->setAccessType("offline");
-        // acceso fuera de línea 
+        // acceso fuera de línea
         $client->setIncludeGrantedScopes(true);
-        // incremental auth 
+        // incremental auth
         $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
         $client->setRedirectUri('http://'.$_SERVER['HTTP_HOST'].'../../bin/oauth2callback.php');
         break;
@@ -210,7 +209,7 @@ switch ($Menu) {
     case "compararcuentass":
         $cuentacorreos = $_POST['usuariocorreo'];
         $cuentaclave = $_POST['usuarioclave'];
-        //$conexion->cuenta($cuentacorreos,$cuentaclave);        
+        //$conexion->cuenta($cuentacorreos,$cuentaclave);
         $checkrobot = $_POST["checkrobot"];
 
         if (!$checkrobot) {
@@ -517,7 +516,8 @@ switch ($Menu) {
         $conexion->verfavoritos($_SESSION['id']);
         break;
 }
+
 $conexion->cerrar();
 unset($conexion);
-//header('Location: localhost/ecomerce/Ecommerce1/index.php');
+
 ?>

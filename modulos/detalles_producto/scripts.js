@@ -14,7 +14,15 @@ var tipo_cambio;
 var like;
 var fav;
 
+$(document).keydown(function(e) {
+    var code = e.which;
+    if (code == 27)
+        $('#modalZoom').fadeOut();
+});
+
 $(document).ready(function () {
+    $('.carousel-control2').hide();
+    $('#imagenes_secundarias').hide();
     /* Mostrar producto */
     $.getJSON("../../bin/ingresar.php?categoria=parametros", function (datos) {
         parametros = datos;
@@ -27,29 +35,12 @@ $(document).ready(function () {
 
     /* Zoom imagen del producto */
     $('#img_producto').click(function () {
-        $('#modalZoom').show();
-        $('#form_busqueda').hide();
+        $('#modalZoom').fadeIn();
         $('#img_modal').attr('src', $('#img_producto').attr('src'));
     });
 
     $('.close').click(function () {
-        $('#modalZoom').hide();
-        $('#form_busqueda').show();
-        $(".line-navbar-two").css("display", "block");
-        
-    });
-    $("#esconder").on("click", function(){
-        $('#form_busqueda').hide();
-      $(".line-navbar-two").css("display", "none");
-    });
-    
-
-    $(document).keypress(function (e) {
-        var code = e.keyCode || e.which;
-        if (code == 27) { //Enter keycode
-            $('#modalZoom').hide();
-            $('#form_busqueda').show();
-        }
+        $('#modalZoom').fadeOut();
     });
 
     //Anton
@@ -75,24 +66,19 @@ $(document).ready(function () {
 });
 
 $('#like').click(function () {
-
-    $.get("../../bin/ingresar.php?categoria=vermeterlike&usuario=" + number + "&producto=" + producto,
-            function (respuesta) {
-                like = respuesta;
-                mostrarlike('#icono_like');
-            });
-
+    $.get("../../bin/ingresar.php?categoria=vermeterlike&usuario=" + number + "&producto=" + producto, function (respuesta) {
+        like = respuesta;
+        mostrarlike('#icono_like');
+    });
 });
+
 $('#fav').click(function () {
-
-    $.get("../../bin/ingresar.php?categoria=vermeterfavorito&usuario=" + number + "&producto=" + producto,
-            function (respuesta) {
-                //alert(respuesta);
-                fav = respuesta;
-                mostrarfavorito('#icono_fav');
-            });
-
+    $.get("../../bin/ingresar.php?categoria=vermeterfavorito&usuario=" + number + "&producto=" + producto, function (respuesta) {
+        fav = respuesta;
+        mostrarfavorito('#icono_fav');
+    });
 });
+
 //fin Anton
 
 function cargarProducto(codigo) {
@@ -134,7 +120,6 @@ function cargarProducto(codigo) {
             $('#nombre_marca').append(articulo["marca"]);
             $('#nombre_marca').attr("href", "../../modulos/productos/detalles.php?extra=1&supercategoria=Todo&busqueda=" + articulo["marca"]);
             $('#nombre_producto').append(articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
-            $('#img_producto').attr("src", articulo["imagen"]);
             $('#img_producto').attr("onerror", 'this.src="\../../IMG/error2.jpg\"');
             $('#descripcion_producto').append(articulo["descripcion"]);
             $('#precio_producto').append(formatoMoneda(articulo.moneda == "Pesos" ? articulo.precio * iva : articulo.precio * iva * tipo_cambio));
@@ -145,11 +130,25 @@ function cargarProducto(codigo) {
             $('#codigo_fabricante').append(articulo["codigo_fabricante"]);
             $('#tiempo_garantia').append(articulo["garantia"].replace("NI", "Ñ"));
             for (var i = 0; i < categorias_sin_cantidad.length; i++) {
-                if (articulo["grupo"] === categorias_sin_cantidad[i]) {
+                if (articulo["grupo"] == categorias_sin_cantidad[i]) {
                     $('#cant_disponibles').empty().append("SI");
                     break;
                 }
             }
+            if(articulo.imagen_extra != undefined) {
+                $('#img_producto').attr("src", articulo.imagen_extra[0]);
+                $('#imagenes_secundarias').show();
+                var img = '<a href=""><img class="img-prod-sm" src="#url"></a>';
+                $.each(articulo.imagen_extra, function(i, url) {
+                    $('slider').append(img.replace("#url", url));
+                });
+                $('.img-prod-sm').click(function(e) {
+                    e.preventDefault();
+                    $('#img_producto').attr("src", $(this).attr("src"));
+                });
+            } else
+                $('#img_producto').attr("src", articulo.imagen);
+
             $('.loader').fadeOut("slow");
         });
     } else {
@@ -192,7 +191,7 @@ function cargarPaginaContacto(articulo) {
             resp = resp.replace("#imagen", articulo.imagen);
             resp = resp.replace("#producto", articulo.descripcion.substr(0,45) + "...");
             resp = resp.replace("#codigo", articulo.marca == "GHIA" ? articulo.clave : articulo.codigo_fabricante);
-            resp = resp.replace("#costo", "$ " + formatoMoneda(parseFloat(articulo.precio)));
+            resp = resp.replace("#costo", "$ " + formatoMoneda(parseFloat(articulo.precio) * (articulo.moneda == "Pesos" ? iva : iva * tipo_cambio)));
             $('producto').append(resp);
             $('#nombre_categoria').append(articulo.grupo);
             $('#nombre_categoria').attr("href", "../../modulos/productos/detalles.php?extra=1&marca=undefined&priceMIN=1&priceMAX=250000&envio=undefined&subcategoria=" + articulo.grupo);
