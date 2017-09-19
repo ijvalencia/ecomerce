@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 include 'connectBD.php';
@@ -12,18 +11,12 @@ $Menu = $_GET['categoria'];
 if (isset($_GET['extra'])) {
     $Menu = "aux";
 }
+
 if ((isset($_GET['capacidadg'])) || (isset($_GET['capacidadt']))) {
     $Menu = "GB_TB";
 }
+
 switch ($Menu) {
-// registro de para login
-//    case "registro":
-//        $nombre = $_POST['nombre'];
-//        $apellido = $_POST['apellido'];
-//        $correo = $_POST['correos'];
-//        $contrasena = $_POST['contrasena'];
-//        $conexion->agregarUsuario($nombre, $apellido, $correo, $contrasena);
-//        break;
 
     /* SATANAS */
     case "envios":
@@ -40,10 +33,10 @@ switch ($Menu) {
 //            $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
 //            echo json_encode($usuario);
         }
-        if(!(isset($_SESSION['correo']))){
+	if(!(isset($_SESSION['correo']))){
             $_SESSION['correo'] = "";
         }
-        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],$_SESSION['correo'],);
+        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
         echo json_encode($usuario);
         break;
 
@@ -91,7 +84,9 @@ switch ($Menu) {
             if ($data) {
                 $articulo = simplexml_load_string($data);
                 if (sizeof($articulo) > 1) {
-                    echo "{}";
+                    $producto = ["item" => $articulo->item[0]];
+                    $producto = $conexion->agregarImagenes($producto, $_GET['codigo']);
+                    echo json_encode($producto);
                 } else if (sizeof($articulo) < 1) {
                     $filename = "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=26813&clave=".$_GET['codigo']."&tc=1&dc=1&dt=1";
                     $context = stream_context_create(array('http' => array('timeout' => 3)));
@@ -99,10 +94,14 @@ switch ($Menu) {
                     $articulo = simplexml_load_string($data);
                     if (sizeof($articulo) < 1)
                         echo "{}";
-                    else
+                    else {
+                        $articulo = $conexion->agregarImagenes($articulo, $_GET['codigo']);
                         echo json_encode($articulo);
-                } else
+                    }
+                } else {
+                    $articulo = $conexion->agregarImagenes($articulo, $_GET['codigo']);
                     echo json_encode($articulo);
+                }
             } else
                 echo "{}";
         }
@@ -148,7 +147,7 @@ switch ($Menu) {
     case "getCarousel":
         $conexion->getCarousel($_GET['clave'], $_GET['opc']);
         break;
-    /********** */
+    /***********/
     //parte del chuy  
     
     case "idCorreo":
@@ -341,7 +340,7 @@ switch ($Menu) {
             echo 'e';
         break;
 
-    /*     * ******* */
+    /**********/
     /* Anton */
     case "aux":
         $variable = $_GET['categoria'];
@@ -544,7 +543,8 @@ switch ($Menu) {
         $conexion->verfavoritos($_SESSION['id']);
         break;
 }
+
 $conexion->cerrar();
 unset($conexion);
-//header('Location: localhost/ecomerce/Ecommerce1/index.php');
+
 ?>

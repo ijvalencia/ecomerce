@@ -165,6 +165,16 @@ class BD {
         }
         return "0";
     }
+    public function agregarImagenes($articulo, $codigo) {
+        $sql = "SELECT url FROM img_producto WHERE codigo_fabricante = '".$codigo."'";
+        $imagenes = [];
+        foreach($this->conexion->query($sql) as $res)
+            array_push($imagenes, $res['url']);
+        if(sizeof($imagenes) > 0)
+            for($i = 0; $i < sizeof($imagenes); $i++)
+                $articulo['item']->imagen_extra[$i] = $imagenes[$i];
+        return $articulo;
+    }
     /******************/
     /* parte del chuy */
     

@@ -116,7 +116,7 @@
                              
                         <!--aqui ba la span-->
                         <div class="btn-group" role="group" aria-label="...">
-                            <a class="btn btn-default lnt-cart" href="../inicio/index.php" id="hover1">
+                            <a class="btn btn-default lnt-cart hidden" href="../inicio/index.php" id="hover1">
                                 <div class="background_icon_navbar">
                                     <i class="fa fa-truck"></i>
                                 </div>

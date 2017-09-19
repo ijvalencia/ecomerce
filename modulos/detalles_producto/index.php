@@ -23,16 +23,23 @@
 
             <!-- Imagen -->
             <div class="col-md-7">    
-                <div class="modalZoom">
-                    <img id="img_producto">
-                </div>
-                <!-- The Modal -->
-                <div id="modalZoom" class="modal">
-                    <span class="close">&times;</span>
-                    <img class="modal-content" id="img_modal">
+                <div class="img-box">
+                    <div class="modalZoom">
+                        <a data-slide="prev" href="#" class="carousel-control2 fa fa-angle-left"></a>
+                        <img id="img_producto">
+                        <a data-slide="next" href="#" class="carousel-control2 fa fa-angle-right"></a>
+                    </div>
+                    <div id="imagenes_secundarias">
+                        <slider class="container-fluid">
+                        </slider>
+                    </div>
+                    <!-- The Modal -->
+                    <div id="modalZoom" class="modal">
+                        <span class="close">&times;</span>
+                        <img class="modal-content" id="img_modal">
+                    </div>
                 </div>
             </div>
-            
             <!-- Datos y compra -->
             <div class="col-md-4">
                 <div class="col-md-10">
