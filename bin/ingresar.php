@@ -15,7 +15,6 @@ if (isset($_GET['extra'])) {
 if ((isset($_GET['capacidadg'])) || (isset($_GET['capacidadt']))) {
     $Menu = "GB_TB";
 }
-
 switch ($Menu) {
 // registro de para login
 //    case "registro":
@@ -41,7 +40,10 @@ switch ($Menu) {
 //            $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
 //            echo json_encode($usuario);
         }
-        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],);
+        if(!(isset($_SESSION['correo']))){
+            $_SESSION['correo'] = "";
+        }
+        $usuario = array($_SESSION['nombre'], $_SESSION['apellidos'], $_SESSION['id'],$_SESSION['correo'],);
         echo json_encode($usuario);
         break;
 
@@ -146,8 +148,33 @@ switch ($Menu) {
     case "getCarousel":
         $conexion->getCarousel($_GET['clave'], $_GET['opc']);
         break;
-    /*     * ******** */
-    //parte del chuy
+    /********** */
+    //parte del chuy  
+    
+    case "idCorreo":
+        $compraidenviado=$_POST["idcorreosenviados"];
+        $conexion->compracorreoenviado($compraidenviado);
+    break;
+    
+    case "registroGmail":
+    $nombreGmail = $_POST["nombre"];
+    $apellidoGmail = $_POST["apellido"];
+    $correosGmail = $_POST["correos"];
+    $id_gmailProducto = $_POST["contrasena"];
+    $conexion->registroGmail($nombreGmail,$apellidoGmail,$correosGmail,$id_gmailProducto);
+    break;
+
+    case "Gmail":
+        $nombregmail = $_POST['nombregmail'];
+        $id_gmail = $_POST['id_gmail'];
+        $correos_gmail = $_POST['correogmail'];
+    echo json_encode($_SESSION["nombre"] = $nombregmail).",";
+    echo json_encode($_SESSION["id"] = $id_gmail).",";
+    echo json_encode($_SESSION["correo"] = $correos_gmail);
+
+    // $conexion->gmailCorreo($nombregmail,$id_gmail);
+    break;
+
     case "Api_Google":
         $client = new Google_Client();
         $client->setAuthConfig('sPv4n9tpFFSUZvwifDKqqgvH');
@@ -210,23 +237,23 @@ switch ($Menu) {
     case "compararcuentass":
         $cuentacorreos = $_POST['usuariocorreo'];
         $cuentaclave = $_POST['usuarioclave'];
-        //$conexion->cuenta($cuentacorreos,$cuentaclave);        
+       // $conexion->cuenta($cuentacorreos,$cuentaclave);        
         $checkrobot = $_POST["checkrobot"];
-
-        if (!$checkrobot) {
-            echo '<h2>Please check the the captcha form.</h2>';
-            exit;
+     
+        if (!$checkrobot){
+        //  exit;
+            echo 'c';
+            break;
         }
-        $secretKeyy = "";
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secretKeyy . "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX" . $checkrobot . "&remoteip=" . $ip);
-        $responseKeyss = json_decode($response, true);
-        if (intval($responseKeyss["success"]) !== 1) {
-
-            echo '<h2>You are spammer ! Get the @$%K out</h2>';
-        } else {
-
-            echo '<h2>Thanks for posting comment.</h2>';
+	   	$secretKey = "&6Ld_1i0UAAAAABnfcJxUVLcQYlQmSQkcpe6KGNlX";
+	   	$ip = $_SERVER['REMOTE_ADDR'];
+                $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey.$checkrobot."&remoteip=".$ip);
+	   	$responseKeys = json_decode($response,true);
+        if(intval($responseKeys["success"]) !== 1){
+            $conexion->cuenta($cuentacorreos,$cuentaclave);
+        }
+        else{    
+        echo 'e';       
         }
         break;
 

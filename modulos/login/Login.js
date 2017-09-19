@@ -8,16 +8,15 @@ var numerico = /[0-9]+/;
 var txtcontra, txtconfir;
  var contador = 0;
 $(document).ready(function (){
-
     /*
      $('#link').on("click", function () {
      $('#form_busqueda').hide();
-     });     
+    });     
      $('#enviar').on("click", function () {
      $('#form_busqueda').show();
-     });*/
-
-
+    });
+     */
+    
     $('#link').on("click", function () {
 //        $('#form_busqueda').hide();
     });
@@ -30,6 +29,7 @@ $(document).ready(function (){
 
     $("#botonsesion").on('click', function () {             
         contador += 1;
+    
        $("#contador").text(contador);
                // $("#botonsesion").text(contador);
         var txtusuario = $("input:text[id='form-mail']").val().toLowerCase();
@@ -73,31 +73,25 @@ $(document).ready(function (){
                             jAlert("ERROR DE AUNTENTICACIÒN VERIFICAR EL CORREO O CONTRASEÑA");
                            if(contador === 4){
                               jAlert('Tiempo limite ocupas reguistrarse o cambiar contraseña');
-                              window.location.href = "http://10.1.0.49/Ecommerce/modulos/inicio/index.php";
-                               //window.close();    
+                              window.location.href = "../../modulos/inicio/index.php";
+                            //window.close();    
                             }
                         } else if (sessionmsj === "1"){
                             jAlert("Falta Su Clave de Confirmacion");
-                        } else if (sessionmsj === "3") {
-                            jAlert("los tres intentos ");
-                            window.location.href = "http://10.1.0.49/Ecommerce/modulos/inicio/index.php";
-                            //window.close(); ojo no borrar
-                        }
+                        } 
                         else {
-                            //window.location.href = "http://10.1.0.49/Ecommerce/modulos/inicio/index.php";
-                            //window.close(); ojo no borrar
-                            history.back();
+                              jAlert("Acaba de iniciar sesion con su cuneta de la tienda");
+                              window.location.href = "../../modulos/inicio/index.php";                         
+                              history.back();
                         }
                     }
 
                 });
             }
         }
-    });
-    
+    }); 
     $("#contador").text(contador);
     
-
     //Validar los terminio de la para guardar
     $("#check-terminos").click(function () {
         if ($("#check-terminos").is(':checked')) {
@@ -183,26 +177,25 @@ $(document).ready(function (){
             return false;
         }
         //}
-        if ((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== "") && (txtconfir !== "") && (txtcontra === txtconfir)) {
+        if((Cadena.test(txtnombre)) && (Cadena.test(txtapellido)) && (correo.test(txtcorreo)) && (txtcontra !== "") && (txtconfir !== "") && (txtcontra === txtconfir)) {
             bandera2 = true;
             if (bandera2 === true) {
                 $.ajax({type: "POST",
                     url: "../../bin/ingresar.php?categoria=registro",
                     data: {"nombre": txtnombre, "apellido": txtapellido, "correos": txtcorreo, "contrasena": txtcontra, "confirmacion": txtconfir, "robot": norobot},
                     success: function (mns) {
-                        //  alert(mns);
+                          alert(mns);
                         switch (mns) {
-                            case "SI":
+                            case '0':
                                 jAlert("El correo y contraseña ya esta registrada");
                                 break;
-                            case "1":
+                            case '1':
                                 jAlert("Se mando un correo de confirmacion a la direccion que proporcionaste, por favor verificalo");
                                 $.limpiartexto();
                                 break;
                             case "c":
                                 jAlert("Por favor verifica que no eres un robot");
                                 break;
-
                             default:
                                 jAlert("Algo salio mal, intentalo de nuevo");
                                 break;
@@ -263,11 +256,6 @@ $(document).ready(function (){
 });
 
 
-$.incrementar = function () {
-   
-};
-
-
 $(document).ready(function () {
     $('input:password[id="form-contra"]').keyup(function () {
         // set password variable
@@ -311,7 +299,6 @@ $(document).ready(function () {
         $(".line-navbar-two").css("display", "block");
 
     });
-
     $('#link').on("click", function () {
         $('#form_busqueda').hide();
         $(".line-navbar-two").css("display", "none");
@@ -330,17 +317,14 @@ $(document).ready(function () {
         if (txtconfir.match(/[A-z]/)) {
             $('#letter').removeClass('invalid').addClass('valid');
         } else {
-
             $('#letter').removeClass('valid').addClass('invalid');
         }
-
         //validate capital letter
         if (txtconfir.match(/[A-Z]/)) {
             $('#capital').removeClass('invalid').addClass('valid');
         } else {
             $('#capital').removeClass('valid').addClass('invalid');
         }
-
         //validate number
         if (txtconfir.match(/\d/)) {
             $('#number').removeClass('invalid').addClass('valid');
@@ -356,10 +340,77 @@ $(document).ready(function () {
         $('#pswd_info').hide();
     });
 });
+
 function onSignIn(googleUser){
-  var profile = googleUser.getBasicProfile();
+  profile = googleUser.getBasicProfile();
+  //jAlert(profile.getName());
   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  txtnombre = String(profile.getName());
+  txtid_gmail = String(profile.getId());
+  txtcorreos =String(profile.getEmail());
+  
+    //console.log(email);
+    $.ajax({
+         type: "POST",
+         url: "../../bin/ingresar.php?categoria=Gmail",
+         data:{"id_gmail":txtid_gmail,"nombregmail":txtnombre,"correogmail":txtcorreos},
+         success: function(gmailmsj){
+                if(gmailmsj===null){
+                    console.log("los datos no se encontraron");            
+                }else{
+               jAlert("Acabas de iniciar Session por tu correo personal");
+              window.location.href = "../../modulos/inicio/index.php";
+           }
+        }
+    });
 }
+/*
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    if (response.status === 'connected') {
+      testAPI();
+    } else {
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    }
+  }
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '{1587545611320691}',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.10' // use graph api version 2.8
+  });
+ FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+  });
+}*/

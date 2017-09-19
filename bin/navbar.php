@@ -105,73 +105,48 @@
                     </div>
                     <!-- boton de busqueda-->
                     <button type="submit" class="btn btn-search" id="btn_enviar"><span class="fa fa-search"></span></button>
+                
                 </form>
-            </div>
+                <span id="nombre_usuario_nav" style="margin-right: -80px; float: right; margin-top: -6px;"></span> 
+            </div>  
             <div class="col-md-3">
+                
                 <ul class="nav navbar-nav navbar-right lnt-shopping-cart">
-                    <li class="dropdown">
-                        <span id="nombre_usuario_nav"></span>
+                    <li class="dropdown">  
+                             
+                        <!--aqui ba la span-->
                         <div class="btn-group" role="group" aria-label="...">
                             <a class="btn btn-default lnt-cart" href="../inicio/index.php" id="hover1">
                                 <div class="background_icon_navbar">
                                     <i class="fa fa-truck"></i>
                                 </div>
                             </a>
+                        
                             <div class="btn-group" role="group">
                                 <a class="btn btn-default lnt-cart" dropdown-toggle selected-category-btn data-toggle="dropdown" aria-expanded="false" id="hover2"> 
                                     <div class="background_icon_navbar">
                                         <i class="fa fa-user-o"></i>
                                     </div>
                                 </a>
+                           
                                 <ul class="dropdown-menu" role="menu" id="menuloginid">
                                     <li id="navbar-sesion-li"><a href="../login/index.php"><i class="fa fa-user"></i><h5> Iniciar sesion</h5></a></li>
                                     <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><i class="fa fa-pencil"></i><h5> Mis Datos Personales</h5></a></li>
                                     <li class="ocultar"><a id="info" href="#"><i class="fa fa-truck"></i><h5> Mis Pedidos</h5></a></li>
                                     <li class="ocultar"><a id="info" href="#"><i class="fa fa-money"></i><h5> Mis Ofertas</h5></a></li>
-
                                     <li class="ocultar"><a id="info" href="../favoritos/favoritos.php"><i class="fa fa-heart"></i><h5> Mis Favoritos</h5></a></li>
-                                    <a href="#" onclick="signOut();">Sign out</a>
-                                    <!--<script>
-      function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-          console.log('User signed out.');
-        });
-      }
-    </script>-->
-
-                                    <li><a href="../../bin/ingresar.php?categoria=cerrar"><i class="fa fa-ban"></i><h5> Cerrar sesion</h5></a></li>
+                                    <li><a href="../../bin/ingresar.php?categoria=cerrar" onclick="signOut();"><i class="fa fa-ban"></i><h5> Cerrar sesion</h5></a></li>
                                 </ul>
-                            </div>
-                            <a id="navbar_icon_carrito" class="btn btn-default lnt-cart" href="../carrito/index.php">
+                        </div>   
+                             <a id="navbar_icon_carrito" class="btn btn-default lnt-cart" href="../carrito/index.php">
                                 <div class="background_icon_navbar">
                                     <i class="fa fa-shopping-cart"></i>
                                 </div>
                             </a>
-                            <ul class="dropdown-menu" role="menu" id="menuloginid">
-                                <li id="navbar-sesion-li"><a href="../login/index.php"><i class="fa fa-user"></i><h5> Iniciar sesion</h5></a></li>
-                                <li class="ocultar" id="idcuentas"><a id="info" href="../usuario/index.php"><i class="fa fa-pencil"></i><h5> Mis Datos Personales</h5></a></li>
-                                <li class="ocultar"><a id="info" href="#"><i class="fa fa-truck"></i><h5> Mis Pedidos</h5></a></li>
-                                <li class="ocultar"><a id="info" href="#"><i class="fa fa-money"></i><h5> Mis Ofertas</h5></a></li>
-                                
-                                <li class="ocultar"><a id="info" href="../favoritos/favoritos.php"><i class="fa fa-heart"></i><h5> Mis Favoritos</h5></a></li>
-<!--                                <a href="#" onclick="signOut();">Sign out</a>
-                                <script>
-                                    function signOut() {
-                                        var auth2 = gapi.auth2.getAuthInstance();
-                                        auth2.signOut().then(function () {
-                                            console.log('User signed out.');
-                                        });
-                                    }
-                                </script>-->
-                                <li><a href="../../bin/ingresar.php?categoria=cerrar"><i class="fa fa-ban"></i><h5> Cerrar sesion</h5></a></li>
-                            </ul>
-
-                        </div>
-                    </li>
+                   </li>
                 </ul>
             </div>
-        </div> 
+        </div>
     </div>
 </nav>
 <!-- Barra inferior -->
