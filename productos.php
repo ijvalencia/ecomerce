@@ -19,9 +19,12 @@ $articulos = simplexml_load_file($filename);
 $total_articulos = count($articulos->item);
 echo $total_articulos."
 ";
-echo $con->query("delete FROM producto") ? "Borrado con exito
-" : exit("Error en borrado");
-for ($x = 0; $x <= $total_articulos - 1; $x++) {
+if ($total_articulos >= 1) {
+    echo $con->query("delete FROM producto") ? "Borrado con exito" : exit("Error en borrado");
+    echo "
+    ";
+}
+for ($x = 0; $x <= $total_articulos - 1 && $total_articulos >= 1; $x++) {
     $cadenaP = str_replace(" ", "_", $articulos->item[$x]->descripcion);
     $cadenaP = str_replace("/", "-", $cadenaP);
     $buscar = 'TB';
