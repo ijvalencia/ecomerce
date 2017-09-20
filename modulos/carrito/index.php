@@ -29,8 +29,8 @@
                                             <th style="width:12%"></th>
                                         </tr>
                                     </thead>
-                                    <tbody> <!-- AQUI CARGAN LOS PRODUCTOS-->
-                                    </tbody> <!-- AQUI TERMINAN DE CARGAR-->
+                                    <tbody><!-- AQUI CARGAN LOS PRODUCTOS-->
+                                    </tbody><!-- AQUI TERMINAN DE CARGAR-->
                                 </table>
                             </div>
                             <div class="col-md-3">
@@ -92,21 +92,19 @@
                                                             <option value="Visa">Visa</option>
                                                         </select>
                                                     <br>                                              
-                                                        <label>Correo: <input type="text" name="txtcorreoss" id="txtemailcompra" class="form-correo form-control" maxlength="30"></label>
+                                                        <label>Correo: <input type="text" name="txtcorreoss" id="txtemailcompra" class="form-correo form-control" maxlength="40"></label>
                                                         <label>Clave : <input type="password" name="txtclave" id="txtclavescompra" class="form-correo form-control" maxlength="30"></label>
                                                         <label  class="adddirecion">añadir otra Direccion :<input type="checkbox" name="checkbox"  id="addirecion" width="10px" height="10px" style="margin-left: 39px; margin-top: 9px;"></label>              
-                                      
                                                         <div class="g-recaptcha" data-sitekey="6Ld_1i0UAAAAAICeMTzxRahb9jFR8HA5IHAE5wmc" id="yorobot"></div>
                                                        <br><br><br><br><br><br>
                                                        <div id="formularios"></div>
-                                                 <button type="button" class="btn btn-default" id="btn_confirmar_compra" style="margin-left: 201px; margin-top: -33px; float: left;">Confirmar compra</button>              
-                                                 <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrar_tarjetas" style="margin-left: 351px; margin-top: -34px; width: 103px; float: left;">Canselar</button>
-                                               </div>
+                                                   <button type="button" class="btn" id="btn_confirmar_compra" style="margin-left: 201px; margin-top: -33px; float: left;">Confirmar compra</button>              
+                                                 <button type="button" class="btn " data-dismiss="modal" id="cerrar_tarjetas" style="margin-left: 351px; margin-top: -34px; width: 103px; float: left;">Canselar</button>
+                                               </div><!--btn-default-->
                                              </div>
                                            </div>
                                          </div>
-                                       </div>
-                                     
+                                       </div>                                    
                                     <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -114,7 +112,6 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     <h4 class="modal-title" id="myModalLabel">Registro para Realizar la compra</h4>
                                                 </div>
-                                                 
                                                 <div class="modal-body">
                                                     <!--<h3>Continuar con el registro</h3>-->
                                                     <label>Nombre :<input type="text" name="txtnombre" class="form-control" id="txtnombred" maxlength="20"></label>
@@ -150,6 +147,9 @@
                                         <input type="hidden" name="currency_code" value="MXN">
                                         <input type="hidden" name="amount" value="0.00">
                                         <input type="image" src="http://www.paypal.com/es_ES/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                                        <input type="image" src="../../IMG/pagos/MasterCard.png" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" width="40px" height="30px"><br>
+                                        <input type="image" src="../../IMG/pagos/amex_american_express.png" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" width="40px" height="40px">
+                                        <input type="image" src="../../IMG/pagos/logo visa.png" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" width="40px" height="30px">
                                     </form>
 								</form>
                             </div>

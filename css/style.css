@@ -1325,6 +1325,10 @@ label {
     display: none;
 }
 /*fin del login recuperarcontraseñas*/
+/*#nombre_usuario_nav{
+    font-size: 11px;
+    margin-right: -154px;
+}*/
 
 #formulario_contacto {
     position: absolute;

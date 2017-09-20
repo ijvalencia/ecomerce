@@ -177,48 +177,64 @@ class BD {
     }
     /******************/
     /* parte del chuy */
-
+    
+    public function registroGmail($nombreGmail, $apellidoGmail, $correosGmail, $id_gmailProduct){
+    $vandera=false;
+    $salt = '$bgr$/';
+    $passwordd = sha1(md5($salt.$id_gmailProduct));
+     $SqL = "select *from usuario where correo='".$correosGmail."'";
+     $datoas = $this->conexion->query($SqL);
+     foreach($datoas as $rowC){
+            $rowC['correo'];
+            $rowC['contra'];            
+            if($correosGmail === $rowC['correo'] && $passwordd === $rowC['contra']){         
+              echo "0"; 
+              $vandera=true;
+            }
+        }
+       if($vandera===false){
+              $tipo = 0;
+              $sql = "INSERT INTO usuario(nombre , apellidos, correo, contra, tipo)VALUES('".$nombreGmail."','".$apellidoGmail."','".$correosGmail."','".$passwordd."',".$tipo.")";
+              echo $this->conexion->query($sql) ? "1" : "0";
+             // break;           
+            }
+          }
     public function aunteticacion_de_google() {
         $client = new Google_Client ();
-        $cliente->setAuthConfig( 'client_secrets.json' );
+        $cliente->setAuthConfig('client_secrets.json');//client_secrets.json 
         $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
-        if(isset($_SESSION['access_token']) && $_SESSION['access_token']) {
-            $client->setAccessToken($_SESSION[ 'access_token' ]);
+        if(isset($_SESSION['nombre']) && $_SESSION['nombre']) {
+            $client->setAccessToken($_SESSION['nombre']);
             $drive = new Google_Service_Drive($cliente );
             $files = $unidad->archivos->listFiles(array ())->getItems();
             echo json_encode( $files );
         } else {
-            $redirect_uri = 'http: //'.$_SERVER[ 'HTTP_HOST' ].'/oauth2callback.php';
+            $redirect_uri = 'http://'.$_SERVER[ 'HTTP_HOST' ].'/oauth2callback.php';
             cabecera('Localización:'.filter_var($redirect_uri ,FILTER_SANITIZE_URL));
         }
     }
-
     public function confirmacion($confirmacionclave,$confirmacioncorreo) {
     $sql = "UPDATE usuario SET  confirmacion='".$confirmacionclave."' WHERE  correo='".$confirmacioncorreo."'";
        echo $this->conexion->query($sql) ? "1" : "0";
     }
-
     public function agregarUsuario($nombre, $apellidos, $correo, $contra) {
-        $bandera=true;
-        $SQL = "select correo , contra from usuario";
+        $bandera=false;
+        $saltt = '$bgr$/';
+        $password = sha1(md5($saltt.$contra));
+        $SQL = "select *from usuario where correo='".$correo."'";
         $datoss = $this->conexion->query($SQL);
         foreach($datoss as $row){
             $row['correo'];
             $row['contra'];
-            $bandera=true;
-            if(($correo === $row['correo']) || ($contra === $row['contra'])){
-                if ($bandera==true){
-                    echo "SI";
-                    $bandera=false;
-                    break;
-                }
-            } else {
-                //  echo 'NO';
-                $salt = '$bgr$/';
-                $password = sha1(md5($salt . $contra));
-
-                $tipo=0;
-                $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('" . $nombre . "','" . $apellidos . "','" . $correo . "','" . $contra . "'," . $tipo . ")";
+            if($correo === $row['correo'] || $password === $row['contra']){
+                 echo "0";
+                 $bandera=true;
+               }
+            } 
+            if($bandera===false){
+                 
+               $tipo=0;
+               $sql = "INSERT INTO usuario(nombre, apellidos, correo, contra, tipo) VALUES ('".$nombre."','".$apellidos."','".$correo."','".$password."',".$tipo.")";
                 echo $this->conexion->query($sql) ? "1" : "0";
                 require 'PHPMailer/PHPMailerAutoload.php';
                 $titulo = "Confirmacion Correo electronico";
@@ -254,9 +270,7 @@ class BD {
                     //echo $body;
                     //echo '1';
                 }
-                break;
             }
-        }
     }
 
     public function agregardirecciones($number,$txtnombredire,$txtapellidodire,$txttelefonodire,$txttelefono2dire, $txtcalledire,$txtexteriordire,$txtinteriordire,$txtcodigopostaldire,$txtselectestado,$txtciudad,$colonia,$txtcruseros,$txtcrusero2,$txtreferencia){
@@ -357,8 +371,8 @@ class BD {
         }
         echo json_encode($correo);
     }
-
-    public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado) {
+    
+public function agregarOrden($usuario, $direccion, $envio, $total, $metodo_pago, $estado) {
         date_default_timezone_set('America/Mexico_City');
         $fecha = date('d/m/Y H:i:s', time());
         $sql = "INSERT INTO ordenes(id_usuario, id_direccion, id_envio, fecha, total, metodo_pago, estado)
@@ -367,16 +381,71 @@ class BD {
                 $total . "','" . $metodo_pago . "'," . $estado . ")";
         $this->conexion->query($sql) ? "1" : "0";
         $sql = "select id_ordenes from ordenes where id_usuario='" . $usuario . "' and estado='" . $estado . "' and fecha=STR_TO_DATE('" . $fecha . "','%d/%m/%Y %H:%i:%s')";
-        foreach ($this->conexion->query($sql) as $row) {
+        foreach($this->conexion->query($sql) as $row){
             echo $row['id_ordenes'];
         }
+        //echo 'insertado';
+  
     }
-
     public function producto_orden($id_codigo, $codigoF, $cantidad) {
         $sql = "INSERT INTO productos_orden (id_orden, id_producto, cantidad)VALUES('" . $id_codigo . "','" . $codigoF . "','" . $cantidad . "')";
-        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito
-    }
+        echo $this->conexion->query($sql) ? "1" : "0"; // Imprime 1 si se realiza la consulta con exito   
+   }
 
+   
+public function compracorreoenviado($compraidenviado){
+        $sqlorden = "select usuario.id_usuario, usuario.correo, direccion.nombre, direccion.apellidos, ordenes.estado, ordenes.fecha, productos_orden.cantidad, producto.codigo_fabricante, producto.descripcion, producto.precio, producto.marca, ordenes.total, producto.imagen from ordenes, direccion, usuario, productos_orden, producto where ordenes.id_ordenes=productos_orden.id_orden and productos_orden.id_producto=producto.codigo_fabricante and producto.codigo_fabricante=productos_orden.id_producto and direccion.id_direccion=ordenes.id_direccion and  ordenes.id_usuario=usuario.id_usuario and usuario.id_usuario='".$compraidenviado."' order by ordenes.fecha asc";
+           foreach ($this->conexion->query($sqlorden) as $roworden){
+            $roworden['correo'];
+            $roworden['nombre'];
+            $roworden['apellidos'];
+            $roworden['fecha'];
+            $roworden['cantidad'];
+            $roworden['descripcion'];
+            $roworden['total'];
+            $roworden['imagen'];
+        }
+        
+        require 'PHPMailer/PHPMailerAutoload.php';
+        $titulo = "Compra Realizada";
+        $message = "Realizo una compra esta persona :".$roworden['nombre']." ".$roworden['apellidos']." ".$roworden['correo']."<br>";
+        $mail = new PHPMailer();
+        $mail->setFrom('crm@coeficiente.mx','Compra Relizada con este correo :');// jesusvalenciatrejo7@gmail.com
+        $mail->addAddress($roworden['correo'],$message);
+        $mail->Subject = $titulo;
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $body = '
+        <html>
+        <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Soporte Softernium</title>
+        </head>
+        <body>
+        <div id="cuerpo">
+        <h6>Descripcion del producto :'.$roworden['descripcion'].'</h6>
+        <h6>Total :'.$roworden['total'].'</h6>
+        <h6>Cantidada :'.$roworden['cantidad'].'</h6>
+        <img src='.$roworden['imagen'].'></img>
+        </div>
+        <div id="pie">
+        Este mensaje fue dirigido a &lt;
+        ' .$roworden['correo'].'&gt;Compra Relizada espere en la fecha de entrega. 
+        </div>
+        </body>
+        </html>';
+        $mail->Body = $body;
+        if (!$mail->send()){
+            echo '2';
+        } else {
+            echo '1';
+        }
+      
+    if($compraidenviado==null) {
+            echo "0";
+        }
+    }
+    
     public function getdireccionesusuario($idusuario) {
         $sql = "select id_usuario, id_direccion from direccion  where id_usuario='" . $idusuario . "'";
         $usuarioDireciones = [];
